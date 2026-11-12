@@ -65,6 +65,7 @@ Shared building blocks:
 - `Icons.jsx`: `<Icon name size fill className />` (stroke icons from the `paths` map; adds class `icon icon-<name>`) and `<Logo size />` (blue gradient square + white bolt).
 - `Bits.jsx`: `Kicker` (pill label), `Scribble` (handwritten note + arrow, `dir` = left/up/right), `Squiggle` (self-drawing yellow underline), `Stars`, `Barcode` (deterministic from a seed string), `formatRs(n)`.
 - `Mockups.jsx`: `Monitor` (screen + stand) and `PosBillingScreen({ status })` (the fake POS UI in the hero).
+- `Sections.jsx` (internal): `BrandName` splits `brand.name` into "ZAP" + `.brand-accent` "POS" (two-tone wordmark in navbar and footer).
 
 ### Interactive behaviour (state lives in each component)
 - **Hero**: `offline` toggled by the power switch → adds `.night` to the hero, ticks a `bills` counter every 1.6s, sets `document.documentElement.dataset.power = 'off'|'on'` (the navbar goes dark via `html[data-power="off"]`). Pointer movement over `.hero-stage` sets CSS vars `--px/--py` (−0.5…0.5) used for the 3D tilt/parallax.

@@ -74,7 +74,7 @@ h2 .hl { display: block; }
 .scribble.left .arrow { transform: scaleX(1) rotate(-10deg); }
 .scribble.up { flex-direction: column-reverse; }
 .scribble.up .arrow { transform: rotate(80deg) scaleY(-1); }
-.squiggle { position: absolute; left: 0; bottom: -.12em; width: 100%; height: .28em; overflow: visible; }
+.squiggle { position: absolute; left: .02em; bottom: -.36em; width: calc(100% - .04em); height: .22em; overflow: visible; }
 .squiggle path { fill: none; stroke: var(--yellow); stroke-width: 7; stroke-linecap: round; stroke-dasharray: 420; stroke-dashoffset: 420; animation: draw 1.2s .5s cubic-bezier(.6,.1,.2,1) forwards; }
 @keyframes draw { to { stroke-dashoffset: 0; } }
 .stars { display: inline-flex; gap: 2px; color: #f5b301; }
@@ -94,12 +94,15 @@ h2 .hl { display: block; }
 /* ---------- Navbar (floating pill) ---------- */
 .navbar { position: fixed; top: 14px; left: 0; right: 0; z-index: 50; padding: 0 16px; pointer-events: none; }
 .nav-pill { pointer-events: auto; max-width: 1100px; margin: 0 auto; display: flex; align-items: center; gap: 20px; justify-content: space-between; padding: 8px 8px 8px 14px; border-radius: 999px; background: rgba(255,255,255,.78); backdrop-filter: blur(14px) saturate(1.4); -webkit-backdrop-filter: blur(14px) saturate(1.4); border: 1px solid rgba(15,23,42,.08); box-shadow: 0 6px 24px -12px rgba(15,23,42,.25); transition: box-shadow .3s, background .3s; position: relative; }
-html[data-power="off"] .nav-pill { background: rgba(13,26,51,.72); border-color: rgba(255,255,255,.1); }
-html[data-power="off"] .brand, html[data-power="off"] .nav-login { color: #fff; }
+/* Night mode (load shedding ON): dark pill even when scrolled (beats .navbar.scrolled .nav-pill) */
+html[data-power="off"] .navbar .nav-pill { background: rgba(13,26,51,.88); border-color: rgba(255,255,255,.1); }
+html[data-power="off"] .navbar .brand, html[data-power="off"] .nav-login { color: #fff; }
 html[data-power="off"] .nav-links > a { color: #94a3b8; }
 html[data-power="off"] .menu-btn { background: rgba(255,255,255,.08); color: #fff; }
 .navbar.scrolled .nav-pill { background: rgba(255,255,255,.92); box-shadow: 0 14px 34px -16px rgba(15,23,42,.35); }
 .brand { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-head); font-weight: 800; font-size: 20px; color: var(--ink); letter-spacing: -.03em; }
+.brand-accent { color: var(--brand-500); transition: color .5s; }
+html[data-power="off"] .navbar .brand-accent, .footer .brand-accent { color: var(--brand-400); }
 .nav-links { display: flex; gap: 2px; }
 .nav-links > a { font-size: 14.5px; font-weight: 500; padding: 8px 14px; border-radius: 999px; color: var(--text); transition: background .15s, color .15s; }
 .nav-links > a:hover { color: var(--ink); background: rgba(15,23,42,.05); }
@@ -115,7 +118,7 @@ html[data-power="off"] .menu-btn { background: rgba(255,255,255,.08); color: #ff
 .hero-glow { position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity .7s; background-image: radial-gradient(1px 1px at 10% 20%, #fff8, transparent), radial-gradient(1px 1px at 30% 70%, #fff6, transparent), radial-gradient(1.5px 1.5px at 55% 15%, #fff7, transparent), radial-gradient(1px 1px at 80% 85%, #fff5, transparent), radial-gradient(1px 1px at 92% 10%, #fff8, transparent), radial-gradient(1px 1px at 45% 90%, #fff5, transparent); }
 .hero.night .hero-glow { opacity: 1; }
 .hero-grid { position: relative; display: grid; grid-template-columns: 1fr 1.02fr; gap: 56px; align-items: center; }
-.hero h1 { font-size: clamp(46px, 4.9vw, 70px); line-height: .96; letter-spacing: -.05em; margin: 24px 0 26px; }
+.hero h1 { font-size: clamp(46px, 4.9vw, 70px); line-height: .96; letter-spacing: -.05em; margin: 24px 0 40px; }
 .h-top { display: block; color: var(--ink); transition: color .7s, opacity .7s; }
 .h-bottom { position: relative; display: inline-block; color: var(--brand-500); transition: color .7s, text-shadow .7s; }
 .hero.night .h-top { color: #334155; }
@@ -345,6 +348,7 @@ html[data-power="off"] .menu-btn { background: rgba(255,255,255,.08); color: #ff
 .s4 { transform: rotate(-2deg); }
 .s5 { transform: rotate(1.5deg); background: #fff8d6; }
 .hw-note { position: absolute; right: 10px; bottom: -6px; }
+.scribble.left.hw-note .arrow { transform: scaleY(-1) rotate(8deg) translateY(4px); }
 
 /* ---------- Pricing as receipts ---------- */
 .pricing-sec { background: var(--tint); border-radius: 56px; margin: 0 12px; }

@@ -2,6 +2,12 @@ import { useEffect, useState } from 'react'
 import Icon, { Logo } from './Icons.jsx'
 import { Scribble } from './Bits.jsx'
 
+// "ZAP POS" → "ZAP" in the heading color, "POS" in brand blue (never all-white on a light bar).
+function BrandName({ name }) {
+  const [first, ...rest] = name.split(' ')
+  return <span>{first}{rest.length > 0 && <> <span className="brand-accent">{rest.join(' ')}</span></>}</span>
+}
+
 export function Navbar({ brand, nav, links }) {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
@@ -15,7 +21,7 @@ export function Navbar({ brand, nav, links }) {
   return (
     <header className={`navbar ${scrolled ? 'scrolled' : ''}`}>
       <div className="nav-pill">
-        <a href="#home" className="brand"><Logo size={32} /><span>{brand.name}</span></a>
+        <a href="#home" className="brand"><Logo size={32} /><BrandName name={brand.name} /></a>
         <nav className={`nav-links ${open ? 'open' : ''}`}>
           {nav.map((n) => <a key={n.href} href={n.href} onClick={() => setOpen(false)}>{n.label}</a>)}
           <a href={links.portal} className="nav-mobile-only" onClick={() => setOpen(false)}>Portal login</a>
@@ -96,7 +102,7 @@ export function Footer({ brand, footer, links }) {
       <div className="container">
         <div className="footer-top">
           <div className="footer-brand">
-            <a href="#home" className="brand"><Logo size={32} /><span>{brand.name}</span></a>
+            <a href="#home" className="brand"><Logo size={32} /><BrandName name={brand.name} /></a>
             <p>{brand.about}</p>
             <div className="footer-contact-list">
               <span><Icon name="call" size={14} /> {brand.phone}</span>

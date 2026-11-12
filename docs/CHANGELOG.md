@@ -2,6 +2,17 @@
 
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
+## 2026-11-12: Navbar logo text color
+- Bug fix: with load shedding ON and the page scrolled, the nav pill turned white while "ZAP POS" stayed white (invisible). Night-mode nav rules now use `html[data-power="off"] .navbar …` so they beat `.navbar.scrolled .nav-pill`.
+- Wordmark now two-tone everywhere: "ZAP" in heading color, "POS" in brand blue (`.brand-accent`, lighter blue at night/footer) via a `BrandName` helper in `Sections.jsx` (navbar + footer).
+- Files: `components/Sections.jsx`, `styles.css`.
+
+## 2026-11-12: Hardware note arrow
+- The handwritten "no new hardware needed" arrow now points up toward the hardware stickers instead of down into empty space (`.scribble.left.hw-note .arrow` flips it vertically). File: `styles.css`.
+
+## 2026-11-12: Hero underline position
+- Moved the yellow squiggle under "The billing doesn't." lower (`bottom: -.36em`, slightly thinner) so it no longer cuts through descenders (the "g"); added more space below the headline (`.hero h1` margin-bottom 40px). File: `styles.css`.
+
 ## 2026-11-12: Vercel deployment setup
 - Added `src/zappos-web/vercel.json` (build to `dist/`, long cache for hashed assets) so the landing page can be hosted on Vercel with Root Directory `src/zappos-web`.
 - `App.jsx`: in production the API fetch only runs when `VITE_API_URL` is set, so the static Vercel site makes no failing `/api` requests and uses the bundled JSON.
