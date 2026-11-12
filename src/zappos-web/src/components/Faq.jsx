@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import Icon, { Logo } from './Icons.jsx'
+import Icon from './Icons.jsx'
 import { Kicker } from './Bits.jsx'
 
 const time = (i) => `10:${String(12 + i * 3).padStart(2, '0')}`
@@ -42,9 +42,15 @@ export default function Faq({ data, brand, links }) {
 
         <div className="chat">
           <div className="chat-top">
-            <span className="chat-avatar"><Logo size={34} /></span>
-            <div><b>ZAP POS Support</b><small>{typing !== null ? 'typing…' : 'online'}</small></div>
-            <Icon name="call" size={17} />
+            <span className="chat-back" aria-hidden="true"><Icon name="chevL" size={20} /></span>
+            <span className="chat-avatar"><Icon name="zap" size={18} fill /><i className="chat-presence" /></span>
+            <div className="chat-who">
+              <b>ZAP POS Support <span className="bot-tag">BOT</span></b>
+              <small className={typing !== null ? 'is-typing' : ''}>
+                {typing !== null ? 'typing…' : <><i className="dot" /> Live · replies instantly</>}
+              </small>
+            </div>
+            <span className="chat-actions" aria-hidden="true"><Icon name="video" size={19} /><Icon name="call" size={17} /></span>
           </div>
           <div className="chat-body" ref={body}>
             <span className="chat-day">Today</span>

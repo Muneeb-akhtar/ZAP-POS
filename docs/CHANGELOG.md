@@ -2,6 +2,16 @@
 
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
+## 2026-11-12: FAQ chat live indicator + BOT tag
+- Chat header shows it's an automated assistant: "BOT" tag after "ZAP POS Support"; status reads "Live · replies instantly".
+- Live animations: the status dot blinks (`liveBlink`) and the avatar's green presence dot sends out a soft ring (`livePing`), both 1.6s loops, disabled automatically for reduced-motion users.
+- Files: `components/Faq.jsx`, `styles.css` (FAQ block; merged duplicate `.chat-who b` rule).
+
+## 2026-11-12: FAQ chat header redesign
+- WhatsApp-style chat header: back arrow, round avatar (blue bolt on white, green presence dot), "online" with green dot ("typing…" in italic green while answering), video + call icons, gradient bar with soft shadow. Replaced the square logo that was clipped inside a white circle.
+- Added icons `chevL`, `video` to `Icons.jsx`; `Faq.jsx` no longer imports `Logo`.
+- Files: `components/Faq.jsx`, `components/Icons.jsx`, `styles.css` (FAQ block).
+
 ## 2026-11-12: Navbar logo text color
 - Bug fix: with load shedding ON and the page scrolled, the nav pill turned white while "ZAP POS" stayed white (invisible). Night-mode nav rules now use `html[data-power="off"] .navbar …` so they beat `.navbar.scrolled .nav-pill`.
 - Wordmark now two-tone everywhere: "ZAP" in heading color, "POS" in brand blue (`.brand-accent`, lighter blue at night/footer) via a `BrandName` helper in `Sections.jsx` (navbar + footer).
