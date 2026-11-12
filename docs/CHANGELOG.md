@@ -2,6 +2,11 @@
 
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
+## 2026-11-12: Live network wires in counter demo
+- The dotted lines between the Master PC and the counters now flow continuously (`wireFlow`), with small glowing blue "data packets" riding along a second path (`.flow`, `packetFlow`), so the connection feels live.
+- The Sell-button pulse (`.pulse`) and the Sold/Synced animations are unchanged and play on top.
+- Files: `components/Counters.jsx` (extra `.flow` path), `styles.css` (counter demo block).
+
 ## 2026-11-12: FAQ chat live indicator + BOT tag
 - Chat header shows it's an automated assistant: "BOT" tag after "ZAP POS Support"; status reads "Live · replies instantly".
 - Live animations: the status dot blinks (`liveBlink`) and the avatar's green presence dot sends out a soft ring (`livePing`), both 1.6s loops, disabled automatically for reduced-motion users.

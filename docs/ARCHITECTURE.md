@@ -70,7 +70,7 @@ Shared building blocks:
 ### Interactive behaviour (state lives in each component)
 - **Hero**: `offline` toggled by the power switch → adds `.night` to the hero, ticks a `bills` counter every 1.6s, sets `document.documentElement.dataset.power = 'off'|'on'` (the navbar goes dark via `html[data-power="off"]`). Pointer movement over `.hero-stage` sets CSS vars `--px/--py` (−0.5…0.5) used for the 3D tilt/parallax.
 - **App**: one global `pointermove` listener sets `--mx/--my` on the nearest `.glow` element (cursor spotlight on timeline cards and tills).
-- **Counters**: `stock` (starts at `counters.stock`) and `last = {i, n}`. The tills use `key={i-n}` so they remount and replay animations on every sale. The SVG `pulse` path animates along the wires.
+- **Counters**: `stock` (starts at `counters.stock`) and `last = {i, n}`. The tills use `key={i-n}` so they remount and replay animations on every sale. The SVG has three layers: `.wire` (dashes always flowing master→counters), `.flow` (always-moving glowing packets) and `.pulse` (one-shot bright pulse from the counter that sold, remounted per sale via `key`).
 - **Pricing**: `annual` (monthly/yearly prices) and `open` (comparison table).
 - **Faq**: `asked` (question indexes shown), `typing` (900ms typing dots), auto-scroll after the first render.
 - **FinalCta**: `spin` set on click; cleared on `animationend` of `boltTap`.

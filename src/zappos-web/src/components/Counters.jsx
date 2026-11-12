@@ -35,7 +35,9 @@ export default function Counters({ data }) {
           </div>
 
           <svg className="lan-wires" viewBox="0 0 900 70" preserveAspectRatio="none" aria-hidden="true">
+            {/* Always-on: dashes flow from the master to every counter, with small "data packets" riding along */}
             <path d="M450 0 V30 H150 V70 M450 30 V70 M450 30 H750 V70" className="wire" />
+            <path d="M450 0 V30 H150 V70 M450 30 V70 M450 30 H750 V70" className="flow" />
             {last && (
               <path
                 key={last.n}
