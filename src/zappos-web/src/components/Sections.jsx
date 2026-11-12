@@ -1,0 +1,127 @@
+import { useEffect, useState } from 'react'
+import Icon, { Logo } from './Icons.jsx'
+import { Scribble } from './Bits.jsx'
+
+export function Navbar({ brand, nav, links }) {
+  const [open, setOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+  useEffect(() => {
+    const on = () => setScrolled(window.scrollY > 20)
+    on()
+    window.addEventListener('scroll', on, { passive: true })
+    return () => window.removeEventListener('scroll', on)
+  }, [])
+
+  return (
+    <header className={`navbar ${scrolled ? 'scrolled' : ''}`}>
+      <div className="nav-pill">
+        <a href="#home" className="brand"><Logo size={32} /><span>{brand.name}</span></a>
+        <nav className={`nav-links ${open ? 'open' : ''}`}>
+          {nav.map((n) => <a key={n.href} href={n.href} onClick={() => setOpen(false)}>{n.label}</a>)}
+          <a href={links.portal} className="nav-mobile-only" onClick={() => setOpen(false)}>Portal login</a>
+        </nav>
+        <div className="nav-actions">
+          <a href={links.portal} className="nav-login">Log in</a>
+          <a href={links.windowsInstaller} className="btn btn-primary btn-sm"><Icon name="windows" size={13} fill /> Download</a>
+        </div>
+        <button className="menu-btn" onClick={() => setOpen(!open)} aria-label="Toggle menu"><Icon name={open ? 'close' : 'menu'} size={20} /></button>
+      </div>
+    </header>
+  )
+}
+
+export function Ticker({ items }) {
+  const row = [...items, ...items]
+  return (
+    <div className="ticker" aria-label="Made for every kind of shop">
+      <div className="ticker-track">
+        {row.map((t, i) => <span key={i}>{t}<Icon name="zap" size={16} fill /></span>)}
+      </div>
+    </div>
+  )
+}
+
+export function Hardware({ data }) {
+  return (
+    <section className="hardware">
+      <div className="container hw-inner">
+        <h2>{data.title}</h2>
+        <div className="stickers">
+          {data.items.map((h, i) => (
+            <span key={h.label} className={`sticker s${i}`}><Icon name={h.icon} size={18} />{h.label}</span>
+          ))}
+          <Scribble dir="left" className="hw-note">{data.note}</Scribble>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+export function FinalCta({ data, links, brand }) {
+  // Tap or click the bolt to spin it (hover also spins it on desktop).
+  const [spin, setSpin] = useState(false)
+  return (
+    <section className="final">
+      <div className="final-stars" aria-hidden="true" />
+      <div className="container final-inner">
+        <button
+          className={`final-bolt ${spin ? 'spin' : ''}`}
+          onClick={() => setSpin(true)}
+          onAnimationEnd={(e) => e.animationName === 'boltTap' && setSpin(false)}
+          aria-label="Spin the lightning bolt"
+        >
+          <Icon name="zap" size={44} fill />
+        </button>
+        <h2>{data.title} <span className="hl">{data.titleHighlight}</span></h2>
+        <p>{data.description}</p>
+        <div className="final-actions">
+          <a href={links.windowsInstaller} className="btn btn-primary btn-lg"><Icon name="windows" size={16} fill /> {data.primary}</a>
+          <a href={links.demo} className="btn btn-glass btn-lg">{data.secondary} <Icon name="arrow" size={16} /></a>
+        </div>
+        <div className="final-stores">
+          <a href={links.googlePlay} className="store"><Icon name="gplay" size={18} fill /><span><small>Owner app on</small>Google Play</span></a>
+          <a href={links.appStore} className="store"><Icon name="apple" size={18} fill /><span><small>Owner app on the</small>App Store</span></a>
+          <a href={links.whatsapp} className="store wa"><Icon name="whatsapp" size={18} /><span><small>WhatsApp us</small>{brand.phone}</span></a>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+export function Footer({ brand, footer, links }) {
+  const year = new Date().getFullYear()
+  const socials = ['linkedin', 'facebook', 'instagram', 'x']
+  return (
+    <footer className="footer" id="contact">
+      <div className="container">
+        <div className="footer-top">
+          <div className="footer-brand">
+            <a href="#home" className="brand"><Logo size={32} /><span>{brand.name}</span></a>
+            <p>{brand.about}</p>
+            <div className="footer-contact-list">
+              <span><Icon name="call" size={14} /> {brand.phone}</span>
+              <span><Icon name="mail" size={14} /> <a href={`mailto:${brand.email}`}>{brand.email}</a></span>
+              <span><Icon name="pin" size={14} /> {brand.address}</span>
+            </div>
+          </div>
+          {footer.columns.map((col) => (
+            <div className="footer-col" key={col.title}>
+              <h4>{col.title}</h4>
+              {col.links.map((l) => <a key={l} href="#">{l}</a>)}
+            </div>
+          ))}
+        </div>
+        <div className="footer-searches">
+          <h4>{footer.searchesTitle}</h4>
+          <div className="chips">{footer.searches.map((s) => <a key={s} href="#" className="chip">{s}</a>)}</div>
+        </div>
+        <div className="footer-bottom">
+          <span>© {year} {footer.copyright}</span>
+          <div className="socials">{socials.map((s) => <a key={s} href={links.social[s]} aria-label={s}><Icon name={s} size={15} /></a>)}</div>
+          <span className="legal"><a href="#">Privacy</a><a href="#">Terms</a></span>
+        </div>
+      </div>
+      <div className="wordmark" aria-hidden="true">ZAP POS</div>
+    </footer>
+  )
+}

@@ -1,0 +1,492 @@
+{
+  "_note": "PLACEHOLDER CONTENT. Replace phone, email, prices, links and reviews with real ZAP POS details. The admin panel will manage this content later.",
+  "brand": {
+    "name": "ZAP POS",
+    "phone": "03XX XXXXXXX",
+    "email": "info@zappos.example",
+    "address": "Office address, City, Pakistan",
+    "about": "Point of sale software for Pakistani shops. Fast at the counter, calm during load shedding."
+  },
+  "nav": [
+    {
+      "label": "How it works",
+      "href": "#day"
+    },
+    {
+      "label": "Multi-counter",
+      "href": "#counters"
+    },
+    {
+      "label": "Pricing",
+      "href": "#pricing"
+    },
+    {
+      "label": "FAQ",
+      "href": "#faq"
+    }
+  ],
+  "links": {
+    "demo": "#contact",
+    "portal": "#",
+    "windowsInstaller": "#",
+    "googlePlay": "#",
+    "appStore": "#",
+    "whatsapp": "#",
+    "social": {
+      "linkedin": "#",
+      "facebook": "#",
+      "instagram": "#",
+      "x": "#"
+    }
+  },
+  "hero": {
+    "kicker": "Made for shops in Pakistan",
+    "titleTop": "The lights go out.",
+    "titleBottom": "The billing doesn't.",
+    "description": "ZAP POS keeps your counter running through load shedding, rush hour and three branches at once, then puts every rupee on your phone.",
+    "primaryCta": "Download for Windows",
+    "secondaryCta": "Book a free demo",
+    "switchLabel": "Load shedding",
+    "switchNote": "go on, flip it",
+    "trust": [
+      "Free trial",
+      "No card needed",
+      "Setup help on WhatsApp"
+    ]
+  },
+  "ticker": [
+    "Clothing boutiques",
+    "Kiryana stores",
+    "Pharmacies",
+    "Shoe stores",
+    "Supermarkets",
+    "Bakeries",
+    "Cafes",
+    "Electronics shops",
+    "Cosmetics stores",
+    "Restaurants"
+  ],
+  "day": {
+    "kicker": "A day at your counter",
+    "title": "From shutter up",
+    "titleHighlight": "to lights out.",
+    "description": "Every feature in ZAP POS exists because of a real moment in a shopkeeper's day.",
+    "stops": [
+      {
+        "time": "09:00",
+        "period": "Morning",
+        "title": "Shutter up.",
+        "text": "Open the till in seconds. Opening cash, yesterday's totals and today's prices are already waiting.",
+        "visual": "open"
+      },
+      {
+        "time": "13:30",
+        "period": "Rush hour",
+        "title": "Three counters, one stock.",
+        "text": "Every counter shares the same stock and prices over your shop's network. Nobody sells the last jacket twice.",
+        "visual": "counters"
+      },
+      {
+        "time": "15:00",
+        "period": "Load shedding",
+        "title": "Bijli gayi. Billing didn't.",
+        "text": "Internet down? ZAP POS saves every bill on the PC and syncs automatically when the connection comes back.",
+        "visual": "offline"
+      },
+      {
+        "time": "18:00",
+        "period": "Evening",
+        "title": "The shelf warns you first.",
+        "text": "Low-stock alerts before the shelf is empty. Purchases, suppliers and stock transfers between branches in a few taps.",
+        "visual": "stock"
+      },
+      {
+        "time": "23:00",
+        "period": "Night",
+        "title": "Check sales from bed.",
+        "text": "Every branch, every counter, live on the ZAP POS app for iPhone and Android, or any browser.",
+        "visual": "phone"
+      }
+    ]
+  },
+  "counters": {
+    "kicker": "Multi-counter, live",
+    "title": "Sell on one counter.",
+    "titleHighlight": "Watch the others know.",
+    "description": "Try it: press Sell on any counter. The master PC updates stock everywhere instantly over your local network, no internet needed.",
+    "product": "Denim Jacket · Size M",
+    "stock": 12,
+    "note": "press any Sell button",
+    "points": [
+      "One master PC, unlimited counters",
+      "Works on your shop's local network",
+      "Add a new counter in minutes"
+    ]
+  },
+  "hardware": {
+    "title": "Plugs into what's already on your counter.",
+    "note": "no new hardware needed",
+    "items": [
+      {
+        "icon": "printer",
+        "label": "Thermal printers"
+      },
+      {
+        "icon": "scan",
+        "label": "Barcode scanners"
+      },
+      {
+        "icon": "drawer",
+        "label": "Cash drawers"
+      },
+      {
+        "icon": "tag",
+        "label": "Label printers"
+      },
+      {
+        "icon": "card",
+        "label": "Card machines"
+      },
+      {
+        "icon": "monitor",
+        "label": "Touch screens"
+      }
+    ]
+  },
+  "pricing": {
+    "kicker": "Pricing",
+    "title": "Pricing that fits",
+    "titleHighlight": "on a receipt.",
+    "description": "Prices in PKR. Free trial on every plan, no card required.",
+    "annualLabel": "2 months free",
+    "plans": [
+      {
+        "id": "solo",
+        "name": "Solo",
+        "tag": "Single shop",
+        "monthly": 2499,
+        "annual": 24990,
+        "description": "One shop, one counter.",
+        "cta": "Get started",
+        "lines": [
+          [
+            "1",
+            "POS counter"
+          ],
+          [
+            "1",
+            "Branch"
+          ],
+          [
+            "∞",
+            "Offline bills"
+          ],
+          [
+            "✓",
+            "Printer & scanner"
+          ],
+          [
+            "✓",
+            "Inventory & ledger"
+          ],
+          [
+            "✓",
+            "Daily cloud backup"
+          ]
+        ]
+      },
+      {
+        "id": "business",
+        "name": "Business",
+        "tag": "Most picked",
+        "monthly": 5999,
+        "annual": 59990,
+        "description": "Growing brands, many counters.",
+        "cta": "Start free trial",
+        "featured": true,
+        "lines": [
+          [
+            "∞",
+            "POS counters"
+          ],
+          [
+            "3",
+            "Branches"
+          ],
+          [
+            "✓",
+            "Everything in Solo"
+          ],
+          [
+            "✓",
+            "Owner mobile app"
+          ],
+          [
+            "✓",
+            "Staff roles"
+          ],
+          [
+            "✓",
+            "Stock transfers"
+          ],
+          [
+            "✓",
+            "Priority support"
+          ]
+        ]
+      },
+      {
+        "id": "enterprise",
+        "name": "Enterprise",
+        "tag": "3+ branches",
+        "monthly": null,
+        "annual": null,
+        "priceLabel": "Custom",
+        "description": "Chains with a central warehouse.",
+        "cta": "Get a quote",
+        "lines": [
+          [
+            "∞",
+            "Branches"
+          ],
+          [
+            "✓",
+            "Everything in Business"
+          ],
+          [
+            "✓",
+            "Central warehouse"
+          ],
+          [
+            "✓",
+            "On-site setup"
+          ],
+          [
+            "✓",
+            "Custom reports"
+          ],
+          [
+            "✓",
+            "Account manager"
+          ]
+        ]
+      }
+    ],
+    "compare": [
+      {
+        "group": "Billing"
+      },
+      {
+        "label": "POS counters",
+        "values": [
+          "1",
+          "Unlimited",
+          "Unlimited"
+        ]
+      },
+      {
+        "label": "Branches",
+        "values": [
+          "1",
+          "Up to 3",
+          "Unlimited"
+        ]
+      },
+      {
+        "label": "Offline billing",
+        "values": [
+          true,
+          true,
+          true
+        ]
+      },
+      {
+        "label": "Barcode & printer support",
+        "values": [
+          true,
+          true,
+          true
+        ]
+      },
+      {
+        "group": "Management"
+      },
+      {
+        "label": "Inventory, purchases & ledger",
+        "values": [
+          true,
+          true,
+          true
+        ]
+      },
+      {
+        "label": "Staff roles & permissions",
+        "values": [
+          false,
+          true,
+          true
+        ]
+      },
+      {
+        "label": "Stock transfers between branches",
+        "values": [
+          false,
+          true,
+          true
+        ]
+      },
+      {
+        "label": "Central warehouse",
+        "values": [
+          false,
+          false,
+          true
+        ]
+      },
+      {
+        "group": "Cloud & support"
+      },
+      {
+        "label": "Daily cloud backup",
+        "values": [
+          true,
+          true,
+          true
+        ]
+      },
+      {
+        "label": "Mobile app & web portal",
+        "values": [
+          false,
+          true,
+          true
+        ]
+      },
+      {
+        "label": "On-site installation & training",
+        "values": [
+          false,
+          false,
+          true
+        ]
+      },
+      {
+        "label": "Support",
+        "values": [
+          "Standard",
+          "Priority",
+          "Dedicated manager"
+        ]
+      }
+    ]
+  },
+  "reviewsSection": {
+    "kicker": "Reviews",
+    "title": "Notes from",
+    "titleHighlight": "the counter.",
+    "note": "placeholders, add real reviews from the admin panel",
+    "rating": "5.0"
+  },
+  "reviews": [
+    {
+      "text": "Placeholder: a real customer's words go here. Keep it short and honest.",
+      "name": "Customer Name",
+      "business": "Shop name, City"
+    },
+    {
+      "text": "Placeholder: a second real review, added from the admin panel.",
+      "name": "Customer Name",
+      "business": "Shop name, City"
+    },
+    {
+      "text": "Placeholder: a third real review. Real names build trust.",
+      "name": "Customer Name",
+      "business": "Shop name, City"
+    }
+  ],
+  "faq": {
+    "kicker": "FAQ",
+    "title": "Questions shopkeepers",
+    "titleHighlight": "ask us on WhatsApp.",
+    "description": "Tap a question. Still stuck? Message us, a real person replies.",
+    "items": [
+      {
+        "q": "Does ZAP POS work without internet?",
+        "a": "Yes. Billing, printing and stock updates all work offline. Sales are saved on the counter PC and sync to the cloud automatically when the internet returns."
+      },
+      {
+        "q": "What hardware do I need?",
+        "a": "Any Windows 10 or 11 PC. ZAP POS supports standard thermal receipt printers, USB barcode scanners, cash drawers and label printers."
+      },
+      {
+        "q": "Can I import my existing products?",
+        "a": "Yes. Import your product list from Excel, or scan barcodes to add products one by one."
+      },
+      {
+        "q": "Can I run more than one counter in a shop?",
+        "a": "Yes. On the Business and Enterprise plans, add as many counters as you need. They share stock and prices over your local network."
+      },
+      {
+        "q": "Is there a free trial?",
+        "a": "Yes. Every plan comes with a free trial and no card is required."
+      }
+    ]
+  },
+  "finalCta": {
+    "title": "Ready when",
+    "titleHighlight": "the lights aren't.",
+    "description": "Install ZAP POS on your counter PC today. Free trial, free setup help.",
+    "primary": "Download for Windows",
+    "secondary": "Book a free demo"
+  },
+  "footer": {
+    "columns": [
+      {
+        "title": "Product",
+        "links": [
+          "How it works",
+          "Multi-counter",
+          "Pricing",
+          "Download"
+        ]
+      },
+      {
+        "title": "Resources",
+        "links": [
+          "Help Center",
+          "Hardware Guide",
+          "Contact Support",
+          "FAQs"
+        ]
+      },
+      {
+        "title": "Company",
+        "links": [
+          "About Us",
+          "Careers",
+          "Partners",
+          "Contact"
+        ]
+      }
+    ],
+    "searchesTitle": "Popular searches",
+    "searches": [
+      "POS Lahore",
+      "POS Karachi",
+      "POS Islamabad",
+      "POS Rawalpindi",
+      "POS Faisalabad",
+      "POS Multan",
+      "POS Peshawar",
+      "POS Sialkot",
+      "Clothing Store POS",
+      "Pharmacy POS",
+      "Supermarket POS",
+      "Restaurant POS",
+      "Shoe Store POS",
+      "Bakery POS",
+      "Electronics Shop POS"
+    ],
+    "copyright": "ZAP POS. All rights reserved."
+  }
+}

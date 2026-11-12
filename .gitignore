@@ -1,0 +1,25 @@
+# .NET build output
+bin/
+obj/
+.vs/
+*.user
+
+# Node / React
+node_modules/
+dist/
+src/ZapPos.Api/wwwroot/
+
+# Editor / OS
+.vscode/*
+!.vscode/extensions.json
+.DS_Store
+Thumbs.db
+
+# Local env files (never commit secrets)
+.env
+.env.*
+
+# Old copies / archives, not part of the project
+Claude outputs/
+*.tar.gz
+*.zip

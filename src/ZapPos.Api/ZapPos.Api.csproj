@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>ZapPos.Api</RootNamespace>
+  </PropertyGroup>
+
+  <!-- Single source of truth for landing page content: the React app's JSON file.
+       The admin panel will later move this content into SQL Server. -->
+  <ItemGroup>
+    <Content Include="..\zappos-web\src\content\landing-content.json" Link="Data\landing-content.json" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>
