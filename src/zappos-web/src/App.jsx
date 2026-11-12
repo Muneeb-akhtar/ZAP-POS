@@ -8,13 +8,18 @@ import Pricing from './components/Pricing.jsx'
 import Reviews from './components/Reviews.jsx'
 import Faq from './components/Faq.jsx'
 
-// Content comes from the ASP.NET Core API (GET /api/landing).
-// If the API isn't running, the bundled JSON is used so the page still renders.
+// Where content comes from:
+// - Dev: the ASP.NET Core API through the Vite proxy (GET /api/landing).
+// - Production: the API at VITE_API_URL if that env var is set (e.g. once the admin panel API is hosted).
+// - Otherwise (static hosting on Vercel today): the bundled JSON, with no network request.
+const API_URL = import.meta.env.VITE_API_URL ?? ''
+
 export default function App() {
   const [c, setC] = useState(fallbackContent)
 
   useEffect(() => {
-    fetch('/api/landing')
+    if (!import.meta.env.DEV && !API_URL) return
+    fetch(`${API_URL}/api/landing`)
       .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
       .then(setC)
       .catch(() => console.info('ZAP POS API not reachable, using bundled content.'))

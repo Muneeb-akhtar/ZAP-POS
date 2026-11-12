@@ -3,6 +3,8 @@
 Offline-first point of sale for shops in Pakistan.
 This repo contains the public landing page (React) and its backend API (ASP.NET Core 8).
 
+Developer docs: `CLAUDE.md` (rules + commands), `docs/ARCHITECTURE.md` (code map), `docs/CHANGELOG.md` (history).
+
 ```
 ZAP POS/
 ├─ ZapPos.sln                     ← open in Visual Studio
