@@ -16,6 +16,8 @@ export const STATUSES = [
 export const statusLabel = (id) => STATUSES.find((s) => s.id === id)?.label ?? id
 export const METHODS = { cash: 'Cash', bank: 'Bank transfer', jazzcash: 'JazzCash', easypaisa: 'Easypaisa', card: 'Card', other: 'Other' }
 export const BILLING = { monthly: 'Monthly', yearly: 'Yearly', setup: 'Setup / one-time', other: 'Other' }
+// Monthly and yearly payments are plan periods: one at a time per shop, never overlapping (see schema.sql).
+export const isPeriod = (billing) => billing === 'monthly' || billing === 'yearly'
 
 // ---------- formatting ----------
 export const rs = (n) => `Rs ${Math.round(n ?? 0).toLocaleString('en-PK')}`
@@ -42,6 +44,15 @@ export const timeAgo = (iso) => {
   if (s < 86400) return `${Math.round(s / 3600)} h ago`
   if (s < 86400 * 7) return `${Math.round(s / 86400)} d ago`
   return dateFmt(toDay(iso))
+}
+
+// Same rule as phone_key() in schema.sql: 0300-1234567, +92 300 1234567, 923001234567 → 03001234567.
+export const phoneKey = (phone) => {
+  const d = (phone ?? '').replace(/\D/g, '')
+  if (/^0092\d{10}$/.test(d)) return `0${d.slice(4)}`
+  if (/^92\d{10}$/.test(d)) return `0${d.slice(2)}`
+  if (/^3\d{9}$/.test(d)) return `0${d}`
+  return d
 }
 
 // Pakistani numbers → tel: and wa.me links (03XX… → 923XX…).
@@ -87,6 +98,17 @@ export function customersOf(leads, payments) {
     })
 }
 
+// Database guards (schema.sql) → plain-language messages.
+const GUARDS = {
+  leads_phone_key: 'A lead with this mobile number already exists. Search for it in Leads instead of adding it again.',
+  leads_email_key: 'A lead with this email already exists. Search for it in Leads instead of adding it again.',
+  payments_same_payment: 'This payment is already recorded (same customer, date, amount and billing).',
+  payments_reference: 'A payment with this reference number is already recorded.',
+  payments_no_overlap: 'This customer is already paid for part of these dates. One plan at a time: start the new period when the current one ends, or shorten the current payment first.',
+  payments_period: 'Monthly and yearly payments need a start date and a paid-until date after it.',
+}
+const friendly = (msg) => Object.entries(GUARDS).find(([k]) => msg.includes(k))?.[1] ?? msg
+
 // ---------- store ----------
 export const BizContext = createContext(null)
 export const useBiz = () => useContext(BizContext)
@@ -108,7 +130,7 @@ export function useBizStore() {
   }, [])
   useEffect(() => { reload() }, [reload])
 
-  const run = async (q) => { const { data, error } = await q; if (error) throw new Error(error.message); return data }
+  const run = async (q) => { const { data, error } = await q; if (error) throw new Error(friendly(error.message)); return data }
 
   const saveLead = async (lead) => {
     const { id, created_at, updated_at, ...fields } = lead

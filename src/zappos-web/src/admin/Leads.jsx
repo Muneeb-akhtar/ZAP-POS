@@ -1,24 +1,28 @@
 import { useEffect, useMemo, useState } from 'react'
 import Icon from '../components/Icons.jsx'
-import { STATUSES, dateFmt, daysUntil, downloadCsv, statusLabel, telLink, timeAgo, today, toDay, useBiz, waLink } from './biz.js'
+import { STATUSES, dateFmt, daysUntil, downloadCsv, phoneKey, statusLabel, telLink, timeAgo, today, toDay, useBiz, waLink } from './biz.js'
 import { ConfirmButton, Field, PageBar, Sheet, StatusPill, useNotify } from './ui.jsx'
 
 const SOURCES = ['Website', 'Phone call', 'WhatsApp', 'Walk-in', 'Referral', 'Facebook', 'Instagram']
-const blank = { name: '', phone: '', shop: '', city: '', plan: '', branches: 1, message: '', source: 'Phone call', status: 'new', follow_up: null, notes: '' }
+const blank = { name: '', phone: '', email: '', shop: '', city: '', plan: '', branches: 1, message: '', source: 'Phone call', status: 'new', follow_up: null, notes: '' }
 const clean = (l) => Object.fromEntries(Object.entries(l).map(([k, v]) => [k, typeof v === 'string' ? v.trim() || null : v]))
 
 // Add / edit a lead (all fields).
 export function LeadSheet({ lead, plans, onClose }) {
-  const { saveLead } = useBiz()
+  const { leads, saveLead } = useBiz()
   const notify = useNotify()
   const [f, setF] = useState(() => ({ ...blank, ...lead }))
   const [busy, setBusy] = useState(false)
   const set = (k) => (e) => setF({ ...f, [k]: e.target.value })
   const submit = async (e) => {
     e.preventDefault()
+    // One lead per mobile number and per email (the database enforces it too).
+    const email = f.email?.trim().toLowerCase()
+    const twin = leads.find((l) => l.id !== lead?.id && (phoneKey(l.phone) === phoneKey(f.phone) || (email && l.email?.toLowerCase() === email)))
+    if (twin) { notify(`${twin.name}${twin.shop ? ` (${twin.shop})` : ''} already has this ${phoneKey(twin.phone) === phoneKey(f.phone) ? 'mobile number' : 'email'}. Open that lead instead.`, 'error'); return }
     setBusy(true)
     try {
-      await saveLead(clean({ ...f, branches: Number(f.branches) || null, follow_up: f.follow_up || null }))
+      await saveLead(clean({ ...f, email: email || null, branches: Number(f.branches) || null, follow_up: f.follow_up || null }))
       notify(lead?.id ? 'Lead updated' : 'Lead added'); onClose()
     } catch (err) { notify(err.message, 'error'); setBusy(false) }
   }
@@ -28,6 +32,7 @@ export function LeadSheet({ lead, plans, onClose }) {
         <div className="adm-grid">
           <Field label="Name"><input type="text" required minLength={2} maxLength={80} value={f.name ?? ''} onChange={set('name')} /></Field>
           <Field label="Mobile number"><input type="tel" required minLength={7} maxLength={20} value={f.phone ?? ''} onChange={set('phone')} placeholder="03XX XXXXXXX" /></Field>
+          <Field label="Email" hint="Their account email. A sign-up with this email links to this lead."><input type="email" maxLength={120} value={f.email ?? ''} onChange={set('email')} /></Field>
           <Field label="Shop name"><input type="text" maxLength={100} value={f.shop ?? ''} onChange={set('shop')} /></Field>
           <Field label="City"><input type="text" maxLength={60} value={f.city ?? ''} onChange={set('city')} /></Field>
           <Field label="Plan">
@@ -84,6 +89,8 @@ function LeadDetail({ lead, onEdit, onPay }) {
       <div className="adm-lead-cols">
         <dl className="adm-dl">
           <div><dt>Phone</dt><dd><a href={telLink(lead.phone)}>{lead.phone}</a></dd></div>
+          <div><dt>Email</dt><dd>{lead.email ? <a href={`mailto:${lead.email}`}>{lead.email}</a> : '–'}</dd></div>
+          <div><dt>Account</dt><dd>{lead.user_id ? `Signed up ${dateFmt(toDay(lead.signed_up_at))}` : lead.signed_up_at ? 'Account deleted' : 'No account yet'}{lead.user_id && !paid.length && <b className="adm-unpaid"> · not paid yet</b>}</dd></div>
           <div><dt>Shop</dt><dd>{lead.shop || '–'}</dd></div>
           <div><dt>City</dt><dd>{lead.city || '–'}</dd></div>
           <div><dt>Plan</dt><dd>{lead.plan || 'Not sure'}{lead.branches ? ` · ${lead.branches} branch${lead.branches > 1 ? 'es' : ''}` : ''}</dd></div>
@@ -115,43 +122,54 @@ function LeadDetail({ lead, onEdit, onPay }) {
   )
 }
 
+// #leads/account and #leads/unpaid open those filters; any other #leads/<id> opens that lead.
+const FILTER_LINKS = ['account', 'unpaid']
+
 export default function Leads({ focus, plans, onPay }) {
-  const { leads } = useBiz()
+  const { leads, payments } = useBiz()
   const [q, setQ] = useState('')
-  const [filter, setFilter] = useState(focus ? 'all' : 'open')
-  const [openId, setOpenId] = useState(focus ?? null)
+  const linkFilter = FILTER_LINKS.includes(focus)
+  const [filter, setFilter] = useState(linkFilter ? focus : focus ? 'all' : 'open')
+  const [openId, setOpenId] = useState(linkFilter ? null : focus ?? null)
+  const payers = useMemo(() => new Set(payments.map((p) => p.lead_id)), [payments])
   const [sheet, setSheet] = useState(null) // null | {} (new) | lead (edit)
-  useEffect(() => { if (focus) document.getElementById(`lead-${focus}`)?.scrollIntoView({ block: 'center' }) }, [focus])
+  useEffect(() => { if (focus && !linkFilter) document.getElementById(`lead-${focus}`)?.scrollIntoView({ block: 'center' }) }, [focus])
 
   const counts = useMemo(() => {
-    const c = { all: leads.length, open: 0, followup: 0 }
+    const c = { all: leads.length, open: 0, followup: 0, account: 0, unpaid: 0 }
     for (const l of leads) {
+      if (l.user_id) { c.account++; if (!payers.has(l.id)) c.unpaid++ }
       c[l.status] = (c[l.status] ?? 0) + 1
       if (['new', 'contacted', 'demo'].includes(l.status)) c.open++
       if (l.follow_up && daysUntil(l.follow_up) <= 0 && l.status !== 'won' && l.status !== 'lost') c.followup++
     }
     return c
-  }, [leads])
+  }, [leads, payers])
 
   const shown = useMemo(() => {
     const t = q.trim().toLowerCase()
     return leads.filter((l) => {
       if (filter === 'open' && !['new', 'contacted', 'demo'].includes(l.status)) return false
       if (filter === 'followup' && !(l.follow_up && daysUntil(l.follow_up) <= 0 && l.status !== 'won' && l.status !== 'lost')) return false
-      if (!['all', 'open', 'followup'].includes(filter) && l.status !== filter) return false
-      return !t || [l.name, l.phone, l.shop, l.city, l.plan, l.notes].some((v) => v?.toLowerCase().includes(t))
+      if (filter === 'account' && !l.user_id) return false
+      if (filter === 'unpaid' && !(l.user_id && !payers.has(l.id))) return false
+      if (!['all', 'open', 'followup', 'account', 'unpaid'].includes(filter) && l.status !== filter) return false
+      return !t || [l.name, l.phone, l.email, l.shop, l.city, l.plan, l.notes].some((v) => v?.toLowerCase().includes(t))
     })
-  }, [leads, q, filter])
+  }, [leads, q, filter, payers])
 
   const tabs = [
     { id: 'open', label: 'Open' },
     { id: 'followup', label: 'Call back today' },
+    { id: 'unpaid', label: 'Signed up, not paid' },
+    { id: 'account', label: 'Has account' },
     ...STATUSES,
     { id: 'all', label: 'All' },
   ]
 
   const exportCsv = () => downloadCsv(`zap-pos-leads-${today()}.csv`, [
     { label: 'Received', get: (l) => toDay(l.created_at) }, { label: 'Name', get: (l) => l.name }, { label: 'Phone', get: (l) => l.phone },
+    { label: 'Email', get: (l) => l.email }, { label: 'Signed up', get: (l) => (l.user_id ? toDay(l.signed_up_at) : '') }, { label: 'Paid', get: (l) => (payers.has(l.id) ? 'Yes' : 'No') },
     { label: 'Shop', get: (l) => l.shop }, { label: 'City', get: (l) => l.city }, { label: 'Plan', get: (l) => l.plan },
     { label: 'Branches', get: (l) => l.branches }, { label: 'Status', get: (l) => statusLabel(l.status) }, { label: 'Call back on', get: (l) => l.follow_up },
     { label: 'Came from', get: (l) => l.source }, { label: 'Message', get: (l) => l.message }, { label: 'Notes', get: (l) => l.notes },
@@ -166,10 +184,10 @@ export default function Leads({ focus, plans, onPay }) {
 
       <div className="adm-panel wide">
         <div className="adm-toolbar">
-          <div className="adm-search"><Icon name="search" size={16} /><input type="search" placeholder="Search name, phone, shop, city…" value={q} onChange={(e) => setQ(e.target.value)} /></div>
+          <div className="adm-search"><Icon name="search" size={16} /><input type="search" placeholder="Search name, phone, email, shop, city…" value={q} onChange={(e) => setQ(e.target.value)} /></div>
           <div className="adm-chips" role="tablist">
             {tabs.map((t) => (
-              <button key={t.id} role="tab" aria-selected={filter === t.id} className={`${filter === t.id ? 'on' : ''} ${t.id === 'followup' && counts.followup ? 'alert' : ''}`} onClick={() => setFilter(t.id)}>
+              <button key={t.id} role="tab" aria-selected={filter === t.id} className={`${filter === t.id ? 'on' : ''} ${(t.id === 'followup' && counts.followup) || (t.id === 'unpaid' && counts.unpaid) ? 'alert' : ''}`} onClick={() => setFilter(t.id)}>
                 {t.label} <em>{counts[t.id] ?? 0}</em>
               </button>
             ))}
@@ -194,6 +212,7 @@ export default function Leads({ focus, plans, onPay }) {
                       <b>{l.name}{l.shop && <small> · {l.shop}</small>}</b>
                       <small>{l.phone}{l.city && ` · ${l.city}`}{l.plan && ` · ${l.plan}`}</small>
                     </span>
+                    {l.user_id && <span className={`adm-acct ${payers.has(l.id) ? 'paid' : ''}`} title={payers.has(l.id) ? 'Has an account and has paid' : 'Signed up but has not paid'}><Icon name="lock" size={11} /> {payers.has(l.id) ? 'Account' : 'Not paid'}</span>}
                     {due != null && <span className={`adm-due ${due < 0 ? 'late' : due === 0 ? 'today' : ''}`}><Icon name="calendar" size={12} /> {due < 0 ? `${-due} d late` : due === 0 ? 'Today' : dateFmt(l.follow_up)}</span>}
                     <StatusPill status={l.status} />
                     <span className="adm-row-time">{timeAgo(l.created_at)}</span>

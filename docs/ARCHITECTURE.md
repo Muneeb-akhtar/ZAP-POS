@@ -11,14 +11,15 @@ ZAP POS/
 ├─ docs/CHANGELOG.md             dated history of changes (newest first)
 ├─ .claude/                      Claude Code settings + custom commands
 ├─ README.md                     human setup guide
-├─ supabase/schema.sql           tables, RLS, grants, admin_stats() (run in Supabase SQL editor; safe to re-run)
+├─ supabase/schema.sql           tables, RLS, grants, functions, sign-up trigger (run in Supabase SQL editor; safe to re-run)
 └─ src/
-   └─ zappos-web/                React 18 + Vite 5 landing page + admin
+   └─ zappos-web/                React 18 + Vite 5 landing page + admin + customer account
       ├─ index.html              title/meta, mounts #root
       ├─ admin/index.html        admin entry (noindex, same theme script), loads src/admin/main.jsx
+      ├─ account/index.html      customer account entry (noindex, same theme script), loads src/account/main.jsx
       ├─ .env.example            VITE_SUPABASE_URL / VITE_SUPABASE_ANON_KEY template (copy to .env.local)
-      ├─ vite.config.js          dev port 5173, two inputs (main, admin), build → dist/
-      ├─ vercel.json             Vercel build: `npm run build`, output `dist/`, /admin rewrite + noindex header, immutable cache for /assets
+      ├─ vite.config.js          dev port 5173, three inputs (main, admin, account), build → dist/
+      ├─ vercel.json             Vercel build: `npm run build`, output `dist/`, /admin and /account rewrites + noindex headers, immutable cache for /assets
       ├─ public/favicon.svg      blue square + white bolt
       └─ src/
          ├─ main.jsx             font imports (Latin subsets) + styles.css + <App/>
@@ -26,6 +27,7 @@ ZAP POS/
          ├─ lib/content.js       Supabase config, defaultContent, mergeContent, fetchPublishedContent, localStorage cache
          ├─ lib/track.js         anonymous visit/click/view events, leadSource()
          ├─ admin/               admin panel (see §9)
+         ├─ account/             customer sign-up / log-in / my account (see §10)
          ├─ styles.css           all styles (see §5)
          ├─ content/landing-content.json   ALL page content (see §4)
          └─ components/          see §3
@@ -38,10 +40,14 @@ localStorage "zap-content" (last published copy) ──────────�
 Supabase site_content[id='landing'].data ──REST fetch──────┘   then re-merge + re-cache when the fetch returns
 
 Admin (/admin/) ──supabase-js (signed in)──► upsert site_content[id='landing'] ──► live on next page load
+
+Shop (/account/ or POS app) ──auth.signUp(email, password, data{name, phone, shop, city})──► auth.users
+   └─ trigger link_signup() ──► leads row (matched by email, else mobile number, else new) gets user_id + signed_up_at
+Shop signed in ──rpc('my_account')──► own shop, current plan, paid_until, payments (nothing else)
 ```
 - `mergeContent(defaults, saved)`: objects merge key by key, arrays and plain values from `saved` win. So new JSON fields appear automatically, but a published array replaces the default array entirely.
 - The landing page uses `GET {VITE_SUPABASE_URL}/rest/v1/site_content?id=eq.landing&select=data` with the anon key (no SDK). If Supabase is unset, down, or has no row yet, the bundled JSON is shown.
-- **Demo requests:** any click on `a[href="#demo"]` (or opening `/#demo`) opens `LeadForm`; pricing buttons pass `data-plan`. Submit → `POST /rest/v1/leads` (anon, `return=minimal`). Visitors can insert but never read leads.
+- **Demo requests:** any click on `a[href="#demo"]` (or opening `/#demo`) opens `LeadForm`; pricing buttons pass `data-plan`. Submit → `POST /rest/v1/rpc/submit_lead` (anon, params `p_name, p_phone, p_email, p_shop, …`). Visitors can't read or write the `leads` table directly; the same email or mobile number again updates the existing lead (no duplicates).
 - **Tracking (`lib/track.js`):** `trackVisit()` once per load, `trackClick(name)` for any click inside `[data-track="name"]`, `trackView('pricing')` via IntersectionObserver → `POST /rest/v1/events` with `keepalive`. Off in dev, for bots/headless, with Do Not Track, and when localStorage `zap-no-track` is set (the admin sets it on login).
 - **Admin data:** `admin/biz.js` loads all `leads` and `payments` once (`useBizStore`, shared via `BizContext`) and updates the local copy after each write; `useStats(days)` calls `rpc('admin_stats')`.
 
@@ -128,10 +134,14 @@ Gotchas:
 |---|---|---|
 | `site_content` | anyone: read · admins: insert/update | one row `id='landing'`, trigger stamps `updated_at/updated_by` |
 | `admins` | admins: read own row | add via the statement at the end of the file |
-| `leads` | anon: insert `name, phone, shop, city, plan, branches, message, source` only · admins: all | `status` ∈ new/contacted/demo/won/lost (won = customer), `follow_up` date, `notes`; length checks |
-| `payments` | admins only | `lead_id` → leads (**on delete restrict**), `amount` int > 0, `paid_on`, `method` ∈ cash/bank/jazzcash/easypaisa/card/other, `plan`, `billing` ∈ monthly/yearly/setup/other, `branches`, `paid_until`, `reference`, `note` |
+| `leads` | anon: nothing (uses `submit_lead()`) · admins: all | `status` ∈ new/contacted/demo/won/lost (won = customer), `follow_up` date, `notes`; length checks. **One lead per mobile number:** generated `phone_key` (via `phone_key()`: 0300-…, +92 300…, 92300… → `0300…`) with unique index `leads_phone_key`. **Accounts:** `email` (unique `leads_email_key` on lower(email)), `user_id` → auth.users (unique, on delete set null), `signed_up_at` |
+| `phone_key(text)` | immutable helper | mirrored in JS as `phoneKey()` in `admin/biz.js`; keep both in sync |
+| `submit_lead(p_name, p_phone, p_email, p_shop, p_city, p_plan, p_branches, p_message, p_source)` | anon only (security definer; the landing page always calls as anon) | insert, or on the same email (preferred) or `phone_key`: fill empty fields, append a dated "Sent the demo form again…" line to `notes`, Lost → New. Returns nothing |
+| `payments` | admins only | `lead_id` → leads (**on delete restrict**), `amount` int > 0, `paid_on`, `method` ∈ cash/bank/jazzcash/easypaisa/card/other, `plan`, `billing` ∈ monthly/yearly/setup/other, `branches`, `starts_on`, `paid_until`, `reference`, `note`. Guards: `payments_period` (monthly/yearly need `starts_on` and `paid_until > starts_on`), **`payments_no_overlap`** (exclusion constraint, btree_gist: a shop's monthly/yearly periods `[starts_on, paid_until)` never overlap → one plan at a time, no double billing), unique `payments_same_payment` (lead, paid_on, amount, billing), unique `payments_reference` (method, lower(reference)) |
 | `events` | anon: insert `type, name, visitor, device, referrer, campaign` · admins: read/delete | `type` ∈ visit/click/view |
-| `is_admin()` | used by policies | security definer |
+| `is_admin()` | used by policies (authenticated only) | security definer |
+| `link_signup()` + trigger `on_auth_user_created` (after insert on `auth.users`) | runs as definer, nobody can call it | links the new login to the lead with the same email, else same `phone_key` (from user metadata `phone`), else inserts a lead (`source` 'Sign-up'). A number/email whose lead already has another `user_id` → exception `ZAP_ACCOUNT_EXISTS` (sign-up fails). No metadata phone and no email match (e.g. the owner's own login) → nothing |
+| `my_account()` | authenticated (security definer) | jsonb for `auth.uid()`'s lead: `name, shop, city, phone, email, since, plan, branches, billing, paid_until, active` (paid_until ≥ today, Asia/Karachi), `payments[] {paid_on, amount, method, plan, billing, branches, starts_on, paid_until}`. Null if the login isn't linked (admin). **Customers get no table policies; this is their only read path** (also for the POS app's licence check) |
 | `admin_stats(days)` | authenticated (RLS still applies) | jsonb: `daily[] {date, visits, visitors, leads}`, `totals {visits, visitors, prevVisits, prevVisitors, leads, prevLeads, sawPricing, clickedCta}`, `clicks{}`, `devices{}`, `referrers[]`, `campaigns[]`; days in Asia/Karachi |
 
 ## 9. Admin panel (`/admin/`)
@@ -140,11 +150,21 @@ Gotchas:
 - **Panel:** sidebar with two groups. *Business*: Dashboard, Leads (badge = new), Payments, Customers (badge = overdue), Analytics. *Website*: the `SECTIONS` editor tabs (dot = unsaved; "unsaved" badge on the group). Hash routing: `#dashboard`, `#leads`, `#leads/<id>` (opens that lead), `#payments`, `#customers`, `#analytics`, `#<section id>`. Holds the website draft (so switching pages keeps edits), the business store, toasts (max 3) and the Add lead / Record payment sheets.
 - **Website editor (`ContentPage`):** loads `site_content`, merges with `defaultContent`, edits a `draft`. Bar: status, View site, Discard, Publish (`upsert({ id: 'landing', data: draft })`, Ctrl+S). Unload warning when unpublished. "Reset everything to the built-in content" (2-step).
 - **`Dashboard.jsx`:** stat tiles (visitors/requests 7 days vs previous 7, received this month vs last, customers), "Needs your attention", visitors chart (30 d), latest leads, renewals, website `checklist()` (placeholder detection rules live there).
-- **`Leads.jsx`:** list with search + filter chips, expandable `LeadDetail` (status segment, call-back date, notes, Call/WhatsApp/Record payment/Edit/Delete), `LeadSheet` (add/edit), CSV export.
-- **`Payments.jsx`:** `PaymentSheet` (price = plan `monthly`/`annual` × branches when the plan has a `unit`; paid-until = +1 or +12 months), payments tab (tiles, per-month chart, by method/plan, table, month filter, CSV), `Customers` tab (renewal state from the latest `paid_until`: overdue < 0 d, due ≤ 7 d, active; estimated monthly income = monthly amounts + yearly ÷ 12).
+- **`Leads.jsx`:** list with search + filter chips, expandable `LeadDetail` (status segment, call-back date, notes, Call/WhatsApp/Record payment/Edit/Delete), `LeadSheet` (add/edit; blocks a mobile number another lead already has, by `phoneKey`), CSV export.
+- **`Payments.jsx`:** `PaymentSheet` (price = plan `monthly`/`annual` × branches when the plan has a `unit`; monthly/yearly get "Covers from" = the later of paid-on and the shop's current paid-until, paid-until = covers-from +1 or +12 months; refuses overlapping periods with a message naming the clashing dates), payments tab (tiles, per-month chart, by method/plan, table, month filter, CSV), `Customers` tab (renewal state from the latest `paid_until`: overdue < 0 d, due ≤ 7 d, active; estimated monthly income = monthly amounts + yearly ÷ 12).
 - **`Analytics.jsx`:** range 7/30/90, tiles with deltas, per-day charts, funnel, `BarList`s; `CLICK_LABELS` names the `data-track` values.
-- **Shared:** `biz.js` (Supabase client, labels `STATUSES/METHODS/BILLING`, formatting `rs/rsShort/dateFmt/timeAgo/addMonths/daysUntil`, `telLink/waLink` (03… → 92…), `downloadCsv` (UTF-8 BOM for Excel), `customersOf`, `useBizStore`, `useStats`), `ui.jsx` (`PageBar`, `Card`, `StatusPill`, `ConfirmButton`, `Sheet`, `Toasts`, `Field`), `Charts.jsx` (`Stat`, `Bars` with hover tooltip, `BarList`, `Funnel`; single brand-blue series, no chart library).
+- **Shared:** `biz.js` (Supabase client, labels `STATUSES/METHODS/BILLING`, formatting `rs/rsShort/dateFmt/timeAgo/addMonths/daysUntil`, `phoneKey` (same rule as SQL `phone_key()`), `isPeriod(billing)`, `telLink/waLink` (03… → 92…), database-guard errors → plain messages (`GUARDS`), `downloadCsv` (UTF-8 BOM for Excel), `customersOf`, `useBizStore`, `useStats`), `ui.jsx` (`PageBar`, `Card`, `StatusPill`, `ConfirmButton`, `Sheet`, `Toasts`, `Field`), `Charts.jsx` (`Stat`, `Bars` with hover tooltip, `BarList`, `Funnel`; single brand-blue series, no chart library).
 - **Fields (`Fields.jsx`):** generic editor driven by the JSON shape: strings (input/textarea, icon picker for `icon` keys via `iconNames`, selects from `CHOICES`), numbers (`monthly`, `annual`, `stock`; empty → null), booleans (switch), string lists, `[mark, text]` pair lists (receipt lines), object lists as collapsible cards (move up/down, 2-step delete, add), compare rows (`values` → ✓ / – / text per plan, plus "Add group heading"/"Add feature row"). Keys starting with `_` are hidden.
 - **`sections.js`:** `SECTIONS` (id, label, icon, top-level `keys`, hint), `LABELS` (friendly field names), `HINTS` (help text under fields), `CHOICES`, `humanize` fallback.
 - **Styling (`admin.css`):** `adm-` classes on the landing tokens, so light/dark come for free (status colors have dark twins next to them). Under 900px the sidebar becomes a top bar with scrolling tabs, grids go single-column, sheets become bottom sheets; under 700px tables turn into cards (`td[data-label]`).
 - **Supabase:** see §8. Add an admin: create the user in Supabase Auth, then `insert into public.admins (user_id) select id from auth.users where email = '…';`.
+
+## 10. Customer account (`/account/`)
+- **Entry:** `account/index.html` → `src/account/main.jsx` (fonts, `styles.css`, `admin/admin.css` for boxes/fields/tables) → `AccountApp.jsx`. Landing "Log in" buttons use `links.portal` (default `/account/`); `/account/#signup` opens the sign-up tab.
+- **Screens:** `Auth` (tabs Log in / Sign up, plus Forgot password; sign-up sends `{ name, phone, shop, city }` as user metadata and `emailRedirectTo` `/account/`; "check your email" when confirmation is on), `NewPassword` (on the `PASSWORD_RECOVERY` auth event), `MyAccount` (`rpc('my_account')`: greeting, plan card green = active / red = expired, Download + "Pay or renew on WhatsApp" buttons, payments table). A login that isn't linked to a shop sees the WhatsApp help, or a link to `/admin/` if it is the admin.
+- **Errors → text:** "already registered" / empty `identities` → `emailTaken`; "Database error saving new user" (trigger `ZAP_ACCOUNT_EXISTS`) → `shopTaken`; unconfirmed email → `notConfirmed`.
+- **Text:** `account` key in `landing-content.json` (admin tab "Customer account"); `{email}`, `{name}`, `{date}` placeholders filled by `fill()`.
+- **Styles:** `acc-` block in `admin/admin.css` (plan card has dark twins), phone rules in its 700px block.
+- **Admin side:** lead rows show an "Account" (paid, green) / "Not paid" (amber) chip; filters "Signed up, not paid" (`#leads/unpaid`) and "Has account" (`#leads/account`); lead detail shows Email + Account; Customers tab notes "has account / no account yet"; Dashboard "Needs your attention" counts sign-ups that haven't paid.
+- **POS app (not in this repo):** sign in with the same Supabase Auth email + password (anon key), then `rpc('my_account')` → use `active` / `paid_until` / `plan` / `branches` to unlock features. Never give the app the service-role key.
+- **Supabase settings it relies on:** Authentication → Sign In / Providers → "Allow new users to sign up" ON; URL Configuration → Site URL = the live domain, Redirect URLs include `https://<domain>/account/` and `http://localhost:5173/account/`. Supabase's built-in email sender is rate-limited (a few emails per hour); set up custom SMTP (Authentication → Emails) before launch, or turn off "Confirm email".

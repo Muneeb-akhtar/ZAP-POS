@@ -15,6 +15,7 @@ export const SECTIONS = [
   { id: 'faq', label: 'FAQ', icon: 'whatsapp', keys: ['faq'], hint: 'Questions shown in the WhatsApp-style chat.' },
   { id: 'finalCta', label: 'Final section', icon: 'moon', keys: ['finalCta'], hint: 'The dark "Ready when the internet isn\'t" section at the bottom.' },
   { id: 'leadForm', label: 'Demo form', icon: 'mail', keys: ['leadForm'], hint: 'The "Book a free demo" form. It opens from every demo button; requests arrive under Leads.' },
+  { id: 'account', label: 'Customer account', icon: 'lock', keys: ['account'], hint: 'The /account/ page where shops sign up and log in (same login as the POS app). {email}, {name} and {date} are filled in automatically.' },
   { id: 'footer', label: 'Footer', icon: 'layers', keys: ['footer'], hint: 'Footer link columns and popular searches.' },
 ]
 

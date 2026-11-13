@@ -1,7 +1,7 @@
 # ZAP POS
 
 Offline-first point of sale for shops in Pakistan.
-This repo contains the public landing page and the admin panel (React + Vite), backed by Supabase.
+This repo contains the public landing page, the admin panel and the customer account page (React + Vite), backed by Supabase.
 
 Developer docs: `CLAUDE.md` (rules + commands), `docs/ARCHITECTURE.md` (code map), `docs/CHANGELOG.md` (history).
 
@@ -34,7 +34,7 @@ cd src/zappos-web
 npm install
 npm run dev
 ```
-Landing page: http://localhost:5173 · Admin: http://localhost:5173/admin/
+Landing page: http://localhost:5173 · Admin: http://localhost:5173/admin/ · Customer account: http://localhost:5173/account/
 
 ## Production
 Vercel builds `src/zappos-web` (`npm run build` → `dist/`) on every push to `main`.

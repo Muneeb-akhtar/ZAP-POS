@@ -4,16 +4,17 @@ import { SUPABASE_URL, SUPABASE_ANON_KEY, supabaseConfigured } from '../lib/cont
 import { leadSource } from '../lib/track.js'
 
 // "Book a free demo" form. Opens from any link to #demo (App.jsx); pricing buttons pass their plan.
-// Saves to Supabase `leads` (visitors may only insert), shown in the admin Leads inbox.
+// Sends to Supabase `submit_lead()` (visitors can't touch the leads table), shown in the admin Leads inbox.
+// The same mobile number twice updates the existing lead instead of creating a duplicate.
 async function sendLead(lead) {
   if (!supabaseConfigured) throw new Error('not configured')
-  const res = await fetch(`${SUPABASE_URL}/rest/v1/leads`, {
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/submit_lead`, {
     method: 'POST',
     headers: {
       apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
       'Content-Type': 'application/json', Prefer: 'return=minimal',
     },
-    body: JSON.stringify(lead),
+    body: JSON.stringify(Object.fromEntries(Object.entries(lead).map(([k, v]) => [`p_${k}`, v]))),
   })
   if (!res.ok) throw new Error(`Supabase ${res.status}`)
 }
@@ -21,7 +22,7 @@ async function sendLead(lead) {
 const digits = (s) => s.replace(/\D/g, '')
 
 export default function LeadForm({ plan, plans, data, links, brand, onClose }) {
-  const [f, setF] = useState({ name: '', phone: '', shop: '', city: '', plan: plan ?? '', branches: '1', message: '', website: '' })
+  const [f, setF] = useState({ name: '', phone: '', email: '', shop: '', city: '', plan: plan ?? '', branches: '1', message: '', website: '' })
   const [state, setState] = useState('idle') // idle | sending | done | error
   const [phoneError, setPhoneError] = useState(false)
   const box = useRef(null)
@@ -49,7 +50,7 @@ export default function LeadForm({ plan, plans, data, links, brand, onClose }) {
     setState('sending')
     try {
       await sendLead({
-        name: f.name.trim(), phone: f.phone.trim(), shop: f.shop.trim() || null, city: f.city.trim() || null,
+        name: f.name.trim(), phone: f.phone.trim(), email: f.email.trim() || null, shop: f.shop.trim() || null, city: f.city.trim() || null,
         plan: f.plan || null, branches: Number(f.branches) || null, message: f.message.trim() || null, source: leadSource(),
       })
       setState('done')
@@ -88,6 +89,9 @@ export default function LeadForm({ plan, plans, data, links, brand, onClose }) {
                 <input required type="tel" inputMode="tel" maxLength={20} autoComplete="tel" placeholder={data.phonePlaceholder}
                   value={f.phone} onChange={(e) => { setPhoneError(false); set('phone')(e) }} />
                 {phoneError && <small role="alert">{data.phoneError}</small>}
+              </label>
+              <label className="wide"><span>{data.emailLabel}</span>
+                <input type="email" maxLength={120} autoComplete="email" placeholder={data.emailPlaceholder} value={f.email} onChange={set('email')} />
               </label>
               <label><span>{data.shopLabel}</span>
                 <input maxLength={100} autoComplete="organization" value={f.shop} onChange={set('shop')} />

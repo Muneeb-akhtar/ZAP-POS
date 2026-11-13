@@ -44,12 +44,15 @@ export default function Dashboard({ content, published, updatedAt, go, onAddLead
   const overdue = renewals.filter((c) => c.state === 'overdue').length
   const dueSoon = renewals.length - overdue
   const fresh = leads.filter((l) => l.status === 'new')
+  const paidIds = new Set(payments.map((p) => p.lead_id))
+  const unpaidSignups = leads.filter((l) => l.user_id && !paidIds.has(l.id))
   const callbacks = leads.filter((l) => l.follow_up && daysUntil(l.follow_up) <= 0 && l.status !== 'won' && l.status !== 'lost')
   const checks = checklist(content, published)
   const done = checks.filter((x) => x.done).length
 
   const attention = [
     fresh.length && { icon: 'users', tone: 'blue', text: `${fresh.length} new lead${fresh.length > 1 ? 's' : ''} waiting for a call`, go: 'leads' },
+    unpaidSignups.length && { icon: 'lock', tone: 'amber', text: `${unpaidSignups.length} shop${unpaidSignups.length > 1 ? 's' : ''} signed up but ${unpaidSignups.length > 1 ? "haven't" : "hasn't"} paid yet`, go: 'leads/unpaid' },
     callbacks.length && { icon: 'calendar', tone: 'amber', text: `${callbacks.length} call-back${callbacks.length > 1 ? 's' : ''} due today`, go: 'leads' },
     overdue && { icon: 'close', tone: 'red', text: `${overdue} customer${overdue > 1 ? 's' : ''} overdue on payment`, go: 'customers' },
     dueSoon && { icon: 'card', tone: 'amber', text: `${dueSoon} renewal${dueSoon > 1 ? 's' : ''} due this week`, go: 'customers' },

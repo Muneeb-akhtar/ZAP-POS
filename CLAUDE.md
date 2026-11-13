@@ -4,7 +4,7 @@ Read this first. For deeper detail see `docs/ARCHITECTURE.md`; for recent histor
 
 ## What this is
 ZAP POS: offline-first point of sale software for shops in Pakistan (owner: Muneeb Akhtar).
-This repo holds the **public landing page** and the **admin panel** at `/admin/` (dashboard, leads, payments, customers, analytics, website editor), both React, backed by **Supabase**. There is no custom server.
+This repo holds the **public landing page**, the **admin panel** at `/admin/` (dashboard, leads, payments, customers, analytics, website editor) and the **customer account page** at `/account/` (shop sign-up / log-in, plan and payments; same login as the POS app), all React, backed by **Supabase**. There is no custom server.
 
 ## Stack
 - `src/zappos-web/`: React 18 + Vite 5, plain CSS (no Tailwind, no UI library), fonts bundled via @fontsource.
@@ -15,7 +15,7 @@ This repo holds the **public landing page** and the **admin panel** at `/admin/`
 ```bash
 cd src/zappos-web
 npm install          # once, and again after pulling dependency changes
-npm run dev          # http://localhost:5173 (landing) and http://localhost:5173/admin/ (admin)
+npm run dev          # http://localhost:5173 (landing), /admin/ (admin), /account/ (customer account)
 npm run build        # outputs to dist/ (gitignored)
 ```
 Env: copy `src/zappos-web/.env.example` to `.env.local` and fill `VITE_SUPABASE_URL` + `VITE_SUPABASE_ANON_KEY` (Supabase → Project Settings → API). Without them the landing page shows the bundled JSON and `/admin/` shows setup steps.
@@ -43,6 +43,7 @@ Env: copy `src/zappos-web/.env.example` to `.env.local` and fill `VITE_SUPABASE_
 1b. **Admin security:** all protection is Supabase RLS (`is_admin()` / `admins` table). Visitors may only INSERT into `leads` and `events` (column grants). Never put the service-role key in the frontend or in `.env*` used by Vite; only the anon key. Test any schema change for anon, non-admin and admin.
 1c. **Privacy:** tracking stays anonymous (random browser id, device, referrer host, utm). Never store names, IPs or full URLs in `events`; personal data belongs only in `leads`, which visitors can't read.
 1d. **Money is recorded, not processed:** payments are entered by the owner; there is no online checkout. Amounts are whole rupees.
+1e. **No duplicates, no multi-buying, single owner (owner request):** one lead per mobile number (`leads_phone_key`; the demo form goes through `submit_lead()`, which updates instead of duplicating); a payment can't be recorded twice (`payments_same_payment`, `payments_reference`); a shop has **one plan at a time**: monthly/yearly periods (`starts_on` → `paid_until`) never overlap (`payments_no_overlap`); to switch plans, end the current period first. Shops sign up (website `/account/` or the POS app) and are linked to their lead by **email**, else mobile number (`link_signup()` trigger); the admin sees who signed up and who paid. **Tenancy:** only users in `admins` see business data; a customer sees only their own account, through `my_account()`. Never add table policies for customers. Never weaken these guards; keep the DB rule and the admin's friendly check/message in sync.
 2. **Never invent real customer reviews, ratings, phone numbers or prices.** Current values are placeholders; keep them clearly marked until Muneeb provides real ones.
 3. **Keep the design system:** blue brand (`--brand-*`), electric yellow accent (`--yellow`) only for "lightning" moments, night navy (`--night`) for dark sections. Headings use `--font-head`, receipts/clocks `--font-mono`, handwritten notes `--font-hand`.
 4. **Hover effects only inside the hover media block** (pointer devices only). Everything must still work on touch and with `prefers-reduced-motion`.
@@ -74,4 +75,5 @@ Env: copy `src/zappos-web/.env.example` to `.env.local` and fill `VITE_SUPABASE_
 1. Replace placeholders with real content (phone, prices, store links, reviews).
 2. ~~Admin panel~~ done (Supabase, `/admin/`).
 3. ~~Dashboard, leads, payments, analytics~~ done.
-4. Ideas: email/WhatsApp alert on a new lead (Supabase webhook), online payments once a JazzCash/Easypaisa merchant account exists.
+4. ~~Customer accounts~~ done (`/account/`). Next: the POS app signs in with the same Supabase login and checks `my_account()` (see ARCHITECTURE §10).
+5. Ideas: email/WhatsApp alert on a new lead (Supabase webhook), online payments once a JazzCash/Easypaisa merchant account exists.

@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import Icon from '../components/Icons.jsx'
-import { BILLING, METHODS, addMonths, customersOf, dateFmt, downloadCsv, rs, rsShort, telLink, today, useBiz, waLink } from './biz.js'
+import { BILLING, METHODS, addMonths, customersOf, dateFmt, downloadCsv, isPeriod, rs, rsShort, telLink, today, useBiz, waLink } from './biz.js'
 import { BarList, Bars, Stat } from './Charts.jsx'
 import { Card, ConfirmButton, Field, PageBar, Sheet, useNotify } from './ui.jsx'
 
@@ -15,40 +15,56 @@ const lastMonths = (n) => {
   }
   return out
 }
-const coverOf = (billing, paidOn) => (billing === 'monthly' ? addMonths(paidOn, 1) : billing === 'yearly' ? addMonths(paidOn, 12) : '')
+const coverOf = (billing, start) => (start && billing === 'monthly' ? addMonths(start, 1) : start && billing === 'yearly' ? addMonths(start, 12) : '')
 
-// Record or edit a payment. Amount and "paid until" fill in from the plan, until you type your own.
+// Record or edit a payment. Amount, "covers from" and "paid until" fill in until you type your own.
+// One plan at a time: a renewal starts when the shop's current period ends (never overlaps it).
 export function PaymentSheet({ payment, plans, onClose, onAddLead }) {
-  const { leads, savePayment } = useBiz()
+  const { leads, payments, savePayment } = useBiz()
   const notify = useNotify()
   const lead0 = leads.find((l) => l.id === payment.lead_id)
+  // The shop's other plan periods (not this payment).
+  const periodsOf = (leadId) => payments.filter((p) => p.lead_id === leadId && p.id !== payment.id && isPeriod(p.billing) && p.starts_on && p.paid_until)
+  const startFor = (x) => {
+    if (!isPeriod(x.billing)) return ''
+    const end = periodsOf(x.lead_id).map((p) => p.paid_until).sort().at(-1)
+    return end && end > x.paid_on ? end : x.paid_on
+  }
   const [f, setF] = useState(() => {
-    const base = { lead_id: '', amount: '', paid_on: today(), method: 'cash', plan: lead0?.plan ?? plans[0]?.name ?? '', billing: 'monthly', branches: lead0?.branches ?? 1, paid_until: '', reference: '', note: '', ...payment }
-    return {
-      ...base,
-      paid_until: payment.id ? payment.paid_until ?? '' : coverOf(base.billing, base.paid_on),
-      amount: payment.id ? base.amount : priceFor(plans, base),
-    }
+    const base = { lead_id: '', amount: '', paid_on: today(), method: 'cash', plan: lead0?.plan ?? plans[0]?.name ?? '', billing: 'monthly', branches: lead0?.branches ?? 1, starts_on: '', paid_until: '', reference: '', note: '', ...payment }
+    if (payment.id) return { ...base, starts_on: base.starts_on ?? '', paid_until: base.paid_until ?? '' }
+    const starts_on = startFor(base)
+    return { ...base, starts_on, paid_until: coverOf(base.billing, starts_on), amount: priceFor(plans, base) }
   })
-  const [touched, setTouched] = useState({ amount: Boolean(payment.id), paid_until: Boolean(payment.id) })
+  const [touched, setTouched] = useState({ amount: Boolean(payment.id), starts_on: Boolean(payment.id), paid_until: Boolean(payment.id) })
   const [busy, setBusy] = useState(false)
+  const period = isPeriod(f.billing)
 
   const change = (k) => (e) => {
     const v = e.target.value
     const next = { ...f, [k]: v }
-    if (k === 'amount' || k === 'paid_until') setTouched({ ...touched, [k]: true })
+    if (k === 'amount' || k === 'starts_on' || k === 'paid_until') setTouched({ ...touched, [k]: true })
     if (k === 'lead_id') { const l = leads.find((x) => x.id === v); if (l?.plan) next.plan = l.plan; if (l?.branches) next.branches = l.branches }
     if (!touched.amount && k !== 'amount') next.amount = priceFor(plans, next)
-    if (!touched.paid_until && (k === 'billing' || k === 'paid_on')) next.paid_until = coverOf(next.billing, next.paid_on)
+    if (!touched.starts_on && ['lead_id', 'billing', 'paid_on'].includes(k)) next.starts_on = startFor(next)
+    if (!touched.paid_until && ['lead_id', 'billing', 'paid_on', 'starts_on'].includes(k)) next.paid_until = coverOf(next.billing, next.starts_on)
     setF(next)
   }
 
   const submit = async (e) => {
     e.preventDefault()
+    if (period) {
+      const clash = periodsOf(f.lead_id).find((p) => p.starts_on < f.paid_until && f.starts_on < p.paid_until)
+      if (clash) {
+        notify(`Already paid ${dateFmt(clash.starts_on)} – ${dateFmt(clash.paid_until)} (${clash.plan ?? BILLING[clash.billing]}). Start this period on ${dateFmt(clash.paid_until)} or later, or shorten that payment first if they're switching plans.`, 'error')
+        return
+      }
+    }
     setBusy(true)
     try {
       await savePayment({
-        ...f, amount: Math.round(Number(f.amount)), branches: Number(f.branches) || 1, paid_until: f.paid_until || null,
+        ...f, amount: Math.round(Number(f.amount)), branches: Number(f.branches) || 1,
+        starts_on: period ? f.starts_on || null : null, paid_until: f.paid_until || null,
         plan: f.plan || null, reference: (f.reference ?? '').trim() || null, note: (f.note ?? '').trim() || null,
       })
       notify(payment.id ? 'Payment updated' : 'Payment recorded'); onClose()
@@ -87,8 +103,13 @@ export function PaymentSheet({ payment, plans, onClose, onAddLead }) {
             <Field label="Method">
               <select value={f.method} onChange={change('method')}>{Object.entries(METHODS).map(([k, v]) => <option key={k} value={k}>{v}</option>)}</select>
             </Field>
-            <Field label="Paid until (renewal date)" hint="Leave empty for one-time payments.">
-              <input type="date" value={f.paid_until ?? ''} onChange={change('paid_until')} />
+            {period && (
+              <Field label="Covers from" hint="Starts when their current period ends. One plan at a time, no overlaps.">
+                <input type="date" required value={f.starts_on ?? ''} onChange={change('starts_on')} />
+              </Field>
+            )}
+            <Field label="Paid until (renewal date)" hint={period ? null : 'Leave empty for one-time payments.'}>
+              <input type="date" required={period} min={period ? f.starts_on || undefined : undefined} value={f.paid_until ?? ''} onChange={change('paid_until')} />
             </Field>
             <Field label="Reference"><input type="text" maxLength={80} value={f.reference ?? ''} onChange={change('reference')} placeholder="Transaction ID, cheque no…" /></Field>
             <Field label="Note" wide><textarea rows={2} maxLength={500} value={f.note ?? ''} onChange={change('note')} /></Field>
@@ -141,7 +162,7 @@ export function Customers({ onPay, onOpenLead }) {
             <tbody>
               {shown.map((c) => (
                 <tr key={c.lead.id}>
-                  <td className="lead-cell"><button className="adm-tlink" onClick={() => onOpenLead(c.lead.id)}><b>{c.lead.name}</b></button><small>{[c.lead.shop, c.lead.city].filter(Boolean).join(' · ') || c.lead.phone}</small></td>
+                  <td className="lead-cell"><button className="adm-tlink" onClick={() => onOpenLead(c.lead.id)}><b>{c.lead.name}</b></button><small>{[c.lead.shop, c.lead.city].filter(Boolean).join(' · ') || c.lead.phone}{c.lead.user_id ? ' · has account' : ' · no account yet'}</small></td>
                   <td data-label="Plan">{c.plan ?? '–'}{c.branches > 1 && <small>{c.branches} branches</small>}</td>
                   <td data-label="Paid until">{dateFmt(c.paidUntil)}</td>
                   <td data-label="Status"><span className={`adm-renew ${c.state}`}>{stateText(c)}</span></td>
@@ -193,7 +214,7 @@ export default function Payments({ tab, go, onPay, onEditPayment, onOpenLead }) 
     { label: 'Paid on', get: (p) => p.paid_on }, { label: 'Customer', get: (p) => name[p.lead_id]?.name }, { label: 'Shop', get: (p) => name[p.lead_id]?.shop },
     { label: 'Phone', get: (p) => name[p.lead_id]?.phone }, { label: 'Plan', get: (p) => p.plan }, { label: 'Billing', get: (p) => BILLING[p.billing] },
     { label: 'Branches', get: (p) => p.branches }, { label: 'Amount (Rs)', get: (p) => p.amount }, { label: 'Method', get: (p) => METHODS[p.method] },
-    { label: 'Paid until', get: (p) => p.paid_until }, { label: 'Reference', get: (p) => p.reference }, { label: 'Note', get: (p) => p.note },
+    { label: 'Covers from', get: (p) => p.starts_on }, { label: 'Paid until', get: (p) => p.paid_until }, { label: 'Reference', get: (p) => p.reference }, { label: 'Note', get: (p) => p.note },
   ], shown)
 
   const remove = async (id) => {
@@ -251,7 +272,7 @@ export default function Payments({ tab, go, onPay, onEditPayment, onOpenLead }) 
                         <td className="lead-cell"><button className="adm-tlink" onClick={() => onOpenLead(p.lead_id)}><b>{name[p.lead_id]?.name ?? 'Unknown'}</b></button><small>{name[p.lead_id]?.shop}</small></td>
                         <td data-label="Plan">{p.plan ?? '–'}<small>{BILLING[p.billing]}{p.branches > 1 ? ` · ${p.branches} branches` : ''}</small></td>
                         <td data-label="Method">{METHODS[p.method]}{p.reference && <small>{p.reference}</small>}</td>
-                        <td data-label="Paid until">{dateFmt(p.paid_until)}</td>
+                        <td data-label="Paid until">{dateFmt(p.paid_until)}{p.starts_on && <small>from {dateFmt(p.starts_on)}</small>}</td>
                         <td data-label="Amount" className="num"><b>{rs(p.amount)}</b></td>
                         <td className="adm-td-actions">
                           <button className="adm-icon-btn plain" title="Edit" onClick={() => onEditPayment(p)}><Icon name="edit" size={15} /></button>

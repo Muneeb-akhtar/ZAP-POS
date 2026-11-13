@@ -21,7 +21,7 @@ create table if not exists public.admins (
 
 -- 3) Keep updated_at / updated_by current on every save.
 create or replace function public.site_content_touch()
-returns trigger language plpgsql as $$
+returns trigger language plpgsql set search_path = '' as $$
 begin
   new.updated_at := now();
   new.updated_by := auth.uid();
@@ -63,10 +63,13 @@ create or replace function public.is_admin()
 returns boolean language sql stable security definer set search_path = public as $$
   select exists (select 1 from public.admins a where a.user_id = auth.uid())
 $$;
+revoke execute on function public.is_admin() from public, anon;
+grant execute on function public.is_admin() to authenticated;
 
 -- ============================================================
 -- 6) Leads: "Book a free demo" requests from the website (+ ones you add yourself).
---    Visitors can only ADD a lead (and only these columns); only admins can read/change.
+--    One lead per mobile number. Visitors can't touch the table: the demo form calls
+--    submit_lead() below. Only admins can read/change leads.
 -- ============================================================
 create table if not exists public.leads (
   id          uuid primary key default gen_random_uuid(),
@@ -86,8 +89,21 @@ create table if not exists public.leads (
 );
 create index if not exists leads_created_at on public.leads (created_at desc);
 
+-- Same shop, same number: 0300-1234567, +92 300 1234567 and 923001234567 all become 03001234567.
+create or replace function public.phone_key(p text)
+returns text language sql immutable set search_path = '' as $$
+  select case
+    when d ~ '^0092[0-9]{10}$' then '0' || substr(d, 5)
+    when d ~ '^92[0-9]{10}$'   then '0' || substr(d, 3)
+    when d ~ '^3[0-9]{9}$'     then '0' || d
+    else d end
+  from (select regexp_replace(coalesce(p, ''), '[^0-9]', '', 'g') as d) x
+$$;
+alter table public.leads add column if not exists phone_key text generated always as (public.phone_key(phone)) stored;
+create unique index if not exists leads_phone_key on public.leads (phone_key);
+
 create or replace function public.touch_updated_at()
-returns trigger language plpgsql as $$
+returns trigger language plpgsql set search_path = '' as $$
 begin new.updated_at := now(); return new; end $$;
 drop trigger if exists leads_touch on public.leads;
 create trigger leads_touch before update on public.leads
@@ -95,18 +111,61 @@ create trigger leads_touch before update on public.leads
 
 alter table public.leads enable row level security;
 revoke all on public.leads from anon;
-grant insert (name, phone, shop, city, plan, branches, message, source) on public.leads to anon;
-
 drop policy if exists "Visitors can send a lead" on public.leads;
-create policy "Visitors can send a lead" on public.leads for insert to anon
-  with check (status = 'new' and notes is null and follow_up is null);
 drop policy if exists "Admins manage leads" on public.leads;
 create policy "Admins manage leads" on public.leads for all to authenticated
   using (public.is_admin()) with check (public.is_admin());
 
+-- Customer accounts: a shop that signs up (website /account/ or the POS app) is linked to its lead.
+alter table public.leads add column if not exists email text check (char_length(email) <= 120);
+alter table public.leads add column if not exists user_id uuid unique references auth.users (id) on delete set null;
+alter table public.leads add column if not exists signed_up_at timestamptz;
+create unique index if not exists leads_email_key on public.leads (lower(email)) where email is not null;
+
+-- The website's demo form. A repeat request (same email, or same mobile number) never makes a
+-- second lead: it fills in what the lead was missing, adds a dated line to your notes, and moves
+-- a Lost lead back to New. Visitors get the same "sent" answer either way and can't read anything.
+drop function if exists public.submit_lead(text, text, text, text, text, int, text, text);
+create or replace function public.submit_lead(
+  p_name text, p_phone text, p_email text default null, p_shop text default null, p_city text default null,
+  p_plan text default null, p_branches int default null, p_message text default null, p_source text default null)
+returns void language plpgsql security definer set search_path = public as $$
+declare
+  v_email text := nullif(lower(trim(p_email)), '');
+  v_id uuid;
+begin
+  select id into v_id from public.leads
+   where (v_email is not null and lower(email) = v_email) or phone_key = public.phone_key(p_phone)
+   order by (v_email is not null and lower(email) = v_email) desc
+   limit 1 for update;
+  if v_id is null then
+    insert into public.leads (name, phone, email, shop, city, plan, branches, message, source)
+    values (p_name, p_phone, v_email, p_shop, p_city, p_plan, p_branches, p_message, p_source);
+  else
+    update public.leads l set
+      email    = coalesce(l.email, v_email),
+      shop     = coalesce(l.shop, p_shop),
+      city     = coalesce(l.city, p_city),
+      plan     = coalesce(l.plan, p_plan),
+      branches = coalesce(l.branches, p_branches),
+      message  = coalesce(l.message, p_message),
+      status   = case when l.status = 'lost' then 'new' else l.status end,
+      notes    = left(concat_ws(E'\n', l.notes, format('Sent the demo form again on %s%s%s',
+                   to_char(now() at time zone 'Asia/Karachi', 'DD Mon YYYY'),
+                   ' · plan: ' || p_plan, ' · "' || p_message || '"')), 4000)
+    where l.id = v_id;
+  end if;
+exception when unique_violation then
+  null; -- the same shop was saved a moment ago by a parallel request: nothing to add
+end $$;
+revoke all on function public.submit_lead(text, text, text, text, text, text, int, text, text) from public, authenticated;
+grant execute on function public.submit_lead(text, text, text, text, text, text, int, text, text) to anon;
+
 -- ============================================================
 -- 7) Payments: what each customer paid you (recorded by you in the admin).
 --    A customer is a lead marked "won". Admins only.
+--    No double entries, and one plan at a time: a shop's monthly/yearly periods
+--    (starts_on → paid_until) can never overlap, so it can't be billed twice for the same days.
 -- ============================================================
 create table if not exists public.payments (
   id          uuid primary key default gen_random_uuid(),
@@ -124,6 +183,17 @@ create table if not exists public.payments (
 );
 create index if not exists payments_paid_on on public.payments (paid_on desc);
 create index if not exists payments_lead on public.payments (lead_id);
+
+create extension if not exists btree_gist with schema extensions;
+alter table public.payments add column if not exists starts_on date;
+alter table public.payments drop constraint if exists payments_period;
+alter table public.payments add constraint payments_period check
+  (billing not in ('monthly', 'yearly') or (starts_on is not null and paid_until > starts_on));
+alter table public.payments drop constraint if exists payments_no_overlap;
+alter table public.payments add constraint payments_no_overlap exclude using gist
+  (lead_id with =, daterange(starts_on, paid_until) with &&) where (billing in ('monthly', 'yearly'));
+create unique index if not exists payments_same_payment on public.payments (lead_id, paid_on, amount, billing);
+create unique index if not exists payments_reference on public.payments (method, lower(reference)) where reference is not null;
 
 alter table public.payments enable row level security;
 revoke all on public.payments from anon;
@@ -207,6 +277,74 @@ returns jsonb language sql stable security invoker set search_path = public as $
 $$;
 revoke execute on function public.admin_stats(int) from public, anon;
 grant execute on function public.admin_stats(int) to authenticated;
+
+-- ============================================================
+-- 10) Customer accounts. Sign-up = Supabase Auth email + password, with the shop details in
+--     the user's metadata: { name, phone, shop, city }. A trigger links the new account to the
+--     lead with the same email (or, failing that, the same mobile number), else creates the lead.
+--     A number that already belongs to another account is refused (the sign-up fails).
+--     Customers never get table access: they read their own account through my_account() only.
+-- ============================================================
+create or replace function public.link_signup()
+returns trigger language plpgsql security definer set search_path = public as $$
+declare
+  m jsonb := coalesce(new.raw_user_meta_data, '{}'::jsonb);
+  v_phone text := nullif(trim(m->>'phone'), '');
+  v_id uuid;
+  v_user uuid;
+begin
+  select id, user_id into v_id, v_user from public.leads
+   where lower(email) = lower(new.email) or (v_phone is not null and phone_key = public.phone_key(v_phone))
+   order by (lower(email) = lower(new.email)) desc nulls last
+   limit 1 for update;
+  if v_id is not null and v_user is not null and v_user <> new.id then
+    raise exception 'ZAP_ACCOUNT_EXISTS: this shop already has an account';
+  end if;
+  if v_id is null then
+    if v_phone is null then return new; end if; -- e.g. the owner's own login made in the dashboard
+    insert into public.leads (name, phone, email, shop, city, source, user_id, signed_up_at)
+    values (coalesce(nullif(trim(m->>'name'), ''), split_part(new.email, '@', 1)), v_phone, lower(new.email),
+            nullif(trim(m->>'shop'), ''), nullif(trim(m->>'city'), ''), 'Sign-up', new.id, now());
+  else
+    update public.leads l set
+      user_id = new.id, signed_up_at = now(),
+      email = coalesce(l.email, lower(new.email)),
+      shop  = coalesce(l.shop, nullif(trim(m->>'shop'), '')),
+      city  = coalesce(l.city, nullif(trim(m->>'city'), '')),
+      status = case when l.status = 'lost' then 'new' else l.status end
+    where l.id = v_id;
+  end if;
+  return new;
+end $$;
+revoke all on function public.link_signup() from public, anon, authenticated;
+drop trigger if exists on_auth_user_created on auth.users;
+create trigger on_auth_user_created after insert on auth.users
+  for each row execute function public.link_signup();
+
+-- The signed-in customer's own account: shop details, current plan and payment history.
+-- Returns null for a login that isn't linked to a shop (e.g. the admin). Also used by the POS app.
+create or replace function public.my_account()
+returns jsonb language sql stable security definer set search_path = public as $$
+  select jsonb_build_object(
+    'name', l.name, 'shop', l.shop, 'city', l.city, 'phone', l.phone, 'email', l.email, 'since', l.signed_up_at,
+    'plan', cur.plan, 'branches', cur.branches, 'billing', cur.billing, 'paid_until', cur.paid_until,
+    'active', coalesce(cur.paid_until >= (now() at time zone 'Asia/Karachi')::date, false),
+    'payments', coalesce((
+      select jsonb_agg(jsonb_build_object('paid_on', p.paid_on, 'amount', p.amount, 'method', p.method, 'plan', p.plan,
+               'billing', p.billing, 'branches', p.branches, 'starts_on', p.starts_on, 'paid_until', p.paid_until)
+             order by p.paid_on desc, p.created_at desc)
+      from public.payments p where p.lead_id = l.id), '[]'::jsonb)
+  )
+  from public.leads l
+  left join lateral (
+    select p.plan, p.branches, p.billing, p.paid_until from public.payments p
+    where p.lead_id = l.id and p.billing in ('monthly', 'yearly')
+    order by p.paid_until desc limit 1
+  ) cur on true
+  where l.user_id = auth.uid()
+$$;
+revoke all on function public.my_account() from public, anon;
+grant execute on function public.my_account() to authenticated;
 
 -- ============================================================
 -- 9) Make yourself the admin (do this AFTER creating your user in

@@ -2,6 +2,23 @@
 
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
+## 2026-11-13: Customer accounts (sign up / log in) + who signed up vs who paid
+- Owner request: shops that buy will sign up, so the owner can see who signed up and who paid. Sign-up on the website **and** in the POS app (same login); matched to leads **by email**.
+- **New page `/account/`** (`account/index.html`, `src/account/main.jsx`, `src/account/AccountApp.jsx`): Log in / Sign up (name, mobile, shop, city, email, password) / Forgot password / set new password, and "My account": plan card (active until / expired on), Download, "Pay or renew on WhatsApp", payment history. Text in new JSON key `account` (admin tab "Customer account"). Landing "Log in" (`links.portal`) now points to `/account/`.
+- **Supabase:** `leads` gets `email` (unique, case-insensitive), `user_id` (→ auth.users, unique), `signed_up_at`. Trigger `link_signup()` on `auth.users` links each new login to the lead with the same email, else the same mobile number, else creates a lead (source "Sign-up"); a shop that already has an account can't sign up twice. `my_account()` returns only the signed-in shop's plan and payments (customers get no table access). `submit_lead()` takes `p_email` and matches on email first, then mobile.
+- **Demo form:** optional Email field (`leadForm.emailLabel`, `emailPlaceholder`).
+- **Admin:** lead rows show "Account" (paid) / "Not paid" chips; new filters "Signed up, not paid" and "Has account" (`#leads/unpaid`, `#leads/account`); lead detail shows Email + Account; Email field in Add/Edit lead (duplicate email refused); Customers tab shows has/no account; Dashboard "Needs your attention" counts sign-ups that haven't paid; CSV adds Email, Signed up, Paid.
+- Vite builds a third page; `vercel.json` rewrites `/account` and sends `noindex` for it.
+- Files: `supabase/schema.sql` (§6 accounts columns, `submit_lead`, §10), `account/index.html`, `src/account/*`, `components/LeadForm.jsx`, `content/landing-content.json`, `admin/Leads.jsx`, `admin/Payments.jsx`, `admin/Dashboard.jsx`, `admin/biz.js`, `admin/sections.js`, `admin/admin.css`, `vite.config.js`, `vercel.json`, `CLAUDE.md`, `docs/ARCHITECTURE.md` (§1, §2, §8, §10).
+
+## 2026-11-13: No duplicate leads, no double payments, one plan per shop
+- Owner request: no duplicate client records, no "multi buying", no multi-tenant leaks.
+- **Leads:** one lead per mobile number. New generated column `phone_key` (`phone_key()`: 0300-1234567, +92 300 1234567, 923001234567 → 03001234567) with a unique index. The demo form now calls `submit_lead()` instead of inserting: a repeat request updates the existing lead (fills empty fields, adds a dated note, Lost → New). Visitors lost direct insert on `leads`. Adding/editing a lead in the admin with a number another lead has is refused with that lead's name.
+- **Payments:** new `starts_on` ("Covers from"). Monthly/yearly payments need it and a later `paid_until`; a shop's periods can never overlap (`payments_no_overlap`, btree_gist), so one plan at a time and no paying twice for the same days. Renewals auto-start on the current paid-until date. Same customer + date + amount + billing, or the same method + reference, can't be recorded twice. Database errors show plain-language messages.
+- **Tenancy:** single owner; everything stays behind `is_admin()`. (Sign-ups stay on: see the customer accounts entry above.)
+- Applied to the live Supabase project and tested (16 checks, rolled back). Security advisor fixes: trigger functions pinned `search_path = ''`; `is_admin()` no longer callable by anon; `submit_lead()` anon-only.
+- Files: `supabase/schema.sql`, `components/LeadForm.jsx`, `admin/biz.js`, `admin/Leads.jsx`, `admin/Payments.jsx`, `CLAUDE.md` (rule 1e), `docs/ARCHITECTURE.md` (§2, §8, §9).
+
 ## 2026-11-13: Admin dashboard, leads, payments, analytics; .NET API removed
 - **Dashboard** (first screen after login): visitors and demo requests this week (vs last week), money received this month (vs last month), customers; "Needs your attention" (new leads, call-backs due, overdue/upcoming renewals, website placeholders); visitors chart (30 days); latest leads; renewals; **website checklist** (placeholder phone/email/address, empty links and socials, placeholder reviews, unpublished content) with Fix buttons.
 - **Leads**: "Book a free demo" requests from the website plus leads you add yourself (calls, walk-ins). Search, filter tabs with counts (Open, Call back today, New, Contacted, Demo booked, Customer, Lost, All), one-tap status, call-back date, private notes, Call / WhatsApp (pre-written greeting) buttons, edit, delete (blocked while the lead has payments), CSV export.
