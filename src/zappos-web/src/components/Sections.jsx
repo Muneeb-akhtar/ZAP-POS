@@ -30,7 +30,7 @@ function useTheme() {
   return [theme, setTheme]
 }
 
-function ThemeToggle() {
+export function ThemeToggle() {
   const [theme, setTheme] = useTheme()
   const toggle = (e) => {
     const next = theme === 'dark' ? 'light' : 'dark'
@@ -72,12 +72,12 @@ export function Navbar({ brand, nav, links }) {
         <a href="#home" className="brand"><Logo size={32} /><BrandName name={brand.name} /></a>
         <nav className={`nav-links ${open ? 'open' : ''}`}>
           {nav.map((n) => <a key={n.href} href={n.href} onClick={() => setOpen(false)}>{n.label}</a>)}
-          <a href={links.portal} className="nav-mobile-only" onClick={() => setOpen(false)}>Portal login</a>
+          <a href={links.portal} data-track="portal" className="nav-mobile-only" onClick={() => setOpen(false)}>Portal login</a>
         </nav>
         <div className="nav-actions">
           <ThemeToggle />
-          <a href={links.portal} className="nav-login">Log in</a>
-          <a href={links.windowsInstaller} className="btn btn-primary btn-sm"><Icon name="windows" size={13} fill /> Download</a>
+          <a href={links.portal} data-track="portal" className="nav-login">Log in</a>
+          <a href={links.windowsInstaller} data-track="download" className="btn btn-primary btn-sm"><Icon name="windows" size={13} fill /> Download</a>
         </div>
         <button className="menu-btn" onClick={() => setOpen(!open)} aria-label="Toggle menu"><Icon name={open ? 'close' : 'menu'} size={20} /></button>
       </div>
@@ -164,13 +164,13 @@ export function FinalCta({ data, links, brand }) {
         <h2>{data.title} <span className="hl">{data.titleHighlight}</span></h2>
         <p>{data.description}</p>
         <div className="final-actions">
-          <a href={links.windowsInstaller} className="btn btn-primary btn-lg"><Icon name="windows" size={16} fill /> {data.primary}</a>
-          <a href={links.demo} className="btn btn-glass btn-lg">{data.secondary} <Icon name="arrow" size={16} /></a>
+          <a href={links.windowsInstaller} data-track="download" className="btn btn-primary btn-lg"><Icon name="windows" size={16} fill /> {data.primary}</a>
+          <a href={links.demo} data-track="demo" className="btn btn-glass btn-lg">{data.secondary} <Icon name="arrow" size={16} /></a>
         </div>
         <div className="final-stores">
-          <a href={links.googlePlay} className="store"><Icon name="gplay" size={18} fill /><span><small>Owner app on</small>Google Play</span></a>
-          <a href={links.appStore} className="store"><Icon name="apple" size={18} fill /><span><small>Owner app on the</small>App Store</span></a>
-          <a href={links.whatsapp} className="store wa"><Icon name="whatsapp" size={18} /><span><small>WhatsApp us</small>{brand.phone}</span></a>
+          <a href={links.googlePlay} data-track="android" className="store"><Icon name="gplay" size={18} fill /><span><small>Owner app on</small>Google Play</span></a>
+          <a href={links.appStore} data-track="ios" className="store"><Icon name="apple" size={18} fill /><span><small>Owner app on the</small>App Store</span></a>
+          <a href={links.whatsapp} data-track="whatsapp" className="store wa"><Icon name="whatsapp" size={18} /><span><small>WhatsApp us</small>{brand.phone}</span></a>
         </div>
       </div>
     </section>
@@ -189,7 +189,7 @@ export function Footer({ brand, footer, links }) {
             <p>{brand.about}</p>
             <div className="footer-contact-list">
               <span><Icon name="call" size={14} /> {brand.phone}</span>
-              <span><Icon name="mail" size={14} /> <a href={`mailto:${brand.email}`}>{brand.email}</a></span>
+              <span><Icon name="mail" size={14} /> <a href={`mailto:${brand.email}`} data-track="email">{brand.email}</a></span>
               <span><Icon name="pin" size={14} /> {brand.address}</span>
             </div>
           </div>

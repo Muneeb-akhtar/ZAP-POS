@@ -33,7 +33,7 @@ export default function Faq({ data, brand, links }) {
           <Kicker icon="whatsapp">{data.kicker}</Kicker>
           <h2>{data.title} <span className="hl">{data.titleHighlight}</span></h2>
           <p>{data.description}</p>
-          <a href={links.whatsapp} className="wa-cta">
+          <a href={links.whatsapp} data-track="whatsapp" className="wa-cta">
             <span className="wa-ic"><Icon name="whatsapp" size={20} /></span>
             <div><small>Message us on WhatsApp</small><b>{brand.phone}</b></div>
             <Icon name="arrow" size={16} />

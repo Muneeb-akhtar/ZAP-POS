@@ -127,8 +127,8 @@ export default function Hero({ hero, brand, links }) {
           <p className="lead">{hero.description}</p>
 
           <div className="hero-actions">
-            <a href={links.windowsInstaller} className="btn btn-primary btn-lg"><Icon name="windows" size={16} fill /> {hero.primaryCta}</a>
-            <a href={links.demo} className="btn btn-quiet btn-lg">{hero.secondaryCta} <Icon name="arrow" size={16} /></a>
+            <a href={links.windowsInstaller} data-track="download" className="btn btn-primary btn-lg"><Icon name="windows" size={16} fill /> {hero.primaryCta}</a>
+            <a href={links.demo} data-track="demo" className="btn btn-quiet btn-lg">{hero.secondaryCta} <Icon name="arrow" size={16} /></a>
           </div>
 
           {/* Internet switch: turn it off and the POS on the right keeps billing offline */}

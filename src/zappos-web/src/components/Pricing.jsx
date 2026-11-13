@@ -46,7 +46,7 @@ function ReceiptPlan({ p, annual, links }) {
         <div className="scan"><Barcode seed={p.name} /><span className="laser" aria-hidden="true" /></div>
         <small className="rp-thanks">*** THANK YOU, COME AGAIN ***</small>
       </div>
-      <a href={links.demo} className={`btn ${p.featured ? 'btn-primary' : 'btn-outline'} btn-block rp-cta`}>{p.cta} <Icon name="arrow" size={15} /></a>
+      <a href={links.demo} data-track="demo" data-plan={p.name} className={`btn ${p.featured ? 'btn-primary' : 'btn-outline'} btn-block rp-cta`}>{p.cta} <Icon name="arrow" size={15} /></a>
     </div>
   )
 }

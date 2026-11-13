@@ -1,18 +1,18 @@
+import { resolve } from 'node:path'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// Dev: React runs on http://localhost:5173 and forwards /api calls to the ASP.NET Core API.
-// Build: output goes into the API's wwwroot so one server hosts everything in production.
+// Two pages: the public landing page (index.html) and the admin panel (admin/index.html → /admin).
+// Dev: http://localhost:5173 (admin at http://localhost:5173/admin/). Build: dist/ (Vercel serves it).
 export default defineConfig({
   plugins: [react()],
-  server: {
-    port: 5173,
-    proxy: {
-      '/api': 'http://localhost:5080',
-    },
-  },
+  server: { port: 5173 },
   build: {
-    outDir: '../ZapPos.Api/wwwroot',
-    emptyOutDir: true,
+    rollupOptions: {
+      input: {
+        main: resolve(__dirname, 'index.html'),
+        admin: resolve(__dirname, 'admin/index.html'),
+      },
+    },
   },
 })

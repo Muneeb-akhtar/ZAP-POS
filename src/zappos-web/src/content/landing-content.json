@@ -26,7 +26,7 @@
     }
   ],
   "links": {
-    "demo": "#contact",
+    "demo": "#demo",
     "portal": "#",
     "windowsInstaller": "#",
     "googlePlay": "#",
@@ -513,6 +513,27 @@
     "description": "Install ZAP POS on your counter PC today. It bills online or offline. Free trial, free setup help.",
     "primary": "Download for Windows",
     "secondary": "Book a free demo"
+  },
+  "leadForm": {
+    "title": "Book a free demo",
+    "description": "Tell us a little about your shop. We'll call you, usually within one working day, and show ZAP POS with your own products.",
+    "nameLabel": "Your name",
+    "phoneLabel": "Mobile number",
+    "phonePlaceholder": "03XX XXXXXXX",
+    "phoneError": "Please enter a valid mobile number.",
+    "shopLabel": "Shop name",
+    "cityLabel": "City",
+    "planLabel": "Plan you're looking at",
+    "notSure": "Not sure yet",
+    "branchesLabel": "Branches",
+    "messageLabel": "Anything we should know?",
+    "messagePlaceholder": "Optional, e.g. 2 counters, garments, need barcode printer",
+    "submit": "Request my demo",
+    "sending": "Sending…",
+    "privacy": "We only use your number to contact you about ZAP POS.",
+    "successTitle": "Got it, thank you!",
+    "successText": "We'll call you soon to fix a time for your demo.",
+    "errorText": "Couldn't send right now. Please message us on WhatsApp instead."
   },
   "footer": {
     "columns": [

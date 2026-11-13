@@ -12,17 +12,13 @@
       "Bash(git commit:*)",
       "Bash(git push)",
       "Bash(git push origin main)",
-      "Bash(git pull)",
-      "Bash(dotnet build:*)",
-      "Bash(dotnet run:*)"
+      "Bash(git pull)"
     ],
     "deny": [
       "Read(./.env)",
       "Read(./.env.*)",
+      "Read(./**/dist/**)",
       "Read(./**/node_modules/**)",
-      "Read(./**/wwwroot/**)",
-      "Read(./**/bin/**)",
-      "Read(./**/obj/**)",
       "Bash(git push --force:*)",
       "Bash(git push -f:*)"
     ]

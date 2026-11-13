@@ -1,44 +1,40 @@
 # ZAP POS
 
 Offline-first point of sale for shops in Pakistan.
-This repo contains the public landing page (React) and its backend API (ASP.NET Core 8).
+This repo contains the public landing page and the admin panel (React + Vite), backed by Supabase.
 
 Developer docs: `CLAUDE.md` (rules + commands), `docs/ARCHITECTURE.md` (code map), `docs/CHANGELOG.md` (history).
 
 ```
 ZAP POS/
-├─ ZapPos.sln                     ← open in Visual Studio
-└─ src/
-   ├─ ZapPos.Api/                 ← ASP.NET Core 8 Web API
-   │  └─ Controllers/LandingController.cs   GET /api/landing
-   └─ zappos-web/                 ← React + Vite landing page
-      └─ src/
-         ├─ content/landing-content.json    ← all page text, prices, links
-         ├─ components/                     ← page sections
-         └─ styles.css                      ← colors at the top (:root)
+├─ supabase/schema.sql            ← database setup (run once in Supabase → SQL Editor)
+└─ src/zappos-web/                ← React + Vite
+   ├─ index.html / admin/index.html   ← landing page / admin panel (/admin)
+   └─ src/
+      ├─ content/landing-content.json ← built-in page content (the admin edits the live copy)
+      ├─ components/                  ← landing page sections + demo request form
+      ├─ admin/                       ← dashboard, leads, payments, analytics, website editor
+      ├─ lib/                         ← content loading + anonymous visit tracking
+      └─ styles.css                   ← colors at the top (:root)
 ```
 
 ## Requirements
 - Node.js LTS (https://nodejs.org)
-- Visual Studio 2022 with "ASP.NET and web development" (only needed for the API)
+- A free Supabase project (https://supabase.com)
 
-## Run the landing page
+## Setup (once)
+1. Supabase → SQL Editor: run `supabase/schema.sql`.
+2. Supabase → Authentication → Users → Add user (tick "Auto Confirm"), then run the admin statement at the end of `schema.sql` with your email.
+3. Copy `src/zappos-web/.env.example` to `src/zappos-web/.env.local` and fill in your Project URL and anon key (Supabase → Project Settings → API).
+4. Vercel → Settings → Environment Variables: add the same two values, then redeploy.
+
+## Run locally
 ```
 cd src/zappos-web
 npm install
 npm run dev
 ```
-Open http://localhost:5173
+Landing page: http://localhost:5173 · Admin: http://localhost:5173/admin/
 
-The API is optional during development: open `ZapPos.sln` in Visual Studio and press F5 (runs on http://localhost:5080).
-Without it, the page uses the bundled `landing-content.json`.
-
-## Edit content
-Change `src/zappos-web/src/content/landing-content.json`. The admin panel (coming next) will manage this from a database.
-
-## Production build
-```
-cd src/zappos-web
-npm run build
-```
-Outputs into `src/ZapPos.Api/wwwroot`, so publishing the API hosts both the site and the API.
+## Production
+Vercel builds `src/zappos-web` (`npm run build` → `dist/`) on every push to `main`.

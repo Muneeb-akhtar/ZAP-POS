@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import fallbackContent from './content/landing-content.json'
+import { useCallback, useEffect, useState } from 'react'
+import { defaultContent, mergeContent, fetchPublishedContent, readCachedContent, writeCachedContent } from './lib/content.js'
 import { Navbar, Ticker, Hardware, FinalCta, Footer } from './components/Sections.jsx'
 import Hero from './components/Hero.jsx'
 import Day from './components/Day.jsx'
@@ -7,22 +7,48 @@ import Counters from './components/Counters.jsx'
 import Pricing from './components/Pricing.jsx'
 import Reviews from './components/Reviews.jsx'
 import Faq from './components/Faq.jsx'
+import LeadForm from './components/LeadForm.jsx'
+import { trackClick, trackView, trackVisit } from './lib/track.js'
 
 // Where content comes from:
-// - Dev: the ASP.NET Core API through the Vite proxy (GET /api/landing).
-// - Production: the API at VITE_API_URL if that env var is set (e.g. once the admin panel API is hosted).
-// - Otherwise (static hosting on Vercel today): the bundled JSON, with no network request.
-const API_URL = import.meta.env.VITE_API_URL ?? ''
+// - Supabase (edited in the admin panel at /admin), when VITE_SUPABASE_URL / VITE_SUPABASE_ANON_KEY are set.
+// - Until it loads: the copy this browser saw last time, else the bundled landing-content.json.
+// - If Supabase is unreachable or not configured: the bundled JSON.
 
 export default function App() {
-  const [c, setC] = useState(fallbackContent)
+  const [c, setC] = useState(() => mergeContent(defaultContent, readCachedContent()))
 
   useEffect(() => {
-    if (!import.meta.env.DEV && !API_URL) return
-    fetch(`${API_URL}/api/landing`)
-      .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
-      .then(setC)
-      .catch(() => console.info('ZAP POS API not reachable, using bundled content.'))
+    fetchPublishedContent()
+      .then((data) => {
+        if (!data) return
+        writeCachedContent(data)
+        setC(mergeContent(defaultContent, data))
+      })
+      .catch(() => console.info('ZAP POS: content service not reachable, using built-in content.'))
+  }, [])
+
+  // Demo form: any link to #demo opens it (pricing buttons pass their plan). Opening the page at /#demo opens it too.
+  const [lead, setLead] = useState(() => (location.hash === '#demo' ? { plan: null } : null))
+  const closeLead = useCallback(() => {
+    setLead(null)
+    if (location.hash === '#demo') history.replaceState(null, '', location.pathname + location.search)
+  }, [])
+
+  // Analytics: one visit per page load, clicks on [data-track] links, and whether pricing was seen.
+  useEffect(() => {
+    trackVisit()
+    const click = (e) => {
+      const tracked = e.target.closest?.('[data-track]')
+      if (tracked) trackClick(tracked.dataset.track)
+      const demo = e.target.closest?.('a[href="#demo"]')
+      if (demo) { e.preventDefault(); setLead({ plan: demo.dataset.plan ?? null }) }
+    }
+    document.addEventListener('click', click)
+    const pricing = document.getElementById('pricing')
+    const io = new IntersectionObserver(([en]) => { if (en.isIntersecting) { trackView('pricing'); io.disconnect() } }, { threshold: 0.3 })
+    if (pricing) io.observe(pricing)
+    return () => { document.removeEventListener('click', click); io.disconnect() }
   }, [])
 
   // Hover glow: cards with class "glow" get a soft light that follows the cursor.
@@ -53,6 +79,7 @@ export default function App() {
         <FinalCta data={c.finalCta} links={c.links} brand={c.brand} />
       </main>
       <Footer brand={c.brand} footer={c.footer} links={c.links} />
+      {lead && <LeadForm plan={lead.plan} plans={c.pricing.plans} data={c.leadForm} links={c.links} brand={c.brand} onClose={closeLead} />}
     </>
   )
 }
