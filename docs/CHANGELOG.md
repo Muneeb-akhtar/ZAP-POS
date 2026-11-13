@@ -2,6 +2,9 @@
 
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
+## 2026-11-13: Star field around the final CTA glow
+- Replaced the 7 static dots with a `StarField` (in `Sections.jsx`): 90 deterministic stars, ~60% clustered in an ellipse around the blue glow, each one glowing (bright with a blue-white halo) and dimming almost out at its own pace; 7 bright 4-point sparkles near the glow; an occasional shooting star (every ~9s). Disabled automatically for reduced-motion visitors. Files: `components/Sections.jsx`, `styles.css` (`.final-stars`, `.star`, `.sparkle`, `.shooting`).
+
 ## 2026-11-13: Dark mode
 - Sun/moon toggle in the navbar (`ThemeToggle` in `Sections.jsx`). First visit follows the device's light/dark setting; the visitor's choice is remembered (`localStorage` key `zap-theme`). An inline script in `index.html` sets the theme before first paint (no white flash). Switching uses a circular reveal from the button (View Transitions API; instant where unsupported or with reduced motion).
 - Dark palette: deep navy base `#070b16` (not pure black), cards one step lighter (`--surface #0f1829`), brand blue lifted (`#2b95ff`), yellow kept as the lightning accent, black-based shadows.

@@ -112,12 +112,44 @@ export function Hardware({ data }) {
   )
 }
 
+// Star field for the night CTA: deterministic positions (same every render), denser around the blue glow,
+// each star twinkles at its own pace; a few bright 4-point sparkles and an occasional shooting star.
+const STARS = (() => {
+  let seed = 7
+  const rand = () => ((seed = (seed * 16807) % 2147483647) / 2147483647)
+  const list = []
+  for (let i = 0; i < 90; i++) {
+    // 60% clustered in an ellipse around the glow (top center), the rest scattered
+    const near = i < 54
+    const a = rand() * Math.PI * 2, r = Math.sqrt(rand())
+    const x = near ? 50 + Math.cos(a) * r * 34 : rand() * 100
+    const y = near ? 6 + Math.abs(Math.sin(a)) * r * 46 : rand() * 100
+    list.push({ x, y, s: 1.2 + rand() * (near ? 2 : 1.3), d: 2.2 + rand() * 3.5, delay: -rand() * 5, o: 0.55 + rand() * 0.45 })
+  }
+  return list
+})()
+const SPARKLES = [{ x: 34, y: 18, s: 22, d: 3.2 }, { x: 66, y: 12, s: 18, d: 4.1 }, { x: 60, y: 36, s: 14, d: 2.8 }, { x: 38, y: 42, s: 13, d: 3.7 }, { x: 76, y: 28, s: 16, d: 4.6 }, { x: 24, y: 8, s: 13, d: 3.4 }, { x: 50, y: 4, s: 12, d: 3.9 }]
+
+function StarField() {
+  return (
+    <div className="final-stars" aria-hidden="true">
+      {STARS.map((st, i) => (
+        <i key={i} className="star" style={{ left: `${st.x}%`, top: `${st.y}%`, width: st.s, height: st.s, '--o': st.o, animationDuration: `${st.d}s`, animationDelay: `${st.delay}s` }} />
+      ))}
+      {SPARKLES.map((sp, i) => (
+        <i key={`s${i}`} className="sparkle" style={{ left: `${sp.x}%`, top: `${sp.y}%`, width: sp.s, height: sp.s, animationDuration: `${sp.d}s`, animationDelay: `${-i * 0.7}s` }} />
+      ))}
+      <i className="shooting" />
+    </div>
+  )
+}
+
 export function FinalCta({ data, links, brand }) {
   // Tap or click the bolt to spin it (hover also spins it on desktop).
   const [spin, setSpin] = useState(false)
   return (
     <section className="final">
-      <div className="final-stars" aria-hidden="true" />
+      <StarField />
       <div className="container final-inner">
         <button
           className={`final-bolt ${spin ? 'spin' : ''}`}

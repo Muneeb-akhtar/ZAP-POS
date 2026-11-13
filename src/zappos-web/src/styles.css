@@ -539,7 +539,19 @@ h2 .hl { display: block; }
 
 /* ---------- Final CTA (night) ---------- */
 .final { position: relative; overflow: hidden; margin-top: 40px; padding: 140px 0 120px; background: radial-gradient(700px 380px at 50% 0%, rgba(11,132,240,.35), transparent 70%), var(--night); color: #94a3b8; text-align: center; }
-.final-stars { position: absolute; inset: 0; background-image: radial-gradient(1px 1px at 8% 30%, #fff9, transparent), radial-gradient(1px 1px at 22% 80%, #fff6, transparent), radial-gradient(1.5px 1.5px at 38% 18%, #fff8, transparent), radial-gradient(1px 1px at 61% 62%, #fff5, transparent), radial-gradient(1px 1px at 74% 22%, #fff9, transparent), radial-gradient(1.5px 1.5px at 88% 70%, #fff7, transparent), radial-gradient(1px 1px at 95% 40%, #fff6, transparent); }
+.final-stars { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.star { position: absolute; border-radius: 50%; background: #fff; opacity: var(--o); box-shadow: 0 0 6px 1px rgba(186,224,255,.75); animation: twinkle 3s ease-in-out infinite; will-change: opacity, transform; }
+/* glow → dim → glow: bright with a halo, then fades almost out */
+@keyframes twinkle { 0%, 100% { opacity: .08; transform: scale(.5); box-shadow: 0 0 0 0 rgba(186,224,255,0); } 45%, 55% { opacity: 1; transform: scale(1.25); box-shadow: 0 0 8px 2px rgba(220,238,255,.95), 0 0 18px 5px rgba(120,190,255,.45); } }
+/* bright 4-point sparkles near the glow */
+.sparkle { position: absolute; translate: -50% -50%; animation: sparkle 3.5s ease-in-out infinite; }
+.sparkle::before, .sparkle::after { content: ''; position: absolute; inset: 0; background: radial-gradient(closest-side, #fff, rgba(186,224,255,.6) 40%, transparent); }
+.sparkle::before { clip-path: polygon(50% 0, 58% 42%, 100% 50%, 58% 58%, 50% 100%, 42% 58%, 0 50%, 42% 42%); }
+.sparkle::after { inset: 30%; border-radius: 50%; box-shadow: 0 0 10px 3px rgba(147,203,255,.7); }
+@keyframes sparkle { 0%, 100% { opacity: .1; transform: scale(.4) rotate(0deg); filter: brightness(.6); } 50% { opacity: 1; transform: scale(1.1) rotate(45deg); filter: brightness(1.6) drop-shadow(0 0 8px rgba(186,224,255,.9)); } }
+/* occasional shooting star across the glow */
+.shooting { position: absolute; top: 10%; left: 18%; width: 140px; height: 2px; border-radius: 2px; background: linear-gradient(90deg, rgba(255,255,255,0), #fff); opacity: 0; transform: rotate(14deg); animation: shoot 9s ease-in 2s infinite; }
+@keyframes shoot { 0% { opacity: 0; translate: 0 0; } 2% { opacity: 1; } 9% { opacity: 0; translate: 560px 140px; } 100% { opacity: 0; translate: 560px 140px; } }
 .final-inner { position: relative; display: grid; justify-items: center; }
 .final-bolt { width: 92px; height: 92px; border-radius: 26px; display: grid; place-items: center; color: var(--yellow); background: linear-gradient(160deg, #11284d, #0a1730); border: 1px solid rgba(255,255,255,.1); box-shadow: 0 0 60px rgba(255,214,10,.25); animation: flicker 4s infinite; cursor: pointer; -webkit-tap-highlight-color: transparent; }
 .final-bolt.spin { animation: boltTap .8s cubic-bezier(.3,1.3,.5,1); box-shadow: 0 0 90px rgba(255,214,10,.55); }
