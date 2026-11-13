@@ -17,7 +17,7 @@ function Receipt({ phase, bills }) {
         <div className="r-head">
           <b>ZAP POS</b>
           <small>Lahore Main · Counter 01</small>
-          <small>12-11-2026 · 15:04</small>
+          <small>12-11-2026 · 3:04 PM</small>
         </div>
         <div className="r-rule" />
         {receiptItems.map(([n, p], i) => (

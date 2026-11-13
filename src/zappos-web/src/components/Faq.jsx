@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import Icon from './Icons.jsx'
 import { Kicker } from './Bits.jsx'
 
-const time = (i) => `10:${String(12 + i * 3).padStart(2, '0')}`
+const time = (i) => `10:${String(12 + i * 3).padStart(2, '0')} am`
 
 // FAQ as a WhatsApp-style chat: tap a question and the answer "types" in.
 export default function Faq({ data, brand, links }) {

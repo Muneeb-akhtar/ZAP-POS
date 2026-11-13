@@ -87,35 +87,35 @@
     "description": "Every feature in ZAP POS exists because of a real moment in a shopkeeper's day.",
     "stops": [
       {
-        "time": "09:00",
+        "time": "9:00 AM",
         "period": "Morning",
         "title": "Shutter up.",
         "text": "Open the till in seconds. Opening cash, yesterday's totals and today's prices are already waiting.",
         "visual": "open"
       },
       {
-        "time": "13:30",
+        "time": "1:30 PM",
         "period": "Rush hour",
         "title": "Three counters, one stock.",
         "text": "Every counter shares the same stock and prices over your shop's network. Nobody sells the last jacket twice.",
         "visual": "counters"
       },
       {
-        "time": "15:00",
+        "time": "3:00 PM",
         "period": "Internet down",
         "title": "Router's off. Billing isn't.",
         "text": "Load shedding took the router down? The counter PC stays on its UPS and ZAP POS keeps billing offline, then syncs every sale the moment the internet is back.",
         "visual": "offline"
       },
       {
-        "time": "18:00",
+        "time": "6:00 PM",
         "period": "Evening",
         "title": "The shelf warns you first.",
         "text": "Low-stock alerts before the shelf is empty. Purchases, suppliers and stock transfers between branches in a few taps.",
         "visual": "stock"
       },
       {
-        "time": "23:00",
+        "time": "11:00 PM",
         "period": "Night",
         "title": "Check sales from bed.",
         "text": "Every branch, every counter, live on the ZAP POS app for iPhone and Android, or any browser.",
@@ -172,14 +172,14 @@
     "title": "Pricing that fits",
     "titleHighlight": "on a receipt.",
     "description": "Prices in PKR. Free trial on every plan, no card required.",
-    "annualLabel": "2 months free",
+    "saveLabel": "save up to 30% yearly",
     "plans": [
       {
         "id": "dukaan",
         "name": "Dukaan",
         "tag": "1 shop · 1 counter",
-        "monthly": 2499,
-        "annual": 24990,
+        "monthly": 3499,
+        "annual": 29988,
         "description": "Single location, single counter. Full offline billing, no internet needed.",
         "cta": "Get started",
         "lines": [
@@ -213,8 +213,8 @@
         "id": "brand",
         "name": "Brand",
         "tag": "Most picked",
-        "monthly": 6999,
-        "annual": 69990,
+        "monthly": 8999,
+        "annual": 83988,
         "description": "Multi-branch cloud dashboard, mobile app & web portal. Built for retail chains and growing brands.",
         "cta": "Book a brand demo",
         "featured": true,
@@ -222,6 +222,14 @@
           [
             "∞",
             "POS counters per branch"
+          ],
+          [
+            "1–3",
+            "Branches, priced per branch"
+          ],
+          [
+            "✓",
+            "Everything in Dukaan"
           ],
           [
             "✓",
@@ -261,7 +269,7 @@
       {
         "id": "enterprise",
         "name": "Enterprise",
-        "tag": "Premium brands · 3+ branches",
+        "tag": "Premium brands · 4+ branches",
         "monthly": null,
         "annual": null,
         "priceLabel": "Custom",
@@ -269,8 +277,8 @@
         "cta": "Get a custom quote",
         "lines": [
           [
-            "3+",
-            "Branches, priced per count"
+            "4+",
+            "Branches, custom pricing"
           ],
           [
             "✓",
@@ -278,15 +286,15 @@
           ],
           [
             "✓",
-            "Mobile app + web portal"
-          ],
-          [
-            "✓",
             "Central warehouse"
           ],
           [
             "✓",
-            "Dedicated onboarding"
+            "On-site setup & training"
+          ],
+          [
+            "✓",
+            "Custom reports"
           ],
           [
             "✓",
@@ -294,7 +302,7 @@
           ],
           [
             "✓",
-            "Account manager"
+            "Dedicated account manager"
           ]
         ]
       }
@@ -315,8 +323,8 @@
         "label": "Branches",
         "values": [
           "1",
-          "Any (per branch)",
-          "Unlimited"
+          "1–3 (per branch)",
+          "4+ (custom)"
         ]
       },
       {
@@ -328,9 +336,17 @@
         ]
       },
       {
-        "label": "Barcode & printer support",
+        "label": "Barcode scanner & thermal printer",
         "values": [
           true,
+          true,
+          true
+        ]
+      },
+      {
+        "label": "Multiple PCs on shop network (LAN)",
+        "values": [
+          false,
           true,
           true
         ]
@@ -347,7 +363,15 @@
         ]
       },
       {
-        "label": "Staff roles & permissions",
+        "label": "Analytics & daily reports",
+        "values": [
+          true,
+          true,
+          true
+        ]
+      },
+      {
+        "label": "Cashier logins & roles",
         "values": [
           false,
           true,
@@ -355,7 +379,15 @@
         ]
       },
       {
-        "label": "Stock transfers between branches",
+        "label": "Real-time stock across branches",
+        "values": [
+          false,
+          true,
+          true
+        ]
+      },
+      {
+        "label": "Fraud alerts & access control",
         "values": [
           false,
           true,
@@ -364,6 +396,14 @@
       },
       {
         "label": "Central warehouse",
+        "values": [
+          false,
+          false,
+          true
+        ]
+      },
+      {
+        "label": "Custom reports",
         "values": [
           false,
           false,
@@ -382,6 +422,14 @@
         ]
       },
       {
+        "label": "Multi-branch cloud dashboard",
+        "values": [
+          false,
+          true,
+          true
+        ]
+      },
+      {
         "label": "Mobile app & web portal",
         "values": [
           false,
@@ -390,7 +438,7 @@
         ]
       },
       {
-        "label": "On-site installation & training",
+        "label": "On-site setup & training",
         "values": [
           false,
           false,
@@ -402,7 +450,7 @@
         "values": [
           "Standard",
           "Dedicated + onboarding",
-          "Dedicated manager"
+          "Priority + account manager"
         ]
       }
     ]
@@ -451,7 +499,7 @@
       },
       {
         "q": "Can I run more than one counter in a shop?",
-        "a": "Yes. On the Business and Enterprise plans, add as many counters as you need. They share stock and prices over your local network."
+        "a": "Yes. On the Brand and Enterprise plans, add as many counters as you need. They share stock and prices over your local network."
       },
       {
         "q": "Is there a free trial?",

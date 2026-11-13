@@ -2,6 +2,33 @@
 
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
+## 2026-11-13: Fixed "save up to 30%" label
+- Owner wants the toggle note to read "save up to 30% yearly". Added optional `pricing.saveLabel` (overrides the computed `bestSaving` text; remove it to go back to the computed value). Actual savings with current prices: Dukaan 28.6%, Brand 22.2%. Files: `content/landing-content.json`, `components/Pricing.jsx`.
+
+## 2026-11-13: Monthly prices + yearly shown per month
+- Monthly prices from owner: **Dukaan Rs 3,499/month**, **Brand Rs 8,999/branch/month**.
+- Rs 2,499 / Rs 6,999 are the per-month prices **when billed yearly** (a yearly total of Rs 2,499 would be cheaper than one month). Stored as yearly totals: Dukaan `annual` 29,988, Brand `annual` 83,988 (per branch).
+- Yearly view shows the per-month equivalent big ("Rs 2,499 /month") with "billed yearly · Rs 29,988" underneath; compare table Yearly row "Rs 2,499/month · Rs 29,988/yr". Saving note computes to "save up to 29% yearly" (Dukaan 29%, Brand 22%).
+- Files: `content/landing-content.json`, `components/Pricing.jsx` (`perMonth`, `periodOf`, `priceText`), `styles.css` (`.billed`).
+
+## 2026-11-13: Yearly prices + price rows in comparison (superseded)
+- Rs 2,499 (Dukaan) and Rs 6,999/branch (Brand) are the **yearly** totals: shown as "Rs 2,499 /year" and "Rs 6,999 /branch/year". Monthly prices pending from the owner (`monthly: null` → receipt shows "On request" until set).
+- Comparison table starts with a **Price** group: Monthly and Yearly rows for every plan; the row matching the toggle is highlighted.
+- The "2 months free" note is now computed from the data ("save up to N% yearly", best saving across plans) and hidden when it can't be computed. Removed `pricing.annualLabel`.
+- Files: `content/landing-content.json`, `components/Pricing.jsx` (`amountOf`, `periodOf`, `priceText`, `bestSaving`), `styles.css` (`.cmp-price`).
+
+## 2026-11-13: Plans + comparison table audit
+- Branch ranges no longer overlap: **Dukaan** 1 branch, **Brand** 1–3 branches (priced per branch), **Enterprise** 4+ branches (custom). Enterprise tag now "Premium brands · 4+ branches".
+- Brand receipt adds "1–3 Branches, priced per branch" and "Everything in Dukaan". Enterprise receipt no longer repeats Brand features; it lists what it adds (central warehouse, on-site setup & training, custom reports, priority support, dedicated account manager), so it never looks weaker than Brand.
+- Comparison table rebuilt to match the receipts exactly (19 rows): added LAN multi-PC, analytics & daily reports, fraud alerts & access control, custom reports, multi-branch cloud dashboard; renamed rows to the receipt wording; Support: Standard / Dedicated + onboarding / Priority + account manager.
+- FAQ answer still said "Business plan" → "Brand plan".
+- Receipt quantity column widened (26px → 36px) so "1–3" doesn't touch its label.
+- Files: `content/landing-content.json`, `styles.css`.
+
+## 2026-11-13: 12-hour times (Pakistani clock)
+- All times on the page now use 12-hour format: timeline stops 9:00 AM, 1:30 PM, 3:00 PM, 6:00 PM, 11:00 PM (`day.stops[].time` is now e.g. "9:00 AM"; `Day.jsx` renders the AM/PM as a smaller `.ampm` label next to the big clock); offline card 3:00 PM / 3:52 PM / 4:10 PM; hero receipt 3:04 PM; FAQ chat timestamps "10:12 am".
+- Files: `content/landing-content.json`, `components/Day.jsx`, `components/Hero.jsx`, `components/Faq.jsx`, `styles.css`.
+
 ## 2026-11-13: Enterprise plan details
 - Enterprise receipt: tag "Premium brands · 3+ branches", description "For clothing chains, shoe brands and premium retail groups. Priced on your actual branch count.", CTA "Get a custom quote". Lines: 3+ Branches (priced per count), Everything in Brand, Mobile app + web portal, Central warehouse, Dedicated onboarding, Priority support, Account manager. Price stays "Custom". File: `content/landing-content.json`.
 

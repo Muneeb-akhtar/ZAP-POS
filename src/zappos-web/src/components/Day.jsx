@@ -23,10 +23,10 @@ const visuals = {
   ),
   offline: () => (
     <div className="dv dv-offline">
-      <div className="dv-row"><Icon name="wifiOff" size={15} /><span>Internet down</span><em>15:00</em></div>
+      <div className="dv-row"><Icon name="wifiOff" size={15} /><span>Internet down</span><em>3:00 PM</em></div>
       <div className="dv-bar"><i /></div>
-      <div className="dv-row"><Icon name="receipt" size={15} /><span>46 bills saved locally</span><em>15:52</em></div>
-      <div className="dv-row ok"><Icon name="cloud" size={15} /><span>Back online, all synced</span><em>16:10</em></div>
+      <div className="dv-row"><Icon name="receipt" size={15} /><span>46 bills saved locally</span><em>3:52 PM</em></div>
+      <div className="dv-row ok"><Icon name="cloud" size={15} /><span>Back online, all synced</span><em>4:10 PM</em></div>
     </div>
   ),
   stock: () => (
@@ -69,7 +69,7 @@ export default function Day({ data }) {
             return (
               <li key={s.time} className={`stop stop-${i} ${i % 2 ? 'right' : 'left'}`}>
                 <div className="stop-time">
-                  <span className="clock">{s.time}</span>
+                  <span className="clock">{s.time.split(' ')[0]}<small className="ampm">{s.time.split(' ')[1]}</small></span>
                   <span className="period"><Icon name={periodIcon[s.period] ?? 'zap'} size={13} /> {s.period}</span>
                 </div>
                 <span className="stop-dot" aria-hidden="true" />

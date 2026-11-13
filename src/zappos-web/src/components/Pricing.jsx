@@ -2,8 +2,23 @@ import { useState } from 'react'
 import Icon from './Icons.jsx'
 import { Kicker, Barcode, Scribble, formatRs } from './Bits.jsx'
 
+// Price helpers. `monthly` = price per month on the monthly plan; `annual` = yearly TOTAL.
+// Yearly view shows the per-month equivalent (annual / 12) with the yearly total underneath.
+// null → priceLabel (e.g. "Custom").
+const perMonth = (p, annual) => (annual ? (p.annual == null ? null : Math.round(p.annual / 12)) : p.monthly)
+const periodOf = (p) => `/${p.unit ? `${p.unit}/` : ''}month`
+const priceText = (p, annual) => {
+  const a = perMonth(p, annual)
+  if (a == null) return p.priceLabel ?? 'On request'
+  return annual ? `${formatRs(a)}${periodOf(p)} · ${formatRs(p.annual)}/yr` : `${formatRs(a)}${periodOf(p)}`
+}
+// Best yearly saving across plans that have both prices (yearly vs 12 × monthly).
+const bestSaving = (plans) => Math.max(0, ...plans
+  .filter((p) => p.monthly && p.annual)
+  .map((p) => Math.round((1 - p.annual / (p.monthly * 12)) * 100)))
+
 function ReceiptPlan({ p, annual, links }) {
-  const amount = annual ? p.annual : p.monthly
+  const amount = perMonth(p, annual)
   return (
     <div className={`rplan ${p.featured ? 'featured' : ''}`}>
       {p.featured && <span className="stamp">{p.tag}</span>}
@@ -24,7 +39,7 @@ function ReceiptPlan({ p, annual, links }) {
         <div className="rp-total">
           <span>TOTAL</span>
           <span className="amt">
-            {amount == null ? <b>{p.priceLabel}</b> : <><b>{formatRs(amount)}</b><small>/{p.unit ? `${p.unit}/` : ''}{annual ? 'year' : 'month'}</small></>}
+            {amount == null ? <b>{p.priceLabel ?? 'On request'}</b> : <><b>{formatRs(amount)}</b><small>{periodOf(p)}</small>{annual && <small className="billed">billed yearly · {formatRs(p.annual)}</small>}</>}
           </span>
         </div>
         <p className="rp-desc">{p.description}</p>
@@ -55,7 +70,7 @@ export default function Pricing({ data, links }) {
               <button className={!annual ? 'on' : ''} onClick={() => setAnnual(false)}>Monthly</button>
               <button className={annual ? 'on' : ''} onClick={() => setAnnual(true)}>Yearly</button>
             </div>
-            <Scribble dir="left" className="toggle-note">{data.annualLabel} yearly</Scribble>
+            {(data.saveLabel || bestSaving(data.plans) > 0) && <Scribble dir="left" className="toggle-note">{data.saveLabel ?? `save up to ${bestSaving(data.plans)}% yearly`}</Scribble>}
           </div>
         </div>
 
@@ -74,6 +89,15 @@ export default function Pricing({ data, links }) {
                 <span role="columnheader" />
                 {data.plans.map((p) => <span key={p.id} role="columnheader" className={`cmp-cell ${p.featured ? 'featured' : ''}`}>{p.name}</span>)}
               </div>
+              <div className="cmp-group" role="row"><span role="cell">Price</span></div>
+              {[false, true].map((yr) => (
+                <div className={`cmp-row cmp-price ${annual === yr ? 'current' : ''}`} role="row" key={yr ? 'y' : 'm'}>
+                  <span className="cmp-label" role="cell">{yr ? 'Yearly' : 'Monthly'}</span>
+                  {data.plans.map((p) => (
+                    <span key={p.id} role="cell" className={`cmp-cell ${p.featured ? 'featured' : ''}`} data-plan={p.name}><span>{priceText(p, yr)}</span></span>
+                  ))}
+                </div>
+              ))}
               {data.compare.map((r, i) =>
                 r.group ? (
                   <div className="cmp-group" role="row" key={i}><span role="cell">{r.group}</span></div>
