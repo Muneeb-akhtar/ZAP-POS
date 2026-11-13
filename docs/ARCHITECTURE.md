@@ -99,6 +99,8 @@ Order of blocks (search the `/* ---------- Name ---------- */` headers):
 6. Responsive: `max-width: 1080px` (stack hero/heads), `900px` (mobile nav, single-column timeline/receipts/notes, compare table becomes stacked rows), `720px` (phone sizing)
 7. **Hover animations** (`@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)`), always last
 
+**Themes:** light tokens in `:root`, dark tokens in `:root[data-theme="dark"]` (right after `:root`); per-section dark twins for hard-coded colors in the "Dark theme: section-by-section" block near the end, then the `.theme-toggle` styles. Theme tokens beyond the palette: `--surface` (cards), `--solid` (bezels/frames), `--on-paper` (text on paper/stickers/yellow), `--sticker-shadow`. `index.html` has an inline script that sets `data-theme` before first paint (localStorage `zap-theme`, else `prefers-color-scheme`). `Sections.jsx` `ThemeToggle` (in the navbar) flips it, saves the choice, follows the device setting until the visitor picks one, and uses the View Transitions API for a circular reveal from the button (instant fallback / reduced motion).
+
 Key tokens: `--brand-50…700`, `--yellow #ffd60a`, `--night #060c1a`, `--night-2`, `--paper`, `--ink`, `--text`, `--muted`, `--line`, `--tint`; fonts `--font` (Inter), `--font-head` (Bricolage Grotesque Variable), `--font-mono` (JetBrains Mono), `--font-hand` (Caveat).
 
 Gotchas:

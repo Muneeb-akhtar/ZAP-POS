@@ -8,6 +8,54 @@ function BrandName({ name }) {
   return <span>{first}{rest.length > 0 && <> <span className="brand-accent">{rest.join(' ')}</span></>}</span>
 }
 
+// Theme: index.html sets data-theme before first paint (saved choice, else the device setting).
+// The toggle saves the visitor's choice; with no saved choice we keep following the device.
+const THEME_KEY = 'zap-theme'
+const saveTheme = (t) => { try { localStorage.setItem(THEME_KEY, t) } catch { /* private mode etc. */ } }
+const savedTheme = () => { try { return localStorage.getItem(THEME_KEY) } catch { return null } }
+
+function useTheme() {
+  const [theme, setTheme] = useState(() => document.documentElement.dataset.theme || 'light')
+  useEffect(() => {
+    const mq = window.matchMedia('(prefers-color-scheme: dark)')
+    const onSystem = (e) => {
+      if (savedTheme()) return
+      const t = e.matches ? 'dark' : 'light'
+      document.documentElement.dataset.theme = t
+      setTheme(t)
+    }
+    mq.addEventListener('change', onSystem)
+    return () => mq.removeEventListener('change', onSystem)
+  }, [])
+  return [theme, setTheme]
+}
+
+function ThemeToggle() {
+  const [theme, setTheme] = useTheme()
+  const toggle = (e) => {
+    const next = theme === 'dark' ? 'light' : 'dark'
+    const apply = () => { document.documentElement.dataset.theme = next; setTheme(next); saveTheme(next) }
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (!document.startViewTransition || reduce) return apply()
+    // Reveal the new theme in a circle growing from the button
+    const r = e.currentTarget.getBoundingClientRect()
+    const x = r.left + r.width / 2, y = r.top + r.height / 2
+    const end = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y))
+    document.startViewTransition(apply).ready.then(() => {
+      document.documentElement.animate(
+        { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${end}px at ${x}px ${y}px)`] },
+        { duration: 650, easing: 'cubic-bezier(.6,.1,.2,1)', pseudoElement: '::view-transition-new(root)' }
+      )
+    })
+  }
+  return (
+    <button className="theme-toggle" onClick={toggle} aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'} title={theme === 'dark' ? 'Light mode' : 'Dark mode'}>
+      <Icon name="sun" size={18} />
+      <Icon name="moon" size={17} />
+    </button>
+  )
+}
+
 export function Navbar({ brand, nav, links }) {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
@@ -27,6 +75,7 @@ export function Navbar({ brand, nav, links }) {
           <a href={links.portal} className="nav-mobile-only" onClick={() => setOpen(false)}>Portal login</a>
         </nav>
         <div className="nav-actions">
+          <ThemeToggle />
           <a href={links.portal} className="nav-login">Log in</a>
           <a href={links.windowsInstaller} className="btn btn-primary btn-sm"><Icon name="windows" size={13} fill /> Download</a>
         </div>

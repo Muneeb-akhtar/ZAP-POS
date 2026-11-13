@@ -2,6 +2,16 @@
 
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
+## 2026-11-13: Dark mode
+- Sun/moon toggle in the navbar (`ThemeToggle` in `Sections.jsx`). First visit follows the device's light/dark setting; the visitor's choice is remembered (`localStorage` key `zap-theme`). An inline script in `index.html` sets the theme before first paint (no white flash). Switching uses a circular reveal from the button (View Transitions API; instant where unsupported or with reduced motion).
+- Dark palette: deep navy base `#070b16` (not pure black), cards one step lighter (`--surface #0f1829`), brand blue lifted (`#2b95ff`), yellow kept as the lightning accent, black-based shadows.
+- Section details: dark-glass navbar; hero blue glow (amber when offline); the POS screen and WhatsApp chat use their own dark UIs; day timeline becomes a quiet dawn-to-night gradient; counter demo wires/dots dimmed; receipts, sticky notes and stickers stay paper-colored (slightly dimmed) with a blue offset shadow on stickers; pricing toggle and compare table themed; footer/final CTA stay one step darker than the page.
+- Refactor so themes work: new tokens `--surface`, `--solid`, `--on-paper`, `--sticker-shadow`; hard-coded `background: #fff` on cards replaced by `var(--surface)`.
+- Files: `styles.css`, `components/Sections.jsx`, `index.html`. New rule 5c in `CLAUDE.md`.
+
+## 2026-11-13: Reviews handwritten note
+- Note under the review cards changed from the internal "placeholders, add real reviews…" to customer-facing copy: "real shops, real counters, taking their business to the next level" (`reviewsSection.note`). The review texts themselves are still placeholders until real reviews are added.
+
 ## 2026-11-13: Offline bills pile up and fly back as paper planes
 - While the internet is off, each offline bill drops onto a small messy stack of paper slips beside the monitor ("BILL #1043 · Rs 2,980").
 - The demo goes back online by itself after ~5.6s (visual demo, owner request): the slips fold away and turn into blue paper planes that fly one by one into the cloud card, then "All N bills synced · Nothing lost" → normal. Clicking the switch while syncing does nothing.

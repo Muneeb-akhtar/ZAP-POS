@@ -4,6 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="color-scheme" content="light dark" />
+    <!-- Set the theme before first paint (no white flash): saved choice, else the device setting -->
+    <script>
+      (function () {
+        var t = null
+        try { t = localStorage.getItem('zap-theme') } catch (e) {}
+        if (t !== 'light' && t !== 'dark') t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+        document.documentElement.dataset.theme = t
+      })()
+    </script>
     <title>ZAP POS | Point of Sale Software for Shops in Pakistan</title>
     <meta name="description" content="ZAP POS: point of sale software for retail shops in Pakistan. Fast billing, inventory, multi-counter and multi-branch sync, live sales on your phone, and offline billing when the internet drops." />
   </head>
