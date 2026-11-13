@@ -2,6 +2,22 @@
 
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
+## 2026-11-13: Enterprise plan details
+- Enterprise receipt: tag "Premium brands · 3+ branches", description "For clothing chains, shoe brands and premium retail groups. Priced on your actual branch count.", CTA "Get a custom quote". Lines: 3+ Branches (priced per count), Everything in Brand, Mobile app + web portal, Central warehouse, Dedicated onboarding, Priority support, Account manager. Price stays "Custom". File: `content/landing-content.json`.
+
+## 2026-11-13: Middle plan renamed "Brand"
+- Owner preferred "Brand" over "Bazaar" (matches "Book a brand demo" / "built for growing brands"). `id` → `brand`; Enterprise line "Everything in Brand". File: `content/landing-content.json`.
+
+## 2026-11-13: Middle plan renamed "Bazaar" + new details (name replaced same day)
+- Plan "Business" → **"Bazaar"** (featured, "Most picked"): **Rs 6,999 per branch / month** (Rs 69,990 per branch / year). Lines: ∞ POS counters per branch, Multi-branch cloud dashboard, Live sales app (iOS + Android), Web portal (every branch), Server + unlimited LAN PCs, Cashier logins & roles, Real-time inter-branch stock, Fraud alerts & access control, Dedicated support & onboarding. Description: "Multi-branch cloud dashboard, mobile app & web portal. Built for retail chains and growing brands." CTA "Book a brand demo".
+- New optional plan field `unit` (e.g. `"branch"`) → price suffix "/branch/month" (`Pricing.jsx`).
+- Enterprise line "Everything in Bazaar"; compare table: Branches "Any (per branch)", Support "Dedicated + onboarding".
+- Files: `content/landing-content.json`, `components/Pricing.jsx`.
+
+## 2026-11-13: First plan renamed "Dukaan" + new details
+- Plan "Solo" → **"Dukaan"** (own name, not a competitor's), tag "1 shop · 1 counter", description "Single location, single counter. Full offline billing, no internet needed."
+- Receipt lines: 1 PC (server mode), Full offline billing, Barcode & thermal printer, Inventory, purchases & ledger, Analytics & daily reports, Daily cloud backup. Business plan line now "Everything in Dukaan". Price unchanged (Rs 2,499/mo). File: `content/landing-content.json`.
+
 ## 2026-11-13: Shooting stars start with the section
 - Shooting stars now start the moment the final CTA scrolls into view (IntersectionObserver adds `.final.in-view`): the first streaks across the glow right away, a second one at a different angle follows, and both repeat (6.5s / 8s). More visible: longer fading tail + glowing head. Reduced-motion visitors don't get them. Files: `components/Sections.jsx`, `styles.css`.
 

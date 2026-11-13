@@ -175,33 +175,33 @@
     "annualLabel": "2 months free",
     "plans": [
       {
-        "id": "solo",
-        "name": "Solo",
-        "tag": "Single shop",
+        "id": "dukaan",
+        "name": "Dukaan",
+        "tag": "1 shop · 1 counter",
         "monthly": 2499,
         "annual": 24990,
-        "description": "One shop, one counter.",
+        "description": "Single location, single counter. Full offline billing, no internet needed.",
         "cta": "Get started",
         "lines": [
           [
             "1",
-            "POS counter"
-          ],
-          [
-            "1",
-            "Branch"
-          ],
-          [
-            "∞",
-            "Offline bills"
+            "PC (server mode)"
           ],
           [
             "✓",
-            "Printer & scanner"
+            "Full offline billing"
           ],
           [
             "✓",
-            "Inventory & ledger"
+            "Barcode & thermal printer"
+          ],
+          [
+            "✓",
+            "Inventory, purchases & ledger"
+          ],
+          [
+            "✓",
+            "Analytics & daily reports"
           ],
           [
             "✓",
@@ -210,62 +210,75 @@
         ]
       },
       {
-        "id": "business",
-        "name": "Business",
+        "id": "brand",
+        "name": "Brand",
         "tag": "Most picked",
-        "monthly": 5999,
-        "annual": 59990,
-        "description": "Growing brands, many counters.",
-        "cta": "Start free trial",
+        "monthly": 6999,
+        "annual": 69990,
+        "description": "Multi-branch cloud dashboard, mobile app & web portal. Built for retail chains and growing brands.",
+        "cta": "Book a brand demo",
         "featured": true,
         "lines": [
           [
             "∞",
-            "POS counters"
-          ],
-          [
-            "3",
-            "Branches"
+            "POS counters per branch"
           ],
           [
             "✓",
-            "Everything in Solo"
+            "Multi-branch cloud dashboard"
           ],
           [
             "✓",
-            "Owner mobile app"
+            "Live sales app (iOS + Android)"
           ],
           [
             "✓",
-            "Staff roles"
+            "Web portal, every branch"
           ],
           [
             "✓",
-            "Stock transfers"
+            "Server + unlimited LAN PCs"
           ],
           [
             "✓",
-            "Priority support"
+            "Cashier logins & roles"
+          ],
+          [
+            "✓",
+            "Real-time inter-branch stock"
+          ],
+          [
+            "✓",
+            "Fraud alerts & access control"
+          ],
+          [
+            "✓",
+            "Dedicated support & onboarding"
           ]
-        ]
+        ],
+        "unit": "branch"
       },
       {
         "id": "enterprise",
         "name": "Enterprise",
-        "tag": "3+ branches",
+        "tag": "Premium brands · 3+ branches",
         "monthly": null,
         "annual": null,
         "priceLabel": "Custom",
-        "description": "Chains with a central warehouse.",
-        "cta": "Get a quote",
+        "description": "For clothing chains, shoe brands and premium retail groups. Priced on your actual branch count.",
+        "cta": "Get a custom quote",
         "lines": [
           [
-            "∞",
-            "Branches"
+            "3+",
+            "Branches, priced per count"
           ],
           [
             "✓",
-            "Everything in Business"
+            "Everything in Brand"
+          ],
+          [
+            "✓",
+            "Mobile app + web portal"
           ],
           [
             "✓",
@@ -273,11 +286,11 @@
           ],
           [
             "✓",
-            "On-site setup"
+            "Dedicated onboarding"
           ],
           [
             "✓",
-            "Custom reports"
+            "Priority support"
           ],
           [
             "✓",
@@ -302,7 +315,7 @@
         "label": "Branches",
         "values": [
           "1",
-          "Up to 3",
+          "Any (per branch)",
           "Unlimited"
         ]
       },
@@ -388,7 +401,7 @@
         "label": "Support",
         "values": [
           "Standard",
-          "Priority",
+          "Dedicated + onboarding",
           "Dedicated manager"
         ]
       }

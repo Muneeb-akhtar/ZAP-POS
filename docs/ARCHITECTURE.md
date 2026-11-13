@@ -83,7 +83,7 @@ Top-level keys: `_note, brand, nav, links, hero, ticker, day, counters, hardware
 - `day.stops[]`: `time, period, title, text, visual` (`visual` ∈ `open|counters|offline|stock|phone`, rendered by `visuals` in Day.jsx; `period` maps to an icon via `periodIcon`)
 - `counters`: `kicker, title, titleHighlight, description, product, stock, note, points[]`
 - `hardware.items[]`: `icon, label` (icon = a key in Icons.jsx)
-- `pricing.plans[]`: `id, name, tag, monthly, annual, priceLabel?, description, cta, featured?, lines[[qty, label]]`. `monthly: null` shows `priceLabel` (e.g. "Custom").
+- `pricing.plans[]`: `id, name, tag, monthly, annual, unit? (e.g. "branch" → "/branch/month"), priceLabel?, description, cta, featured?, lines[[qty, label]]`. Plans today: Dukaan (1 shop), Brand (per branch, featured), Enterprise (custom). `monthly: null` shows `priceLabel` (e.g. "Custom").
 - `pricing.compare[]`: either `{group}` or `{label, values[3]}` where a value is `true|false|string`, in plan order.
 - `reviews[]`: `text, name, business` (**placeholders**). An empty array hides the section.
 - `faq.items[]`: `q, a`

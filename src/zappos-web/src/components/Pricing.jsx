@@ -24,7 +24,7 @@ function ReceiptPlan({ p, annual, links }) {
         <div className="rp-total">
           <span>TOTAL</span>
           <span className="amt">
-            {amount == null ? <b>{p.priceLabel}</b> : <><b>{formatRs(amount)}</b><small>/{annual ? 'year' : 'month'}</small></>}
+            {amount == null ? <b>{p.priceLabel}</b> : <><b>{formatRs(amount)}</b><small>/{p.unit ? `${p.unit}/` : ''}{annual ? 'year' : 'month'}</small></>}
           </span>
         </div>
         <p className="rp-desc">{p.description}</p>
