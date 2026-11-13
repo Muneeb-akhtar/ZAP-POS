@@ -22,6 +22,13 @@ const Arrow = ({ flip = false }) => (
   </svg>
 )
 
+// Hand-drawn yellow underline that "draws" itself (used under the hero headline).
+export const Squiggle = () => (
+  <svg className="squiggle" viewBox="0 0 300 18" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M3 12C40 4 70 15 110 9s80-6 120-1 50 4 67 0" />
+  </svg>
+)
+
 export const Stars = ({ size = 14 }) => (
   <span className="stars">{[...Array(5)].map((_, i) => <Icon key={i} name="star" size={size} fill />)}</span>
 )

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import Icon from './Icons.jsx'
 import { Monitor, PosBillingScreen } from './Mockups.jsx'
-import { Kicker, Scribble } from './Bits.jsx'
+import { Kicker, Scribble, Squiggle } from './Bits.jsx'
 
 const receiptItems = [
   ['Denim Jacket', '3,450'],
@@ -10,7 +10,7 @@ const receiptItems = [
   ['Sports Cap', '890'],
 ]
 
-function Receipt({ offline, bills }) {
+function Receipt({ phase, bills }) {
   return (
     <div className="hero-receipt" aria-hidden="true">
       <div className="paper zz">
@@ -25,18 +25,27 @@ function Receipt({ offline, bills }) {
         ))}
         <div className="r-rule" />
         <div className="r-total"><span>TOTAL</span><span>Rs 13,310</span></div>
-        <div className={`r-status ${offline ? 'off' : ''}`}>
-          {offline ? `SAVED OFFLINE · #${1042 + bills}` : 'SYNCED · #1042'}
+        <div className={`r-status ${phase}`}>
+          {phase === 'offline' ? `SAVED OFFLINE · #${1042 + bills}` : phase === 'syncing' ? 'SYNCING…' : `SYNCED · #${1042 + bills}`}
         </div>
       </div>
     </div>
   )
 }
 
+// Internet demo phases: online → (switch off) offline → (auto, or switch on) syncing → synced → online.
+// It's a visual demo: after a few offline bills the internet comes back by itself.
+const OFFLINE_MS = 5600
+const SYNCED_MS = 2600
+const FLY_GAP = 0.38 // seconds between paper planes
+const slipAmounts = ['2,980', '890', '5,990', '3,450', '1,490', '2,250']
+
 export default function Hero({ hero, brand, links }) {
-  const [offline, setOffline] = useState(false)
+  const [phase, setPhase] = useState('online')
   const [bills, setBills] = useState(0)
   const stage = useRef(null)
+  const offline = phase === 'offline'
+  const slips = Math.min(bills, slipAmounts.length)
 
   // Hover: tilt the monitor toward the cursor; floating pieces move at different depths.
   const onMove = (e) => {
@@ -51,29 +60,67 @@ export default function Hero({ hero, brand, links }) {
     stage.current?.style.setProperty('--py', 0)
   }
 
-  // While the internet is off, the counter keeps billing locally: one bill every 1.6s.
+  // Offline: the counter keeps billing locally, one bill every 1.6s.
   useEffect(() => {
     if (!offline) return
     const t = setInterval(() => setBills((b) => b + 1), 1600)
     return () => clearInterval(t)
   }, [offline])
 
-  const status = offline ? (
-    <span className="app-user off"><Icon name="wifiOff" size={11} /> Offline · {bills} bills saved</span>
-  ) : (
-    <span className="app-user"><i className="live" /> Online · synced</span>
-  )
+  // Offline for a few seconds, then the internet comes back by itself (timer depends on phase only).
+  useEffect(() => {
+    if (phase !== 'offline') return
+    const t = setTimeout(() => setPhase('syncing'), OFFLINE_MS)
+    return () => clearTimeout(t)
+  }, [phase])
+
+  // Back online: planes fly (sync), then "all synced", then return to normal.
+  useEffect(() => {
+    if (phase === 'syncing') {
+      const t = setTimeout(() => setPhase('synced'), (1.3 + FLY_GAP * Math.max(0, slips - 1)) * 1000 + 300)
+      return () => clearTimeout(t)
+    }
+    if (phase === 'synced') {
+      const t = setTimeout(() => { setPhase('online'); setBills(0) }, SYNCED_MS)
+      return () => clearTimeout(t)
+    }
+  }, [phase, slips])
+
+  const toggle = () => {
+    if (offline) setPhase(bills > 0 ? 'syncing' : 'online')
+    else if (phase === 'online') { setBills(0); setPhase('offline') }
+    // while syncing / synced the demo finishes on its own
+  }
+
+  const status = {
+    online: <span className="app-user"><i className="live" /> Online · synced</span>,
+    offline: <span className="app-user off"><Icon name="wifiOff" size={11} /> Offline · {bills} bills saved</span>,
+    syncing: <span className="app-user sync"><Icon name="cloud" size={11} /> Syncing {bills} bills…</span>,
+    synced: <span className="app-user"><i className="live" /> All {bills} bills synced</span>,
+  }[phase]
+
+  const chip = {
+    online: { icon: 'cloud', title: '3 branches synced', sub: 'Last sync 2s ago' },
+    offline: { icon: 'wifiOff', title: 'Internet down', sub: `${bills} bills saved, will sync later` },
+    syncing: { icon: 'cloud', title: 'Back online', sub: `Syncing ${bills} bills…` },
+    synced: { icon: 'check', title: `All ${bills} bills synced`, sub: 'Nothing lost' },
+  }[phase]
+
+  const note = offline ? hero.offlineNote : phase === 'online' ? hero.switchNote : hero.syncedNote
 
   return (
-    <section id="home" className={`hero ${offline ? 'is-offline' : ''}`}>
+    <section id="home" className={`hero is-${phase}`}>
       <div className="container hero-grid">
         <div className="hero-copy">
           <Kicker>{hero.kicker}</Kicker>
 
-          {/* Headline: what the POS does */}
+          {/* Headline: what the POS does; the yellow line draws under the last row */}
           <h1 className="h-rows">
-            {hero.rows.map((r) => (
-              <span className="hr-row" key={r.accent}>{r.lead} <span className="hl">{r.accent}</span></span>
+            {hero.rows.map((r, i) => (
+              <span className="hr-row" key={r.accent}>
+                {r.lead} <span className="hl">{r.accent}</span>
+                {i === hero.rows.length - 1 && <Squiggle />}
+              </span>
             ))}
           </h1>
 
@@ -88,7 +135,7 @@ export default function Hero({ hero, brand, links }) {
           <div className="net-toggle-row">
             <button
               className={`net-toggle ${offline ? 'off' : 'on'}`}
-              onClick={() => setOffline(!offline)}
+              onClick={toggle}
               role="switch"
               aria-checked={!offline}
             >
@@ -97,7 +144,7 @@ export default function Hero({ hero, brand, links }) {
               <span className="nt-track"><span className="nt-knob" /></span>
               <b>{offline ? 'OFF' : 'ON'}</b>
             </button>
-            <Scribble dir="left" className="net-note">{offline ? hero.offlineNote : hero.switchNote}</Scribble>
+            <Scribble dir="left" className="net-note">{note}</Scribble>
           </div>
 
           <ul className="trust">
@@ -107,14 +154,38 @@ export default function Hero({ hero, brand, links }) {
 
         <div className="hero-stage" ref={stage} onPointerMove={onMove} onPointerLeave={onLeave}>
           <Monitor className="hero-monitor"><PosBillingScreen status={status} /></Monitor>
-          <Receipt offline={offline} bills={bills} />
-          <div className={`hero-chip ${offline ? 'warn' : ''}`}>
-            <Icon name={offline ? 'wifiOff' : 'cloud'} size={15} />
+          <Receipt phase={phase} bills={bills} />
+          <div className={`hero-chip ${phase}`}>
+            <span className="chip-ic"><Icon name={chip.icon} size={15} /></span>
             <div>
-              <b>{offline ? 'Internet down' : '3 branches synced'}</b>
-              <small>{offline ? `${bills} bills saved, will sync later` : 'Last sync 2s ago'}</small>
+              <b>{chip.title}</b>
+              <small>{chip.sub}</small>
+              {phase === 'syncing' && <span className="sync-bar"><i /></span>}
             </div>
+            {offline && bills > 0 && <span className="chip-count" key={bills}>{bills}</span>}
           </div>
+          {/* Offline bills pile up as paper slips; when the internet is back they fold into paper planes and fly to the cloud */}
+          {(offline || phase === 'syncing') && slips > 0 && (
+            <div className={`slip-stack ${phase}`} aria-hidden="true">
+              {Array.from({ length: slips }, (_, i) => (
+                <span
+                  className="slip paper"
+                  key={i}
+                  style={{ '--i': i, animationDelay: phase === 'syncing' ? `${(slips - 1 - i) * FLY_GAP}s` : '0s' }}
+                >
+                  <small>BILL #{1043 + i}</small>
+                  <b>Rs {slipAmounts[i]}</b>
+                </span>
+              ))}
+            </div>
+          )}
+          {phase === 'syncing' && (
+            <div className="plane-layer" aria-hidden="true">
+              {Array.from({ length: slips }, (_, i) => (
+                <span className="plane" key={i} style={{ animationDelay: `${i * FLY_GAP}s` }}><Icon name="plane" size={24} /></span>
+              ))}
+            </div>
+          )}
           <div className="hero-phone-tag"><Icon name="call" size={14} /> {brand.phone}</div>
         </div>
       </div>

@@ -2,6 +2,19 @@
 
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
+## 2026-11-13: Offline bills pile up and fly back as paper planes
+- While the internet is off, each offline bill drops onto a small messy stack of paper slips beside the monitor ("BILL #1043 · Rs 2,980").
+- The demo goes back online by itself after ~5.6s (visual demo, owner request): the slips fold away and turn into blue paper planes that fly one by one into the cloud card, then "All N bills synced · Nothing lost" → normal. Clicking the switch while syncing does nothing.
+- Replaced the earlier round flying-receipt-icon effect. Added `plane` icon. Files: `components/Hero.jsx`, `components/Icons.jsx`, `styles.css`.
+
+## 2026-11-13: Hero underline back + internet-down animation sequence
+- Yellow self-drawing underline (`Squiggle`, re-added to `Bits.jsx`) under the last headline row "See every branch.".
+- Internet switch now runs a full, logical sequence (`phase` state in `Hero.jsx`):
+  - **OFF** → warm amber glow over the hero, brief screen glitch as the connection drops, sync chip turns orange with a pulsing "signal lost" ring and a bumping bill counter, receipt "SAVED OFFLINE".
+  - **ON again** → "Back online · Syncing N bills…" with a filling progress bar and receipt icons flying from the receipt into the cloud chip; receipt "SYNCING…".
+  - → "All N bills synced · Nothing lost" (green chip, green screen glow), then back to normal.
+- JSON: added `hero.syncedNote`. Files: `components/Hero.jsx`, `components/Bits.jsx`, `content/landing-content.json`, `styles.css`.
+
 ## 2026-11-13: Internet switch note arrow
 - The handwritten arrow next to the Internet switch now points straight left at the button (`.scribble.left.net-note .arrow { rotate(25deg) }`; hover nudge uses matching `pointNet` keyframes). Phones keep their own up-pointing arrow. File: `styles.css`.
 

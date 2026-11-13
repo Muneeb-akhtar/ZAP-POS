@@ -110,8 +110,19 @@ h2 .hl { display: block; }
 /* Headline = two "switch rows": Power [toggle] / Billing [toggle] */
 /* Left column: headline rows ("Sell at every counter." …) + Internet switch. Right column: the POS scene. */
 .hero-grid { position: relative; display: grid; grid-template-columns: 1fr 1.02fr; gap: 56px; align-items: center; }
-.h-rows { display: grid; margin: 24px 0 26px; font-size: clamp(40px, 4.2vw, 57px); line-height: 1.04; letter-spacing: -.045em; }
-.hr-row { display: block; color: var(--ink); white-space: nowrap; }
+.h-rows { display: grid; margin: 24px 0 40px; font-size: clamp(40px, 4.2vw, 57px); line-height: 1.04; letter-spacing: -.045em; }
+.hr-row { position: relative; justify-self: start; color: var(--ink); white-space: nowrap; }
+/* Yellow hand-drawn underline under the last headline row (draws itself on load) */
+.squiggle { position: absolute; left: .02em; bottom: -.34em; width: calc(100% - .04em); height: .22em; overflow: visible; }
+.squiggle path { fill: none; stroke: var(--yellow); stroke-width: 7; stroke-linecap: round; stroke-dasharray: 420; stroke-dashoffset: 420; animation: draw 1.2s .5s cubic-bezier(.6,.1,.2,1) forwards; }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+
+/* Internet OFF: warm "offline" glow over the hero, screen glitches as the connection drops */
+.hero::before { content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity .8s; background: radial-gradient(900px 600px at 82% 30%, #ffe1bf 0%, transparent 65%), radial-gradient(500px 360px at 10% 90%, #ffedd5 0%, transparent 70%); }
+.hero.is-offline::before { opacity: 1; }
+.hero.is-offline .hero-monitor .monitor-screen { animation: glitch .6s steps(1) 1; box-shadow: 0 0 0 1px rgba(234,88,12,.3), 0 30px 70px -24px rgba(234,88,12,.55), var(--shadow-lg); }
+.hero.is-synced .hero-monitor .monitor-screen { box-shadow: 0 0 0 1px rgba(34,197,94,.3), 0 30px 70px -24px rgba(34,197,94,.5), var(--shadow-lg); }
+@keyframes glitch { 0% { transform: translate(-4px, 2px) skewX(-2deg); filter: saturate(.2) contrast(1.4); } 20% { transform: translate(3px, -2px); filter: hue-rotate(-40deg) brightness(1.3); } 40% { transform: translate(-2px, 0); filter: brightness(.6); } 60% { transform: translate(2px, 1px); filter: saturate(.3); } 80% { transform: translate(-1px, 0); filter: none; } 100% { transform: none; filter: none; } }
 
 .net-toggle-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin-top: 30px; }
 .net-toggle { display: inline-flex; align-items: center; gap: 10px; padding: 8px 14px; border-radius: 999px; background: #fff; border: 1.5px solid var(--line); box-shadow: var(--shadow); font-size: 14.5px; font-weight: 600; color: var(--ink); transition: border-color .3s, background .3s; }
@@ -135,6 +146,7 @@ h2 .hl { display: block; }
 .hero-stage { position: relative; padding: 30px 0 40px 30px; }
 .hero-monitor .monitor-screen { transition: box-shadow .7s; }
 .app-user.off { color: #ea580c; font-weight: 600; }
+.app-user.sync { color: var(--brand-600); font-weight: 600; }
 
 .hero-receipt { position: absolute; left: -18px; bottom: -6px; width: 210px; transform: rotate(-5deg); z-index: 3; animation: receiptIn .9s .2s cubic-bezier(.3,1.3,.5,1) backwards; }
 @keyframes receiptIn { from { transform: rotate(-5deg) translateY(40px); opacity: 0; } }
@@ -146,15 +158,45 @@ h2 .hl { display: block; }
 @keyframes print { from { opacity: 0; transform: translateY(-4px); } }
 .r-total { display: flex; justify-content: space-between; font-weight: 700; font-size: 13px; }
 .r-status { margin-top: 10px; text-align: center; font-size: 9.5px; font-weight: 700; letter-spacing: .06em; color: #15803d; border: 1.5px solid currentColor; border-radius: 4px; padding: 3px; }
-.r-status.off { color: #c2410c; }
+.r-status.offline { color: #c2410c; }
+.r-status.syncing { color: var(--brand-600); animation: blink .8s ease-in-out infinite; }
+@keyframes blink { 50% { opacity: .35; } }
 
 .hero-chip { position: absolute; top: 0; right: -14px; z-index: 3; display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 14px; background: #fff; border: 1px solid var(--line); box-shadow: var(--shadow-lg); font-size: 12px; transition: background .5s; }
-.hero-chip > svg { color: var(--brand-500); }
+.chip-ic { position: relative; flex-shrink: 0; width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; background: var(--brand-50); color: var(--brand-500); transition: background .4s, color .4s; }
+.chip-count { min-width: 24px; height: 24px; padding: 0 7px; border-radius: 999px; display: grid; place-items: center; font-family: var(--font-mono); font-size: 12px; font-weight: 700; color: #fff; background: #ea580c; animation: bump .35s cubic-bezier(.3,1.6,.5,1); }
+@keyframes bump { from { transform: scale(.4); opacity: 0; } }
+.sync-bar { display: block; width: 150px; height: 4px; margin-top: 6px; border-radius: 4px; background: var(--brand-100); overflow: hidden; }
+.sync-bar i { display: block; width: 0; height: 100%; border-radius: 4px; background: var(--brand-500); animation: syncFill 2.2s ease-in-out forwards; }
+@keyframes syncFill { to { width: 100%; } }
 .hero-chip > div { display: grid; line-height: 1.3; }
 .hero-chip b { color: var(--ink); font-size: 13px; }
 .hero-chip small { color: var(--muted); }
-.hero-chip.warn { background: #fff7ed; border-color: #fed7aa; }
-.hero-chip.warn > svg { color: #ea580c; }
+.hero-chip.offline { background: #fff7ed; border-color: #fed7aa; }
+.hero-chip.offline .chip-ic { background: #ffedd5; color: #ea580c; }
+.hero-chip.offline .chip-ic::after { content: ''; position: absolute; inset: 0; border-radius: 50%; border: 2px solid #fb923c; animation: signalLost 1.4s ease-out infinite; }
+@keyframes signalLost { from { transform: scale(1); opacity: .9; } to { transform: scale(2); opacity: 0; } }
+.hero-chip.syncing { border-color: var(--brand-200); }
+.hero-chip.syncing .chip-ic { animation: bob .5s ease-in-out infinite alternate; }
+@keyframes bob { to { transform: translateY(-3px); } }
+.hero-chip.synced { background: #f0fdf4; border-color: #bbf7d0; }
+.hero-chip.synced .chip-ic { background: #22c55e; color: #fff; animation: bump .45s cubic-bezier(.3,1.6,.5,1); }
+
+/* Offline bills pile up as paper slips beside the monitor */
+.slip-stack { position: absolute; left: 56%; bottom: 4%; z-index: 3; width: 100px; height: 0; pointer-events: none; }
+.slip { position: absolute; left: 0; bottom: calc(var(--i) * 11px); width: 96px; padding: 8px 10px 11px; border-radius: 3px; display: grid; gap: 2px; font-size: 9px; line-height: 1.2; transform: translateX(calc(var(--i) * 5px - 8px)) rotate(calc(var(--i) * 4deg - 5deg)); animation: slipDrop .5s cubic-bezier(.3,1.5,.5,1) backwards; }
+.slip small { color: #64748b; letter-spacing: .04em; }
+.slip b { font-size: 12.5px; color: var(--ink); }
+.slip::after { content: ''; position: absolute; left: 7px; right: 7px; bottom: 4px; border-top: 1px dashed #cbd5e1; }
+@keyframes slipDrop { from { transform: translateY(-70px) rotate(-25deg); opacity: 0; } }
+/* Back online: each slip folds away… */
+.slip-stack.syncing .slip { animation: slipFold .35s ease-in forwards; }
+@keyframes slipFold { 40% { transform: scaleY(.4) rotate(0); } to { transform: scale(.2) rotate(30deg); opacity: 0; } }
+/* …and flies into the cloud card as a paper plane */
+.plane-layer { position: absolute; inset: 0; z-index: 4; pointer-events: none; }
+.plane { position: absolute; width: 40px; height: 40px; margin: -20px 0 0 -20px; display: grid; place-items: center; color: #fff; opacity: 0; filter: drop-shadow(0 8px 12px rgba(11,132,240,.55)); animation: planeFly 1.3s cubic-bezier(.45,0,.3,1) forwards; }
+.plane svg { width: 32px; height: 32px; fill: var(--brand-500); stroke-width: 1.6; }
+@keyframes planeFly { 0% { left: 62%; top: 86%; opacity: 0; transform: rotate(-20deg) scale(.4); } 12% { opacity: 1; transform: rotate(-25deg) scale(1); } 45% { left: 70%; top: 44%; transform: rotate(-12deg) scale(1.15); } 80% { opacity: 1; } 100% { left: 86%; top: 7%; opacity: 0; transform: rotate(5deg) scale(.5); } }
 .hero-phone-tag { position: absolute; right: 8px; bottom: 6px; z-index: 3; display: inline-flex; align-items: center; gap: 7px; font-family: var(--font-mono); font-size: 12px; font-weight: 700; color: var(--ink); background: var(--yellow); padding: 6px 12px; border-radius: 999px; transform: rotate(3deg); box-shadow: var(--shadow); }
 
 /* ---------- Monitor frame ---------- */
