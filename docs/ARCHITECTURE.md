@@ -63,12 +63,12 @@ Rendered by `App.jsx` in this order:
 
 Shared building blocks:
 - `Icons.jsx`: `<Icon name size fill className />` (stroke icons from the `paths` map; adds class `icon icon-<name>`) and `<Logo size />` (blue gradient square + white bolt).
-- `Bits.jsx`: `Kicker` (pill label), `Scribble` (handwritten note + arrow, `dir` = left/up/right), `Squiggle` (self-drawing yellow underline), `Stars`, `Barcode` (deterministic from a seed string), `formatRs(n)`.
+- `Bits.jsx`: `Kicker` (pill label), `Scribble` (handwritten note + arrow, `dir` = left/up/right), `Stars`, `Barcode` (deterministic from a seed string), `formatRs(n)`.
 - `Mockups.jsx`: `Monitor` (screen + stand) and `PosBillingScreen({ status })` (the fake POS UI in the hero).
 - `Sections.jsx` (internal): `BrandName` splits `brand.name` into "ZAP" + `.brand-accent` "POS" (two-tone wordmark in navbar and footer).
 
 ### Interactive behaviour (state lives in each component)
-- **Hero**: `offline` toggled by the power switch → adds `.night` to the hero, ticks a `bills` counter every 1.6s, sets `document.documentElement.dataset.power = 'off'|'on'` (the navbar goes dark via `html[data-power="off"]`). Pointer movement over `.hero-stage` sets CSS vars `--px/--py` (−0.5…0.5) used for the 3D tilt/parallax.
+- **Hero**: `.hero-grid` 2 columns. **Left** `.hero-copy`: kicker, `.h-rows` headline (3 `.hr-row` lines, "every …" in `.hl` blue), lead, CTAs, **Internet switch** (`.net-toggle`, `role="switch"`) + handwritten note, trust list. **Right** `.hero-stage` (owner-locked layout, don't change): `Monitor` + `PosBillingScreen`, `.hero-receipt` (bottom-left overlap), `.hero-chip` (top-right), `.hero-phone-tag`. Internet OFF → `offline` state: hero gets `.is-offline`, POS status/receipt/chip show offline billing, `bills` ticks every 1.6s ("will sync later"). No night mode (a power cut would turn the PC off too; the demo is about the internet dropping). Pointer movement over `.hero-stage` sets `--px/--py` for the 3D tilt/parallax.
 - **App**: one global `pointermove` listener sets `--mx/--my` on the nearest `.glow` element (cursor spotlight on timeline cards and tills).
 - **Counters**: `stock` (starts at `counters.stock`) and `last = {i, n}`. The tills use `key={i-n}` so they remount and replay animations on every sale. The SVG has three layers: `.wire` (dashes always flowing master→counters), `.flow` (always-moving glowing packets) and `.pulse` (one-shot bright pulse from the counter that sold, remounted per sale via `key`).
 - **Pricing**: `annual` (monthly/yearly prices) and `open` (comparison table).
@@ -79,7 +79,7 @@ Shared building blocks:
 Top-level keys: `_note, brand, nav, links, hero, ticker, day, counters, hardware, pricing, reviewsSection, reviews, faq, finalCta, footer`.
 - `brand`: `name, phone, email, address, about`
 - `links`: `demo, portal, windowsInstaller, googlePlay, appStore, whatsapp, social{linkedin,facebook,instagram,x}`
-- `hero`: `kicker, titleTop, titleBottom, description, primaryCta, secondaryCta, switchLabel, switchNote, trust[]`
+- `hero`: `kicker, rows[] {lead, accent}, description, primaryCta, secondaryCta, switchLabel, switchNote, offlineNote, trust[]`
 - `day.stops[]`: `time, period, title, text, visual` (`visual` ∈ `open|counters|offline|stock|phone`, rendered by `visuals` in Day.jsx; `period` maps to an icon via `periodIcon`)
 - `counters`: `kicker, title, titleHighlight, description, product, stock, note, points[]`
 - `hardware.items[]`: `icon, label` (icon = a key in Icons.jsx)
@@ -93,7 +93,7 @@ Top-level keys: `_note, brand, nav, links, hero, ticker, day, counters, hardware
 Order of blocks (search the `/* ---------- Name ---------- */` headers):
 1. Tokens `:root` (colors, shadows, fonts), base, `h2 .hl` convention
 2. Buttons (`btn`, `btn-primary|outline|quiet|glass`, `btn-sm|lg|block`)
-3. Shared bits (kicker, scribble, squiggle, stars, store button, `.paper` + `.zz`/`.zz-top` torn receipt edges, `.r-rule`)
+3. Shared bits (kicker, scribble, stars, store button, `.paper` + `.zz`/`.zz-top` torn receipt edges, `.r-rule`)
 4. Navbar → Hero → Monitor frame + POS app UI → Ticker → Day → Counters → Hardware → Pricing → Reviews → FAQ → Final CTA → Footer
 5. Reduced motion (kills all animation)
 6. Responsive: `max-width: 1080px` (stack hero/heads), `900px` (mobile nav, single-column timeline/receipts/notes, compare table becomes stacked rows), `720px` (phone sizing)

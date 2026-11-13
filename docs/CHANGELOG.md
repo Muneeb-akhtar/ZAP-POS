@@ -2,6 +2,32 @@
 
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
+## 2026-11-13: Internet switch note arrow
+- The handwritten arrow next to the Internet switch now points straight left at the button (`.scribble.left.net-note .arrow { rotate(25deg) }`; hover nudge uses matching `pointNet` keyframes). Phones keep their own up-pointing arrow. File: `styles.css`.
+
+## 2026-11-13: Hero right side restored (owner-locked)
+- Owner wants the original right side kept: two-column hero restored (`.hero-grid` 1fr / 1.02fr, `.hero-stage` padding, right-side glow). Monitor + Active Bill screen, receipt overlap, "3 branches synced" chip and phone tag are exactly as before.
+- Left column now holds the new copy: kicker "Made for shops in Pakistan", headline "Sell at every counter. / Track every item. / See every branch.", POS description, CTAs, Internet switch with note, trust list.
+- Removed (no longer used): headline product chips (`.hr-chip`, `.hr-ic`, `chipIn`, `rows[].icon/chip/chipNote`), centered `.hero-head`, `.sr-only` + `srTitle` (the h1 is real text again).
+- Offline note shortened ("saved offline, syncs later"); on phones the note's arrow points up at the switch.
+- Files: `components/Hero.jsx`, `content/landing-content.json`, `styles.css`. Rule added to `CLAUDE.md`: the hero's right side is locked.
+
+## 2026-11-13: Hero rewritten product-first + logic fix (internet, not power)
+- Why: "Power OFF / Billing ON" was illogical. A power cut turns the PC off too. What actually fails during load shedding is the **internet** (router down, PC on UPS), and offline billing is the real feature.
+- New headline (centered, 2-column grid): **"Sell at every counter. / Track every item. / See every branch."** ("every …" in brand blue), each with a live product chip (3 counters live, 1,284 in stock, Rs 1.24M today). Chips hidden on mobile.
+- Demo switch is now **Internet ON/OFF** above the counter scene. OFF → POS screen, receipt and sync chip show offline billing with a bill counter ("will sync later"). The **night mode was removed** entirely (hero `.night` styles, star glow, `html[data-power]` navbar rules, the `document.documentElement.dataset.power` effect).
+- Same logic fix elsewhere: timeline 15:00 card is now "Internet down / Router's off. Billing isn't." (mentions UPS); final CTA "Ready when the internet isn't."; `brand.about`; page `<title>` and meta description now describe the POS.
+- Removed: Power/Billing pill headline (`.h-switch`, `.hs-*`, `hold`/`invite`/`bump` keyframes). Added: `wifi` icon, `.h-rows`/`.hr-*`, `.net-toggle`/`.nt-*` styles.
+- Files: `components/Hero.jsx`, `components/Icons.jsx`, `components/Day.jsx`, `content/landing-content.json`, `styles.css`, `index.html`.
+
+## 2026-11-13: Hero redesign: switch headline, centered layout (replaced next day)
+- Why: the old hero (two-line headline with a colored second line, text left / screen right) looked too close to a competitor's site.
+- New headline **"Power [ON] / Billing [ON]"** with real toggle pills built into the words. The Power pill IS the load-shedding switch (`role="switch"`): tap it and it flips to OFF, the hero goes to night, "Power" fades, and the **Billing pill stays ON**, glowing (`hold`) with a yellow "+N" bills badge. Words sit in a 2-column grid so the pills always line up.
+- Centered hero (kicker, headline, lead, CTAs, trust) with a wide counter scene below (monitor center, receipt left, sync chip right, 3D tilt kept).
+- Removed: yellow squiggle underline (`Squiggle` in Bits.jsx + CSS), separate power-switch row (`.power-switch`, `.ps-*`, `.switch-row`), old `.hero-grid` / `.h-top` / `.h-bottom` styles. Added `.sr-only` utility; the h1 has a hidden full-sentence title for screen readers/SEO.
+- JSON `hero` keys changed: removed `titleTop`, `titleBottom`, `switchLabel`; added `powerWord`, `billingWord`, `srTitle`, `switchAria`, `nightNote`; new `description` and `switchNote`.
+- Files: `components/Hero.jsx`, `components/Bits.jsx`, `content/landing-content.json`, `styles.css`.
+
 ## 2026-11-12: Live network wires in counter demo
 - The dotted lines between the Master PC and the counters now flow continuously (`wireFlow`), with small glowing blue "data packets" riding along a second path (`.flow`, `packetFlow`), so the connection feels live.
 - The Sell-button pulse (`.pulse`) and the Sold/Synced animations are unchanged and play on top.

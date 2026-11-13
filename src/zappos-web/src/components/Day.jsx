@@ -51,7 +51,7 @@ const visuals = {
   ),
 }
 
-const periodIcon = { Morning: 'sun', 'Rush hour': 'users', 'Load shedding': 'wifiOff', Evening: 'box', Night: 'moon' }
+const periodIcon = { Morning: 'sun', 'Rush hour': 'users', 'Internet down': 'wifiOff', Evening: 'box', Night: 'moon' }
 
 export default function Day({ data }) {
   return (

@@ -74,9 +74,6 @@ h2 .hl { display: block; }
 .scribble.left .arrow { transform: scaleX(1) rotate(-10deg); }
 .scribble.up { flex-direction: column-reverse; }
 .scribble.up .arrow { transform: rotate(80deg) scaleY(-1); }
-.squiggle { position: absolute; left: .02em; bottom: -.36em; width: calc(100% - .04em); height: .22em; overflow: visible; }
-.squiggle path { fill: none; stroke: var(--yellow); stroke-width: 7; stroke-linecap: round; stroke-dasharray: 420; stroke-dashoffset: 420; animation: draw 1.2s .5s cubic-bezier(.6,.1,.2,1) forwards; }
-@keyframes draw { to { stroke-dashoffset: 0; } }
 .stars { display: inline-flex; gap: 2px; color: #f5b301; }
 .live { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 0 3px #dcfce7; }
 .store { display: inline-flex; align-items: center; gap: 10px; background: var(--ink); color: #fff; padding: 8px 16px 8px 13px; border-radius: 12px; transition: transform .15s; }
@@ -94,15 +91,10 @@ h2 .hl { display: block; }
 /* ---------- Navbar (floating pill) ---------- */
 .navbar { position: fixed; top: 14px; left: 0; right: 0; z-index: 50; padding: 0 16px; pointer-events: none; }
 .nav-pill { pointer-events: auto; max-width: 1100px; margin: 0 auto; display: flex; align-items: center; gap: 20px; justify-content: space-between; padding: 8px 8px 8px 14px; border-radius: 999px; background: rgba(255,255,255,.78); backdrop-filter: blur(14px) saturate(1.4); -webkit-backdrop-filter: blur(14px) saturate(1.4); border: 1px solid rgba(15,23,42,.08); box-shadow: 0 6px 24px -12px rgba(15,23,42,.25); transition: box-shadow .3s, background .3s; position: relative; }
-/* Night mode (load shedding ON): dark pill even when scrolled (beats .navbar.scrolled .nav-pill) */
-html[data-power="off"] .navbar .nav-pill { background: rgba(13,26,51,.88); border-color: rgba(255,255,255,.1); }
-html[data-power="off"] .navbar .brand, html[data-power="off"] .nav-login { color: #fff; }
-html[data-power="off"] .nav-links > a { color: #94a3b8; }
-html[data-power="off"] .menu-btn { background: rgba(255,255,255,.08); color: #fff; }
 .navbar.scrolled .nav-pill { background: rgba(255,255,255,.92); box-shadow: 0 14px 34px -16px rgba(15,23,42,.35); }
 .brand { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-head); font-weight: 800; font-size: 20px; color: var(--ink); letter-spacing: -.03em; }
 .brand-accent { color: var(--brand-500); transition: color .5s; }
-html[data-power="off"] .navbar .brand-accent, .footer .brand-accent { color: var(--brand-400); }
+.footer .brand-accent { color: var(--brand-400); }
 .nav-links { display: flex; gap: 2px; }
 .nav-links > a { font-size: 14.5px; font-weight: 500; padding: 8px 14px; border-radius: 999px; color: var(--text); transition: background .15s, color .15s; }
 .nav-links > a:hover { color: var(--ink); background: rgba(15,23,42,.05); }
@@ -114,44 +106,34 @@ html[data-power="off"] .navbar .brand-accent, .footer .brand-accent { color: var
 
 /* ---------- Hero ---------- */
 .hero { position: relative; padding: 150px 0 110px; overflow: hidden; background: radial-gradient(900px 600px at 82% 30%, #dcefff 0%, transparent 65%), radial-gradient(600px 400px at 0% 100%, #fff7d1 0%, transparent 70%), var(--bg); transition: background .7s ease; }
-.hero.night { background: radial-gradient(700px 500px at 75% 40%, #0b2a55 0%, transparent 70%), var(--night); }
-.hero-glow { position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity .7s; background-image: radial-gradient(1px 1px at 10% 20%, #fff8, transparent), radial-gradient(1px 1px at 30% 70%, #fff6, transparent), radial-gradient(1.5px 1.5px at 55% 15%, #fff7, transparent), radial-gradient(1px 1px at 80% 85%, #fff5, transparent), radial-gradient(1px 1px at 92% 10%, #fff8, transparent), radial-gradient(1px 1px at 45% 90%, #fff5, transparent); }
-.hero.night .hero-glow { opacity: 1; }
+
+/* Headline = two "switch rows": Power [toggle] / Billing [toggle] */
+/* Left column: headline rows ("Sell at every counter." …) + Internet switch. Right column: the POS scene. */
 .hero-grid { position: relative; display: grid; grid-template-columns: 1fr 1.02fr; gap: 56px; align-items: center; }
-.hero h1 { font-size: clamp(46px, 4.9vw, 70px); line-height: .96; letter-spacing: -.05em; margin: 24px 0 40px; }
-.h-top { display: block; color: var(--ink); transition: color .7s, opacity .7s; }
-.h-bottom { position: relative; display: inline-block; color: var(--brand-500); transition: color .7s, text-shadow .7s; }
-.hero.night .h-top { color: #334155; }
-.hero.night .h-bottom { color: #fff; text-shadow: 0 0 28px rgba(58,160,245,.75), 0 0 2px rgba(255,255,255,.6); }
-.lead { font-size: 18px; max-width: 520px; transition: color .7s; }
-.hero.night .lead { color: #94a3b8; }
+.h-rows { display: grid; margin: 24px 0 26px; font-size: clamp(40px, 4.2vw, 57px); line-height: 1.04; letter-spacing: -.045em; }
+.hr-row { display: block; color: var(--ink); white-space: nowrap; }
+
+.net-toggle-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin-top: 30px; }
+.net-toggle { display: inline-flex; align-items: center; gap: 10px; padding: 8px 14px; border-radius: 999px; background: #fff; border: 1.5px solid var(--line); box-shadow: var(--shadow); font-size: 14.5px; font-weight: 600; color: var(--ink); transition: border-color .3s, background .3s; }
+.net-toggle > svg { color: var(--brand-500); }
+.net-toggle b { font-family: var(--font-mono); font-size: 13px; min-width: 28px; text-align: left; color: #15803d; }
+.nt-track { position: relative; width: 44px; height: 24px; border-radius: 999px; background: #22c55e; transition: background .3s; }
+.nt-knob { position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; border-radius: 50%; background: #fff; box-shadow: 0 2px 6px rgba(0,0,0,.25); transform: translateX(20px); transition: transform .35s cubic-bezier(.5,1.6,.4,1); }
+.net-toggle.off { border-color: #fdba74; background: #fff7ed; }
+.net-toggle.off > svg, .net-toggle.off b { color: #c2410c; }
+.net-toggle.off .nt-track { background: #cbd5e1; }
+.net-toggle.off .nt-knob { transform: translateX(0); }
+.hero.is-offline .net-note { color: #c2410c; }
+.scribble.left.net-note .arrow { transform: rotate(25deg); }
+
+.lead { font-size: 18px; max-width: 520px; }
 .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 34px; }
-.hero.night .btn-quiet { color: #e2e8f0; }
-
-.switch-row { display: flex; align-items: center; gap: 14px; margin-top: 34px; flex-wrap: wrap; }
-.power-switch { display: inline-flex; align-items: center; gap: 12px; padding: 7px 16px 7px 7px; border-radius: 999px; background: #fff; border: 1.5px solid var(--line); box-shadow: var(--shadow); transition: background .5s, border-color .5s; }
-.ps-track { position: relative; width: 58px; height: 32px; border-radius: 999px; background: var(--brand-100); transition: background .4s; }
-.ps-knob { position: absolute; top: 3px; left: 3px; width: 26px; height: 26px; border-radius: 50%; background: var(--brand-500); color: var(--yellow); display: grid; place-items: center; box-shadow: 0 4px 10px rgba(11,132,240,.45); transition: transform .4s cubic-bezier(.5,1.6,.4,1), background .4s, color .4s; }
-.ps-label { font-size: 14px; font-weight: 600; color: var(--ink); transition: color .5s; }
-.ps-label b { font-family: var(--font-mono); font-size: 13px; }
-.power-switch.on { background: #111b2e; border-color: #24324b; }
-.power-switch.on .ps-track { background: #24324b; }
-.power-switch.on .ps-knob { transform: translateX(26px); background: #475569; color: #1e293b; box-shadow: none; }
-.power-switch.on .ps-label { color: #e2e8f0; }
-.power-switch.on .ps-label b { color: var(--yellow); }
-.switch-note { transition: color .5s; }
-.hero.night .switch-note { color: var(--yellow); }
-
-.trust { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 30px; }
+.trust { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 26px; }
 .trust li { display: inline-flex; align-items: center; gap: 6px; font-size: 13.5px; color: var(--muted); }
 .trust svg { color: var(--brand-500); }
-.hero.night .trust li { color: #64748b; }
 
 .hero-stage { position: relative; padding: 30px 0 40px 30px; }
 .hero-monitor .monitor-screen { transition: box-shadow .7s; }
-.hero.night .hero-monitor .monitor-screen { box-shadow: 0 0 0 1px rgba(58,160,245,.25), 0 0 90px 10px rgba(11,132,240,.45), 0 40px 80px rgba(0,0,0,.6); }
-.hero.night .monitor-neck { background: linear-gradient(90deg, #1e293b, #334155, #1e293b); }
-.hero.night .monitor-base { background: linear-gradient(180deg, #334155, #1e293b); }
 .app-user.off { color: #ea580c; font-weight: 600; }
 
 .hero-receipt { position: absolute; left: -18px; bottom: -6px; width: 210px; transform: rotate(-5deg); z-index: 3; animation: receiptIn .9s .2s cubic-bezier(.3,1.3,.5,1) backwards; }
@@ -535,7 +517,6 @@ html[data-power="off"] .navbar .brand-accent, .footer .brand-accent { color: var
   .nav-links.open { display: flex; }
   .nav-links > a { padding: 12px 14px; font-size: 16px; border-radius: 12px; }
   .nav-mobile-only { display: block; }
-  html[data-power="off"] .nav-links > a { color: var(--text); }
   .nav-login { display: none; }
   .menu-btn { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: var(--bg-soft); color: var(--ink); }
   .nav-pill { gap: 8px; }
@@ -576,10 +557,11 @@ html[data-power="off"] .navbar .brand-accent, .footer .brand-accent { color: var
   .navbar { top: 10px; padding: 0 10px; }
   .nav-actions .btn { padding: 8px 12px; }
   .hero { padding: 112px 0 80px; }
-  .hero h1 { font-size: clamp(42px, 12vw, 60px); }
   .lead { font-size: 16.5px; }
   .hero-actions .btn-primary { flex: 1 1 100%; }
   .hero-stage { padding: 40px 0 70px; }
+  .h-rows { font-size: min(9.4vw, 46px); }
+  .scribble.left.net-note .arrow { transform: rotate(145deg); }
   .monitor-screen { padding: 6px; border-radius: 12px; aspect-ratio: auto; height: 260px; }
   .monitor-neck { height: 22px; }
   .app { grid-template-columns: 1fr; }
@@ -662,15 +644,12 @@ html[data-power="off"] .navbar .brand-accent, .footer .brand-accent { color: var
   .hero-stage:hover .hero-chip { transform: translate(calc(var(--px) * 26px), calc(var(--py) * 20px)); }
   .hero-stage:hover .hero-phone-tag { transform: rotate(3deg) translate(calc(var(--px) * 18px), calc(var(--py) * 14px)); }
   .hero-phone-tag:hover { animation: wiggle .5s ease; }
-  .squiggle path { transition: stroke-width .3s; }
-  .h-bottom:hover .squiggle path { stroke-width: 10; }
 
-  /* Power switch: knob glows, label nudges */
-  .power-switch { transition: background .5s, border-color .5s, transform .2s, box-shadow .2s; }
-  .power-switch:hover { transform: translateY(-2px); box-shadow: 0 16px 30px -14px rgba(15,23,42,.4); }
-  .power-switch:hover .ps-knob { box-shadow: 0 0 0 6px rgba(11,132,240,.18), 0 4px 10px rgba(11,132,240,.45); }
-  .power-switch.on:hover .ps-knob { box-shadow: 0 0 0 6px rgba(255,214,10,.15); }
-  .power-switch:hover + .switch-note .arrow { animation: point .8s ease infinite; }
+  /* Internet switch lifts and the handwritten arrow points at it */
+  .net-toggle { transition: transform .2s, box-shadow .2s, border-color .3s, background .3s; }
+  .net-toggle:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+  .net-toggle:hover ~ .net-note .arrow { animation: pointNet .8s ease infinite; }
+  @keyframes pointNet { 50% { transform: translateX(-5px) rotate(25deg); } }
   @keyframes point { 50% { transform: translateX(-5px) rotate(-10deg); } }
 
   /* Ticker: pauses so you can read it; hovered shop lights up */

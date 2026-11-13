@@ -5,7 +5,7 @@
     "phone": "03XX XXXXXXX",
     "email": "info@zappos.example",
     "address": "Office address, City, Pakistan",
-    "about": "Point of sale software for Pakistani shops. Fast at the counter, calm during load shedding."
+    "about": "Point of sale software for Pakistani shops. Fast at the counter, and keeps billing even when the internet drops."
   },
   "nav": [
     {
@@ -41,13 +41,26 @@
   },
   "hero": {
     "kicker": "Made for shops in Pakistan",
-    "titleTop": "The lights go out.",
-    "titleBottom": "The billing doesn't.",
-    "description": "ZAP POS keeps your counter running through load shedding, rush hour and three branches at once, then puts every rupee on your phone.",
+    "rows": [
+      {
+        "lead": "Sell at",
+        "accent": "every counter."
+      },
+      {
+        "lead": "Track",
+        "accent": "every item."
+      },
+      {
+        "lead": "See",
+        "accent": "every branch."
+      }
+    ],
+    "description": "ZAP POS is point of sale software for clothing stores, supermarkets, pharmacies and restaurants. Fast billing, barcode and printer support, inventory, multi-branch sync and live sales on your phone. And it keeps billing when the internet drops.",
     "primaryCta": "Download for Windows",
     "secondaryCta": "Book a free demo",
-    "switchLabel": "Load shedding",
-    "switchNote": "go on, flip it",
+    "switchLabel": "Internet",
+    "switchNote": "switch it off, billing keeps going",
+    "offlineNote": "saved offline, syncs later",
     "trust": [
       "Free trial",
       "No card needed",
@@ -88,9 +101,9 @@
       },
       {
         "time": "15:00",
-        "period": "Load shedding",
-        "title": "Bijli gayi. Billing didn't.",
-        "text": "Internet down? ZAP POS saves every bill on the PC and syncs automatically when the connection comes back.",
+        "period": "Internet down",
+        "title": "Router's off. Billing isn't.",
+        "text": "Load shedding took the router down? The counter PC stays on its UPS and ZAP POS keeps billing offline, then syncs every sale the moment the internet is back.",
         "visual": "offline"
       },
       {
@@ -434,8 +447,8 @@
   },
   "finalCta": {
     "title": "Ready when",
-    "titleHighlight": "the lights aren't.",
-    "description": "Install ZAP POS on your counter PC today. Free trial, free setup help.",
+    "titleHighlight": "the internet isn't.",
+    "description": "Install ZAP POS on your counter PC today. It bills online or offline. Free trial, free setup help.",
     "primary": "Download for Windows",
     "secondary": "Book a free demo"
   },

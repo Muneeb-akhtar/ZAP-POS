@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import Icon from './Icons.jsx'
 import { Monitor, PosBillingScreen } from './Mockups.jsx'
-import { Kicker, Scribble, Squiggle } from './Bits.jsx'
+import { Kicker, Scribble } from './Bits.jsx'
 
 const receiptItems = [
   ['Denim Jacket', '3,450'],
@@ -51,16 +51,11 @@ export default function Hero({ hero, brand, links }) {
     stage.current?.style.setProperty('--py', 0)
   }
 
-  // While "load shedding" is on, keep billing: one bill every 1.6s.
+  // While the internet is off, the counter keeps billing locally: one bill every 1.6s.
   useEffect(() => {
     if (!offline) return
     const t = setInterval(() => setBills((b) => b + 1), 1600)
     return () => clearInterval(t)
-  }, [offline])
-
-  // Let the navbar know so it can go dark with the hero.
-  useEffect(() => {
-    document.documentElement.dataset.power = offline ? 'off' : 'on'
   }, [offline])
 
   const status = offline ? (
@@ -70,18 +65,18 @@ export default function Hero({ hero, brand, links }) {
   )
 
   return (
-    <section id="home" className={`hero ${offline ? 'night' : ''}`}>
-      <div className="hero-glow" aria-hidden="true" />
+    <section id="home" className={`hero ${offline ? 'is-offline' : ''}`}>
       <div className="container hero-grid">
         <div className="hero-copy">
-          <Kicker light={offline}>{hero.kicker}</Kicker>
-          <h1>
-            <span className="h-top">{hero.titleTop}</span>
-            <span className="h-bottom">
-              {hero.titleBottom}
-              <Squiggle />
-            </span>
+          <Kicker>{hero.kicker}</Kicker>
+
+          {/* Headline: what the POS does */}
+          <h1 className="h-rows">
+            {hero.rows.map((r) => (
+              <span className="hr-row" key={r.accent}>{r.lead} <span className="hl">{r.accent}</span></span>
+            ))}
           </h1>
+
           <p className="lead">{hero.description}</p>
 
           <div className="hero-actions">
@@ -89,17 +84,20 @@ export default function Hero({ hero, brand, links }) {
             <a href={links.demo} className="btn btn-quiet btn-lg">{hero.secondaryCta} <Icon name="arrow" size={16} /></a>
           </div>
 
-          <div className="switch-row">
+          {/* Internet switch: turn it off and the POS on the right keeps billing offline */}
+          <div className="net-toggle-row">
             <button
-              className={`power-switch ${offline ? 'on' : ''}`}
+              className={`net-toggle ${offline ? 'off' : 'on'}`}
               onClick={() => setOffline(!offline)}
               role="switch"
-              aria-checked={offline}
+              aria-checked={!offline}
             >
-              <span className="ps-track"><span className="ps-knob"><Icon name="zap" size={12} fill /></span></span>
-              <span className="ps-label">{hero.switchLabel}: <b>{offline ? 'ON' : 'OFF'}</b></span>
+              <Icon name={offline ? 'wifiOff' : 'wifi'} size={16} />
+              <span>{hero.switchLabel}</span>
+              <span className="nt-track"><span className="nt-knob" /></span>
+              <b>{offline ? 'OFF' : 'ON'}</b>
             </button>
-            <Scribble dir="left" className="switch-note">{offline ? 'still billing, see?' : hero.switchNote}</Scribble>
+            <Scribble dir="left" className="net-note">{offline ? hero.offlineNote : hero.switchNote}</Scribble>
           </div>
 
           <ul className="trust">
@@ -114,7 +112,7 @@ export default function Hero({ hero, brand, links }) {
             <Icon name={offline ? 'wifiOff' : 'cloud'} size={15} />
             <div>
               <b>{offline ? 'Internet down' : '3 branches synced'}</b>
-              <small>{offline ? `${bills} bills saved on this PC` : 'Last sync 2s ago'}</small>
+              <small>{offline ? `${bills} bills saved, will sync later` : 'Last sync 2s ago'}</small>
             </div>
           </div>
           <div className="hero-phone-tag"><Icon name="call" size={14} /> {brand.phone}</div>

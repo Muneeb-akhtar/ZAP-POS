@@ -41,6 +41,8 @@ API: open `ZapPos.sln` and press F5, or `dotnet run --project src/ZapPos.Api` (p
 3. **Keep the design system:** blue brand (`--brand-*`), electric yellow accent (`--yellow`) only for "lightning" moments, night navy (`--night`) for dark sections. Headings use `--font-head`, receipts/clocks `--font-mono`, handwritten notes `--font-hand`.
 4. **Hover effects only inside the hover media block** (pointer devices only). Everything must still work on touch and with `prefers-reduced-motion`.
 5. The final CTA bolt spins **on tap/click only, not on hover** (owner request).
+    Hero layout is **locked by the owner**: left column = text (kicker, headline "Sell at every counter. / Track every item. / See every branch.", description, CTAs, Internet switch, trust); **right column = the POS scene, do NOT change it** (monitor with the Active Bill screen, receipt overlapping its bottom-left, "3 branches synced" chip top-right, yellow phone tag). Only the left text may change.
+5b. **Product logic must hold up:** a power cut also turns off the PC, so never claim "billing works when the power goes out". The real benefit is **offline billing when the internet drops** (router off during load shedding, PC on UPS). Demos and copy must stay technically true.
 6. **Mobile first-class:** check 390px width; no horizontal scroll (`html/body overflow-x: clip` is set).
 7. **No dead code.** The repo was audited clean before the first push. Remove anything you stop using (components, CSS rules, icons, JSON fields). Dynamic class names (`stop-N`, `sN`, `nN`, note tints, `icon-<name>`) are used; don't delete them.
 8. Don't add dependencies without a clear reason; prefer plain CSS/React.
