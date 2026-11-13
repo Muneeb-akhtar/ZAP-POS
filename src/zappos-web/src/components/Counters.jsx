@@ -58,7 +58,7 @@ export default function Counters({ data }) {
                     <span className="till-flag">{sold ? 'Sold!' : synced ? 'Synced' : 'Ready'}</span>
                   </div>
                   <div className="till-item">
-                    <span className="till-thumb" />
+                    <span className="till-thumb"><Icon name="jeans" size={24} /></span>
                     <div><b>{data.product}</b><small>Rs 3,450</small></div>
                   </div>
                   <div className="till-stock">

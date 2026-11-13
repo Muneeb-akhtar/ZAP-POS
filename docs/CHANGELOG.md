@@ -2,6 +2,15 @@
 
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
+## 2026-11-13: Shooting stars start with the section
+- Shooting stars now start the moment the final CTA scrolls into view (IntersectionObserver adds `.final.in-view`): the first streaks across the glow right away, a second one at a different angle follows, and both repeat (6.5s / 8s). More visible: longer fading tail + glowing head. Reduced-motion visitors don't get them. Files: `components/Sections.jsx`, `styles.css`.
+
+## 2026-11-13: Jeans icon in counter demo
+- Each till's product tile now shows a white jeans icon on the blue gradient (new `jeans` icon in `Icons.jsx`). Product renamed "Denim Jacket · Size M" → "Denim Jeans · Size 32" (`counters.product`) so the label matches the icon. Works in light and dark. Files: `components/Counters.jsx`, `components/Icons.jsx`, `content/landing-content.json`, `styles.css` (`.till-thumb`).
+
+## 2026-11-13: Fewer stars in final CTA
+- Owner feedback: too many stars. `StarField` now has 7 hand-placed, well-spaced stars around the glow (each glows and dims at its own pace) plus the occasional shooting star. Removed the 90-star generator and the 4-point sparkles (`.sparkle` CSS). Files: `components/Sections.jsx`, `styles.css`.
+
 ## 2026-11-13: Star field around the final CTA glow
 - Replaced the 7 static dots with a `StarField` (in `Sections.jsx`): 90 deterministic stars, ~60% clustered in an ellipse around the blue glow, each one glowing (bright with a blue-white halo) and dimming almost out at its own pace; 7 bright 4-point sparkles near the glow; an occasional shooting star (every ~9s). Disabled automatically for reduced-motion visitors. Files: `components/Sections.jsx`, `styles.css` (`.final-stars`, `.star`, `.sparkle`, `.shooting`).
 

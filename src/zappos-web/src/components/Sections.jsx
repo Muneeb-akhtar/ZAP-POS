@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Icon, { Logo } from './Icons.jsx'
 import { Scribble } from './Bits.jsx'
 
@@ -112,43 +112,45 @@ export function Hardware({ data }) {
   )
 }
 
-// Star field for the night CTA: deterministic positions (same every render), denser around the blue glow,
-// each star twinkles at its own pace; a few bright 4-point sparkles and an occasional shooting star.
-const STARS = (() => {
-  let seed = 7
-  const rand = () => ((seed = (seed * 16807) % 2147483647) / 2147483647)
-  const list = []
-  for (let i = 0; i < 90; i++) {
-    // 60% clustered in an ellipse around the glow (top center), the rest scattered
-    const near = i < 54
-    const a = rand() * Math.PI * 2, r = Math.sqrt(rand())
-    const x = near ? 50 + Math.cos(a) * r * 34 : rand() * 100
-    const y = near ? 6 + Math.abs(Math.sin(a)) * r * 46 : rand() * 100
-    list.push({ x, y, s: 1.2 + rand() * (near ? 2 : 1.3), d: 2.2 + rand() * 3.5, delay: -rand() * 5, o: 0.55 + rand() * 0.45 })
-  }
-  return list
-})()
-const SPARKLES = [{ x: 34, y: 18, s: 22, d: 3.2 }, { x: 66, y: 12, s: 18, d: 4.1 }, { x: 60, y: 36, s: 14, d: 2.8 }, { x: 38, y: 42, s: 13, d: 3.7 }, { x: 76, y: 28, s: 16, d: 4.6 }, { x: 24, y: 8, s: 13, d: 3.4 }, { x: 50, y: 4, s: 12, d: 3.9 }]
+// Star field for the night CTA: 7 well-spaced stars around the glow, each glowing and dimming at its own pace,
+// plus shooting stars that start as soon as the section scrolls into view.
+const STARS = [
+  { x: 22, y: 14, s: 4, d: 3.6, delay: 0 },
+  { x: 36, y: 34, s: 3, d: 4.4, delay: -1.2 },
+  { x: 41, y: 6, s: 3, d: 5.0, delay: -2.6 },
+  { x: 60, y: 9, s: 4, d: 4.0, delay: -0.6 },
+  { x: 65, y: 31, s: 3, d: 3.2, delay: -1.9 },
+  { x: 79, y: 17, s: 4, d: 4.8, delay: -3.1 },
+  { x: 88, y: 40, s: 3, d: 3.9, delay: -2.2 },
+]
 
 function StarField() {
   return (
     <div className="final-stars" aria-hidden="true">
       {STARS.map((st, i) => (
-        <i key={i} className="star" style={{ left: `${st.x}%`, top: `${st.y}%`, width: st.s, height: st.s, '--o': st.o, animationDuration: `${st.d}s`, animationDelay: `${st.delay}s` }} />
+        <i key={i} className="star" style={{ left: `${st.x}%`, top: `${st.y}%`, width: st.s, height: st.s, animationDuration: `${st.d}s`, animationDelay: `${st.delay}s` }} />
       ))}
-      {SPARKLES.map((sp, i) => (
-        <i key={`s${i}`} className="sparkle" style={{ left: `${sp.x}%`, top: `${sp.y}%`, width: sp.s, height: sp.s, animationDuration: `${sp.d}s`, animationDelay: `${-i * 0.7}s` }} />
-      ))}
-      <i className="shooting" />
+      <i className="shooting s1" />
+      <i className="shooting s2" />
     </div>
   )
 }
 
 export function FinalCta({ data, links, brand }) {
-  // Tap or click the bolt to spin it (hover also spins it on desktop).
+  // Tap or click the bolt to spin it.
   const [spin, setSpin] = useState(false)
+  // Start the sky (shooting stars) the moment the section comes into view.
+  const ref = useRef(null)
+  const [inView, setInView] = useState(false)
+  useEffect(() => {
+    const el = ref.current
+    if (!el || !('IntersectionObserver' in window)) return setInView(true)
+    const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setInView(true); io.disconnect() } }, { threshold: 0.3 })
+    io.observe(el)
+    return () => io.disconnect()
+  }, [])
   return (
-    <section className="final">
+    <section className={`final ${inView ? 'in-view' : ''}`} ref={ref}>
       <StarField />
       <div className="container final-inner">
         <button

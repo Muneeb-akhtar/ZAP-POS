@@ -73,7 +73,7 @@ Shared building blocks:
 - **Counters**: `stock` (starts at `counters.stock`) and `last = {i, n}`. The tills use `key={i-n}` so they remount and replay animations on every sale. The SVG has three layers: `.wire` (dashes always flowing master→counters), `.flow` (always-moving glowing packets) and `.pulse` (one-shot bright pulse from the counter that sold, remounted per sale via `key`).
 - **Pricing**: `annual` (monthly/yearly prices) and `open` (comparison table).
 - **Faq**: `asked` (question indexes shown), `typing` (900ms typing dots), auto-scroll after the first render.
-- **FinalCta**: `spin` set on click; cleared on `animationend` of `boltTap`. Background is `StarField` (deterministic `STARS`/`SPARKLES` arrays + one `.shooting` star).
+- **FinalCta**: `spin` set on click; cleared on `animationend` of `boltTap`. Background is `StarField` (7 hand-placed `STARS` that glow/dim + two `.shooting` stars that start when an IntersectionObserver adds `.final.in-view`).
 
 ## 4. Content schema (`landing-content.json`)
 Top-level keys: `_note, brand, nav, links, hero, ticker, day, counters, hardware, pricing, reviewsSection, reviews, faq, finalCta, footer`.
