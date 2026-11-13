@@ -3,14 +3,14 @@ import Icon from './Icons.jsx'
 import { Kicker, Barcode, Scribble, formatRs } from './Bits.jsx'
 
 // Price helpers. `monthly` = price per month on the monthly plan; `annual` = yearly TOTAL.
-// Yearly view shows the per-month equivalent (annual / 12) with the yearly total underneath.
+// Yearly view shows only the per-month equivalent (annual / 12) + "billed yearly"; the yearly total is never shown (owner request).
 // null → priceLabel (e.g. "Custom").
 const perMonth = (p, annual) => (annual ? (p.annual == null ? null : Math.round(p.annual / 12)) : p.monthly)
 const periodOf = (p) => `/${p.unit ? `${p.unit}/` : ''}month`
 const priceText = (p, annual) => {
   const a = perMonth(p, annual)
   if (a == null) return p.priceLabel ?? 'On request'
-  return annual ? `${formatRs(a)}${periodOf(p)} · ${formatRs(p.annual)}/yr` : `${formatRs(a)}${periodOf(p)}`
+  return `${formatRs(a)}${periodOf(p)}`
 }
 // Best yearly saving across plans that have both prices (yearly vs 12 × monthly).
 const bestSaving = (plans) => Math.max(0, ...plans
@@ -39,7 +39,7 @@ function ReceiptPlan({ p, annual, links }) {
         <div className="rp-total">
           <span>TOTAL</span>
           <span className="amt">
-            {amount == null ? <b>{p.priceLabel ?? 'On request'}</b> : <><b>{formatRs(amount)}</b><small>{periodOf(p)}</small>{annual && <small className="billed">billed yearly · {formatRs(p.annual)}</small>}</>}
+            {amount == null ? <b>{p.priceLabel ?? 'On request'}</b> : <><b>{formatRs(amount)}</b><small>{periodOf(p)}</small>{annual && <small className="billed">billed yearly</small>}</>}
           </span>
         </div>
         <p className="rp-desc">{p.description}</p>

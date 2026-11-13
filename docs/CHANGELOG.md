@@ -2,6 +2,9 @@
 
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
+## 2026-11-13: Yearly total hidden
+- Owner request: never show customers the big yearly total. Yearly view now shows only "Rs 2,499 /month" + "billed yearly" (no "· Rs 29,988"); compare table Yearly row shows only the per-month price. Files: `components/Pricing.jsx`.
+
 ## 2026-11-13: Fixed "save up to 30%" label
 - Owner wants the toggle note to read "save up to 30% yearly". Added optional `pricing.saveLabel` (overrides the computed `bestSaving` text; remove it to go back to the computed value). Actual savings with current prices: Dukaan 28.6%, Brand 22.2%. Files: `content/landing-content.json`, `components/Pricing.jsx`.
 
