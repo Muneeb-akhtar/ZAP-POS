@@ -2,6 +2,9 @@
 
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
+## 2026-11-13: Pricing receipts level
+- Receipts no longer tilt or sit at different heights: all three stand straight and stretch to equal height (paper is a flex column, `.rp-lines` grows), so headers, TOTAL lines, barcodes and buttons line up across plans. Descriptions reserve 3 lines and the price block reserves room for period + "billed yearly", so TOTAL lines and barcodes align in both Monthly and Yearly. Hover lifts a receipt 10px with a small zoom (scale 1.035). File: `styles.css`.
+
 ## 2026-11-13: Yearly total hidden
 - Owner request: never show customers the big yearly total. Yearly view now shows only "Rs 2,499 /month" + "billed yearly" (no "· Rs 29,988"); compare table Yearly row shows only the per-month price. Files: `components/Pricing.jsx`.
 
