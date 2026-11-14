@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="ZapPos.Core/ZapPos.Core.csproj" />
+  <Project Path="ZapPos.Server/ZapPos.Server.csproj" />
+  <Project Path="ZapPos.Tests/ZapPos.Tests.csproj" />
+</Solution>

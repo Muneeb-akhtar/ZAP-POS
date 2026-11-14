@@ -1,0 +1,6 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Business rules shared by ZAP Server and the counter app. No database, no UI, no packages. -->
+  <PropertyGroup>
+    <RootNamespace>ZapPos.Core</RootNamespace>
+  </PropertyGroup>
+</Project>

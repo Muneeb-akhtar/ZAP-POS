@@ -1,0 +1,14 @@
+<Project>
+  <!-- Shared settings for every ZAP POS desktop project. -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <InvariantGlobalization>false</InvariantGlobalization>
+    <Company>ZAP POS</Company>
+    <Product>ZAP POS</Product>
+    <Version>0.1.0</Version>
+  </PropertyGroup>
+</Project>
