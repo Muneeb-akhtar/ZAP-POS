@@ -14,6 +14,7 @@ import Analytics from './Analytics.jsx'
 import Plans, { PlanCodeSheet } from './PlanCodes.jsx'
 import Releases from './Releases.jsx'
 import Bills from './Bills.jsx'
+import Earnings from './Earnings.jsx'
 import Team from './Team.jsx'
 import HelpDesk from './HelpDesk.jsx'
 import Health from './Health.jsx'
@@ -144,6 +145,7 @@ const BUSINESS = [
   { id: 'help', label: 'Help desk', icon: 'call' },
   { id: 'bills', label: 'Bills', icon: 'receipt' },
   { id: 'payments', label: 'Payments', icon: 'card' },
+  { id: 'earnings', label: 'Earnings', icon: 'star' },
   { id: 'analytics', label: 'Analytics', icon: 'chart' },
 ]
 
@@ -153,6 +155,7 @@ const QUICK = [
   { id: 'leads', label: 'Leads', icon: 'users' },
   { id: 'payments', label: 'Payments', icon: 'card' },
   { id: 'bills', label: 'Bills', icon: 'receipt' },
+  { id: 'earnings', label: 'Earnings', icon: 'star' },
   { id: 'plans', label: 'Plans', icon: 'lock' },
   { id: 'help', label: 'Help desk', icon: 'call' },
 ]
@@ -288,6 +291,7 @@ function Panel({ session }) {
               {current === 'plans' && <Plans onNewKey={(id) => setSheet({ type: 'plancode', value: id })} />}
               {current === 'releases' && <Releases />}
               {current === 'bills' && <Bills />}
+              {current === 'earnings' && <Earnings onOpenLead={openLead} />}
               {current === 'team' && <Team />}
               {current === 'help' && <HelpDesk />}
               {current === 'health' && <Health />}

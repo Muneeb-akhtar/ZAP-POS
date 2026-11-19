@@ -2,6 +2,11 @@
 
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
+## 2026-11-20: Earnings page
+- Owner asked for one place to see all earnings and every customer ranked by what they paid. New **Earnings** page (menu after Payments, and in the top bar): total earned (all time / this year / last 12 months / this month), this month vs last, paying customers (with an account), average per customer, top customer, best month; "Earned per month" line chart; customers ranked by total paid (gold/silver/bronze for the top three) with account status, payments, settled bills, paying since, total and share of earnings; filter by account, search, CSV export; a row opens the lead. Money in = payments + settled bills, shown in separate columns.
+- Fix: the line chart (`Area`) could stop part-way in Chrome (dash animation + non-scaling stroke); it now reveals with a clip-path.
+- Files: `src/admin/Earnings.jsx`, `src/admin/AdminApp.jsx`, `src/admin/Charts.jsx`, `src/admin/admin.css`, docs.
+
 ## 2026-11-20: Bills, Team, Help desk and System health pages
 - The owner asked for the same features as the reference admin, under ZAP's own names: Merchant documents → **Bills** (bills and estimates, numbered BIL-/EST-, payment-proof upload, Open now / Coming up / Late 30+ days / Collected / Average a month / Bills open cards, tabs, date range, customer filter, search, Settle, Make bill, print or save PDF, send on WhatsApp, Cancel), Users → **Team** (add/remove admins by email), Support → **Help desk** (requests from shops with status, priority, notes, call/WhatsApp), Database status → **System health** (database size, rows per table, storage, shops' versions). The sidebar follows the reference order.
 - Schema §14–17: `bills` (+ `bills_no_seq`, bucket `bill-proofs`), `admin_team()`, `add_admin()`, `remove_admin()`, `help_requests` + `send_help_request()`, `admin_health()`. Checked as anon (can only send a help request), non-admin and admin. Applied to Supabase.

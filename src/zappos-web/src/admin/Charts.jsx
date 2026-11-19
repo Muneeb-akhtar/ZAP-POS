@@ -154,7 +154,7 @@ export function Area({ data, name, format = (v) => v.toLocaleString('en-PK'), he
         <defs><linearGradient id="admAreaFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style={{ stopColor: 'var(--brand-500)', stopOpacity: 0.32 }} /><stop offset="1" style={{ stopColor: 'var(--brand-500)', stopOpacity: 0 }} /></linearGradient></defs>
         {[0.25, 0.5, 0.75].map((f) => <line key={f} x1="0" x2={W} y1={H * f} y2={H * f} className="adm-area-grid" />)}
         {pts.length > 1 && <path className="adm-area-fill" d={`${line} L${W},${H} L0,${H}Z`} />}
-        {pts.length > 1 && <path className="adm-area-line" d={line} pathLength="1" vectorEffect="non-scaling-stroke" />}
+        {pts.length > 1 && <path className="adm-area-line" d={line} vectorEffect="non-scaling-stroke" />}
       </svg>
       <div className="adm-area-hits" style={{ gridTemplateColumns: `repeat(${data.length}, minmax(0, 1fr))` }}>
         {data.map((d, i) => (
