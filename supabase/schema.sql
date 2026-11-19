@@ -347,6 +347,34 @@ revoke all on function public.my_account() from public, anon;
 grant execute on function public.my_account() to authenticated;
 
 -- ============================================================
+-- 11) Plan codes: the signed code a shop pastes into ZAP POS (Settings > Plan) to unlock what it paid for
+--     (counters allowed, paid until). Made by the admin panel through the edge function
+--     supabase/functions/make-plan-code, which holds ZAP's secret signing key (Edge Function secret
+--     PLAN_SIGNING_KEY). This table only keeps a record of every code made. Admins only; nothing is deleted.
+--     Each shop's ZAP POS branch code is remembered on the lead, so the next code is quicker to make.
+-- ============================================================
+alter table public.leads add column if not exists pos_branch_code text
+  check (pos_branch_code ~ '^[A-Z0-9]{2,20}$');
+
+create table if not exists public.plan_codes (
+  id          uuid primary key default gen_random_uuid(),
+  created_at  timestamptz not null default now(),
+  lead_id     uuid not null references public.leads (id) on delete restrict,
+  branch_code text not null check (branch_code ~ '^[A-Z0-9]{2,20}$'),
+  counters    int  not null check (counters between 1 and 50),
+  paid_until  date not null,
+  code        text not null unique,
+  made_by     uuid references auth.users (id) default auth.uid()
+);
+create index if not exists plan_codes_lead on public.plan_codes (lead_id, created_at desc);
+alter table public.plan_codes enable row level security;
+revoke all on public.plan_codes from anon;
+drop policy if exists "Admins read plan codes" on public.plan_codes;
+create policy "Admins read plan codes" on public.plan_codes for select to authenticated using (public.is_admin());
+drop policy if exists "Admins add plan codes" on public.plan_codes;
+create policy "Admins add plan codes" on public.plan_codes for insert to authenticated with check (public.is_admin());
+
+-- ============================================================
 -- 9) Make yourself the admin (do this AFTER creating your user in
 --    Authentication → Users → Add user, with "Auto Confirm User" on).
 --    Replace the email below, then run just this statement:

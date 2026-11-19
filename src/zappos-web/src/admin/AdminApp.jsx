@@ -11,6 +11,7 @@ import Dashboard from './Dashboard.jsx'
 import Leads, { LeadSheet } from './Leads.jsx'
 import Payments, { PaymentSheet } from './Payments.jsx'
 import Analytics from './Analytics.jsx'
+import { PlanCodeSheet } from './PlanCodes.jsx'
 
 // ---------- screens ----------
 function Shell({ children }) {
@@ -147,7 +148,7 @@ function Panel({ session }) {
   const biz = useBizStore()
   const [route, setRoute] = useState(() => location.hash.slice(1) || 'dashboard')
   const [toasts, setToasts] = useState([])
-  const [sheet, setSheet] = useState(null) // { type: 'lead' | 'payment', value }
+  const [sheet, setSheet] = useState(null) // { type: 'lead' | 'payment' | 'plancode', value }
 
   useEffect(() => {
     supabase.from('site_content').select('data, updated_at').eq('id', CONTENT_ID).maybeSingle().then(({ data, error }) => {
@@ -250,7 +251,7 @@ function Panel({ session }) {
               {current === 'dashboard' && <Dashboard content={draft} published={published} updatedAt={updatedAt} go={go} onAddLead={addLead} onPay={pay} onOpenLead={openLead} />}
               {current === 'leads' && <Leads key={param ?? 'list'} focus={param} plans={plans.map((p) => p.name)} onPay={pay} />}
               {(current === 'payments' || current === 'customers') && (
-                <Payments tab={current} go={go} onPay={pay} onEditPayment={(p) => setSheet({ type: 'payment', value: p })} onOpenLead={openLead} />
+                <Payments tab={current} go={go} onPay={pay} onEditPayment={(p) => setSheet({ type: 'payment', value: p })} onOpenLead={openLead} onPlanCode={(id) => setSheet({ type: 'plancode', value: id })} />
               )}
               {current === 'analytics' && <Analytics />}
               {section && (
@@ -261,6 +262,7 @@ function Panel({ session }) {
           </div>
 
           {sheet?.type === 'lead' && <LeadSheet lead={sheet.value} plans={plans.map((p) => p.name)} onClose={() => setSheet(null)} />}
+          {sheet?.type === 'plancode' && <PlanCodeSheet leadId={sheet.value} onClose={() => setSheet(null)} />}
           {sheet?.type === 'payment' && <PaymentSheet payment={sheet.value} plans={plans} onClose={() => setSheet(null)} onAddLead={addLead} />}
           <Toasts items={toasts} />
         </RootContext.Provider>

@@ -2,6 +2,12 @@
 
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
+## 2026-11-19: Plan codes for ZAP POS (Customers → Plan code)
+- Owner request: a proper way to give a shop the plan it bought (how many counters, paid until) without scripts. The admin makes a signed **plan code**; the shop owner pastes it into ZAP POS → Settings → Plan (works offline). Signing is ECDSA P-256 in a new Supabase edge function, so the secret key never reaches the browser or the repo; ZAP POS checks codes with the matching public key, so shops can't forge, edit or swap codes.
+- **Supabase:** `leads.pos_branch_code`; new table `plan_codes` (admins read/insert only); edge function `make-plan-code` (admin-only, records each code, remembers the shop code). Secret `PLAN_SIGNING_KEY` must be set in Supabase → Edge Functions → Secrets. Applied to the live project.
+- **Admin:** Customers rows get a **Plan code** button → `PlanCodeSheet` (shop code, counters, paid until; Copy / Send on WhatsApp; history of codes made).
+- Files: `supabase/schema.sql` (§11), `supabase/functions/make-plan-code/index.ts`, `supabase/functions/make-plan-code/plancode.ts`, `src/admin/PlanCodes.jsx`, `src/admin/Payments.jsx`, `src/admin/AdminApp.jsx`, `src/admin/admin.css`, `docs/ARCHITECTURE.md` (§8, §9), `CLAUDE.md`.
+
 ## 2026-11-13: Customer accounts (sign up / log in) + who signed up vs who paid
 - Owner request: shops that buy will sign up, so the owner can see who signed up and who paid. Sign-up on the website **and** in the POS app (same login); matched to leads **by email**.
 - **New page `/account/`** (`account/index.html`, `src/account/main.jsx`, `src/account/AccountApp.jsx`): Log in / Sign up (name, mobile, shop, city, email, password) / Forgot password / set new password, and "My account": plan card (active until / expired on), Download, "Pay or renew on WhatsApp", payment history. Text in new JSON key `account` (admin tab "Customer account"). Landing "Log in" (`links.portal`) now points to `/account/`.

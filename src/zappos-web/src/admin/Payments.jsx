@@ -133,7 +133,7 @@ function priceFor(plans, f) {
 
 const stateText = (c) => c.state === 'overdue' ? `${-c.left} d overdue` : c.state === 'due' ? (c.left === 0 ? 'Due today' : `Due in ${c.left} d`) : c.state === 'active' ? 'Active' : 'No renewal date'
 
-export function Customers({ onPay, onOpenLead }) {
+export function Customers({ onPay, onOpenLead, onPlanCode }) {
   const { leads, payments } = useBiz()
   const [q, setQ] = useState('')
   const all = useMemo(() => customersOf(leads, payments).sort((a, b) => (a.left ?? 1e9) - (b.left ?? 1e9)), [leads, payments])
@@ -171,6 +171,7 @@ export function Customers({ onPay, onOpenLead }) {
                     {(c.state === 'due' || c.state === 'overdue') && <a className="btn btn-outline btn-sm" href={waLink(c.lead.phone, remind(c))} target="_blank" rel="noreferrer"><Icon name="whatsapp" size={14} /> Remind</a>}
                     <a className="adm-icon-btn plain" href={telLink(c.lead.phone)} title="Call"><Icon name="call" size={15} /></a>
                     <button className="btn btn-quiet btn-sm" onClick={() => onPay(c.lead.id)}><Icon name="plus" size={14} /> Payment</button>
+                    <button className="btn btn-quiet btn-sm" onClick={() => onPlanCode(c.lead.id)} title="Make the code that unlocks their plan in ZAP POS"><Icon name="lock" size={14} /> Plan code</button>
                   </td>
                 </tr>
               ))}
@@ -182,7 +183,7 @@ export function Customers({ onPay, onOpenLead }) {
   )
 }
 
-export default function Payments({ tab, go, onPay, onEditPayment, onOpenLead }) {
+export default function Payments({ tab, go, onPay, onEditPayment, onOpenLead, onPlanCode }) {
   const { leads, payments, deletePayment } = useBiz()
   const notify = useNotify()
   const [month, setMonth] = useState('all')
@@ -234,7 +235,7 @@ export default function Payments({ tab, go, onPay, onEditPayment, onOpenLead }) 
           <button role="tab" aria-selected={tab === 'customers'} className={tab === 'customers' ? 'on' : ''} onClick={() => go('customers')}>Customers &amp; renewals</button>
         </div>
 
-        {tab === 'customers' ? <Customers onPay={onPay} onOpenLead={onOpenLead} /> : (
+        {tab === 'customers' ? <Customers onPay={onPay} onOpenLead={onOpenLead} onPlanCode={onPlanCode} /> : (
           <>
             <div className="adm-stats">
               <Stat icon="card" label="This month" value={rs(sum(thisMonth))} cur={sum(thisMonth)} prev={sum(prevMonth)} sub={`${thisMonth.length} payments`} />
