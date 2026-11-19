@@ -2,6 +2,12 @@
 
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
+## 2026-11-19: Admin V15 look (glass + animations)
+- The owner picked the "Admin Dashboard V15" style. Every admin page now sits on a soft blue background with slowly drifting colour blobs; cards, tables, the page bar and the sidebar are frosted glass; the open page is a solid blue pill; stat cards have round colour icons and a green/red change badge. Navy twin in dark mode; the sign-in box uses the same glass.
+- Animations (calm, once per page, off with reduced motion): numbers count up (`CountUp`, 2 s), bars grow, the income line draws itself, the licence ring fills, pages rise in.
+- Dashboard: new "Income, last 6 months" line chart (`Area`) and "Licence keys" ring (`Donut`, from `plan_codes` via `keyState`); title "Good evening, welcome back"; your initial in the sidebar.
+- Files: `src/admin/admin.css` (V15 block before the mobile rules), `src/admin/Charts.jsx`, `src/admin/Dashboard.jsx`, `src/admin/AdminApp.jsx`, docs.
+
 ## 2026-11-19: Plans page (licence keys)
 - New **Plans** page in the admin: every licence key with its state (active, ending in ≤ 7 days, expired, replaced, revoked), filter chips, Copy / Renew / Revoke / Restore, and **New key**: pick the client, shop code, counters and a duration (1, 3, 6, 12 months or a date). A new key starts when the shop's current key ends, and replaces it (`plan_codes_replace` trigger). ZAP POS (1.9.79) fetches the newest key and revocations itself every 30 minutes through `licence_status()`, warns from 7 days before the end and locks the day after.
 - Schema §13: `plan_codes.starts_on`, `status` (active/replaced/revoked), `changed_at`; admins may update status; `licence_status(p_branch, p_code)` answers only a caller holding one of that shop's keys. `make-plan-code` accepts `starts_on`.

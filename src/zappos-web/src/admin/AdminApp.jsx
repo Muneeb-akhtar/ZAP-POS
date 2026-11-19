@@ -242,7 +242,7 @@ function Panel({ session }) {
                 ))}
               </nav>
               <div className="adm-side-foot">
-                <span className="adm-user" title={session.user.email}>{session.user.email}</span>
+                <span className="adm-me"><span className="adm-me-badge">{session.user.email[0]?.toUpperCase()}</span><span className="adm-user" title={session.user.email}>{session.user.email}</span></span>
                 <span className="adm-side-actions">
                   <ThemeToggle />
                   <button className="adm-icon-btn" title="Sign out" onClick={() => supabase.auth.signOut()}><Icon name="logout" size={17} /></button>

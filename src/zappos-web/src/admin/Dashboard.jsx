@@ -1,7 +1,8 @@
-import { useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import Icon from '../components/Icons.jsx'
-import { customersOf, daysUntil, dateFmt, rs, rsShort, timeAgo, today, useBiz, useStats } from './biz.js'
-import { Bars, Stat } from './Charts.jsx'
+import { customersOf, daysUntil, dateFmt, rs, rsShort, supabase, timeAgo, today, useBiz, useStats } from './biz.js'
+import { Area, Bars, Donut, Stat } from './Charts.jsx'
+import { keyState } from './PlanCodes.jsx'
 import { dailySeries, StatsError } from './Analytics.jsx'
 import { Card, PageBar, StatusPill } from './ui.jsx'
 
@@ -39,6 +40,18 @@ export default function Dashboard({ content, published, updatedAt, go, onAddLead
   const lastMonthKey = (() => { const d = new Date(`${month}-01T00:00:00`); d.setMonth(d.getMonth() - 1); return d.toLocaleDateString('en-CA').slice(0, 7) })()
   const received = (k) => payments.filter((p) => p.paid_on.startsWith(k)).reduce((s, p) => s + p.amount, 0)
 
+  // income per month, last 6 months (for the line chart)
+  const income = useMemo(() => Array.from({ length: 6 }, (_, i) => {
+    const d = new Date(`${month}-01T00:00:00`); d.setMonth(d.getMonth() - (5 - i))
+    const key = d.toLocaleDateString('en-CA').slice(0, 7)
+    return { key, short: d.toLocaleDateString('en-GB', { month: 'short' }), label: d.toLocaleDateString('en-GB', { month: 'long', year: 'numeric' }), value: received(key) }
+  }), [payments, month])
+
+  // licence keys by state (for the ring)
+  const [keys, setKeys] = useState(null)
+  useEffect(() => { supabase.from('plan_codes').select('status, paid_until').then(({ data }) => setKeys(data ?? [])) }, [])
+  const keyCount = (id) => (keys ?? []).filter((k) => keyState(k).id === id).length
+
   const customers = useMemo(() => customersOf(leads, payments), [leads, payments])
   const renewals = customers.filter((c) => c.state === 'due' || c.state === 'overdue').sort((a, b) => a.left - b.left)
   const overdue = renewals.filter((c) => c.state === 'overdue').length
@@ -61,7 +74,7 @@ export default function Dashboard({ content, published, updatedAt, go, onAddLead
 
   return (
     <>
-      <PageBar title={greeting()} sub={new Date().toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}>
+      <PageBar title={`${greeting()}, welcome back`} sub={new Date().toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}>
         <button className="btn btn-quiet btn-sm" onClick={onAddLead}><Icon name="plus" size={14} /> Add lead</button>
         <button className="btn btn-primary btn-sm" onClick={() => onPay(null)}><Icon name="card" size={14} /> Record payment</button>
       </PageBar>
@@ -73,6 +86,19 @@ export default function Dashboard({ content, published, updatedAt, go, onAddLead
           <Stat icon="mail" label="Demo requests, 7 days" value={stats ? sumOf(week, 'leads') : '…'} cur={sumOf(week, 'leads')} prev={sumOf(prevWeek, 'leads')} sub="vs week before" onClick={() => go('leads')} />
           <Stat icon="card" label="Received this month" value={rs(received(month))} cur={received(month)} prev={received(lastMonthKey)} sub="vs last month" onClick={() => go('payments')} />
           <Stat icon="receipt" label="Customers" value={customers.length} sub={renewals.length ? `${renewals.length} renewal${renewals.length > 1 ? 's need' : ' needs'} attention` : 'all renewals on time'} onClick={() => go('customers')} />
+        </div>
+
+        <div className="adm-wide-two">
+          <Card title="Income, last 6 months" action={<button className="adm-link" onClick={() => go('payments')}>Payments</button>}>
+            <Area data={income} name="received" format={rs} height={150} />
+          </Card>
+          <Card title="Licence keys" action={<button className="adm-link" onClick={() => go('plans')}>Plans</button>}>
+            {keys ? <Donut sub="can bill" middle={keyCount('active') + keyCount('expiring')} parts={[
+              { label: 'Active', value: keyCount('active'), tone: 'blue' },
+              { label: 'Ending in 7 days', value: keyCount('expiring'), tone: 'amber' },
+              { label: 'Expired', value: keyCount('expired'), tone: 'red' },
+            ]} /> : <div className="adm-skel short" />}
+          </Card>
         </div>
 
         <div className="adm-two">
