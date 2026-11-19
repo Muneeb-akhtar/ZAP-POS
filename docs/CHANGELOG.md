@@ -2,6 +2,11 @@
 
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
+## 2026-11-20: Bills, Team, Help desk and System health pages
+- The owner asked for the same features as the reference admin, under ZAP's own names: Merchant documents → **Bills** (bills and estimates, numbered BIL-/EST-, payment-proof upload, Open now / Coming up / Late 30+ days / Collected / Average a month / Bills open cards, tabs, date range, customer filter, search, Settle, Make bill, print or save PDF, send on WhatsApp, Cancel), Users → **Team** (add/remove admins by email), Support → **Help desk** (requests from shops with status, priority, notes, call/WhatsApp), Database status → **System health** (database size, rows per table, storage, shops' versions). The sidebar follows the reference order.
+- Schema §14–17: `bills` (+ `bills_no_seq`, bucket `bill-proofs`), `admin_team()`, `add_admin()`, `remove_admin()`, `help_requests` + `send_help_request()`, `admin_health()`. Checked as anon (can only send a help request), non-admin and admin. Applied to Supabase.
+- Files: `supabase/schema.sql`, `src/admin/Bills.jsx`, `Team.jsx`, `HelpDesk.jsx`, `Health.jsx`, `AdminApp.jsx`, `admin.css`, `src/components/Icons.jsx` (`id` icon), docs.
+
 ## 2026-11-20: Admin layout restructured (owner's reference layout)
 - New structure, same colours and glass: a top bar across the page (logo, quick links in a pill, the signed-in owner); the sidebar gets an "Admin console" badge, small capital labels, the open page as a blue pill with a chevron, and a profile card with Log out at the bottom (theme toggle moved to the top bar); page headers get an icon tile, a big title with the yellow squiggle and a small capital line (`PageBar icon`); stat cards: icon tile, change badge, big number, small capital label (`Stat`); filter bars are one glass card with segmented chips; tables get small capital headings and a "Showing N · Live from Supabase" foot (`TableFoot`). Dashboard gains "Active licence keys" and "New leads" cards (6 in a row).
 - Files: `src/admin/AdminApp.jsx`, `src/admin/ui.jsx`, `src/admin/Charts.jsx`, `src/admin/Dashboard.jsx`, `src/admin/Payments.jsx`, `src/admin/PlanCodes.jsx`, `src/admin/Releases.jsx`, `src/admin/Leads.jsx`, `src/admin/Analytics.jsx`, `src/admin/admin.css` (Layout block), docs.

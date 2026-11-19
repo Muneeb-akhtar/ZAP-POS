@@ -13,6 +13,10 @@ import Payments, { PaymentSheet } from './Payments.jsx'
 import Analytics from './Analytics.jsx'
 import Plans, { PlanCodeSheet } from './PlanCodes.jsx'
 import Releases from './Releases.jsx'
+import Bills from './Bills.jsx'
+import Team from './Team.jsx'
+import HelpDesk from './HelpDesk.jsx'
+import Health from './Health.jsx'
 
 // ---------- screens ----------
 function Shell({ children }) {
@@ -132,11 +136,15 @@ function ContentPage({ section, draft, setDraft, saved, dirty, published, update
 const BUSINESS = [
   { id: 'dashboard', label: 'Dashboard', icon: 'grid' },
   { id: 'leads', label: 'Leads', icon: 'users' },
-  { id: 'payments', label: 'Payments', icon: 'card' },
-  { id: 'customers', label: 'Customers', icon: 'receipt' },
-  { id: 'analytics', label: 'Analytics', icon: 'chart' },
+  { id: 'customers', label: 'Customers', icon: 'cart' },
+  { id: 'team', label: 'Team', icon: 'id' },
   { id: 'plans', label: 'Plans', icon: 'lock' },
+  { id: 'health', label: 'System health', icon: 'server' },
   { id: 'releases', label: 'Releases', icon: 'download' },
+  { id: 'help', label: 'Help desk', icon: 'call' },
+  { id: 'bills', label: 'Bills', icon: 'receipt' },
+  { id: 'payments', label: 'Payments', icon: 'card' },
+  { id: 'analytics', label: 'Analytics', icon: 'chart' },
 ]
 
 // the top bar's quick links
@@ -144,8 +152,9 @@ const QUICK = [
   { id: 'dashboard', label: 'Dashboard', icon: 'grid' },
   { id: 'leads', label: 'Leads', icon: 'users' },
   { id: 'payments', label: 'Payments', icon: 'card' },
+  { id: 'bills', label: 'Bills', icon: 'receipt' },
   { id: 'plans', label: 'Plans', icon: 'lock' },
-  { id: 'releases', label: 'Releases', icon: 'download' },
+  { id: 'help', label: 'Help desk', icon: 'call' },
 ]
 
 function Panel({ session }) {
@@ -278,6 +287,10 @@ function Panel({ session }) {
               {current === 'analytics' && <Analytics />}
               {current === 'plans' && <Plans onNewKey={(id) => setSheet({ type: 'plancode', value: id })} />}
               {current === 'releases' && <Releases />}
+              {current === 'bills' && <Bills />}
+              {current === 'team' && <Team />}
+              {current === 'help' && <HelpDesk />}
+              {current === 'health' && <Health />}
               {section && (
                 <ContentPage section={section} draft={draft} setDraft={setDraft} saved={saved} dirty={dirty}
                   published={published} updatedAt={updatedAt} status={status} publish={publish} />

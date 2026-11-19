@@ -500,3 +500,165 @@ grant execute on function public.licence_status(text, text) to anon, authenticat
 -- select id from auth.users where email = 'you@example.com'
 -- on conflict do nothing;
 -- ============================================================
+
+-- ============================================================
+-- 14) Bills (admin → Bills): bills and estimates you send to shops, and the payment proof they send back.
+--     Numbers come from one sequence and never repeat (BIL-1001, EST-1002). Nothing is deleted: a wrong bill is
+--     cancelled. The same bill can't be made twice (same shop, kind, amount, issue date and description).
+--     Status: unpaid → proof (shop sent a payment proof, you check it) → paid; or cancelled.
+--     Late / upcoming are worked out from the dates. Proof files: private bucket 'bill-proofs', admins only.
+-- ============================================================
+create sequence if not exists public.bills_no_seq start 1001;
+create table if not exists public.bills (
+  id         uuid primary key default gen_random_uuid(),
+  no         bigint not null unique default nextval('public.bills_no_seq'),
+  kind       text not null default 'bill' check (kind in ('bill', 'estimate')),
+  lead_id    uuid not null references public.leads(id) on delete restrict,
+  title      text not null check (length(trim(title)) between 2 and 200),
+  amount     integer not null check (amount > 0),
+  issued_on  date not null default current_date,
+  due_on     date not null,
+  status     text not null default 'unpaid' check (status in ('unpaid', 'proof', 'paid', 'cancelled')),
+  proof_path text,
+  paid_on    date,
+  note       text,
+  created_at timestamptz not null default now(),
+  made_by    uuid default auth.uid(),
+  check (due_on >= issued_on),
+  check ((status = 'paid') = (paid_on is not null))
+);
+create unique index if not exists bills_same_bill on public.bills (lead_id, kind, amount, issued_on, lower(trim(title))) where status <> 'cancelled';
+alter table public.bills enable row level security;
+revoke all on public.bills from anon;
+drop policy if exists "Admins read bills" on public.bills;
+create policy "Admins read bills" on public.bills for select to authenticated using (public.is_admin());
+drop policy if exists "Admins add bills" on public.bills;
+create policy "Admins add bills" on public.bills for insert to authenticated with check (public.is_admin());
+drop policy if exists "Admins change bills" on public.bills;
+create policy "Admins change bills" on public.bills for update to authenticated using (public.is_admin()) with check (public.is_admin());
+grant usage on sequence public.bills_no_seq to authenticated;
+
+insert into storage.buckets (id, name, public, file_size_limit)
+values ('bill-proofs', 'bill-proofs', false, 8 * 1024 * 1024)
+on conflict (id) do nothing;
+drop policy if exists "Admins read bill proofs" on storage.objects;
+create policy "Admins read bill proofs" on storage.objects for select to authenticated using (bucket_id = 'bill-proofs' and public.is_admin());
+drop policy if exists "Admins upload bill proofs" on storage.objects;
+create policy "Admins upload bill proofs" on storage.objects for insert to authenticated with check (bucket_id = 'bill-proofs' and public.is_admin());
+drop policy if exists "Admins replace bill proofs" on storage.objects;
+create policy "Admins replace bill proofs" on storage.objects for update to authenticated using (bucket_id = 'bill-proofs' and public.is_admin());
+
+-- ============================================================
+-- 15) Team (admin → Team): who can sign in to the admin. Admins see every admin with their email and last
+--     sign-in; an admin adds another by the email of an account that already exists (it must sign up first)
+--     and can remove anyone but themselves, so the panel always keeps at least one admin.
+-- ============================================================
+create or replace function public.admin_team()
+returns table (user_id uuid, email text, added_at timestamptz, last_sign_in timestamptz, me boolean)
+language sql stable security definer set search_path = public as $$
+  select a.user_id, u.email::text, a.created_at, u.last_sign_in_at, a.user_id = auth.uid()
+  from public.admins a join auth.users u on u.id = a.user_id
+  where public.is_admin()
+  order by a.created_at
+$$;
+revoke all on function public.admin_team() from public, anon;
+grant execute on function public.admin_team() to authenticated;
+
+create or replace function public.add_admin(p_email text)
+returns text language plpgsql security definer set search_path = public as $$
+declare v uuid;
+begin
+  if not public.is_admin() then raise exception 'Only an admin can add admins'; end if;
+  select id into v from auth.users where lower(email) = lower(trim(p_email));
+  if v is null then return 'no_account'; end if;
+  insert into public.admins (user_id) values (v) on conflict do nothing;
+  return case when found then 'added' else 'already' end;
+end $$;
+revoke all on function public.add_admin(text) from public, anon;
+grant execute on function public.add_admin(text) to authenticated;
+
+create or replace function public.remove_admin(p_user uuid)
+returns text language plpgsql security definer set search_path = public as $$
+begin
+  if not public.is_admin() then raise exception 'Only an admin can remove admins'; end if;
+  if p_user = auth.uid() then return 'self'; end if;
+  delete from public.admins where user_id = p_user;
+  return 'removed';
+end $$;
+revoke all on function public.remove_admin(uuid) from public, anon;
+grant execute on function public.remove_admin(uuid) to authenticated;
+
+-- ============================================================
+-- 16) Help desk (admin → Help desk): requests from shops. Shops send them through send_help_request()
+--     (ZAP POS Support screen or the website, no login); they can't read anything back. The same message from
+--     the same number within an hour is kept once. Admins read, reply (notes for your records) and close.
+-- ============================================================
+create table if not exists public.help_requests (
+  id         uuid primary key default gen_random_uuid(),
+  created_at timestamptz not null default now(),
+  lead_id    uuid references public.leads(id) on delete set null,
+  shop       text,
+  name       text not null check (length(trim(name)) between 1 and 120),
+  phone      text not null check (length(trim(phone)) between 7 and 30),
+  branch_code text,
+  topic      text not null default 'other' check (topic in ('billing', 'setup', 'printer', 'licence', 'bug', 'other')),
+  message    text not null check (length(trim(message)) between 3 and 4000),
+  status     text not null default 'open' check (status in ('open', 'waiting', 'solved')),
+  priority   text not null default 'normal' check (priority in ('normal', 'urgent')),
+  reply      text,
+  updated_at timestamptz not null default now()
+);
+alter table public.help_requests enable row level security;
+revoke all on public.help_requests from anon;
+drop policy if exists "Admins manage help requests" on public.help_requests;
+create policy "Admins manage help requests" on public.help_requests for select to authenticated using (public.is_admin());
+drop policy if exists "Admins update help requests" on public.help_requests;
+create policy "Admins update help requests" on public.help_requests for update to authenticated using (public.is_admin()) with check (public.is_admin());
+drop policy if exists "Admins add help requests" on public.help_requests;
+create policy "Admins add help requests" on public.help_requests for insert to authenticated with check (public.is_admin());
+
+create or replace function public.send_help_request(p_name text, p_phone text, p_message text, p_topic text default 'other',
+                                                    p_shop text default null, p_branch text default null)
+returns text language plpgsql security definer set search_path = public as $$
+declare v_key text := right(regexp_replace(coalesce(p_phone, ''), '\D', '', 'g'), 10);
+begin
+  if length(v_key) < 7 or length(trim(coalesce(p_message, ''))) < 3 then return 'missing'; end if;
+  if exists (select 1 from public.help_requests h where right(regexp_replace(h.phone, '\D', '', 'g'), 10) = v_key
+             and trim(h.message) = trim(p_message) and h.created_at > now() - interval '1 hour') then return 'sent'; end if;
+  insert into public.help_requests (lead_id, shop, name, phone, branch_code, topic, message)
+  values ((select l.id from public.leads l where right(l.phone_key, 10) = v_key limit 1), nullif(trim(p_shop), ''), trim(p_name), trim(p_phone),
+          nullif(upper(trim(p_branch)), ''), case when p_topic in ('billing', 'setup', 'printer', 'licence', 'bug') then p_topic else 'other' end, trim(p_message));
+  return 'sent';
+end $$;
+revoke all on function public.send_help_request(text, text, text, text, text, text) from public;
+grant execute on function public.send_help_request(text, text, text, text, text, text) to anon, authenticated;
+
+-- ============================================================
+-- 17) System health (admin → System health): how big each table is, the newest row in each, storage used per
+--     bucket, the database size, and the shops' ZAP POS versions. Admins only; read-only.
+-- ============================================================
+create or replace function public.admin_health()
+returns jsonb language plpgsql stable security definer set search_path = public as $$
+begin
+  if not public.is_admin() then raise exception 'Admins only'; end if;
+  return jsonb_build_object(
+    'checked_at', now(),
+    'db_bytes', pg_database_size(current_database()),
+    'tables', jsonb_build_array(
+      jsonb_build_object('name', 'leads', 'label', 'Leads', 'rows', (select count(*) from leads), 'newest', (select max(created_at) from leads)),
+      jsonb_build_object('name', 'payments', 'label', 'Payments', 'rows', (select count(*) from payments), 'newest', (select max(created_at) from payments)),
+      jsonb_build_object('name', 'bills', 'label', 'Bills and estimates', 'rows', (select count(*) from bills), 'newest', (select max(created_at) from bills)),
+      jsonb_build_object('name', 'plan_codes', 'label', 'Licence keys', 'rows', (select count(*) from plan_codes), 'newest', (select max(created_at) from plan_codes)),
+      jsonb_build_object('name', 'help_requests', 'label', 'Help requests', 'rows', (select count(*) from help_requests), 'newest', (select max(created_at) from help_requests)),
+      jsonb_build_object('name', 'events', 'label', 'Website visits and clicks', 'rows', (select count(*) from events), 'newest', (select max(created_at) from events)),
+      jsonb_build_object('name', 'releases', 'label', 'Releases', 'rows', (select count(*) from releases), 'newest', (select max(created_at) from releases)),
+      jsonb_build_object('name', 'admins', 'label', 'Admins', 'rows', (select count(*) from admins), 'newest', (select max(created_at) from admins))),
+    'buckets', coalesce((select jsonb_agg(jsonb_build_object('name', bucket_id, 'files', n, 'bytes', b)) from
+                (select bucket_id, count(*) n, coalesce(sum((metadata->>'size')::bigint), 0) b from storage.objects group by bucket_id) x), '[]'),
+    'shops', coalesce((select jsonb_agg(jsonb_build_object('branch', branch_code, 'version', version, 'seen_at', seen_at) order by seen_at desc) from
+                (select distinct on (branch_code) branch_code, version, seen_at from release_installs order by branch_code, seen_at desc) s), '[]'),
+    'open_help', (select count(*) from help_requests where status <> 'solved'),
+    'latest_release', (select version from releases where published order by string_to_array(version, '.')::int[] desc limit 1));
+end $$;
+revoke all on function public.admin_health() from public, anon;
+grant execute on function public.admin_health() to authenticated;
