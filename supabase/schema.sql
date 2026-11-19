@@ -662,3 +662,57 @@ begin
 end $$;
 revoke all on function public.admin_health() from public, anon;
 grant execute on function public.admin_health() to authenticated;
+
+-- ============================================================
+-- 18) Flood protection for the public entry points (security review, 20 Nov 2026).
+--     The demo form, help requests and shops' version reports can be called by anyone, without a login. Each new row
+--     from a visitor (role anon, including a repeat demo request that updates the lead) passes a counter per sender address and a counter for everyone, per hour:
+--     leads 5 per address / 200 in all, help requests 10 / 300, version reports 60 / 2000. Over the limit the request is
+--     refused ("too many, try again later"); nothing is stored. Signed-in admins are never limited.
+--     The address comes from the request headers Supabase passes in (x-forwarded-for); nothing about it is stored
+--     except a one-way hash in rate_limits, which only keeps the current hour.
+-- ============================================================
+create table if not exists public.rate_limits (
+  bucket       text not null,
+  sender       text not null,          -- sha256 of the address, or 'all'
+  window_start timestamptz not null,
+  hits         int not null,
+  primary key (bucket, sender)
+);
+alter table public.rate_limits enable row level security;   -- no policies: nobody reads it through the API
+revoke all on public.rate_limits from anon, authenticated;
+
+create or replace function public.rate_ok(p_bucket text, p_per_sender int, p_all int)
+returns boolean language plpgsql security definer set search_path = public as $$
+declare
+  v_headers json := nullif(current_setting('request.headers', true), '')::json;
+  v_ip text := trim(split_part(coalesce(v_headers->>'cf-connecting-ip', v_headers->>'x-forwarded-for', v_headers->>'x-real-ip', 'unknown'), ',', 1));
+  v_sender text := encode(extensions.digest(v_ip, 'sha256'), 'hex');
+  v_hits int; v_all int;
+begin
+  delete from public.rate_limits where window_start < now() - interval '1 hour';
+  insert into public.rate_limits as r (bucket, sender, window_start, hits) values (p_bucket, v_sender, now(), 1)
+  on conflict (bucket, sender) do update set hits = r.hits + 1 returning hits into v_hits;
+  insert into public.rate_limits as r (bucket, sender, window_start, hits) values (p_bucket, 'all', now(), 1)
+  on conflict (bucket, sender) do update set hits = r.hits + 1 returning hits into v_all;
+  return v_hits <= p_per_sender and v_all <= p_all;
+end $$;
+revoke all on function public.rate_ok(text, int, int) from public, anon, authenticated;
+
+create or replace function public.limit_visitors() returns trigger language plpgsql security definer set search_path = public as $$
+declare v_role text := coalesce(nullif(current_setting('request.jwt.claims', true), '')::json->>'role', '');
+begin
+  if v_role <> 'anon' then return new; end if;    -- admins, the service and SQL Editor are not limited
+  if not public.rate_ok(tg_argv[0], tg_argv[1]::int, tg_argv[2]::int) then
+    raise exception 'Too many requests from this connection. Please try again in an hour.' using errcode = 'P0429';
+  end if;
+  return new;
+end $$;
+revoke all on function public.limit_visitors() from public, anon, authenticated;
+
+drop trigger if exists leads_limit on public.leads;
+create trigger leads_limit before insert or update on public.leads for each row execute function public.limit_visitors('lead', '5', '200');
+drop trigger if exists help_requests_limit on public.help_requests;
+create trigger help_requests_limit before insert on public.help_requests for each row execute function public.limit_visitors('help', '10', '300');
+drop trigger if exists release_installs_limit on public.release_installs;
+create trigger release_installs_limit before insert on public.release_installs for each row execute function public.limit_visitors('install', '60', '2000');

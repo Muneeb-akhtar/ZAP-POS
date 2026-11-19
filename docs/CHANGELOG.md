@@ -2,6 +2,13 @@
 
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
+
+## 2026-11-20: Security review (website, admin, Supabase)
+- **Flood protection** (schema §18, applied): the public entry points (demo form `submit_lead`, `send_help_request`, `report_release`) could be called without limit. Triggers on `leads` (insert and update), `help_requests` and `release_installs` now count visitors' (role anon) requests per sender address (stored only as a sha256, kept one hour, `rate_limits`, no API access) and in all: leads 5/200 per hour, help 10/300, version reports 60/2000. Over the limit: refused with "Too many requests", nothing stored. Admins are never limited. Tested with 12 requests from one address: 10 stored, 2 refused.
+- **Security headers** (`vercel.json`): every page sends `X-Content-Type-Options: nosniff`, `Referrer-Policy`, `Strict-Transport-Security` (2 years) and a `Permissions-Policy` (no camera, microphone, location, payment). `/admin` and `/account` also send `X-Frame-Options: DENY` and a Content-Security-Policy: own scripts only (plus the inline theme script by its sha256: **if that script in an index.html changes, update its hash in vercel.json**), Supabase as the only outside connection, no framing, no plugins. Checked in Chrome: no CSP errors.
+- Supabase security advisor: no table without row-level security. Its remaining warnings are the intended public functions (each checks the caller) and "leaked password protection" (turn on in the dashboard: Authentication → Passwords).
+- Files: `supabase/schema.sql`, `src/zappos-web/vercel.json`, docs.
+
 ## 2026-11-20: Top bar fits every screen
 - On the owner's laptop (about 1280 px wide at his zoom) the last quick link was cut off. The quick links are tighter, "View site" moved to an icon button on the right, link icons hide below 1440 px and the links hide below 1180 px (all pages stay in the sidebar). Checked at 1100, 1280, 1366, 1536 and 1920 px: nothing overflows. Stat cards fit six in a row from about 1280 px; page-bar buttons stay right-aligned when they wrap.
 - Files: `src/admin/AdminApp.jsx`, `src/admin/admin.css`, docs.
