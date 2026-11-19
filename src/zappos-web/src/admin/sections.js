@@ -16,6 +16,7 @@ export const SECTIONS = [
   { id: 'finalCta', label: 'Final section', icon: 'moon', keys: ['finalCta'], hint: 'The dark "Ready when the internet isn\'t" section at the bottom.' },
   { id: 'leadForm', label: 'Demo form', icon: 'mail', keys: ['leadForm'], hint: 'The "Book a free demo" form. It opens from every demo button; requests arrive under Leads.' },
   { id: 'account', label: 'Customer account', icon: 'lock', keys: ['account'], hint: 'The /account/ page where shops sign up and log in (same login as the POS app). {email}, {name} and {date} are filled in automatically.' },
+  { id: 'invoice', label: 'Invoice page', icon: 'receipt', keys: ['invoice'], hint: 'Words on the invoice your clients open from the link you send (and its PDF). {date} is filled in automatically. Your business details and how to pay are set in Bills → Invoice details.' },
   { id: 'footer', label: 'Footer', icon: 'layers', keys: ['footer'], hint: 'Footer link columns and popular searches.' },
 ]
 

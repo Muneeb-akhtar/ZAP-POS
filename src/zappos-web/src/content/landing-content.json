@@ -589,7 +589,10 @@
     "adminText": "This is the admin login, not a shop account.",
     "adminLink": "Open the admin panel",
     "notLinkedText": "Your login isn't linked to a shop yet. Message us on WhatsApp and we'll sort it out.",
-    "error": "Something went wrong. Please try again in a moment."
+    "error": "Something went wrong. Please try again in a moment.",
+    "invoicesTitle": "Your invoices",
+    "noInvoices": "No invoices yet.",
+    "viewInvoice": "View"
   },
   "footer": {
     "columns": [
@@ -640,5 +643,36 @@
       "Electronics Shop POS"
     ],
     "copyright": "ZAP POS. All rights reserved."
+  },
+  "invoice": {
+    "title": "Invoice",
+    "estimateTitle": "Estimate",
+    "billTo": "Bill to",
+    "issued": "Issued",
+    "due": "Due",
+    "validUntil": "Valid until",
+    "itemCol": "Item",
+    "qtyCol": "Qty",
+    "priceCol": "Price",
+    "amountCol": "Amount",
+    "subtotal": "Subtotal",
+    "discount": "Discount",
+    "tax": "Tax",
+    "total": "Total",
+    "howToPay": "How to pay",
+    "paidStamp": "PAID",
+    "paidOn": "Paid on {date}. Thank you!",
+    "statusUnpaid": "Unpaid · due {date}",
+    "statusLate": "Overdue since {date}",
+    "statusProof": "Payment proof received · being checked",
+    "statusPaid": "Paid",
+    "statusEstimate": "Estimate · valid until {date}",
+    "uploadButton": "Upload payment screenshot",
+    "uploading": "Uploading…",
+    "uploaded": "Thank you! We received your payment screenshot and will confirm it soon.",
+    "uploadError": "The upload didn't work ({error}). Try again, or send the screenshot on WhatsApp.",
+    "downloadButton": "Download PDF",
+    "notFound": "This invoice link is not valid any more. Ask us for a new one on WhatsApp.",
+    "loading": "Loading your invoice…"
   }
 }

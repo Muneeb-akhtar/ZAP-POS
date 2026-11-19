@@ -12,6 +12,10 @@
     {
       "source": "/account",
       "destination": "/account/index.html"
+    },
+    {
+      "source": "/invoice",
+      "destination": "/invoice/index.html"
     }
   ],
   "headers": [
@@ -46,7 +50,7 @@
       ]
     },
     {
-      "source": "/(admin|account)(.*)",
+      "source": "/(admin|account|invoice)(.*)",
       "headers": [
         {
           "key": "X-Robots-Tag",

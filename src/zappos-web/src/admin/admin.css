@@ -688,26 +688,24 @@ td .adm-kind + .adm-bill { margin-left: 6px; }
 .adm-buckets svg { color: var(--brand-500); }
 .adm-buckets span { margin-left: auto; color: var(--muted); }
 
-/* a bill to print: only the bill shows on paper */
-.adm-print { display: grid; gap: 18px; padding: 22px; border-radius: 14px; background: #fff; color: #0b1220; border: 1px solid #e4e9f0; }
-.adm-print-head { display: flex; justify-content: space-between; align-items: flex-start; padding-bottom: 14px; border-bottom: 3px solid var(--yellow); }
-.adm-print-brand { display: block; font-family: var(--font-head); font-size: 26px; font-weight: 800; letter-spacing: -.03em; }
-.adm-print-brand i { font-style: normal; color: #0b84f0; }
-.adm-print small { display: block; font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #64748b; }
-.adm-print-cols { display: grid; grid-template-columns: 1fr auto; gap: 16px; font-size: 14px; }
-.adm-print-cols > div { display: grid; gap: 2px; align-content: start; }
-.adm-print-cols span { color: #475569; }
-.adm-print-cols small:not(:first-child) { margin-top: 8px; }
-.adm-print-lines { width: 100%; border-collapse: collapse; font-size: 14px; }
-.adm-print-lines td { padding: 10px 0; border-bottom: 1px solid #e4e9f0; }
-.adm-print-lines tfoot td { font-weight: 800; font-size: 16px; border-bottom: 0; }
-.adm-print-lines .num { text-align: right; font-variant-numeric: tabular-nums; }
-.adm-print-note { font-size: 13px; color: #475569; white-space: pre-wrap; }
-@media print {
-  body * { visibility: hidden !important; }
-  .adm-print, .adm-print * { visibility: visible !important; }
-  .adm-print { position: fixed; inset: 0; border: 0; border-radius: 0; padding: 32px; }
-}
+/* Invoices (Bills.jsx): the line editor, the live total, the invoice preview and its private link.
+   The invoice itself (InvoiceDoc) is styled in src/invoice/invoice.css and is what prints. */
+.adm .adm-quick { padding: 0; background: none; border: 0; gap: 6px; margin-bottom: 10px; }
+.adm .adm-quick button { padding: 5px 10px; border: 1px dashed var(--line); border-radius: 999px; background: var(--surface); font-size: 12px; font-weight: 600; letter-spacing: 0; text-transform: none; color: var(--text); }
+.adm-lines { display: grid; gap: 6px; }
+.adm-lines-head, .adm-lines-row { display: grid; grid-template-columns: minmax(0, 1fr) 64px 104px 96px 30px; gap: 6px; align-items: center; }
+.adm-lines-head span { font-size: 10.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.adm-lines-row input { min-width: 0; }
+.adm-lines-row b { text-align: right; font-size: 13px; font-variant-numeric: tabular-nums; color: var(--ink); }
+.adm-icon-btn.plain { background: none; border-color: transparent; }
+.adm-icon-btn.plain:disabled { opacity: .3; }
+.adm-add { justify-self: start; display: inline-flex; align-items: center; gap: 6px; padding: 6px 2px; font-size: 13px; font-weight: 600; color: var(--brand-500); }
+.adm-inv-sum { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px; margin-top: 14px; padding: 12px 14px; border-radius: 12px; background: var(--bg-soft); border: 1px solid var(--line); font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.adm-inv-sum b { font-family: var(--font-head); font-size: 18px; color: var(--ink); }
+.adm-inv-view { margin: -4px 0 14px; }
+.adm-inv-view .inv-doc { box-shadow: none; }
+.adm-inv-link { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 10px 12px; border-radius: 12px; background: var(--bg-soft); border: 1px solid var(--line); }
+.adm-inv-link code { flex: 1 1 200px; min-width: 0; overflow-wrap: anywhere; font-family: var(--font-mono); font-size: 12px; color: var(--text); }
 
 /* Earnings: ranked customers (gold, silver, bronze for the top three) */
 .adm-rank-row { cursor: pointer; }
@@ -751,7 +749,10 @@ td .adm-kind + .adm-bill { margin-left: 6px; }
   .adm .adm-toolbar .adm-chips { max-width: 100%; overflow-x: auto; flex-wrap: nowrap; scrollbar-width: none; }
   .adm .adm-toolbar { min-width: 0; }
   .adm .adm-table-wrap.flat { margin: 0 -16px -16px; }
-  .adm-print-cols { grid-template-columns: 1fr; }
+  .adm-lines-head { display: none; }
+  .adm-lines-row { grid-template-columns: 1fr 64px 1fr 30px; }
+  .adm-lines-row input[aria-label="Item"] { grid-column: 1 / -1; }
+  .adm-lines-row b { grid-column: 3; }
   .adm-share { margin-left: 0; }
   .adm-share i { margin-left: 0; transform-origin: left; }
   .adm-stat-value { font-size: 21px; }

@@ -716,3 +716,132 @@ drop trigger if exists help_requests_limit on public.help_requests;
 create trigger help_requests_limit before insert on public.help_requests for each row execute function public.limit_visitors('help', '10', '300');
 drop trigger if exists release_installs_limit on public.release_installs;
 create trigger release_installs_limit before insert on public.release_installs for each row execute function public.limit_visitors('install', '60', '2000');
+
+
+-- ============================================================
+-- 19) Invoices (admin → Bills): line items, your business details, and a private link per invoice.
+--     A bill now carries its items [{desc, qty, price}], a discount and a tax %; the total (amount, whole rupees) is
+--     worked out here from them, so the screen and the database always agree. Each bill has a share token (24 random
+--     bytes): the client opens <site>/invoice/?t=<token> without logging in, sees the invoice, downloads it as PDF and can
+--     upload a payment screenshot. The link can be switched off (share_on). Cancelled bills are never shown.
+--     Your details on every invoice (name, phone, address, how to pay) live in invoice_settings (admins only; shown to a
+--     client only inside their own invoice).
+-- ============================================================
+alter table public.bills add column if not exists items jsonb not null default '[]'::jsonb;
+alter table public.bills add column if not exists discount integer not null default 0 check (discount >= 0);
+alter table public.bills add column if not exists tax_pct numeric(5,2) not null default 0 check (tax_pct between 0 and 100);
+alter table public.bills add column if not exists share_token text unique default encode(extensions.gen_random_bytes(24), 'hex');
+alter table public.bills add column if not exists share_on boolean not null default true;
+alter table public.bills add column if not exists sent_at timestamptz;
+update public.bills set share_token = encode(extensions.gen_random_bytes(24), 'hex') where share_token is null;
+
+-- the total from the lines: sum(qty x price) - discount, + tax %, rounded to whole rupees. Old one-line bills (no items)
+-- keep their amount.
+create or replace function public.bill_total() returns trigger language plpgsql set search_path = public as $$
+declare v_sub numeric := 0; l jsonb;
+begin
+  if jsonb_typeof(new.items) <> 'array' then raise exception 'Items must be a list'; end if;
+  if jsonb_array_length(new.items) > 0 then
+    if jsonb_array_length(new.items) > 50 then raise exception 'At most 50 lines on one invoice'; end if;
+    for l in select * from jsonb_array_elements(new.items) loop
+      if coalesce(length(trim(l->>'desc')), 0) not between 1 and 200 or (l->>'qty')::numeric <= 0 or (l->>'price')::numeric < 0 then
+        raise exception 'Each line needs a description, a quantity above 0 and a price of 0 or more';
+      end if;
+      v_sub := v_sub + (l->>'qty')::numeric * (l->>'price')::numeric;
+    end loop;
+    new.amount := round((v_sub - new.discount) * (1 + new.tax_pct / 100));
+    if new.amount <= 0 then raise exception 'The invoice total must be above Rs 0 (check the discount)'; end if;
+  end if;
+  return new;
+end $$;
+drop trigger if exists bills_total on public.bills;
+create trigger bills_total before insert or update of items, discount, tax_pct, amount on public.bills for each row execute function public.bill_total();
+
+create table if not exists public.invoice_settings (
+  id          boolean primary key default true check (id),
+  business    text not null default 'ZAP POS',
+  owner_name  text,
+  phone       text,
+  email       text,
+  address     text,
+  pay_details text,          -- bank / JazzCash / Easypaisa lines, shown under "How to pay"
+  note        text,          -- a line at the bottom (terms, thanks)
+  updated_at  timestamptz not null default now()
+);
+insert into public.invoice_settings default values on conflict do nothing;
+alter table public.invoice_settings enable row level security;
+revoke all on public.invoice_settings from anon;
+drop policy if exists "Admins manage invoice settings" on public.invoice_settings;
+create policy "Admins manage invoice settings" on public.invoice_settings for all to authenticated using (public.is_admin()) with check (public.is_admin());
+
+-- the client's view of one invoice, by its private link (no login). Flood-limited per address.
+create or replace function public.invoice_view(p_token text)
+returns jsonb language plpgsql security definer set search_path = public as $$
+declare v jsonb;
+begin
+  if coalesce(length(p_token), 0) <> 48 then return null; end if;
+  if not public.rate_ok('invoice_view', 300, 20000) then raise exception 'Too many requests. Please try again later.' using errcode = 'P0429'; end if;
+  select jsonb_build_object(
+    'no', b.no, 'kind', b.kind, 'title', b.title, 'items', b.items, 'discount', b.discount, 'tax_pct', b.tax_pct, 'amount', b.amount,
+    'issued_on', b.issued_on, 'due_on', b.due_on, 'status', b.status, 'paid_on', b.paid_on, 'note', b.note, 'has_proof', b.proof_path is not null,
+    'client', jsonb_build_object('name', l.name, 'shop', l.shop, 'phone', l.phone, 'city', l.city),
+    'from', (select to_jsonb(s) - 'id' - 'updated_at' from public.invoice_settings s))
+  into v
+  from public.bills b join public.leads l on l.id = b.lead_id
+  where b.share_token = p_token and b.share_on and b.status <> 'cancelled';
+  return v;
+end $$;
+revoke all on function public.invoice_view(text) from public;
+grant execute on function public.invoice_view(text) to anon, authenticated;
+
+-- the client sent a payment screenshot through the link: the file goes to bill-proofs/shared/<token>/..., then this marks
+-- the invoice "proof received" for you to check. Only an unpaid, shared invoice; only a file in that invoice's own folder.
+create or replace function public.invoice_proof(p_token text, p_path text)
+returns boolean language plpgsql security definer set search_path = public as $$
+begin
+  if coalesce(length(p_token), 0) <> 48 or p_path is null or p_path not like 'shared/' || p_token || '/%' then return false; end if;
+  if not public.rate_ok('invoice_proof', 10, 500) then raise exception 'Too many uploads. Please try again later.' using errcode = 'P0429'; end if;
+  if not exists (select 1 from storage.objects o where o.bucket_id = 'bill-proofs' and o.name = p_path) then return false; end if;
+  update public.bills set proof_path = p_path, status = case when status = 'unpaid' then 'proof' else status end
+  where share_token = p_token and share_on and kind = 'bill' and status in ('unpaid', 'proof');
+  return found;
+end $$;
+revoke all on function public.invoice_proof(text, text) from public;
+grant execute on function public.invoice_proof(text, text) to anon, authenticated;
+
+-- visitors may put a file only into the folder of a shared, unpaid invoice (images or PDF, 8 MB, set on the bucket)
+update storage.buckets set allowed_mime_types = array['image/jpeg', 'image/png', 'image/webp', 'image/heic', 'application/pdf'] where id = 'bill-proofs';
+drop policy if exists "Clients upload proof by link" on storage.objects;
+create policy "Clients upload proof by link" on storage.objects for insert to anon
+  with check (bucket_id = 'bill-proofs' and (storage.foldername(name))[1] = 'shared'
+              and exists (select 1 from public.bills b where b.share_token = (storage.foldername(name))[2] and b.share_on and b.kind = 'bill'
+                          and b.status in ('unpaid', 'proof')));
+
+-- the customer's account page lists their invoices (with the private link to open each one)
+create or replace function public.my_account()
+returns jsonb language sql stable security definer set search_path = public as $$
+  select jsonb_build_object(
+    'name', l.name, 'shop', l.shop, 'city', l.city, 'phone', l.phone, 'email', l.email, 'since', l.signed_up_at,
+    'plan', cur.plan, 'branches', cur.branches, 'billing', cur.billing, 'paid_until', cur.paid_until,
+    'active', coalesce(cur.paid_until >= (now() at time zone 'Asia/Karachi')::date, false),
+    'payments', coalesce((
+      select jsonb_agg(jsonb_build_object('paid_on', p.paid_on, 'amount', p.amount, 'method', p.method, 'plan', p.plan,
+               'billing', p.billing, 'branches', p.branches, 'starts_on', p.starts_on, 'paid_until', p.paid_until)
+             order by p.paid_on desc, p.created_at desc)
+      from public.payments p where p.lead_id = l.id), '[]'::jsonb),
+    'invoices', coalesce((
+      select jsonb_agg(jsonb_build_object('no', b.no, 'kind', b.kind, 'title', b.title, 'amount', b.amount, 'issued_on', b.issued_on,
+               'due_on', b.due_on, 'status', b.status, 'paid_on', b.paid_on, 'token', case when b.share_on then b.share_token end)
+             order by b.issued_on desc, b.no desc)
+      from public.bills b where b.lead_id = l.id and b.status <> 'cancelled'), '[]'::jsonb)
+  )
+  from public.leads l
+  left join lateral (
+    select p.plan, p.branches, p.billing, p.paid_until from public.payments p
+    where p.lead_id = l.id and p.billing in ('monthly', 'yearly')
+    order by p.paid_until desc limit 1
+  ) cur on true
+  where l.user_id = auth.uid()
+$$;
+revoke all on function public.my_account() from public, anon;
+grant execute on function public.my_account() to authenticated;

@@ -3,6 +3,7 @@ import Icon, { Logo } from '../components/Icons.jsx'
 import { ThemeToggle } from '../components/Sections.jsx'
 import { CONTENT_ID, defaultContent, mergeContent } from '../lib/content.js'
 import { BILLING, METHODS, dateFmt, phoneKey, rs, supabase } from '../admin/biz.js'
+import { invoiceNo, invoiceState } from '../invoice/InvoiceDoc.jsx'
 
 // Customer account at /account/: sign up, log in, reset password, and "My account"
 // (plan, renewal date, payments). The same email + password works in the ZAP POS app.
@@ -133,7 +134,7 @@ function NewPassword({ t, onDone }) {
   )
 }
 
-function MyAccount({ t, links, session }) {
+function MyAccount({ t, ti, links, session }) {
   const [acc, setAcc] = useState(undefined) // undefined = loading, null = not linked to a shop
   const [isAdmin, setIsAdmin] = useState(false)
   const [error, setError] = useState('')
@@ -179,6 +180,26 @@ function MyAccount({ t, links, session }) {
         <a className="btn btn-outline" href={links.whatsapp} data-track="whatsapp"><Icon name="whatsapp" size={16} /> {t.payButton}</a>
         {!acc.paid_until && <a className="btn btn-quiet" href="/#pricing">{t.pricingLink}</a>}
       </div>
+
+      <h2 className="acc-sub">{t.invoicesTitle}</h2>
+      {acc.invoices?.length ? (
+        <div className="adm-table-wrap">
+          <table className="adm-table">
+            <thead><tr><th>#</th><th>{ti.itemCol}</th><th>{ti.issued}</th><th className="num">{t.amountCol}</th><th /></tr></thead>
+            <tbody>
+              {acc.invoices.map((v) => (
+                <tr key={v.token}>
+                  <td data-label="#"><b>{invoiceNo(v)}</b></td>
+                  <td data-label={ti.itemCol}>{v.title}<small>{invoiceState(v, ti).text}</small></td>
+                  <td data-label={ti.issued}>{dateFmt(v.issued_on)}</td>
+                  <td data-label={t.amountCol} className="num"><b>{rs(v.amount)}</b></td>
+                  <td><a className="btn btn-quiet btn-sm" href={`/invoice/?t=${v.token}`}>{t.viewInvoice}</a></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ) : <p className="adm-muted">{t.noInvoices}</p>}
 
       <h2 className="acc-sub">{t.paymentsTitle}</h2>
       {acc.payments.length ? (
@@ -227,6 +248,6 @@ export default function AccountApp() {
   else if (session === undefined) body = <div className="adm-box"><p className="adm-muted">…</p></div>
   else if (recovering) body = <NewPassword t={t} onDone={() => setRecovering(false)} />
   else if (!session) body = <Auth t={t} mode={mode} setMode={setMode} />
-  else body = <MyAccount key={session.user.id} t={t} links={content.links} session={session} />
+  else body = <MyAccount key={session.user.id} t={t} ti={content.invoice} links={content.links} session={session} />
   return <Shell brand={content.brand}>{body}</Shell>
 }
