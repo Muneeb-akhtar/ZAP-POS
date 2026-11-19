@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import Icon from '../components/Icons.jsx'
 import { Stat } from './Charts.jsx'
 import { addMonths, customersOf, dateFmt, daysUntil, supabase, timeAgo, today, useBiz, waLink } from './biz.js'
-import { Card, ConfirmButton, Field, PageBar, Sheet, useNotify } from './ui.jsx'
+import { Card, ConfirmButton, Field, PageBar, Sheet, useNotify, TableFoot } from './ui.jsx'
 
 // Licence keys (Plans page). A key unlocks ZAP POS for one shop: how many counters, from when to when.
 // It is signed by the edge function make-plan-code (the secret key never reaches the browser). A new key replaces the
@@ -53,7 +53,7 @@ export default function Plans({ onNewKey }) {
 
   return (
     <>
-      <PageBar title="Plans" sub="Licence keys: what each shop paid for, and until when.">
+      <PageBar icon="lock" title="Plans" sub="Licence keys: what each shop paid for, and until when.">
         <button className="btn btn-primary btn-sm" onClick={() => onNewKey(null)}><Icon name="plus" size={14} /> New licence key</button>
       </PageBar>
       <div className="adm-stats">
@@ -94,6 +94,7 @@ export default function Plans({ onNewKey }) {
                 })}
               </tbody>
             </table>
+            <TableFoot count={shown.length} noun="keys" />
           </div>
         )}
       </Card>

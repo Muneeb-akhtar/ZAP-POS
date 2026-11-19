@@ -42,7 +42,7 @@ export default function Analytics() {
 
   return (
     <>
-      <PageBar title="Analytics" sub="Visitors, clicks and where your leads come from. Anonymous: no cookies, no personal data.">
+      <PageBar icon="chart" title="Analytics" sub="Visitors, clicks and where your leads come from. Anonymous: no cookies, no personal data.">
         <div className="adm-range" role="group" aria-label="Date range">
           {[7, 30, 90].map((d) => <button key={d} className={days === d ? 'on' : ''} onClick={() => setDays(d)}>{d} days</button>)}
         </div>

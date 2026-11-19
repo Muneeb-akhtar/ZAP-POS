@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import Icon from '../components/Icons.jsx'
 import { dateFmt, supabase, timeAgo } from './biz.js'
-import { Card, ConfirmButton, Field, PageBar, useNotify } from './ui.jsx'
+import { Card, ConfirmButton, Field, PageBar, useNotify, TableFoot } from './ui.jsx'
 
 // Releases: put a new ZAP POS version out to the shops. Upload ZapPos.exe once; each shop's main PC downloads it
 // (it is checked against ZAP's signature first), its counters get it from the main PC, and every PC installs it
@@ -109,7 +109,7 @@ export default function Releases() {
 
   return (
     <>
-      <PageBar title="Releases" sub="Put a new ZAP POS version out to the shops. They install it by themselves." />
+      <PageBar icon="download" title="Releases" sub="Put a new ZAP POS version out to the shops. They install it by themselves." />
       <Card title="Publish a new version">
         <form className="adm-form" onSubmit={publish}>
           <label className="adm-drop">
@@ -158,6 +158,7 @@ export default function Releases() {
                 })}
               </tbody>
             </table>
+            <TableFoot count={list.length} noun="versions" />
           </div>
         )}
       </Card>

@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react'
 import Icon from '../components/Icons.jsx'
 import { BILLING, METHODS, addMonths, customersOf, dateFmt, downloadCsv, isPeriod, rs, rsShort, telLink, today, useBiz, waLink } from './biz.js'
 import { BarList, Bars, Stat } from './Charts.jsx'
-import { Card, ConfirmButton, Field, PageBar, Sheet, useNotify } from './ui.jsx'
+import { Card, ConfirmButton, Field, PageBar, Sheet, useNotify, TableFoot } from './ui.jsx'
 
 const monthKey = (d) => d.slice(0, 7)
 const monthName = (k, short) => new Date(`${k}-01T00:00:00`).toLocaleDateString('en-GB', short ? { month: 'short' } : { month: 'long', year: 'numeric' })
@@ -177,6 +177,7 @@ export function Customers({ onPay, onOpenLead, onPlanCode }) {
               ))}
             </tbody>
           </table>
+          <TableFoot count={shown.length} noun="customers" />
         </div>
       )}
     </>
@@ -224,7 +225,7 @@ export default function Payments({ tab, go, onPay, onEditPayment, onOpenLead, on
 
   return (
     <>
-      <PageBar title={tab === 'customers' ? 'Customers' : 'Payments'} sub={`${rs(sum(thisMonth))} received in ${monthName(monthKey(now))}`}>
+      <PageBar icon="card" title={tab === 'customers' ? 'Customers' : 'Payments'} sub={`${rs(sum(thisMonth))} received in ${monthName(monthKey(now))}`}>
         {tab !== 'customers' && <button className="btn btn-quiet btn-sm" onClick={exportCsv} disabled={!shown.length}><Icon name="download" size={14} /> Export CSV</button>}
         <button className="btn btn-primary btn-sm" onClick={() => onPay(null)}><Icon name="plus" size={14} /> Record payment</button>
       </PageBar>
@@ -284,6 +285,7 @@ export default function Payments({ tab, go, onPay, onEditPayment, onOpenLead, on
                   </tbody>
                   <tfoot><tr><td colSpan={5}>{shown.length} payment{shown.length === 1 ? '' : 's'}</td><td className="num"><b>{rs(sum(shown))}</b></td><td /></tr></tfoot>
                 </table>
+                <TableFoot count={shown.length} noun="payments" />
               </div>
             )}
           </>

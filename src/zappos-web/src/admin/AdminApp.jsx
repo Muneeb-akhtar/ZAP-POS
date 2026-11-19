@@ -139,6 +139,15 @@ const BUSINESS = [
   { id: 'releases', label: 'Releases', icon: 'download' },
 ]
 
+// the top bar's quick links
+const QUICK = [
+  { id: 'dashboard', label: 'Dashboard', icon: 'grid' },
+  { id: 'leads', label: 'Leads', icon: 'users' },
+  { id: 'payments', label: 'Payments', icon: 'card' },
+  { id: 'plans', label: 'Plans', icon: 'lock' },
+  { id: 'releases', label: 'Releases', icon: 'download' },
+]
+
 function Panel({ session }) {
   // Website content
   const [saved, setSaved] = useState(null) // last published content
@@ -225,28 +234,38 @@ function Panel({ session }) {
       <ToastContext.Provider value={notify}>
         <RootContext.Provider value={draft}>
           <div className="adm">
+            {/* top bar: brand, quick links in a pill, the signed-in admin */}
+            <header className="adm-top">
+              <a className="adm-top-brand" href="/" target="_blank" rel="noreferrer"><Logo size={36} /><span><b>ZAP <i>POS</i></b><small>Admin</small></span></a>
+              <nav className="adm-top-nav" aria-label="Quick links">
+                {QUICK.map((q) => <button key={q.id} className={current === q.id ? 'on' : ''} onClick={() => go(q.id)}><Icon name={q.icon} size={15} /> {q.label}</button>)}
+                <a href="/" target="_blank" rel="noreferrer"><Icon name="external" size={15} /> View site</a>
+              </nav>
+              <span className="adm-top-me">
+                <ThemeToggle />
+                <span className="adm-chip-me"><span className="adm-me-badge">{session.user.email[0]?.toUpperCase()}</span><span><b>{session.user.email.split('@')[0]}</b><small>Owner</small></span></span>
+              </span>
+            </header>
+
             <aside className="adm-side">
-              <a className="adm-brand" href="/" target="_blank" rel="noreferrer"><Logo size={30} /> ZAP <span>POS</span> <em>Admin</em></a>
+              <span className="adm-console"><Icon name="zap" size={14} /> Admin console</span>
               <nav className="adm-nav">
                 <span className="adm-nav-group">Business</span>
                 {BUSINESS.map((b) => (
                   <button key={b.id} className={current === b.id ? 'on' : ''} onClick={() => go(b.id)}>
-                    <Icon name={b.icon} size={16} /> {b.label}{badge[b.id] > 0 && <em className={`adm-badge ${b.id === 'customers' ? 'red' : ''}`}>{badge[b.id]}</em>}
+                    <Icon name={b.icon} size={16} /> {b.label}{badge[b.id] > 0 && <em className={`adm-badge ${b.id === 'customers' ? 'red' : ''}`}>{badge[b.id]}</em>}<Icon name="chevL" size={14} className="adm-nav-chev" />
                   </button>
                 ))}
                 <span className="adm-nav-group">Website{dirty && <em className="adm-badge amber" title="Unpublished changes">unsaved</em>}</span>
                 {sections.map((s) => (
                   <button key={s.id} className={current === s.id ? 'on' : ''} onClick={() => go(s.id)}>
-                    <Icon name={s.icon} size={16} /> {s.label}{changed(s) && <i className="adm-dot" title="Unsaved changes" />}
+                    <Icon name={s.icon} size={16} /> {s.label}{changed(s) && <i className="adm-dot" title="Unsaved changes" />}<Icon name="chevL" size={14} className="adm-nav-chev" />
                   </button>
                 ))}
               </nav>
               <div className="adm-side-foot">
-                <span className="adm-me"><span className="adm-me-badge">{session.user.email[0]?.toUpperCase()}</span><span className="adm-user" title={session.user.email}>{session.user.email}</span></span>
-                <span className="adm-side-actions">
-                  <ThemeToggle />
-                  <button className="adm-icon-btn" title="Sign out" onClick={() => supabase.auth.signOut()}><Icon name="logout" size={17} /></button>
-                </span>
+                <span className="adm-me"><span className="adm-me-badge">{session.user.email[0]?.toUpperCase()}</span><span><b>ZAP POS</b><span className="adm-user" title={session.user.email}>{session.user.email}</span></span></span>
+                <button className="adm-logout" onClick={() => supabase.auth.signOut()}><Icon name="logout" size={15} /> Log out</button>
               </div>
             </aside>
 

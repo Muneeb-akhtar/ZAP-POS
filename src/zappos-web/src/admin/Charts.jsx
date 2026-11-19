@@ -38,16 +38,17 @@ export function Stat({ label, value, sub, cur, prev, icon, onClick, hero }) {
   const Tag = onClick ? 'button' : 'div'
   return (
     <Tag className={`adm-stat ${onClick ? 'link' : ''} ${hero ? 'hero' : ''}`} onClick={onClick}>
-      <span className="adm-stat-label">{icon && <Icon name={icon} size={15} />} {label}</span>
-      <b className="adm-stat-value"><CountUp value={value} /></b>
-      <span className="adm-stat-sub">
+      <span className="adm-stat-top">
+        {icon && <span className="adm-stat-ic"><Icon name={icon} size={18} /></span>}
         {delta != null && (
-          <em className={delta > 0 ? 'up' : delta < 0 ? 'down' : ''}>
+          <em className={`adm-delta ${delta > 0 ? 'up' : delta < 0 ? 'down' : ''}`}>
             {delta > 0 ? '▲' : delta < 0 ? '▼' : '•'} {Math.abs(delta)}%
           </em>
         )}
-        {sub}
       </span>
+      <b className="adm-stat-value"><CountUp value={value} /></b>
+      <span className="adm-stat-label">{label}</span>
+      {sub && <span className="adm-stat-sub">{sub}</span>}
     </Tag>
   )
 }

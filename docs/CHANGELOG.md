@@ -2,6 +2,10 @@
 
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
+## 2026-11-20: Admin layout restructured (owner's reference layout)
+- New structure, same colours and glass: a top bar across the page (logo, quick links in a pill, the signed-in owner); the sidebar gets an "Admin console" badge, small capital labels, the open page as a blue pill with a chevron, and a profile card with Log out at the bottom (theme toggle moved to the top bar); page headers get an icon tile, a big title with the yellow squiggle and a small capital line (`PageBar icon`); stat cards: icon tile, change badge, big number, small capital label (`Stat`); filter bars are one glass card with segmented chips; tables get small capital headings and a "Showing N · Live from Supabase" foot (`TableFoot`). Dashboard gains "Active licence keys" and "New leads" cards (6 in a row).
+- Files: `src/admin/AdminApp.jsx`, `src/admin/ui.jsx`, `src/admin/Charts.jsx`, `src/admin/Dashboard.jsx`, `src/admin/Payments.jsx`, `src/admin/PlanCodes.jsx`, `src/admin/Releases.jsx`, `src/admin/Leads.jsx`, `src/admin/Analytics.jsx`, `src/admin/admin.css` (Layout block), docs.
+
 ## 2026-11-19: Admin look: website colours with glass
 - The owner chose the website's colours (white, ZAP blue, electric yellow) with a glass effect. Every admin page: white ground with two faint slow-drifting blobs (blue, yellow), frosted glass cards, tables, page bar and sidebar; the open page is a blue pill with a yellow dot; page titles get the website's yellow squiggle (drawn once, `PageBar` in `ui.jsx`); stat icons on pale blue tiles; the money card ("Received this month", `Stat hero`) is solid blue with a yellow icon and badge; today's bar is yellow. Dark mode uses the website's navy.
 - Animations (calm, once per page, off with reduced motion): numbers count up (`CountUp`), bars grow, the income line draws, the licence ring fills, pages rise in.

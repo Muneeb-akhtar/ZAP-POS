@@ -177,7 +177,7 @@ export default function Leads({ focus, plans, onPay }) {
 
   return (
     <>
-      <PageBar title="Leads" sub={`${counts.new ?? 0} new · ${counts.open} open · ${counts.won ?? 0} customers`}>
+      <PageBar icon="users" title="Leads" sub={`${counts.new ?? 0} new · ${counts.open} open · ${counts.won ?? 0} customers`}>
         <button className="btn btn-quiet btn-sm" onClick={exportCsv} disabled={!shown.length}><Icon name="download" size={14} /> Export CSV</button>
         <button className="btn btn-primary btn-sm" onClick={() => setSheet({})}><Icon name="plus" size={14} /> Add lead</button>
       </PageBar>

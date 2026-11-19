@@ -74,7 +74,7 @@ export default function Dashboard({ content, published, updatedAt, go, onAddLead
 
   return (
     <>
-      <PageBar title={`${greeting()}, welcome back`} sub={new Date().toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}>
+      <PageBar icon="grid" title={`${greeting()}, welcome back`} sub={new Date().toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}>
         <button className="btn btn-quiet btn-sm" onClick={onAddLead}><Icon name="plus" size={14} /> Add lead</button>
         <button className="btn btn-primary btn-sm" onClick={() => onPay(null)}><Icon name="card" size={14} /> Record payment</button>
       </PageBar>
@@ -85,6 +85,8 @@ export default function Dashboard({ content, published, updatedAt, go, onAddLead
           <Stat icon="users" label="Visitors, 7 days" value={stats ? sumOf(week, 'visitors').toLocaleString('en-PK') : '…'} cur={sumOf(week, 'visitors')} prev={sumOf(prevWeek, 'visitors')} sub="vs week before" onClick={() => go('analytics')} />
           <Stat icon="mail" label="Demo requests, 7 days" value={stats ? sumOf(week, 'leads') : '…'} cur={sumOf(week, 'leads')} prev={sumOf(prevWeek, 'leads')} sub="vs week before" onClick={() => go('leads')} />
           <Stat hero icon="card" label="Received this month" value={rs(received(month))} cur={received(month)} prev={received(lastMonthKey)} sub="vs last month" onClick={() => go('payments')} />
+          <Stat icon="lock" label="Active licence keys" value={keys ? keyCount('active') + keyCount('expiring') : '…'} sub={keys ? `${keyCount('expiring')} ending in 7 days` : ''} onClick={() => go('plans')} />
+          <Stat icon="users" label="New leads" value={fresh.length} sub="waiting for a call" onClick={() => go('leads')} />
           <Stat icon="receipt" label="Customers" value={customers.length} sub={renewals.length ? `${renewals.length} renewal${renewals.length > 1 ? 's need' : ' needs'} attention` : 'all renewals on time'} onClick={() => go('customers')} />
         </div>
 

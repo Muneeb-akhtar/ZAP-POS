@@ -4,17 +4,26 @@ import { statusLabel } from './biz.js'
 
 // Small building blocks shared by the admin pages.
 
-export function PageBar({ title, sub, children }) {
+// Page header: an icon tile, a big title (with the website's yellow squiggle), a small line under it, actions on the right.
+export function PageBar({ title, sub, icon, children }) {
   return (
     <header className="adm-bar">
-      <div>
-        <h1><span className="adm-title">{title}<svg viewBox="0 0 200 12" preserveAspectRatio="none" aria-hidden="true"><path d="M3 8 Q50 2 100 7 T197 5" pathLength="1" /></svg></span></h1>
-        {sub && <p className="adm-status">{sub}</p>}
+      <div className="adm-bar-head">
+        {icon && <span className="adm-bar-ic"><Icon name={icon} size={20} /></span>}
+        <div>
+          <h1><span className="adm-title">{title}<svg viewBox="0 0 200 12" preserveAspectRatio="none" aria-hidden="true"><path d="M3 8 Q50 2 100 7 T197 5" pathLength="1" /></svg></span></h1>
+          {sub && <p className="adm-status">{sub}</p>}
+        </div>
       </div>
       {children && <div className="adm-bar-actions">{children}</div>}
     </header>
   )
 }
+
+// Under a table: how many rows, and that the data is live from Supabase.
+export const TableFoot = ({ count, noun = 'entries' }) => (
+  <div className="adm-table-foot"><span>Showing {count} {count === 1 ? noun.replace(/ies$/, 'y').replace(/s$/, '') : noun}</span><span className="adm-live">Live from Supabase <i /></span></div>
+)
 
 export const StatusPill = ({ status }) => <span className={`adm-pill s-${status}`}>{statusLabel(status)}</span>
 
