@@ -375,6 +375,78 @@ drop policy if exists "Admins add plan codes" on public.plan_codes;
 create policy "Admins add plan codes" on public.plan_codes for insert to authenticated with check (public.is_admin());
 
 -- ============================================================
+-- 12) Releases: new ZAP POS versions for the shops' PCs (admin panel → Releases).
+--     The exe is stored in the public bucket 'releases' in parts of up to 40 MB (Supabase's upload limit is 50 MB).
+--     Each release is signed (edge function sign-release, key PLAN_SIGNING_KEY) over "ZAPREL1|<version>|<sha256>",
+--     and ZAP POS installs only a file whose SHA-256 and signature match. A shop's main PC asks latest_release()
+--     (as a visitor, no login) and reports what it installed with report_release(). Admins see everything.
+-- ============================================================
+create table if not exists public.releases (
+  id            uuid primary key default gen_random_uuid(),
+  created_at    timestamptz not null default now(),
+  version       text not null unique check (version ~ '^\d+\.\d+\.\d+$'),
+  notes         text check (char_length(notes) <= 2000),
+  sha256        text not null check (sha256 ~ '^[0-9a-f]{64}$'),
+  size          bigint not null check (size > 0),
+  parts         text[] not null check (cardinality(parts) between 1 and 20),
+  signature     text not null,
+  target_branch text check (target_branch ~ '^[A-Z0-9]{2,20}$'),   -- null = every shop
+  published     boolean not null default false,
+  published_at  timestamptz,
+  made_by       uuid references auth.users (id) default auth.uid()
+);
+alter table public.releases enable row level security;
+revoke all on public.releases from anon;
+drop policy if exists "Admins manage releases" on public.releases;
+create policy "Admins manage releases" on public.releases for all to authenticated using (public.is_admin()) with check (public.is_admin());
+
+create table if not exists public.release_installs (
+  branch_code text not null check (branch_code ~ '^[A-Z0-9]{2,20}$'),
+  version     text not null,
+  seen_at     timestamptz not null default now(),
+  primary key (branch_code, version)
+);
+alter table public.release_installs enable row level security;
+revoke all on public.release_installs from anon;
+drop policy if exists "Admins read installs" on public.release_installs;
+create policy "Admins read installs" on public.release_installs for select to authenticated using (public.is_admin());
+
+-- What a shop's main PC should have: the newest published release for every shop, or for this shop only.
+create or replace function public.latest_release(p_branch text)
+returns jsonb language sql stable security definer set search_path = public as $$
+  select jsonb_build_object('version', r.version, 'notes', r.notes, 'sha256', r.sha256, 'size', r.size,
+                            'parts', to_jsonb(r.parts), 'signature', r.signature)
+  from public.releases r
+  where r.published and (r.target_branch is null or r.target_branch = upper(trim(p_branch)))
+  order by string_to_array(r.version, '.')::int[] desc
+  limit 1
+$$;
+revoke all on function public.latest_release(text) from public;
+grant execute on function public.latest_release(text) to anon, authenticated;
+
+-- A main PC says which version it now runs (shown as "x of y shops updated"). Only real versions are accepted.
+create or replace function public.report_release(p_branch text, p_version text)
+returns void language sql security definer set search_path = public as $$
+  insert into public.release_installs (branch_code, version)
+  select upper(trim(p_branch)), p_version
+  where upper(trim(p_branch)) ~ '^[A-Z0-9]{2,20}$' and exists (select 1 from public.releases r where r.version = p_version)
+  on conflict (branch_code, version) do update set seen_at = now()
+$$;
+revoke all on function public.report_release(text, text) from public;
+grant execute on function public.report_release(text, text) to anon, authenticated;
+
+-- the files: anyone may download (they are signed), only admins may upload
+insert into storage.buckets (id, name, public, file_size_limit)
+values ('releases', 'releases', true, 45 * 1024 * 1024)
+on conflict (id) do update set public = true, file_size_limit = 45 * 1024 * 1024;
+drop policy if exists "Admins upload releases" on storage.objects;
+create policy "Admins upload releases" on storage.objects for insert to authenticated
+  with check (bucket_id = 'releases' and public.is_admin());
+drop policy if exists "Admins replace releases" on storage.objects;
+create policy "Admins replace releases" on storage.objects for update to authenticated
+  using (bucket_id = 'releases' and public.is_admin());
+
+-- ============================================================
 -- 9) Make yourself the admin (do this AFTER creating your user in
 --    Authentication → Users → Add user, with "Auto Confirm User" on).
 --    Replace the email below, then run just this statement:

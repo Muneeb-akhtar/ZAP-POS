@@ -8,7 +8,7 @@ This repo holds the **public landing page**, the **admin panel** at `/admin/` (d
 
 ## Stack
 - `src/zappos-web/`: React 18 + Vite 5, plain CSS (no Tailwind, no UI library), fonts bundled via @fontsource.
-- **Supabase** (Postgres + Auth + Row Level Security): `site_content` (published page), `admins`, `leads` (demo requests), `payments`, `events` (anonymous visits/clicks), `plan_codes`, `admin_stats()` function. Edge function `make-plan-code` (`supabase/functions/`) signs ZAP POS plan codes with the secret `PLAN_SIGNING_KEY` (never commit it; deploy with the Supabase MCP or `supabase functions deploy make-plan-code`). Schema: `supabase/schema.sql` (safe to re-run; run it again after changing it). The admin uses `@supabase/supabase-js`; the landing page uses plain REST fetches (keeps its bundle small).
+- **Supabase** (Postgres + Auth + Row Level Security): `site_content` (published page), `admins`, `leads` (demo requests), `payments`, `events` (anonymous visits/clicks), `plan_codes`, `releases`, `release_installs`, `admin_stats()` function; storage bucket `releases` (ZAP POS versions, signed). Edge functions `make-plan-code` and `sign-release`; `make-plan-code` (`supabase/functions/`) signs ZAP POS plan codes with the secret `PLAN_SIGNING_KEY` (never commit it; deploy with the Supabase MCP or `supabase functions deploy make-plan-code`). Schema: `supabase/schema.sql` (safe to re-run; run it again after changing it). The admin uses `@supabase/supabase-js`; the landing page uses plain REST fetches (keeps its bundle small).
 - Dev machine: Windows, VS Code, PowerShell, Node 26, Git 2.56.
 
 ## Commands

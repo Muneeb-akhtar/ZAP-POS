@@ -12,6 +12,7 @@ import Leads, { LeadSheet } from './Leads.jsx'
 import Payments, { PaymentSheet } from './Payments.jsx'
 import Analytics from './Analytics.jsx'
 import { PlanCodeSheet } from './PlanCodes.jsx'
+import Releases from './Releases.jsx'
 
 // ---------- screens ----------
 function Shell({ children }) {
@@ -134,6 +135,7 @@ const BUSINESS = [
   { id: 'payments', label: 'Payments', icon: 'card' },
   { id: 'customers', label: 'Customers', icon: 'receipt' },
   { id: 'analytics', label: 'Analytics', icon: 'chart' },
+  { id: 'releases', label: 'Releases', icon: 'download' },
 ]
 
 function Panel({ session }) {
@@ -178,7 +180,7 @@ function Panel({ session }) {
     return () => { window.removeEventListener('keydown', onKey); window.removeEventListener('beforeunload', onLeave) }
   }, [publish, dirty])
 
-  // Hash routing: #dashboard, #leads, #leads/<id>, #payments, #customers, #analytics, #<website section>.
+  // Hash routing: #dashboard, #leads, #leads/<id>, #payments, #customers, #analytics, #releases, #<website section>.
   useEffect(() => {
     const onHash = () => setRoute(location.hash.slice(1) || 'dashboard')
     window.addEventListener('hashchange', onHash)
@@ -254,6 +256,7 @@ function Panel({ session }) {
                 <Payments tab={current} go={go} onPay={pay} onEditPayment={(p) => setSheet({ type: 'payment', value: p })} onOpenLead={openLead} onPlanCode={(id) => setSheet({ type: 'plancode', value: id })} />
               )}
               {current === 'analytics' && <Analytics />}
+              {current === 'releases' && <Releases />}
               {section && (
                 <ContentPage section={section} draft={draft} setDraft={setDraft} saved={saved} dirty={dirty}
                   published={published} updatedAt={updatedAt} status={status} publish={publish} />

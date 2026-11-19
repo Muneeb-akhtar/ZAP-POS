@@ -2,6 +2,12 @@
 
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
+## 2026-11-19: Releases (automatic ZAP POS updates)
+- Owner request: shops' PCs update ZAP POS by themselves. New admin page **Releases**: choose ZapPos.exe (the version is read from the file), write what's new, send to all shops or one shop first, Publish. The page hashes the file, gets it signed by the new edge function `sign-release` ("ZAPREL1|version|sha256", same secret key `PLAN_SIGNING_KEY` as plan codes), uploads it to the public bucket `releases` in 40 MB parts (Supabase's limit is 50 MB) and records it. "Stop sending" takes a version back. "x of y shops updated" comes from `release_installs`.
+- **Supabase:** tables `releases` (admins only) and `release_installs` (admins read); `latest_release(p_branch)` and `report_release(p_branch, p_version)` callable without login (a shop's main PC asks them); storage bucket `releases` (public read, admin upload). Applied to the live project.
+- ZAP POS (desktop repo, v1.9.78) downloads, checks the signature and installs it when ZAP POS is closed or on Update now.
+- Files: `supabase/schema.sql` (§12), `supabase/functions/sign-release/index.ts`, `src/admin/Releases.jsx`, `src/admin/AdminApp.jsx`, `src/admin/admin.css`, `docs/ARCHITECTURE.md` (§8, §9), `CLAUDE.md`.
+
 ## 2026-11-19: Plan codes for ZAP POS (Customers → Plan code)
 - Owner request: a proper way to give a shop the plan it bought (how many counters, paid until) without scripts. The admin makes a signed **plan code**; the shop owner pastes it into ZAP POS → Settings → Plan (works offline). Signing is ECDSA P-256 in a new Supabase edge function, so the secret key never reaches the browser or the repo; ZAP POS checks codes with the matching public key, so shops can't forge, edit or swap codes.
 - **Supabase:** `leads.pos_branch_code`; new table `plan_codes` (admins read/insert only); edge function `make-plan-code` (admin-only, records each code, remembers the shop code). Secret `PLAN_SIGNING_KEY` must be set in Supabase → Edge Functions → Secrets. Applied to the live project.
