@@ -8,7 +8,7 @@ export function PageBar({ title, sub, children }) {
   return (
     <header className="adm-bar">
       <div>
-        <h1>{title}</h1>
+        <h1><span className="adm-title">{title}<svg viewBox="0 0 200 12" preserveAspectRatio="none" aria-hidden="true"><path d="M3 8 Q50 2 100 7 T197 5" pathLength="1" /></svg></span></h1>
         {sub && <p className="adm-status">{sub}</p>}
       </div>
       {children && <div className="adm-bar-actions">{children}</div>}

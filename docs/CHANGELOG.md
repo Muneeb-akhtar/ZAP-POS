@@ -2,6 +2,12 @@
 
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
+## 2026-11-19: Admin look: website colours with glass
+- The owner chose the website's colours (white, ZAP blue, electric yellow) with a glass effect. Every admin page: white ground with two faint slow-drifting blobs (blue, yellow), frosted glass cards, tables, page bar and sidebar; the open page is a blue pill with a yellow dot; page titles get the website's yellow squiggle (drawn once, `PageBar` in `ui.jsx`); stat icons on pale blue tiles; the money card ("Received this month", `Stat hero`) is solid blue with a yellow icon and badge; today's bar is yellow. Dark mode uses the website's navy.
+- Animations (calm, once per page, off with reduced motion): numbers count up (`CountUp`), bars grow, the income line draws, the licence ring fills, pages rise in.
+- Dashboard: "Income, last 6 months" line chart (`Area`) and "Licence keys" ring (`Donut`); title "Good evening, welcome back"; your initial in the sidebar.
+- Files: `src/admin/admin.css` (look block before the mobile rules), `src/admin/Charts.jsx`, `src/admin/Dashboard.jsx`, `src/admin/AdminApp.jsx`, `src/admin/ui.jsx`, docs.
+
 ## 2026-11-19: Admin V15 look undone
 - The owner didn't like the V15 glass look once it was live, so it is reverted (admin.css V15 block, `CountUp`/`Area`/`Donut`, Dashboard income and key cards, sidebar initial). New style options will be previewed before anything is built. Files: `src/admin/admin.css`, `src/admin/Charts.jsx`, `src/admin/Dashboard.jsx`, `src/admin/AdminApp.jsx`, docs.
 
