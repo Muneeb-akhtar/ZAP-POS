@@ -554,16 +554,21 @@ body:has(.adm) { background: var(--bg); }
    with an icon tile; a row of stat cards (icon tile, big number, small capital label); filter bars as one glass card
    with segmented chips; tables with small capital headings and a "Showing N · Live" foot. ---------- */
 .adm { grid-template-columns: 248px minmax(0, 1fr); grid-template-rows: auto 1fr; }
-.adm-top { grid-column: 1 / -1; position: sticky; top: 0; z-index: 20; display: flex; align-items: center; gap: 18px; padding: 12px 24px; background: var(--glass); border-bottom: 1px solid var(--glass-line); backdrop-filter: blur(16px) saturate(1.3); -webkit-backdrop-filter: blur(16px) saturate(1.3); }
+.adm-top { grid-column: 1 / -1; position: sticky; top: 0; z-index: 20; display: flex; align-items: center; gap: 14px; padding: 12px 22px; background: var(--glass); border-bottom: 1px solid var(--glass-line); backdrop-filter: blur(16px) saturate(1.3); -webkit-backdrop-filter: blur(16px) saturate(1.3); }
 .adm-top-brand { display: flex; align-items: center; gap: 11px; flex-shrink: 0; white-space: nowrap; color: var(--ink); }
 .adm-top-brand b { display: block; font-family: var(--font-head); font-size: 22px; font-weight: 800; letter-spacing: -.03em; line-height: 1; }
 .adm-top-brand b i { font-style: normal; color: var(--brand-500); }
 .adm-top-brand small { display: block; margin-top: 3px; font-size: 10px; font-weight: 700; letter-spacing: .28em; text-transform: uppercase; color: var(--brand-500); }
 .adm-top-nav { display: flex; align-items: center; gap: 2px; margin: 0 auto; min-width: 0; overflow-x: auto; scrollbar-width: none; padding: 5px; border-radius: 999px; background: var(--glass-strong); border: 1px solid var(--glass-line); box-shadow: var(--glass-shadow); }
-.adm-top-nav :is(button, a) { display: inline-flex; align-items: center; gap: 7px; padding: 8px 14px; border-radius: 999px; font-size: 11.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text); white-space: nowrap; transition: background .2s, color .2s; }
-.adm-top-nav :is(button, a):hover { background: var(--glass-hover); color: var(--ink); }
+.adm-top-nav button { display: inline-flex; align-items: center; gap: 6px; flex-shrink: 0; padding: 8px 12px; border-radius: 999px; font-size: 11.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text); white-space: nowrap; transition: background .2s, color .2s; }
+.adm-top-nav button:hover { background: var(--glass-hover); color: var(--ink); }
 .adm-top-nav button.on { background: var(--brand-500); color: #fff; }
-.adm-top-me { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.adm-top-me { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.adm-top-me .adm-icon-btn { width: 42px; height: 42px; background: var(--glass-strong); border-color: var(--glass-line); }
+.adm-top-me .adm-icon-btn:hover { border-color: var(--brand-200); color: var(--brand-600); }
+/* the top bar always fits: link icons go first, then the links themselves (the sidebar has them all) */
+@media (max-width: 1440px) { .adm-top-nav button svg { display: none; } .adm-top-nav button { padding: 8px 11px; letter-spacing: .06em; } }
+@media (max-width: 1180px) { .adm-top-nav { visibility: hidden; } }
 .adm-top-logout { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 999px; font-size: 11.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; white-space: nowrap; color: var(--ink); background: var(--glass-strong); border: 1px solid var(--glass-line); box-shadow: var(--glass-shadow); transition: color .2s, border-color .2s; }
 .adm-top-logout:hover { color: #dc2626; border-color: #fca5a5; }
 
@@ -597,13 +602,14 @@ body:has(.adm) { background: var(--bg); }
 /* page header: no card, an icon tile, a big title, a small capital line */
 .adm-bar { position: static; margin: 26px 0 10px; padding: 0; background: none; border: 0; box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none; }
 :root[data-theme="dark"] .adm .adm-bar { background: none; }
+.adm .adm-bar-actions { justify-content: flex-end; }
 .adm-bar-head { display: flex; align-items: flex-start; gap: 14px; }
 .adm-bar-ic { width: 42px; height: 42px; flex-shrink: 0; margin-top: 2px; border-radius: 13px; display: grid; place-items: center; color: var(--brand-500); background: var(--glass-strong); border: 1px solid var(--glass-line); box-shadow: var(--glass-shadow); }
 .adm-bar h1 { font-size: 34px; letter-spacing: -.03em; }
 .adm-bar .adm-status { margin-top: 12px; font-size: 11.5px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
 
 /* stat cards: icon tile, big number, small capital label */
-.adm-stats { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; }
+.adm-stats { grid-template-columns: repeat(auto-fit, minmax(138px, 1fr)); gap: 12px; }
 .adm-nav { scrollbar-width: thin; scrollbar-color: var(--brand-200) transparent; }
 .adm-nav::-webkit-scrollbar { width: 4px; }
 .adm-nav::-webkit-scrollbar-thumb { border-radius: 4px; background: var(--brand-200); }

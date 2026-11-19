@@ -2,6 +2,10 @@
 
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
+## 2026-11-20: Top bar fits every screen
+- On the owner's laptop (about 1280 px wide at his zoom) the last quick link was cut off. The quick links are tighter, "View site" moved to an icon button on the right, link icons hide below 1440 px and the links hide below 1180 px (all pages stay in the sidebar). Checked at 1100, 1280, 1366, 1536 and 1920 px: nothing overflows. Stat cards fit six in a row from about 1280 px; page-bar buttons stay right-aligned when they wrap.
+- Files: `src/admin/AdminApp.jsx`, `src/admin/admin.css`, docs.
+
 ## 2026-11-20: Top bar and background tweaks (owner request)
 - Background: the yellow glow is gone (second blob is now a pale sky blue, `--blob-sky`).
 - Top bar: "ZAP POS Admin" stays on one line at the left; the owner chip on the right is replaced by a **Log out** button (theme toggle kept); the quick-links pill scrolls instead of squeezing the brand.

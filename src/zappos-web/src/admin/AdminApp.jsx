@@ -251,9 +251,9 @@ function Panel({ session }) {
               <a className="adm-top-brand" href="/" target="_blank" rel="noreferrer"><Logo size={38} /><span><b>ZAP <i>POS</i></b><small>Admin</small></span></a>
               <nav className="adm-top-nav" aria-label="Quick links">
                 {QUICK.map((q) => <button key={q.id} className={current === q.id ? 'on' : ''} onClick={() => go(q.id)}><Icon name={q.icon} size={15} /> {q.label}</button>)}
-                <a href="/" target="_blank" rel="noreferrer"><Icon name="external" size={15} /> View site</a>
               </nav>
               <span className="adm-top-me">
+                <a className="adm-icon-btn" href="/" target="_blank" rel="noreferrer" title="View website" aria-label="View website"><Icon name="external" size={16} /></a>
                 <ThemeToggle />
                 <button className="adm-top-logout" onClick={() => supabase.auth.signOut()} title={`Signed in as ${session.user.email}`}><Icon name="logout" size={16} /> Log out</button>
               </span>
