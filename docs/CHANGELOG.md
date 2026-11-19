@@ -2,6 +2,13 @@
 
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
+## 2026-11-20: Top bar and background tweaks (owner request)
+- Background: the yellow glow is gone (second blob is now a pale sky blue, `--blob-sky`).
+- Top bar: "ZAP POS Admin" stays on one line at the left; the owner chip on the right is replaced by a **Log out** button (theme toggle kept); the quick-links pill scrolls instead of squeezing the brand.
+- The ZAP logo in the top bar zaps once every 2 minutes (about 3 s: the bolt turns yellow with a soft glow and a small tilt; `admLogo`, `admBolt`; off with reduced motion).
+- Sidebar menu gets a thin blue scrollbar; the date-range buttons don't wrap on phones; on phones the sidebar profile card is hidden (Log out is in the top bar).
+- Files: `src/admin/AdminApp.jsx`, `src/admin/admin.css`, docs.
+
 ## 2026-11-20: Earnings page
 - Owner asked for one place to see all earnings and every customer ranked by what they paid. New **Earnings** page (menu after Payments, and in the top bar): total earned (all time / this year / last 12 months / this month), this month vs last, paying customers (with an account), average per customer, top customer, best month; "Earned per month" line chart; customers ranked by total paid (gold/silver/bronze for the top three) with account status, payments, settled bills, paying since, total and share of earnings; filter by account, search, CSV export; a row opens the lead. Money in = payments + settled bills, shown in separate columns.
 - Fix: the line chart (`Area`) could stop part-way in Chrome (dash animation + non-scaling stroke); it now reveals with a clip-path.
