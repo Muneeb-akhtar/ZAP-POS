@@ -12,11 +12,11 @@ const VERSION = /^\d+\.\d+\.\d+$/
 
 // The version Windows shows for the file (its ProductVersion), read from the program's own header.
 function versionOf(bytes) {
-  const look = bytes.subarray(0, Math.min(bytes.length, 4 * 1024 * 1024))
+  const look = bytes   // .NET programs keep their own version deep in the file (about 10 MB in), after the runtime's
   for (const key of ['ProductVersion', 'FileVersion']) {
     const pat = new Uint8Array([...key].flatMap((c) => [c.charCodeAt(0), 0]))
-    outer: for (let i = 0; i <= look.length - pat.length; i++) {
-      for (let j = 0; j < pat.length; j++) if (look[i + j] !== pat[j]) continue outer
+    outer: for (let i = look.indexOf(pat[0]); i >= 0 && i <= look.length - pat.length; i = look.indexOf(pat[0], i + 1)) {
+      for (let j = 1; j < pat.length; j++) if (look[i + j] !== pat[j]) continue outer
       let p = i + pat.length
       while (p < look.length - 1 && look[p] === 0 && look[p + 1] === 0) p += 2
       let text = ''
@@ -60,8 +60,7 @@ export default function Releases() {
     const x = e.target.files?.[0]
     if (!x) return
     setFile(x)
-    const head = new Uint8Array(await x.slice(0, 4 * 1024 * 1024).arrayBuffer())
-    setF((v) => ({ ...v, version: versionOf(head) || v.version }))
+    setF((v) => ({ ...v, version: versionOf(new Uint8Array(await x.arrayBuffer())) || v.version }))
   }
 
   const publish = async (e) => {
