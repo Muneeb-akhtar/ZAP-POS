@@ -447,6 +447,51 @@ create policy "Admins replace releases" on storage.objects for update to authent
   using (bucket_id = 'releases' and public.is_admin());
 
 -- ============================================================
+-- 13) Licence keys (Plans page): each key has a start, an end and a status.
+--     A new key for a shop replaces its old one (status 'replaced'); 'revoked' switches a key off early.
+--     A shop's main PC asks licence_status() every 30 minutes: it gets told when its key was revoked, and it
+--     receives the shop's newest key by itself (only a PC that already holds one of that shop's keys can ask).
+-- ============================================================
+alter table public.plan_codes add column if not exists starts_on date;
+alter table public.plan_codes add column if not exists status text not null default 'active';
+alter table public.plan_codes drop constraint if exists plan_codes_status;
+alter table public.plan_codes add constraint plan_codes_status check (status in ('active', 'replaced', 'revoked'));
+alter table public.plan_codes add column if not exists changed_at timestamptz;
+create index if not exists plan_codes_branch on public.plan_codes (branch_code, created_at desc);
+
+-- a new key replaces the shop's earlier active keys
+create or replace function public.plan_codes_replace() returns trigger language plpgsql security definer set search_path = '' as $$
+begin
+  update public.plan_codes set status = 'replaced', changed_at = now()
+  where branch_code = new.branch_code and status = 'active' and id <> new.id;
+  return new;
+end $$;
+revoke all on function public.plan_codes_replace() from public, anon, authenticated;
+drop trigger if exists plan_codes_replace on public.plan_codes;
+create trigger plan_codes_replace after insert on public.plan_codes for each row execute function public.plan_codes_replace();
+
+-- admins may revoke (or restore) a key; nothing is ever deleted
+drop policy if exists "Admins change plan codes" on public.plan_codes;
+create policy "Admins change plan codes" on public.plan_codes for update to authenticated using (public.is_admin()) with check (public.is_admin());
+
+-- asked by a shop's main PC with the key it holds now
+create or replace function public.licence_status(p_branch text, p_code text)
+returns jsonb language sql stable security definer set search_path = public as $$
+  with mine as (
+    select * from public.plan_codes
+    where branch_code = upper(trim(p_branch)) and replace(upper(code), '-', '') = replace(upper(trim(p_code)), '-', '')
+  ), newest as (
+    select code from public.plan_codes
+    where branch_code = upper(trim(p_branch)) and status = 'active'
+    order by created_at desc limit 1
+  )
+  select case when not exists (select 1 from mine) then jsonb_build_object('status', 'unknown')
+              else jsonb_build_object('status', (select status from mine limit 1), 'newest', (select code from newest)) end
+$$;
+revoke all on function public.licence_status(text, text) from public;
+grant execute on function public.licence_status(text, text) to anon, authenticated;
+
+-- ============================================================
 -- 9) Make yourself the admin (do this AFTER creating your user in
 --    Authentication → Users → Add user, with "Auto Confirm User" on).
 --    Replace the email below, then run just this statement:

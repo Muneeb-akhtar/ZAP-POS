@@ -2,6 +2,11 @@
 
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
+## 2026-11-19: Plans page (licence keys)
+- New **Plans** page in the admin: every licence key with its state (active, ending in ≤ 7 days, expired, replaced, revoked), filter chips, Copy / Renew / Revoke / Restore, and **New key**: pick the client, shop code, counters and a duration (1, 3, 6, 12 months or a date). A new key starts when the shop's current key ends, and replaces it (`plan_codes_replace` trigger). ZAP POS (1.9.79) fetches the newest key and revocations itself every 30 minutes through `licence_status()`, warns from 7 days before the end and locks the day after.
+- Schema §13: `plan_codes.starts_on`, `status` (active/replaced/revoked), `changed_at`; admins may update status; `licence_status(p_branch, p_code)` answers only a caller holding one of that shop's keys. `make-plan-code` accepts `starts_on`.
+- Files: `supabase/schema.sql`, `supabase/functions/make-plan-code/index.ts`, `src/admin/PlanCodes.jsx`, `src/admin/AdminApp.jsx`, `src/admin/admin.css`, docs.
+
 ## 2026-11-19: Admin sign-in fits small screens
 - The sign-in box was taller than a laptop screen (or a zoomed-in browser) and its bottom was cut off. Tighter spacing, and on screens under 860 px tall a compact layout (no lock icon, smaller heading and fields). Files: `src/admin/admin.css`.
 
