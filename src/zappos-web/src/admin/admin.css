@@ -414,125 +414,6 @@ code { font-family: var(--font-mono); font-size: .88em; padding: 1px 6px; border
 .acc-actions { display: flex; flex-wrap: wrap; gap: 10px; }
 .acc-sub { font-size: 18px; margin-top: 6px; }
 
-/* ============================================================
-   V15 look (approved 19 Nov 2026): frosted white glass on a soft blue background with slow drifting colour
-   blobs; the open page is a solid blue pill; stat cards get round colour icons and a green change badge; numbers
-   count up, bars grow, lines draw and rings fill once when a page opens (calm: about 2 s, never looping).
-   Dark mode: the same glass in navy. Reduced motion: everything shows at once (end of this block).
-   ============================================================ */
-.adm, .adm-center {
-  --glass: rgba(255, 255, 255, .62); --glass-strong: rgba(255, 255, 255, .82); --glass-line: rgba(255, 255, 255, .9);
-  --glass-shadow: 0 10px 30px -18px rgba(11, 84, 180, .5); --glass-hover: rgba(11, 132, 240, .08);
-  --blob-a: #8cc4ff; --blob-b: #c3b5ff; --blob-c: #9be7ff; --ground: #e4f0ff;
-}
-:root[data-theme="dark"] :is(.adm, .adm-center) {
-  --glass: rgba(16, 30, 56, .58); --glass-strong: rgba(18, 34, 62, .85); --glass-line: rgba(140, 190, 255, .14);
-  --glass-shadow: 0 12px 32px -18px rgba(0, 0, 0, .8); --glass-hover: rgba(58, 160, 245, .12);
-  --blob-a: #0b4c9c; --blob-b: #3b2a8c; --blob-c: #0b5f78; --ground: #060f20;
-}
-body:has(.adm) { background: #e4f0ff; }
-:root[data-theme="dark"] body:has(.adm) { background: #060f20; }
-.adm { position: relative; isolation: isolate; background: var(--ground); }
-.adm::before, .adm::after { content: ''; position: fixed; z-index: -1; border-radius: 50%; filter: blur(70px); pointer-events: none; animation: admDrift 24s ease-in-out infinite alternate; }
-.adm::before { width: 520px; height: 520px; left: 120px; top: -160px; background: var(--blob-a); opacity: .75; }
-.adm::after { width: 460px; height: 460px; right: -120px; top: 32%; background: var(--blob-b); opacity: .55; animation-duration: 30s; animation-direction: alternate-reverse; }
-.adm-main::before { content: ''; position: fixed; z-index: -1; width: 380px; height: 380px; left: 38%; bottom: -160px; border-radius: 50%; background: var(--blob-c); opacity: .5; filter: blur(70px); pointer-events: none; animation: admDrift 28s ease-in-out infinite alternate; }
-@keyframes admDrift { to { transform: translate(60px, 40px) scale(1.08); } }
-
-/* glass surfaces */
-.adm :is(.adm-block, .adm-stat, .adm-table-wrap, .adm-card, .adm-range, .adm-tabs, .adm-blank, .adm-group),
-.adm-side, .adm-bar { background: var(--glass); border: 1px solid var(--glass-line); backdrop-filter: blur(18px) saturate(1.2); -webkit-backdrop-filter: blur(18px) saturate(1.2); box-shadow: var(--glass-shadow); }
-.adm-blank { border-style: solid; }
-.adm .adm-table th, .adm .adm-table tfoot td { background: rgba(255, 255, 255, .35); }
-:root[data-theme="dark"] .adm .adm-table th, :root[data-theme="dark"] .adm .adm-table tfoot td { background: rgba(255, 255, 255, .03); }
-.adm .adm-table td { border-bottom-color: rgba(11, 84, 180, .08); }
-.adm .adm-table tbody tr:hover td, .adm :is(.adm-todo, .adm-mini) button:hover, .adm-card-head:hover { background: var(--glass-hover); }
-.adm :is(input:is([type="text"], [type="number"], [type="tel"], [type="date"], [type="search"], [type="email"]), textarea, select),
-.adm .adm-search input, .adm .adm-select { background: var(--glass-strong); }
-.adm-sheet { background: var(--glass-strong); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border: 1px solid var(--glass-line); }
-
-/* sidebar: a floating glass panel; the open page is a solid blue pill */
-.adm { grid-template-columns: 252px 1fr; }
-.adm-side { top: 14px; height: calc(100vh - 28px); margin: 14px 0 14px 14px; border-radius: 22px; }
-.adm-nav button.on { background: var(--brand-500); color: #fff; box-shadow: 0 8px 18px -10px var(--brand-500); }
-.adm-nav button.on svg { color: #fff; }
-.adm-nav button:not(.on):hover { background: var(--glass-hover); }
-.adm-side-foot { border-top-color: var(--glass-line); }
-.adm-me { display: flex; align-items: center; gap: 10px; min-width: 0; }
-.adm-me-badge { width: 32px; height: 32px; flex-shrink: 0; border-radius: 50%; display: grid; place-items: center; font-size: 13px; font-weight: 700; color: var(--on-paper, #0b1220); background: var(--yellow, #ffd60a); }
-
-/* page bar: a glass strip */
-.adm-main { padding: 0 28px 40px; }
-.adm-bar { top: 14px; margin: 14px 0 6px; padding: 16px 22px; border-radius: 20px; }
-.adm-panel { padding-top: 12px; }
-
-/* cards */
-.adm-block { border-radius: 20px; }
-.adm-stat { border-radius: 18px; }
-.adm-stat.link:hover { border-color: var(--glass-line); box-shadow: 0 16px 34px -18px rgba(11, 84, 180, .6); }
-.adm-stat-label svg { box-sizing: content-box; padding: 7px; border-radius: 11px; color: #fff; background: var(--brand-500); }
-.adm-stats > :nth-child(4n+2) .adm-stat-label svg { background: #8b5cf6; }
-.adm-stats > :nth-child(4n+3) .adm-stat-label svg { background: #12a46b; }
-.adm-stats > :nth-child(4n+4) .adm-stat-label svg { background: #f59e0b; }
-.adm-stat-sub em:is(.up, .down) { padding: 1px 7px; border-radius: 7px; }
-.adm-stat-sub em.up { background: #dcf5e7; }
-.adm-stat-sub em.down { background: #fde2e2; }
-:root[data-theme="dark"] .adm-stat-sub em.up { background: rgba(22, 163, 74, .16); }
-:root[data-theme="dark"] .adm-stat-sub em.down { background: rgba(239, 68, 68, .16); }
-.adm-wide-two { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: 18px; }
-
-/* charts */
-.adm-bars-col i { background: linear-gradient(var(--brand-400), var(--brand-500)); transform-origin: bottom; animation: admGrow 1.6s cubic-bezier(.2, .7, .2, 1) both; animation-delay: calc(var(--i, 0) * 40ms); }
-.adm-bars-col i.zero { animation: none; }
-.adm-barlist-bar, .adm-funnel-track i, .adm-progress i { transform-origin: left; animation: admGrowX 1.6s cubic-bezier(.2, .7, .2, 1) both; }
-@keyframes admGrow { from { transform: scaleY(0); } }
-@keyframes admGrowX { from { transform: scaleX(0); } }
-
-.adm-area { position: relative; }
-.adm-area svg { display: block; width: 100%; height: var(--h); overflow: visible; }
-.adm-area-grid { stroke: var(--line); stroke-dasharray: 4 6; }
-.adm-area-fill { fill: url(#admAreaFill); animation: admFadeIn 1.6s ease .6s both; }
-.adm-area-line { fill: none; stroke: var(--brand-500); stroke-width: 2.5; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; animation: admDraw 2.2s ease forwards; }
-.adm-area-hits { position: absolute; inset: 0; display: grid; }
-.adm-area-hits button { display: flex; align-items: flex-end; justify-content: center; border-radius: 10px; cursor: default; }
-.adm-area-hits button.on { background: var(--glass-hover); }
-.adm-area-hits small { transform: translateY(20px); font-size: 11px; color: var(--muted); }
-.adm-area { margin-bottom: 22px; }
-@keyframes admDraw { to { stroke-dashoffset: 0; } }
-@keyframes admFadeIn { from { opacity: 0; } }
-
-.adm-donut { display: grid; grid-template-columns: 132px 1fr; align-items: center; gap: 18px; position: relative; }
-.adm-donut svg { width: 132px; height: 132px; }
-.adm-donut-track { fill: none; stroke: var(--line); stroke-width: 12; }
-.adm-donut-seg { fill: none; stroke-width: 12; stroke-dasharray: 0 var(--c); animation: admRing 2s cubic-bezier(.2, .7, .2, 1) .2s forwards; }
-@keyframes admRing { to { stroke-dasharray: var(--len) var(--c); } }
-.adm-donut-mid { position: absolute; left: 0; top: 0; width: 132px; height: 132px; display: grid; place-content: center; text-align: center; }
-.adm-donut-mid b { font-family: var(--font-head); font-size: 26px; font-weight: 800; color: var(--ink); line-height: 1; }
-.adm-donut-mid small { font-size: 11.5px; color: var(--muted); }
-.adm-donut-key { display: grid; gap: 8px; font-size: 13.5px; color: var(--text); }
-.adm-donut-key li { display: flex; align-items: center; gap: 8px; }
-.adm-donut-key b { margin-left: auto; color: var(--ink); font-variant-numeric: tabular-nums; }
-.adm-donut-key i { width: 10px; height: 10px; border-radius: 50%; }
-.adm-donut .blue { stroke: var(--brand-500); background: var(--brand-500); }
-.adm-donut .amber { stroke: #f59e0b; background: #f59e0b; }
-.adm-donut .red { stroke: #ef4444; background: #ef4444; }
-
-/* pages rise in gently */
-.adm-panel, .adm-main > .adm-stats, .adm-main > .adm-block { animation: admRise .7s cubic-bezier(.2, .7, .2, 1) both; }
-@keyframes admRise { from { opacity: 0; transform: translateY(10px); } }
-
-/* sign-in: the same background and glass box */
-.adm-center { background: var(--ground); position: relative; isolation: isolate; overflow: hidden; }
-.adm-center::before { content: ''; position: absolute; z-index: -1; width: 520px; height: 520px; left: 50%; top: -220px; transform: translateX(-50%); border-radius: 50%; background: var(--blob-a); opacity: .7; filter: blur(80px); }
-.adm-box { background: var(--glass); border: 1px solid var(--glass-line); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); box-shadow: var(--glass-shadow); }
-
-@media (prefers-reduced-motion: reduce) {
-  .adm::before, .adm::after, .adm-main::before, .adm-bars-col i, .adm-barlist-bar, .adm-funnel-track i, .adm-progress i,
-  .adm-area-fill, .adm-panel, .adm-main > .adm-stats, .adm-main > .adm-block { animation: none; }
-  .adm-area-line { animation: none; stroke-dashoffset: 0; }
-  .adm-donut-seg { animation: none; stroke-dasharray: var(--len) var(--c); }
-}
-
 @media (max-width: 900px) {
   .adm { grid-template-columns: minmax(0, 1fr); }
   .adm-side { position: sticky; top: 0; z-index: 10; min-width: 0; height: auto; flex-direction: row; flex-wrap: wrap; align-items: center; gap: 10px; padding: 12px 16px; border-right: 0; border-bottom: 1px solid var(--line); }
@@ -546,11 +427,7 @@ body:has(.adm) { background: #e4f0ff; }
   .adm-grid, .adm-cmp { grid-template-columns: 1fr; }
   .adm-block { padding: 16px; }
   .adm-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .adm-two, .adm-wide-two, .adm-lead-cols, .adm-checks { grid-template-columns: 1fr; }
-  .adm-side { margin: 0; border-radius: 0 0 18px 18px; height: auto; top: 0; }
-  .adm-bar { margin-top: 10px; padding: 12px 16px; }
-  .adm-donut { grid-template-columns: 112px 1fr; }
-  .adm-donut svg, .adm-donut-mid { width: 112px; height: 112px; }
+  .adm-two, .adm-lead-cols, .adm-checks { grid-template-columns: 1fr; }
   .adm-nav-group { display: none; }
   .adm-row-time, .adm-row-head .adm-chev { display: none; }
   .adm-row-head { flex-wrap: wrap; }
