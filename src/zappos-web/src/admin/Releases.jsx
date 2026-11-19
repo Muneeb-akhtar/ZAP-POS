@@ -60,7 +60,8 @@ export default function Releases() {
     const x = e.target.files?.[0]
     if (!x) return
     setFile(x)
-    setF((v) => ({ ...v, version: versionOf(new Uint8Array(await x.arrayBuffer())) || v.version }))
+    const found = versionOf(new Uint8Array(await x.arrayBuffer()))
+    setF((v) => ({ ...v, version: found || v.version }))
   }
 
   const publish = async (e) => {
