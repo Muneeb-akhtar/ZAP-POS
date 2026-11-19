@@ -2,6 +2,9 @@
 
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
+## 2026-11-19: Admin sign-in fits small screens
+- The sign-in box was taller than a laptop screen (or a zoomed-in browser) and its bottom was cut off. Tighter spacing, and on screens under 860 px tall a compact layout (no lock icon, smaller heading and fields). Files: `src/admin/admin.css`.
+
 ## 2026-11-19: Releases (automatic ZAP POS updates)
 - Owner request: shops' PCs update ZAP POS by themselves. New admin page **Releases**: choose ZapPos.exe (the version is read from the file), write what's new, send to all shops or one shop first, Publish. The page hashes the file, gets it signed by the new edge function `sign-release` ("ZAPREL1|version|sha256", same secret key `PLAN_SIGNING_KEY` as plan codes), uploads it to the public bucket `releases` in 40 MB parts (Supabase's limit is 50 MB) and records it. "Stop sending" takes a version back. "x of y shops updated" comes from `release_installs`.
 - **Supabase:** tables `releases` (admins only) and `release_installs` (admins read); `latest_release(p_branch)` and `report_release(p_branch, p_version)` callable without login (a shop's main PC asks them); storage bucket `releases` (public read, admin upload). Applied to the live project.
