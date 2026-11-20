@@ -3,6 +3,11 @@
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
 
+## 2026-11-20: ZAP POS setup uses the licence key and makes the owner's account
+- **Supabase (schema §20, applied and tested):** `licence_lookup(code)` (anon, flood-limited 30/3000 an hour): the shop, owner, plan and whether it already has an account, for the exact key text only. `link_signup()` now links a sign-up that carries `plan_code` (from the POS setup screen) to that key's shop first, whatever email or phone was typed; `ZAP_ACCOUNT_EXISTS` still stops a second account for a shop. Tested (rolled back): lookup, wrong key, sign-up with another email linked by key.
+- Why: ZAP POS 1.9.85 asks for the licence key first, then creates the owner's account (email + password + PIN); the same email and password log in on the website `/account` page.
+- Files: `supabase/schema.sql`, docs.
+
 ## 2026-11-20: Invoices you can send to clients
 - **Admin → Bills is now an invoice maker:** several lines per invoice (item, qty, price) with quick-add items, discount, tax %, live total; numbers show as INV-1006 / EST-1003 (old bills keep their number). **Invoice details** (business name, your name, phone, email, address, how to pay) print on every invoice. Viewing an invoice shows exactly what the client sees, with Send on WhatsApp (message includes the private link), Email, Copy link, Download PDF and a link on/off switch; `sent_at` records the first send.
 - **Client page `/invoice/?t=…`** (no login): the invoice, Download PDF (print), and Upload payment screenshot, which marks the bill "Proof received" in the admin. A PAID stamp appears once settled. Paper-white in both themes; checked at 1366 and 390 px, light and dark, no sideways scroll.

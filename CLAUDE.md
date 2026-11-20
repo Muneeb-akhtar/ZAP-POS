@@ -8,7 +8,7 @@ This repo holds the **public landing page**, the **admin panel** at `/admin/` (d
 
 ## Stack
 - `src/zappos-web/`: React 18 + Vite 5, plain CSS (no Tailwind, no UI library), fonts bundled via @fontsource.
-- **Supabase** (Postgres + Auth + Row Level Security): `site_content` (published page), `admins`, `leads` (demo requests), `payments`, `events` (anonymous visits/clicks), `plan_codes`, `releases`, `release_installs`, `bills` (invoices/estimates with line items and a private `share_token`), `invoice_settings`, `help_requests`, functions `admin_stats()`, `admin_health()`, `admin_team()`/`add_admin()`/`remove_admin()`, `send_help_request()`, `invoice_view()`/`invoice_proof()` (anon, by token); storage buckets `releases` (ZAP POS versions, signed) and `bill-proofs` (private). Edge functions `make-plan-code` and `sign-release`; `make-plan-code` (`supabase/functions/`) signs ZAP POS licence keys (admin → Plans) with the secret `PLAN_SIGNING_KEY` (never commit it; deploy with the Supabase MCP or `supabase functions deploy make-plan-code`). Schema: `supabase/schema.sql` (safe to re-run; run it again after changing it). The admin uses `@supabase/supabase-js`; the landing page uses plain REST fetches (keeps its bundle small).
+- **Supabase** (Postgres + Auth + Row Level Security): `site_content` (published page), `admins`, `leads` (demo requests), `payments`, `events` (anonymous visits/clicks), `plan_codes`, `releases`, `release_installs`, `bills` (invoices/estimates with line items and a private `share_token`), `invoice_settings`, `help_requests`, functions `admin_stats()`, `admin_health()`, `admin_team()`/`add_admin()`/`remove_admin()`, `send_help_request()`, `invoice_view()`/`invoice_proof()` (anon, by token), `licence_lookup()` (anon, ZAP POS setup); storage buckets `releases` (ZAP POS versions, signed) and `bill-proofs` (private). Edge functions `make-plan-code` and `sign-release`; `make-plan-code` (`supabase/functions/`) signs ZAP POS licence keys (admin → Plans) with the secret `PLAN_SIGNING_KEY` (never commit it; deploy with the Supabase MCP or `supabase functions deploy make-plan-code`). Schema: `supabase/schema.sql` (safe to re-run; run it again after changing it). The admin uses `@supabase/supabase-js`; the landing page uses plain REST fetches (keeps its bundle small).
 - Dev machine: Windows, VS Code, PowerShell, Node 26, Git 2.56.
 
 ## Commands
@@ -75,6 +75,6 @@ Env: copy `src/zappos-web/.env.example` to `.env.local` and fill `VITE_SUPABASE_
 1. Replace placeholders with real content (phone, prices, store links, reviews).
 2. ~~Admin panel~~ done (Supabase, `/admin/`).
 3. ~~Dashboard, leads, payments, analytics~~ done.
-4. ~~Customer accounts~~ done (`/account/`). Next: the POS app signs in with the same Supabase login and checks `my_account()` (see ARCHITECTURE §10).
+4. ~~Customer accounts~~ done (`/account/`). ZAP POS 1.9.85 creates the owner's account at setup (licence key → `licence_lookup()`, sign-up linked by `plan_code`). Next: the POS app checks `my_account()` with that login (see ARCHITECTURE §10).
 4b. Help desk is ready in Supabase (`send_help_request()`); next: ZAP POS's Support screen (and a website form) send requests to it.
 5. Ideas: email/WhatsApp alert on a new lead (Supabase webhook), online payments once a JazzCash/Easypaisa merchant account exists.

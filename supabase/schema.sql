@@ -845,3 +845,74 @@ returns jsonb language sql stable security definer set search_path = public as $
 $$;
 revoke all on function public.my_account() from public, anon;
 grant execute on function public.my_account() to authenticated;
+
+-- ============================================================
+-- 20) ZAP POS setup: licence key first, then the owner's account (20 Nov 2026).
+--     The POS setup screen sends the key a shop pasted to licence_lookup() and shows whose key it is (shop, owner,
+--     plan) so the owner checks it before installing. Then it signs the owner up with email + password (the same
+--     account as the website's /account page), passing the key as `plan_code` in the sign-up details: link_signup()
+--     links the new login to exactly that key's shop, even when the owner types a different email or phone.
+--     Only someone holding the key (ZAP sends it to the owner) can look it up; flood-limited like the other public
+--     entry points.
+-- ============================================================
+create or replace function public.licence_lookup(p_code text)
+returns jsonb language plpgsql security definer set search_path = public as $$
+declare v jsonb;
+begin
+  if not public.rate_ok('licence_lookup', 30, 3000) then
+    raise exception 'Too many requests. Please try again later.' using errcode = 'P0429';
+  end if;
+  select jsonb_build_object('branch_code', p.branch_code, 'counters', p.counters, 'paid_until', p.paid_until, 'status', p.status,
+                            'shop', l.shop, 'name', l.name, 'phone', l.phone, 'city', l.city, 'email', l.email,
+                            'has_account', l.user_id is not null)
+    into v
+    from public.plan_codes p join public.leads l on l.id = p.lead_id
+   where replace(upper(p.code), '-', '') = replace(upper(trim(coalesce(p_code, ''))), '-', '')
+   limit 1;
+  return v;
+end $$;
+revoke all on function public.licence_lookup(text) from public;
+grant execute on function public.licence_lookup(text) to anon, authenticated;
+
+create or replace function public.link_signup()
+returns trigger language plpgsql security definer set search_path = public as $$
+declare
+  m jsonb := coalesce(new.raw_user_meta_data, '{}'::jsonb);
+  v_phone text := nullif(trim(m->>'phone'), '');
+  v_plan text := nullif(replace(upper(trim(m->>'plan_code')), '-', ''), '');
+  v_id uuid;
+  v_user uuid;
+begin
+  -- signed up from the ZAP POS setup screen with a licence key: that key's shop, whatever email or phone was typed
+  if v_plan is not null then
+    select l.id, l.user_id into v_id, v_user
+      from public.plan_codes p join public.leads l on l.id = p.lead_id
+     where replace(upper(p.code), '-', '') = v_plan
+     limit 1 for update of l;
+  end if;
+  if v_id is null then
+    select id, user_id into v_id, v_user from public.leads
+     where lower(email) = lower(new.email) or (v_phone is not null and phone_key = public.phone_key(v_phone))
+     order by (lower(email) = lower(new.email)) desc nulls last
+     limit 1 for update;
+  end if;
+  if v_id is not null and v_user is not null and v_user <> new.id then
+    raise exception 'ZAP_ACCOUNT_EXISTS: this shop already has an account';
+  end if;
+  if v_id is null then
+    if v_phone is null then return new; end if; -- e.g. the owner's own login made in the dashboard
+    insert into public.leads (name, phone, email, shop, city, source, user_id, signed_up_at)
+    values (coalesce(nullif(trim(m->>'name'), ''), split_part(new.email, '@', 1)), v_phone, lower(new.email),
+            nullif(trim(m->>'shop'), ''), nullif(trim(m->>'city'), ''), 'Sign-up', new.id, now());
+  else
+    update public.leads l set
+      user_id = new.id, signed_up_at = now(),
+      email = coalesce(l.email, lower(new.email)),
+      shop  = coalesce(l.shop, nullif(trim(m->>'shop'), '')),
+      city  = coalesce(l.city, nullif(trim(m->>'city'), '')),
+      status = case when l.status = 'lost' then 'new' else l.status end
+    where l.id = v_id;
+  end if;
+  return new;
+end $$;
+revoke all on function public.link_signup() from public, anon, authenticated;
