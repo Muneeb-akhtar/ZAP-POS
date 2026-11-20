@@ -8,25 +8,13 @@ function BrandName({ name }) {
   return <span>{first}{rest.length > 0 && <> <span className="brand-accent">{rest.join(' ')}</span></>}</span>
 }
 
-// Theme: index.html sets data-theme before first paint (saved choice, else the device setting).
-// The toggle saves the visitor's choice; with no saved choice we keep following the device.
+// Theme: index.html sets data-theme before first paint (saved choice, else dark: the site's default look).
+// The toggle saves the visitor's choice.
 const THEME_KEY = 'zap-theme'
 const saveTheme = (t) => { try { localStorage.setItem(THEME_KEY, t) } catch { /* private mode etc. */ } }
-const savedTheme = () => { try { return localStorage.getItem(THEME_KEY) } catch { return null } }
 
 function useTheme() {
-  const [theme, setTheme] = useState(() => document.documentElement.dataset.theme || 'light')
-  useEffect(() => {
-    const mq = window.matchMedia('(prefers-color-scheme: dark)')
-    const onSystem = (e) => {
-      if (savedTheme()) return
-      const t = e.matches ? 'dark' : 'light'
-      document.documentElement.dataset.theme = t
-      setTheme(t)
-    }
-    mq.addEventListener('change', onSystem)
-    return () => mq.removeEventListener('change', onSystem)
-  }, [])
+  const [theme, setTheme] = useState(() => document.documentElement.dataset.theme || 'dark')
   return [theme, setTheme]
 }
 

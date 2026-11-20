@@ -3,6 +3,10 @@
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
 
+## 2026-11-20: Dark theme is the default
+- Website, `/admin/`, `/account/` and `/invoice/` open in the dark theme unless the visitor chose light with the toggle (the device's light/dark setting is no longer followed). Why: owner wants the dark look everywhere.
+- Files: the four `index.html` theme scripts, `src/components/Sections.jsx` (`useTheme`), `docs/ARCHITECTURE.md`.
+
 ## 2026-11-20: ZAP POS setup uses the licence key and makes the owner's account
 - **Supabase (schema §20, applied and tested):** `licence_lookup(code)` (anon, flood-limited 30/3000 an hour): the shop, owner, plan and whether it already has an account, for the exact key text only. `link_signup()` now links a sign-up that carries `plan_code` (from the POS setup screen) to that key's shop first, whatever email or phone was typed; `ZAP_ACCOUNT_EXISTS` still stops a second account for a shop. Tested (rolled back): lookup, wrong key, sign-up with another email linked by key.
 - Why: ZAP POS 1.9.85 asks for the licence key first, then creates the owner's account (email + password + PIN); the same email and password log in on the website `/account` page.
