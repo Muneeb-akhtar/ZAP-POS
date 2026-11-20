@@ -796,3 +796,16 @@ td .adm-kind + .adm-bill { margin-left: 6px; }
   .adm-table tfoot tr { display: flex; justify-content: space-between; padding: 12px 14px; border-radius: 14px; background: var(--surface); border: 1px solid var(--line); }
   .adm-table tfoot td { padding: 0; background: none; border: 0; }
 }
+
+/* ---------- Dark glow (20 Nov 2026): depth, glass cards, blue-to-cyan accents. Dark only, calm, no motion. ---------- */
+:root[data-theme="dark"] body { background: radial-gradient(900px 520px at 12% -8%, rgba(43,149,255,.2), transparent 60%), radial-gradient(720px 520px at 96% 6%, rgba(124,92,255,.14), transparent 60%), var(--bg); background-attachment: fixed; }
+:root[data-theme="dark"] .adm-side, :root[data-theme="dark"] .adm-top { background: linear-gradient(180deg, rgba(14,24,48,.82), rgba(8,14,30,.82)); backdrop-filter: blur(14px); }
+:root[data-theme="dark"] :is(.adm-stat, .adm-card, .adm-block, .adm-table-wrap, .adm-box, .adm-row) { background: linear-gradient(180deg, rgba(22,36,68,.62), rgba(12,21,42,.62)); border-color: rgba(120,160,255,.16); box-shadow: 0 1px 0 rgba(255,255,255,.04) inset, 0 18px 40px -22px rgba(0,0,0,.8); }
+:root[data-theme="dark"] .adm-stat { position: relative; overflow: hidden; }
+:root[data-theme="dark"] .adm-stat::before { content: ''; position: absolute; inset: 0 0 auto 0; height: 2px; background: linear-gradient(90deg, #2b95ff, #5ad1ff, transparent); }
+:root[data-theme="dark"] .adm-stat.link:hover, :root[data-theme="dark"] .adm-card.open { border-color: rgba(90,209,255,.5); box-shadow: 0 0 30px -10px rgba(43,149,255,.65), 0 18px 40px -22px rgba(0,0,0,.8); }
+:root[data-theme="dark"] .adm-stat-value { background: linear-gradient(90deg, #fff, #8fdcff); -webkit-background-clip: text; background-clip: text; color: transparent; }
+:root[data-theme="dark"] .adm-nav button.on, :root[data-theme="dark"] .adm-top-nav button.on { background: linear-gradient(90deg, rgba(43,149,255,.32), rgba(43,149,255,.08)); color: #fff; box-shadow: inset 2px 0 0 #2b95ff; }
+:root[data-theme="dark"] .adm-top-nav button.on { background: linear-gradient(90deg, #1c86ff, #35b6ff); box-shadow: 0 8px 22px -8px rgba(43,149,255,.8); }
+:root[data-theme="dark"] .adm-table tbody tr:hover td { background: rgba(43,149,255,.07); }
+:root[data-theme="dark"] .adm-table th { color: #7f93b6; }

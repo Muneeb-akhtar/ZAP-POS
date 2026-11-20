@@ -3,6 +3,10 @@
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
 
+## 2026-11-20: Richer dark theme ("Dark glow")
+- Dark only: soft blue/violet light behind the page (landing and admin), glass cards with a light edge, a blue-to-cyan line on top of stat tiles and gradient numbers, glowing selected menu item. No new motion. Owner approved a preview first.
+- Files: end of `src/admin/admin.css` and `src/styles.css` (blocks named "Dark glow").
+
 ## 2026-11-20: Dark theme is the default
 - Website, `/admin/`, `/account/` and `/invoice/` open in the dark theme unless the visitor chose light with the toggle (the device's light/dark setting is no longer followed). Why: owner wants the dark look everywhere.
 - Files: the four `index.html` theme scripts, `src/components/Sections.jsx` (`useTheme`), `docs/ARCHITECTURE.md`.

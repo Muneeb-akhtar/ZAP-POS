@@ -1005,3 +1005,6 @@ html.modal-open { overflow: hidden; }
 :root[data-theme="dark"] .theme-toggle .icon-moon { transform: none; opacity: 1; }
 /* Theme switch reveal: new theme spreads in a circle from the toggle (View Transitions where supported) */
 ::view-transition-old(root), ::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+
+/* ---------- Dark glow (20 Nov 2026): a soft blue light behind the page. Dark only. ---------- */
+:root[data-theme="dark"] body { background: radial-gradient(1000px 560px at 10% -6%, rgba(43,149,255,.16), transparent 60%), radial-gradient(760px 560px at 98% 4%, rgba(124,92,255,.11), transparent 60%), var(--bg); background-attachment: fixed; }
