@@ -445,6 +445,10 @@ create policy "Admins upload releases" on storage.objects for insert to authenti
 drop policy if exists "Admins replace releases" on storage.objects;
 create policy "Admins replace releases" on storage.objects for update to authenticated
   using (bucket_id = 'releases' and public.is_admin());
+-- the admin page uploads with upsert (so a retried part replaces itself); Supabase needs a select rule for that
+drop policy if exists "Admins read releases" on storage.objects;
+create policy "Admins read releases" on storage.objects for select to authenticated
+  using (bucket_id = 'releases' and public.is_admin());
 
 -- ============================================================
 -- 13) Licence keys (Plans page): each key has a start, an end and a status.

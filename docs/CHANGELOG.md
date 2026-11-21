@@ -3,6 +3,10 @@
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
 
+## 2026-11-22 (later): publishing a release no longer fails with "row-level security policy"
+- Uploading a release part failed ("Upload failed: new row violates row-level security policy"): the admin page uploads with `upsert`, and Supabase then also needs a SELECT rule on `storage.objects`; only insert and update existed for the `releases` bucket. Added the admin-only policy "Admins read releases" (the bucket stays public for downloads). Applied to the live project (migration `releases_admin_select_policy`) and added to `supabase/schema.sql` section 12.
+- Also found: the Edge Function secret `PLAN_SIGNING_KEY` had never been set (Releases and Plans both need it); the owner added it from `ZAP-plan-signing-key.txt`.
+
 ## 2026-11-22: put a version on the website from the admin panel
 - **Releases now also updates the website's Download button.** Publishing a version for all shops has a switch "Also put it on the website's Download button" (on by default; hidden for a one-shop trial). A new "Website download" card shows the version the site offers (read from GitHub), the newest version for all shops, and a "Put x.y.z on the website" button when they differ. No more GitHub web page: the admin does it.
 - How: the edge function `publish-installer` (signed-in admins only, `verify_jwt`) checks the version is published to every shop, then starts the GitHub workflow `.github/workflows/publish-installer.yml` with the version, SHA-256 and the public storage folder. The workflow downloads the uploaded 40 MB parts from the public `releases` bucket (the folder must be ZAP's own project), joins them, checks the SHA-256, and publishes a GitHub release `vX.Y.Z` titled "ZapPos Setup" with `ZAP-POS-Setup.exe` (marked latest), which `lib/release.js` and the buttons already serve. No big upload passes through an edge function.
