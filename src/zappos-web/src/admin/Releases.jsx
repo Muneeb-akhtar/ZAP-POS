@@ -2,12 +2,23 @@ import { useEffect, useMemo, useState } from 'react'
 import Icon from '../components/Icons.jsx'
 import { dateFmt, supabase, timeAgo } from './biz.js'
 import { Card, ConfirmButton, Field, PageBar, useNotify, TableFoot } from './ui.jsx'
+import defaults from '../content/landing-content.json'
 
 // Releases: put a new ZAP POS version out to the shops. Upload ZapPos.exe once; each shop's main PC downloads it
 // (it is checked against ZAP's signature first), its counters get it from the main PC, and every PC installs it
 // when ZAP POS is closed or when someone presses Update now. Files go to the public bucket 'releases' in parts of
 // 40 MB (Supabase's upload limit is 50 MB); the version is signed by the edge function sign-release.
 const PART = 40 * 1024 * 1024
+const REPO = defaults.links?.githubRepo ?? 'Muneeb-akhtar/ZAP-POS'
+// The website's Download buttons serve the newest GitHub release of REPO. Putting a version there is done by the edge
+// function publish-installer, which starts the GitHub workflow publish-installer.yml (it needs the secret GITHUB_DISPATCH_TOKEN).
+async function websiteVersion() {
+  try {
+    const res = await fetch(`https://api.github.com/repos/${REPO}/releases/latest`, { headers: { Accept: 'application/vnd.github+json' }, cache: 'no-store' })
+    if (!res.ok) return ''
+    return String((await res.json()).tag_name ?? '').replace(/^v/i, '')
+  } catch { return '' }
+}
 const VERSION = /^\d+\.\d+\.\d+$/
 
 // The version Windows shows for the file (its ProductVersion), read from the program's own header.
@@ -43,6 +54,9 @@ export default function Releases() {
   const [file, setFile] = useState(null)
   const [f, setF] = useState({ version: '', notes: '', target: '' })
   const [busy, setBusy] = useState('')
+  const [alsoSite, setAlsoSite] = useState(true)
+  const [site, setSite] = useState(null)        // version on the website's Download button; '' = could not be read
+  const [siteBusy, setSiteBusy] = useState('')
 
   const load = async () => {
     const [r, i, l] = await Promise.all([
@@ -52,9 +66,30 @@ export default function Releases() {
     ])
     setList(r.data ?? []); setInstalls(i.data ?? []); setShops(l.data ?? [])
   }
-  useEffect(() => { load() }, [])
+  useEffect(() => { load(); websiteVersion().then(setSite) }, [])
 
   const latest = useMemo(() => (list ?? []).filter((r) => r.published).map((r) => r.version).reduce((a, v) => (!a || newer(v, a) ? v : a), ''), [list])
+
+  // newest version that every shop gets (a one-shop trial never goes on the website)
+  const latestAll = useMemo(() => (list ?? []).filter((r) => r.published && !r.target_branch).map((r) => r.version).reduce((a, v) => (!a || newer(v, a) ? v : a), ''), [list])
+
+  const putOnWebsite = async (version) => {
+    setSiteBusy('Starting…')
+    try {
+      const res = await supabase.functions.invoke('publish-installer', { body: { version } })
+      if (res.error) { let m = res.error.message; try { m = (await res.error.context.json()).error ?? m } catch { /* plain error */ } throw new Error(m) }
+      notify(`Putting ${version} on the website. The Download button changes in about a minute.`)
+      setSiteBusy('Publishing on GitHub…')
+      for (let i = 0; i < 16; i++) {   // look every 15 s for up to 4 minutes
+        await new Promise((r) => setTimeout(r, 15000))
+        const v = await websiteVersion()
+        if (v) setSite(v)
+        if (v === version) { notify(`The website now offers ${version}`); setSiteBusy(''); return }
+      }
+      notify('GitHub is taking longer than usual. Check the Actions tab of the repository.', 'error')
+    } catch (err) { notify(err.message, 'error') }
+    setSiteBusy('')
+  }
 
   const pick = async (e) => {
     const x = e.target.files?.[0]
@@ -94,8 +129,12 @@ export default function Releases() {
       })
       if (error) throw new Error(error.message)
       notify(`Version ${version} published${f.target ? ` to ${f.target}` : ' to every shop'}`)
+      const toSite = alsoSite && !f.target
       setFile(null); setF({ version: '', notes: '', target: '' }); e.target.reset()
-      load()
+      await load()
+      setBusy('')
+      if (toSite) putOnWebsite(version)
+      return
     } catch (err) { notify(err.message, 'error') }
     setBusy('')
   }
@@ -132,10 +171,27 @@ export default function Releases() {
               <textarea rows={3} maxLength={2000} value={f.notes} onChange={(e) => setF({ ...f, notes: e.target.value })} placeholder="Sales update by themselves. Out-of-stock items can't be sold." />
             </Field>
           </div>
+          {!f.target && (
+            <label className="adm-field adm-switch-field">
+              <span className="adm-label">Also put it on the website's Download button</span>
+              <button type="button" role="switch" aria-checked={alsoSite} className={`adm-switch ${alsoSite ? 'on' : ''}`} onClick={() => setAlsoSite(!alsoSite)}><i /></button>
+              <span className="adm-hint">Visitors then download this version. Leave it off to try the version on shops first.</span>
+            </label>
+          )}
           <div className="adm-form-actions">
             <button className="btn btn-primary btn-sm" disabled={Boolean(busy)}>{busy || 'Publish'}</button>
           </div>
         </form>
+      </Card>
+      <Card title="Website download">
+        <p className="adm-hint">The website's Download buttons give visitors: <b>{site === null ? 'checking…' : site || 'unknown (GitHub did not answer)'}</b>{latestAll ? <> · newest for every shop: <b>{latestAll}</b></> : null}</p>
+        {latestAll && site !== null && site !== latestAll && (
+          <div className="adm-form-actions">
+            <button className="btn btn-primary btn-sm" disabled={Boolean(siteBusy)} onClick={() => putOnWebsite(latestAll)}>{siteBusy || `Put ${latestAll} on the website`}</button>
+          </div>
+        )}
+        {latestAll && site === latestAll && <p className="adm-hint">The website is up to date.</p>}
+        <p className="adm-hint adm-note">This starts a GitHub job that takes about a minute. One-time setup: the Supabase Edge Function secret GITHUB_DISPATCH_TOKEN (a GitHub token for the ZAP-POS repository with Actions: Read and write).</p>
       </Card>
       <Card title="Versions">
         {!list ? <p className="adm-hint">Loading…</p> : !list.length ? <p className="adm-hint">No version published yet.</p> : (

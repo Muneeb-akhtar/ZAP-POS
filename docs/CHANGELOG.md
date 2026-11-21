@@ -3,6 +3,12 @@
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
 
+## 2026-11-22: put a version on the website from the admin panel
+- **Releases now also updates the website's Download button.** Publishing a version for all shops has a switch "Also put it on the website's Download button" (on by default; hidden for a one-shop trial). A new "Website download" card shows the version the site offers (read from GitHub), the newest version for all shops, and a "Put x.y.z on the website" button when they differ. No more GitHub web page: the admin does it.
+- How: the edge function `publish-installer` (signed-in admins only, `verify_jwt`) checks the version is published to every shop, then starts the GitHub workflow `.github/workflows/publish-installer.yml` with the version, SHA-256 and the public storage folder. The workflow downloads the uploaded 40 MB parts from the public `releases` bucket (the folder must be ZAP's own project), joins them, checks the SHA-256, and publishes a GitHub release `vX.Y.Z` titled "ZapPos Setup" with `ZAP-POS-Setup.exe` (marked latest), which `lib/release.js` and the buttons already serve. No big upload passes through an edge function.
+- One-time setup (needed before the first use): a fine-grained GitHub token for the ZAP-POS repository only, permission "Actions: Read and write", saved as the Supabase Edge Function secret `GITHUB_DISPATCH_TOKEN`. The token never reaches the browser. Without it the button says so.
+- Files: `src/admin/Releases.jsx`, `supabase/functions/publish-installer/index.ts`, `.github/workflows/publish-installer.yml`.
+
 ## 2026-11-21 (night, 2): the button goes back to normal when the person comes back
 - A page is never told that a download finished, was cancelled or paused, so "Downloading…" now ends as soon as the person returns to the page (window focus, a tap or a key press, after a 1.5 s grace so the download box opening does not count), and at the latest after 25 s. Files: `components/DownloadLink.jsx`.
 

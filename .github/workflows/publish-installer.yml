@@ -1,0 +1,82 @@
+# Put a ZAP POS version on the website's Download button.
+# Started from the admin panel (Releases -> "Put on the website"). It downloads the build that was uploaded to Supabase,
+# checks its SHA-256, and publishes it as a GitHub release titled "ZapPos Setup" with the file ZAP-POS-Setup.exe,
+# which is what the site's Download buttons serve (see src/zappos-web/src/lib/release.js). Nothing secret is in this file.
+name: Publish installer
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version, like 1.9.138'
+        required: true
+        type: string
+      sha256:
+        description: 'SHA-256 of the whole file'
+        required: true
+        type: string
+      base:
+        description: 'Public folder of the uploaded parts'
+        required: true
+        type: string
+      parts:
+        description: 'How many parts'
+        required: true
+        type: string
+      notes:
+        description: 'What is new'
+        required: false
+        default: ''
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-installer
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      VERSION: ${{ inputs.version }}
+      SHA256: ${{ inputs.sha256 }}
+      BASE: ${{ inputs.base }}
+      PARTS: ${{ inputs.parts }}
+      NOTES: ${{ inputs.notes }}
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+    steps:
+      - name: Check what we were asked to publish
+        run: |
+          set -euo pipefail
+          [[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] || { echo "Bad version"; exit 1; }
+          [[ "$SHA256" =~ ^[0-9a-f]{64}$ ]] || { echo "Bad SHA-256"; exit 1; }
+          [[ "$PARTS" =~ ^[0-9]{1,2}$ ]] || { echo "Bad part count"; exit 1; }
+          [ "$BASE" = "https://ofakkxunkqtvruafwdhw.supabase.co/storage/v1/object/public/releases/$VERSION" ] || { echo "Parts must come from ZAP's own storage"; exit 1; }
+
+      - name: Download the parts and join them
+        run: |
+          set -euo pipefail
+          for i in $(seq 0 $((PARTS - 1))); do
+            curl -fsSL --retry 5 --retry-delay 3 -o "part$i" "$BASE/ZapPos.exe.part$i"
+          done
+          cat $(ls part* | sort -V) > ZAP-POS-Setup.exe
+          ls -l ZAP-POS-Setup.exe
+
+      - name: Check the file is exactly the one that was published
+        run: echo "$SHA256  ZAP-POS-Setup.exe" | sha256sum -c -
+
+      - name: Publish the GitHub release
+        run: |
+          set -euo pipefail
+          tag="v$VERSION"
+          notes="${NOTES:-ZAP POS $VERSION}"
+          if gh release view "$tag" >/dev/null 2>&1; then
+            gh release upload "$tag" ZAP-POS-Setup.exe --clobber
+            gh release edit "$tag" --title "ZapPos Setup" --latest
+          else
+            gh release create "$tag" ZAP-POS-Setup.exe --title "ZapPos Setup" --notes "$notes" --latest --target main
+          fi
