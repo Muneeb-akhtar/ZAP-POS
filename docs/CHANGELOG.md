@@ -3,6 +3,10 @@
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
 
+## 2026-11-21 (evening): Download buttons say "Starting download…"
+- GitHub sends the browser on to its download server first, so the "save" box can take a few seconds to appear and the page looked frozen. The buttons now show a small spinner and "Starting download…" for 12 seconds after a tap (new `components/DownloadLink.jsx`, used by navbar, hero, final call-to-action and `/account/`). The file still comes from GitHub; the wait itself cannot be shortened. Light and dark, 1366 and 390 px, no sideways scroll; spinner stops moving with reduced-motion.
+- Files: `components/DownloadLink.jsx` (new), `Hero.jsx`, `Sections.jsx`, `account/AccountApp.jsx`, `styles.css` (`.dl-spin`).
+
 ## 2026-11-21 (later): every Download button works even without the GitHub lookup
 - All four Windows download buttons (navbar, hero, final call-to-action, `/account/`) plus the footer "Download" link now always have a working address: the release's exact file when GitHub answers, otherwise GitHub's `releases/latest/download/ZAP-POS-Setup.exe` for `links.githubRepo`. Before, a blocked or rate-limited lookup (many shops share one internet address) left the buttons on `#`. The version line still shows only when the lookup works. A link typed in the admin still wins.
 - New `footer.downloadLink` (the footer link text that downloads; default "Download"). Keep the release file named `ZAP-POS-Setup.exe`.

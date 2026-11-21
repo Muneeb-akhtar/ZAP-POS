@@ -3,6 +3,7 @@ import Icon, { Logo } from '../components/Icons.jsx'
 import { ThemeToggle } from '../components/Sections.jsx'
 import { CONTENT_ID, defaultContent, mergeContent } from '../lib/content.js'
 import { installerLink, useLatestRelease } from '../lib/release.js'
+import DownloadLink from '../components/DownloadLink.jsx'
 import { BILLING, METHODS, dateFmt, phoneKey, rs, supabase } from '../admin/biz.js'
 import { invoiceNo, invoiceState } from '../invoice/InvoiceDoc.jsx'
 
@@ -177,7 +178,7 @@ function MyAccount({ t, ti, links, session }) {
       </div>
 
       <div className="acc-actions">
-        <a className="btn btn-primary" href={links.windowsInstaller} data-track="download"><Icon name="windows" size={14} fill /> {t.downloadButton}</a>
+        <DownloadLink className="btn btn-primary" href={links.windowsInstaller}><Icon name="windows" size={14} fill /> {t.downloadButton}</DownloadLink>
         <a className="btn btn-outline" href={links.whatsapp} data-track="whatsapp"><Icon name="whatsapp" size={16} /> {t.payButton}</a>
         {!acc.paid_until && <a className="btn btn-quiet" href="/#pricing">{t.pricingLink}</a>}
       </div>

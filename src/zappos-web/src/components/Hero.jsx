@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import Icon from './Icons.jsx'
+import DownloadLink from './DownloadLink.jsx'
 import { Monitor, PosBillingScreen } from './Mockups.jsx'
 import { Kicker, Scribble, Squiggle } from './Bits.jsx'
 import { sizeLabel } from '../lib/release.js'
@@ -128,7 +129,7 @@ export default function Hero({ hero, brand, links, release }) {
           <p className="lead">{hero.description}</p>
 
           <div className="hero-actions">
-            <a href={links.windowsInstaller} data-track="download" className="btn btn-primary btn-lg"><Icon name="windows" size={16} fill /> {hero.primaryCta}</a>
+            <DownloadLink href={links.windowsInstaller} className="btn btn-primary btn-lg"><Icon name="windows" size={16} fill /> {hero.primaryCta}</DownloadLink>
             <a href={links.demo} data-track="demo" className="btn btn-quiet btn-lg">{hero.secondaryCta} <Icon name="arrow" size={16} /></a>
           </div>
 
