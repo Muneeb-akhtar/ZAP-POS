@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react'
 
 // The newest ZAP POS installer. The file itself lives in a GitHub release (public, no bandwidth limit, resumable);
 // the page asks GitHub which one is newest, so a new version appears here by itself the moment it is published
-// there. If GitHub can't be reached or nothing is published yet, the pages fall back to the link edited in the
-// admin (Links → Windows installer link) and show no version line.
+// there. If GitHub can't be reached (or answers too many times from one network), the buttons still work: they use
+// GitHub's "latest" address, which always serves the newest installer, and the version line is simply left out.
 const KEY = 'zap-latest-release'
 const KEEP_MS = 10 * 60 * 1000 // GitHub allows 60 anonymous lookups an hour per address; one every 10 minutes is plenty
 
@@ -44,8 +44,10 @@ export function useLatestRelease(repo) {
   return release
 }
 
-/** The link the Download buttons use: a link edited in the admin wins; otherwise the newest installer; otherwise "#". */
+/** The link every Download button uses: a link typed in the admin wins; otherwise the newest release's installer; otherwise GitHub's "latest" address for the file named ZAP-POS-Setup.exe. */
 export function installerLink(links, release) {
   const edited = links.windowsInstaller
-  return edited && edited !== '#' ? edited : release?.url ?? '#'
+  if (edited && edited !== '#') return edited
+  if (release?.url) return release.url
+  return /^[\w.-]+\/[\w.-]+$/.test(links.githubRepo ?? '') ? `https://github.com/${links.githubRepo}/releases/latest/download/ZAP-POS-Setup.exe` : '#'
 }

@@ -49,6 +49,7 @@ const LABELS = {
   trust: 'Small ticks under the buttons',
   windowsInstaller: 'Windows installer link (leave as # to use the newest GitHub release)',
   githubRepo: 'GitHub repository that holds the installer (owner/name)',
+  downloadLink: 'Footer link that downloads ZAP POS (type its text exactly)',
   downloadNote: 'Small line under the buttons (version and size are added)',
   googlePlay: 'Google Play link',
   appStore: 'App Store link',

@@ -184,7 +184,9 @@ export function Footer({ brand, footer, links }) {
           {footer.columns.map((col) => (
             <div className="footer-col" key={col.title}>
               <h4>{col.title}</h4>
-              {col.links.map((l) => <a key={l} href="#">{l}</a>)}
+              {col.links.map((l) => (l === footer.downloadLink
+                ? <a key={l} href={links.windowsInstaller} data-track="download">{l}</a>
+                : <a key={l} href="#">{l}</a>))}
             </div>
           ))}
         </div>

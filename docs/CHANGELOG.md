@@ -3,6 +3,11 @@
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
 
+## 2026-11-21 (later): every Download button works even without the GitHub lookup
+- All four Windows download buttons (navbar, hero, final call-to-action, `/account/`) plus the footer "Download" link now always have a working address: the release's exact file when GitHub answers, otherwise GitHub's `releases/latest/download/ZAP-POS-Setup.exe` for `links.githubRepo`. Before, a blocked or rate-limited lookup (many shops share one internet address) left the buttons on `#`. The version line still shows only when the lookup works. A link typed in the admin still wins.
+- New `footer.downloadLink` (the footer link text that downloads; default "Download"). Keep the release file named `ZAP-POS-Setup.exe`.
+- Files: `lib/release.js` (`installerLink`), `components/Sections.jsx` (Footer), `content/landing-content.json`, `admin/sections.js`.
+
 ## 2026-11-21: Download button gets the real ZAP POS installer
 - The Download buttons (navbar, hero, final CTA, `/account/`) now point to the newest **GitHub release** of `links.githubRepo` (default `Muneeb-akhtar/ZAP-POS`): the page asks `api.github.com/repos/<repo>/releases/latest`, takes the first `.exe` asset and shows "Windows 10 or 11, 64-bit · Version x · N MB" under the hero buttons (`hero.downloadNote`). Why: the installer is about 80 MB, over Supabase's 50 MB file limit and its 5 GB/month free data; GitHub has no such limit, resumes broken downloads and needs no server.
 - Safe before anything is published: with no release (or GitHub unreachable) the buttons keep the old link (`links.windowsInstaller`, `#`) and no version line shows. A link typed in admin → Links → Windows installer link still wins.
