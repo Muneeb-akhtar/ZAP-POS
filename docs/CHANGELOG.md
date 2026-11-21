@@ -3,6 +3,12 @@
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
 
+## 2026-11-21: Download button gets the real ZAP POS installer
+- The Download buttons (navbar, hero, final CTA, `/account/`) now point to the newest **GitHub release** of `links.githubRepo` (default `Muneeb-akhtar/ZAP-POS`): the page asks `api.github.com/repos/<repo>/releases/latest`, takes the first `.exe` asset and shows "Windows 10 or 11, 64-bit · Version x · N MB" under the hero buttons (`hero.downloadNote`). Why: the installer is about 80 MB, over Supabase's 50 MB file limit and its 5 GB/month free data; GitHub has no such limit, resumes broken downloads and needs no server.
+- Safe before anything is published: with no release (or GitHub unreachable) the buttons keep the old link (`links.windowsInstaller`, `#`) and no version line shows. A link typed in admin → Links → Windows installer link still wins.
+- New versions: draft a release on GitHub, tag `vX.Y.Z`, attach the exe named `ZAP-POS-Setup.exe`, publish. The site updates by itself (no deploy). Automatic updates inside shops still use admin → Releases (Supabase), a separate flow.
+- Files: `src/lib/release.js` (new), `App.jsx`, `components/Hero.jsx`, `account/AccountApp.jsx`, `content/landing-content.json` (`links.githubRepo`, `hero.downloadNote`), `admin/sections.js`, `styles.css` (`.dl-note`), `vercel.json` (CSP `connect-src` adds `https://api.github.com`).
+
 ## 2026-11-20: Richer dark theme ("Dark glow")
 - Dark only: soft blue/violet light behind the page (landing and admin), glass cards with a light edge, a blue-to-cyan line on top of stat tiles and gradient numbers, glowing selected menu item. No new motion. Owner approved a preview first.
 - Files: end of `src/admin/admin.css` and `src/styles.css` (blocks named "Dark glow").

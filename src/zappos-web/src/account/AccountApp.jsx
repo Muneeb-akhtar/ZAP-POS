@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import Icon, { Logo } from '../components/Icons.jsx'
 import { ThemeToggle } from '../components/Sections.jsx'
 import { CONTENT_ID, defaultContent, mergeContent } from '../lib/content.js'
+import { installerLink, useLatestRelease } from '../lib/release.js'
 import { BILLING, METHODS, dateFmt, phoneKey, rs, supabase } from '../admin/biz.js'
 import { invoiceNo, invoiceState } from '../invoice/InvoiceDoc.jsx'
 
@@ -242,12 +243,14 @@ export default function AccountApp() {
     return () => data.subscription.unsubscribe()
   }, [])
 
+  const release = useLatestRelease(content.links.githubRepo)
+  const links = { ...content.links, windowsInstaller: installerLink(content.links, release) }
   const t = content.account
   let body
   if (!supabase) body = <div className="adm-box"><p>{t.error}</p></div>
   else if (session === undefined) body = <div className="adm-box"><p className="adm-muted">…</p></div>
   else if (recovering) body = <NewPassword t={t} onDone={() => setRecovering(false)} />
   else if (!session) body = <Auth t={t} mode={mode} setMode={setMode} />
-  else body = <MyAccount key={session.user.id} t={t} ti={content.invoice} links={content.links} session={session} />
+  else body = <MyAccount key={session.user.id} t={t} ti={content.invoice} links={links} session={session} />
   return <Shell brand={content.brand}>{body}</Shell>
 }

@@ -36,6 +36,7 @@ Env: copy `src/zappos-web/.env.example` to `.env.local` and fill `VITE_SUPABASE_
 | Brand colors / fonts | `:root` tokens at the top of `src/zappos-web/src/styles.css` |
 | A section's layout/behaviour | its component in `src/zappos-web/src/components/` (map in ARCHITECTURE.md) |
 | Hover animations | the `@media (hover: hover)…` block at the **end** of `styles.css` |
+| The Download button / installer | Publish a GitHub release of `links.githubRepo` with an exe attached (see CHANGELOG 2026-11-21); the site finds it by itself. `src/lib/release.js` |
 | Icons | `components/Icons.jsx` (`paths` map; use `<Icon name="…" />`) |
 
 ## Rules (follow these)
@@ -63,7 +64,7 @@ Env: copy `src/zappos-web/.env.example` to `.env.local` and fill `VITE_SUPABASE_
     A change isn't done until these are updated.
 
 ## Git workflow
-- Remote: `https://github.com/Muneeb-akhtar/ZAP-POS` (private). Work on **`main`**.
+- Remote: `https://github.com/Muneeb-akhtar/ZAP-POS` (public: its GitHub releases hold the installer download, so do not make it private without moving them). Work on **`main`**.
 - Before committing: `npm run build` must succeed. Use short imperative messages, e.g. `Add admin login page`, `Update pricing content`.
 - Use the `/ship` command (`.claude/commands/ship.md`) to build, review, update docs, commit and push.
 

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { defaultContent, mergeContent, fetchPublishedContent, readCachedContent, writeCachedContent } from './lib/content.js'
 import { Navbar, Ticker, Hardware, FinalCta, Footer } from './components/Sections.jsx'
 import Hero from './components/Hero.jsx'
@@ -9,6 +9,7 @@ import Reviews from './components/Reviews.jsx'
 import Faq from './components/Faq.jsx'
 import LeadForm from './components/LeadForm.jsx'
 import { trackClick, trackView, trackVisit } from './lib/track.js'
+import { installerLink, useLatestRelease } from './lib/release.js'
 
 // Where content comes from:
 // - Supabase (edited in the admin panel at /admin), when VITE_SUPABASE_URL / VITE_SUPABASE_ANON_KEY are set.
@@ -17,6 +18,9 @@ import { trackClick, trackView, trackVisit } from './lib/track.js'
 
 export default function App() {
   const [c, setC] = useState(() => mergeContent(defaultContent, readCachedContent()))
+
+  const release = useLatestRelease(c.links.githubRepo)
+  const links = useMemo(() => ({ ...c.links, windowsInstaller: installerLink(c.links, release) }), [c.links, release])
 
   useEffect(() => {
     fetchPublishedContent()
@@ -66,20 +70,20 @@ export default function App() {
 
   return (
     <>
-      <Navbar brand={c.brand} nav={c.nav} links={c.links} />
+      <Navbar brand={c.brand} nav={c.nav} links={links} />
       <main>
-        <Hero hero={c.hero} brand={c.brand} links={c.links} />
+        <Hero hero={c.hero} brand={c.brand} links={links} release={release} />
         <Ticker items={c.ticker} />
         <Day data={c.day} />
         <Counters data={c.counters} />
         <Hardware data={c.hardware} />
-        <Pricing data={c.pricing} links={c.links} />
+        <Pricing data={c.pricing} links={links} />
         <Reviews section={c.reviewsSection} reviews={c.reviews} />
-        <Faq data={c.faq} brand={c.brand} links={c.links} />
-        <FinalCta data={c.finalCta} links={c.links} brand={c.brand} />
+        <Faq data={c.faq} brand={c.brand} links={links} />
+        <FinalCta data={c.finalCta} links={links} brand={c.brand} />
       </main>
-      <Footer brand={c.brand} footer={c.footer} links={c.links} />
-      {lead && <LeadForm plan={lead.plan} plans={c.pricing.plans} data={c.leadForm} links={c.links} brand={c.brand} onClose={closeLead} />}
+      <Footer brand={c.brand} footer={c.footer} links={links} />
+      {lead && <LeadForm plan={lead.plan} plans={c.pricing.plans} data={c.leadForm} links={links} brand={c.brand} onClose={closeLead} />}
     </>
   )
 }

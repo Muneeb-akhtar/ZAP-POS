@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import Icon from './Icons.jsx'
 import { Monitor, PosBillingScreen } from './Mockups.jsx'
 import { Kicker, Scribble, Squiggle } from './Bits.jsx'
+import { sizeLabel } from '../lib/release.js'
 
 const receiptItems = [
   ['Denim Jacket', '3,450'],
@@ -40,7 +41,7 @@ const SYNCED_MS = 2600
 const FLY_GAP = 0.38 // seconds between paper planes
 const slipAmounts = ['2,980', '890', '5,990', '3,450', '1,490', '2,250']
 
-export default function Hero({ hero, brand, links }) {
+export default function Hero({ hero, brand, links, release }) {
   const [phase, setPhase] = useState('online')
   const [bills, setBills] = useState(0)
   const stage = useRef(null)
@@ -130,6 +131,8 @@ export default function Hero({ hero, brand, links }) {
             <a href={links.windowsInstaller} data-track="download" className="btn btn-primary btn-lg"><Icon name="windows" size={16} fill /> {hero.primaryCta}</a>
             <a href={links.demo} data-track="demo" className="btn btn-quiet btn-lg">{hero.secondaryCta} <Icon name="arrow" size={16} /></a>
           </div>
+
+          {release && <p className="dl-note">{hero.downloadNote} · Version {release.version} · {sizeLabel(release.size)}</p>}
 
           {/* Internet switch: turn it off and the POS on the right keeps billing offline */}
           <div className="net-toggle-row">

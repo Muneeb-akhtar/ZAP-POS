@@ -131,6 +131,9 @@ Gotchas:
 - Vercel project: import GitHub repo `Muneeb-akhtar/ZAP-POS`, **Root Directory `src/zappos-web`**, framework Vite (read from `vercel.json`). Every push to `main` deploys to production; other branches/PRs get preview URLs.
 - Custom domain: Vercel → Settings → Domains.
 
+### Download (installer)
+`lib/release.js`: `useLatestRelease(repo)` asks GitHub for the newest release (cached 10 minutes in sessionStorage), `installerLink(links, release)` picks the link (admin-typed link, else the release's `.exe`, else `#`). Used by `App.jsx` (navbar, hero, final CTA, with a version/size line in `Hero.jsx`) and `AccountApp.jsx`. The exe is not served by us: it sits in a GitHub release of `links.githubRepo` (the repo must stay public). `/account/` needs `https://api.github.com` in the CSP `connect-src` (`vercel.json`).
+
 ## 8. Database (`supabase/schema.sql`)
 | Table / function | Who can do what | Notes |
 |---|---|---|
