@@ -6,6 +6,8 @@ import Icon from './Icons.jsx'
 // "Starting download…", then "Downloading…", then goes back to normal (the browser's own download box takes over).
 // A web page is never told when a browser really starts a download, so the second step comes as soon as the browser
 // reacts (the page loses focus when its download box or save window opens) or after 5 seconds, whichever is first.
+// Nor is it told when the download finishes, is cancelled or paused, so the button goes back to normal as soon as the
+// person comes back to the page (focus, a tap or a key press, after a short grace) and at the latest after 25 seconds.
 export default function DownloadLink({ href, className, startText = 'Starting download…', doneText = 'Downloading…', children }) {
   const [step, setStep] = useState('idle') // idle → starting → downloading → idle
   const timers = useRef([])
@@ -18,6 +20,24 @@ export default function DownloadLink({ href, className, startText = 'Starting do
     window.addEventListener('blur', go)
     document.addEventListener('visibilitychange', onHide)
     return () => { window.removeEventListener('blur', go); document.removeEventListener('visibilitychange', onHide) }
+  }, [step])
+  useEffect(() => {
+    if (step !== 'downloading') return undefined
+    let armed = false
+    const grace = setTimeout(() => { armed = true }, 1500) // the focus change that opened the download box must not count
+    const back = () => { if (armed) { clear(); setStep('idle') } }
+    const onShow = () => { if (document.visibilityState === 'visible') back() }
+    window.addEventListener('focus', back)
+    document.addEventListener('visibilitychange', onShow)
+    document.addEventListener('pointerdown', back)
+    document.addEventListener('keydown', back)
+    return () => {
+      clearTimeout(grace)
+      window.removeEventListener('focus', back)
+      document.removeEventListener('visibilitychange', onShow)
+      document.removeEventListener('pointerdown', back)
+      document.removeEventListener('keydown', back)
+    }
   }, [step])
   const start = () => {
     clear()

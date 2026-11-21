@@ -3,6 +3,9 @@
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
 
+## 2026-11-21 (night, 2): the button goes back to normal when the person comes back
+- A page is never told that a download finished, was cancelled or paused, so "Downloading…" now ends as soon as the person returns to the page (window focus, a tap or a key press, after a 1.5 s grace so the download box opening does not count), and at the latest after 25 s. Files: `components/DownloadLink.jsx`.
+
 ## 2026-11-21 (night): "Starting download…" then "Downloading…"
 - The Download buttons now go Starting download… (spinner) → Downloading… (download icon) → back to normal after 25 s. A web page is never told when a browser really starts a download (GitHub's server does not allow the page to watch it), so "Downloading…" appears as soon as the browser reacts (the page loses focus when the download box or save window opens) or after 5 seconds, whichever comes first. It is a best guess, not a measured progress.
 - Files: `components/DownloadLink.jsx` (props `startText`, `doneText`), `components/Sections.jsx`.
