@@ -657,6 +657,11 @@ html.modal-open { overflow: hidden; }
   .lead-head h3 { font-size: 21px; }
 }
 
+/* ---------- WhatsApp floating button ---------- */
+.wa-float { position: fixed; right: 18px; bottom: 22px; z-index: 40; display: inline-flex; align-items: center; justify-content: center; height: 58px; min-width: 58px; padding: 0 14px; border-radius: 999px; background: #25d366; color: #fff; box-shadow: 0 14px 30px -10px rgba(37, 211, 102, .7), 0 4px 10px rgba(0, 0, 0, .18); }
+.wa-float-label { max-width: 0; margin-left: 0; overflow: hidden; opacity: 0; white-space: nowrap; font-weight: 700; font-size: 15px; transition: max-width .3s, margin .3s, opacity .2s; }
+.wa-float:focus-visible { outline: 3px solid var(--brand-500); outline-offset: 3px; }
+
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
@@ -712,6 +717,7 @@ html.modal-open { overflow: hidden; }
 }
 
 @media (max-width: 720px) {
+  .wa-float { right: 14px; bottom: 16px; height: 54px; min-width: 54px; padding: 0 12px; }
   .video-head { margin-bottom: 32px; }
   .video-frame { padding: 6px; border-radius: 20px; }
   .video-frame video, .video-play { border-radius: 15px; }
@@ -780,6 +786,9 @@ html.modal-open { overflow: hidden; }
 .stop-4 .glow::after { background: radial-gradient(320px circle at var(--mx, 50%) var(--my, 50%), rgba(147,197,253,.16), transparent 60%); }
 
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+
+  /* WhatsApp floating button: shows its label */
+  .wa-float:hover .wa-float-label { max-width: 220px; margin-left: 10px; opacity: 1; }
 
   /* Demo video: the play button grows a little */
   .video-play:hover .video-badge { transform: scale(1.08); }

@@ -9,6 +9,7 @@ import Pricing from './components/Pricing.jsx'
 import Reviews from './components/Reviews.jsx'
 import Faq from './components/Faq.jsx'
 import LeadForm from './components/LeadForm.jsx'
+import WhatsAppFloat from './components/WhatsAppFloat.jsx'
 import { trackClick, trackView, trackVisit } from './lib/track.js'
 import { installerLink, useLatestRelease } from './lib/release.js'
 
@@ -85,6 +86,7 @@ export default function App() {
         <FinalCta data={c.finalCta} links={links} brand={c.brand} />
       </main>
       <Footer brand={c.brand} footer={c.footer} links={links} />
+      <WhatsAppFloat data={c.whatsappButton} links={links} />
       {lead && <LeadForm plan={lead.plan} plans={c.pricing.plans} data={c.leadForm} links={links} brand={c.brand} onClose={closeLead} />}
     </>
   )

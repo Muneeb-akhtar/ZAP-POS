@@ -3,7 +3,7 @@
 
 export const SECTIONS = [
   { id: 'brand', label: 'Brand & contact', icon: 'call', keys: ['brand'], hint: 'Your shop name, phone, email, address and the short "about" text used in the footer.' },
-  { id: 'links', label: 'Links', icon: 'arrow', keys: ['links'], hint: 'Where buttons point: Windows installer, app stores, WhatsApp, portal login and social media.' },
+  { id: 'links', label: 'Links', icon: 'arrow', keys: ['links', 'whatsappButton'], hint: 'Where buttons point: Windows installer, app stores, WhatsApp, portal login and social media. "Label" at the bottom is the text of the round WhatsApp button on the right of the page (it only shows once the WhatsApp link is set; empty label hides it).' },
   { id: 'nav', label: 'Top menu', icon: 'menu', keys: ['nav'], hint: 'Links in the floating menu. "Link target" must match a section, e.g. #pricing.' },
   { id: 'hero', label: 'Hero', icon: 'zap', keys: ['hero'], hint: 'The top of the page: headline lines, description, buttons and the Internet switch notes.' },
   { id: 'ticker', label: 'Shop ticker', icon: 'tag', keys: ['ticker'], hint: 'Shop types scrolling in the blue band under the hero.' },

@@ -530,6 +530,9 @@
       }
     ]
   },
+  "whatsappButton": {
+    "label": "Chat with us on WhatsApp"
+  },
   "finalCta": {
     "title": "Ready when",
     "titleHighlight": "the internet isn't.",

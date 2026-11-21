@@ -3,6 +3,11 @@
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
 
+## 2026-11-22 (night, 3): floating WhatsApp button
+- Owner request: a WhatsApp button that stays on the right while the page scrolls. A round green button (the WhatsApp green already used by the FAQ) is fixed at the bottom-right of the landing page; on mouse devices it grows to show "Chat with us on WhatsApp" on hover. It opens the WhatsApp link in a new tab and is counted in Analytics as "WhatsApp". It stays hidden until a real WhatsApp link is set. Works in light and dark, 390 px (smaller, 14 px from the edge), no sideways scroll.
+- Content key `whatsappButton.label` (Admin → Links, last field; an empty label hides the button).
+- Files: `components/WhatsAppFloat.jsx` (new), `App.jsx`, `content/landing-content.json`, `styles.css` ("WhatsApp floating button" block, 720 px rule, label grow in the hover block), `admin/sections.js`.
+
 ## 2026-11-22 (night, 2): WhatsApp link set on the live site
 - Owner request: the site's WhatsApp buttons (FAQ, footer, demo form, `/account/` "Pay or renew") pointed to `#`. The published content's `links.whatsapp` is now `https://wa.me/923390035603?text=…` (the owner's number already shown as `brand.phone`, with a short Roman Urdu starter message). Changed directly in the published `site_content` row, not in code; the built-in default in `landing-content.json` stays a placeholder. To change it later: Admin → Links → "WhatsApp link" → Publish.
 

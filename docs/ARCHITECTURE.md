@@ -55,7 +55,7 @@ Shop signed in ──rpc('my_account')──► own shop, current plan, paid_unt
 - **Admin data:** `admin/biz.js` loads all `leads` and `payments` once (`useBizStore`, shared via `BizContext`) and updates the local copy after each write; `useStats(days)` calls `rpc('admin_stats')`.
 
 ## 3. Components → sections
-Rendered by `App.jsx` in this order (plus `LeadForm.jsx`, the demo request modal, rendered on top when open; CSS block "Demo request form (modal)", classes `lead-*`):
+Rendered by `App.jsx` in this order (plus `LeadForm.jsx`, the demo request modal, rendered on top when open; CSS block "Demo request form (modal)", classes `lead-*`); and `WhatsAppFloat.jsx`, the round WhatsApp button fixed to the bottom-right (`wa-float`, z-index 40, under the navbar 50 and the modal 100; label shows on mouse hover; hidden while `links.whatsapp` is empty or `#`, or `whatsappButton.label` is empty; opens `links.whatsapp` in a new tab, tracked as `whatsapp`):
 
 | # | Component | File | JSON key(s) | Anchor | CSS block |
 |---|---|---|---|---|---|
@@ -88,9 +88,10 @@ Shared building blocks:
 - **FinalCta**: `spin` set on click; cleared on `animationend` of `boltTap`. Background is `StarField` (7 hand-placed `STARS` that glow/dim + two `.shooting` stars that start when an IntersectionObserver adds `.final.in-view`).
 
 ## 4. Content schema (`landing-content.json`)
-Top-level keys: `_note, brand, nav, links, hero, ticker, day, video, counters, hardware, pricing, reviewsSection, reviews, faq, finalCta, leadForm, footer`.
+Top-level keys: `_note, brand, nav, links, hero, ticker, day, video, counters, hardware, pricing, reviewsSection, reviews, faq, whatsappButton, finalCta, leadForm, footer`.
 - `brand`: `name, phone, email, address, about`
 - `links`: `demo` (`#demo` = open the demo form; any other URL is followed normally), `portal, windowsInstaller, googlePlay, appStore, whatsapp, social{linkedin,facebook,instagram,x}`
+- `whatsappButton`: `label` (text of the floating WhatsApp button; shown on hover and read by screen readers)
 - `leadForm`: `title, description, nameLabel, phoneLabel, phonePlaceholder, phoneError, shopLabel, cityLabel, planLabel, notSure, branchesLabel, messageLabel, messagePlaceholder, submit, sending, privacy, successTitle, successText, errorText` (plan options come from `pricing.plans[].name`)
 - `hero`: `kicker, rows[] {lead, accent}, description, primaryCta, secondaryCta, switchLabel, switchNote, offlineNote, syncedNote, trust[]`
 - `day.stops[]`: `time` (12-hour, "9:00 AM"; rendered as clock + `.ampm`), `period, title, text, visual` (`visual` ∈ `open|counters|offline|stock|phone`, rendered by `visuals` in Day.jsx; `period` maps to an icon via `periodIcon`)
