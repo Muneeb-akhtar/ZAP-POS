@@ -35,6 +35,7 @@ Env: copy `src/zappos-web/.env.example` to `.env.local` and fill `VITE_SUPABASE_
 | Database tables, security, stats | `supabase/schema.sql` |
 | Brand colors / fonts | `:root` tokens at the top of `src/zappos-web/src/styles.css` |
 | A section's layout/behaviour | its component in `src/zappos-web/src/components/` (map in ARCHITECTURE.md) |
+| The demo video section | Admin → Demo video (addresses); the files are in `src/zappos-web/public/media/` (keep the mp4 under ~8 MB, H.264 + AAC, faststart); component `components/DemoVideo.jsx` |
 | Hover animations | the `@media (hover: hover)…` block at the **end** of `styles.css` |
 | The Download button / installer | Admin → Releases → publish with the "Also put it on the website" switch (or the "Website download" card): it starts `.github/workflows/publish-installer.yml`, which publishes the GitHub release the site finds by itself (see CHANGELOG 2026-11-22). By hand: publish a GitHub release of `links.githubRepo` with `ZAP-POS-Setup.exe` attached. `src/lib/release.js` |
 | Icons | `components/Icons.jsx` (`paths` map; use `<Icon name="…" />`) |

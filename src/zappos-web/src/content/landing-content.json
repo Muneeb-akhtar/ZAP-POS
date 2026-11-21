@@ -13,6 +13,10 @@
       "href": "#day"
     },
     {
+      "label": "Watch demo",
+      "href": "#video"
+    },
+    {
       "label": "Multi-counter",
       "href": "#counters"
     },
@@ -124,6 +128,23 @@
         "visual": "phone"
       }
     ]
+  },
+  "video": {
+    "kicker": "Watch",
+    "title": "See ZAP POS in",
+    "titleHighlight": "one minute.",
+    "description": "A quick walk through real ZAP POS screens: billing, stock, sales, the shift report, and what happens when the internet drops.",
+    "src": "/media/zap-pos-demo.mp4",
+    "poster": "/media/zap-pos-demo-poster.jpg",
+    "videoLabel": "ZAP POS demo video",
+    "playLabel": "Play demo video",
+    "playNote": "1 minute · sound on",
+    "points": [
+      "Bills in seconds",
+      "Keeps billing when the internet drops",
+      "Every counter in one place"
+    ],
+    "cta": "Book a free demo"
   },
   "counters": {
     "kicker": "Multi-counter, live",

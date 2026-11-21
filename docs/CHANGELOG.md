@@ -3,6 +3,12 @@
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
 
+## 2026-11-22 (night): demo video section on the landing page
+- New section **"See ZAP POS in one minute"** (`#video`, menu item "Watch demo") between "A day at the counter" and the multi-counter demo. A 16:9 frame shows the poster with a yellow play button; tapping it plays the 62-second demo (real ZAP POS screens in the new clean look, music, English/Roman Urdu captions, ZAPPOS.pk at the end). The video file is only downloaded after the tap. Under it: three tick chips and a "Book a free demo" button. Works in light and dark, no sideways scroll at 390 px.
+- Content in the new `video` key (admin tab "Demo video"); `src` empty hides the section. Files: `public/media/zap-pos-demo.mp4` (1280x720, about 5.4 MB, H.264 + AAC, faststart) and `zap-pos-demo-poster.jpg`. No voiceover yet; when one exists, make a new mp4 and replace the file.
+- Analytics: clicks on play are counted as "Played the demo video" (`demo-video-play`).
+- Files: `components/DemoVideo.jsx` (new), `components/Icons.jsx` (`play`), `App.jsx`, `content/landing-content.json` (`video`, nav "Watch demo"), `styles.css` ("Demo video" block, 720 px rules, hover scale in the hover block), `admin/sections.js`, `admin/Analytics.jsx`, `public/media/*`.
+
 ## 2026-11-22 (later): publishing a release no longer fails with "row-level security policy"
 - Uploading a release part failed ("Upload failed: new row violates row-level security policy"): the admin page uploads with `upsert`, and Supabase then also needs a SELECT rule on `storage.objects`; only insert and update existed for the `releases` bucket. Added the admin-only policy "Admins read releases" (the bucket stays public for downloads). Applied to the live project (migration `releases_admin_select_policy`) and added to `supabase/schema.sql` section 12.
 - Also found: the Edge Function secret `PLAN_SIGNING_KEY` had never been set (Releases and Plans both need it); the owner added it from `ZAP-plan-signing-key.txt`.

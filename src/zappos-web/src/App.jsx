@@ -3,6 +3,7 @@ import { defaultContent, mergeContent, fetchPublishedContent, readCachedContent,
 import { Navbar, Ticker, Hardware, FinalCta, Footer } from './components/Sections.jsx'
 import Hero from './components/Hero.jsx'
 import Day from './components/Day.jsx'
+import DemoVideo from './components/DemoVideo.jsx'
 import Counters from './components/Counters.jsx'
 import Pricing from './components/Pricing.jsx'
 import Reviews from './components/Reviews.jsx'
@@ -75,6 +76,7 @@ export default function App() {
         <Hero hero={c.hero} brand={c.brand} links={links} release={release} />
         <Ticker items={c.ticker} />
         <Day data={c.day} />
+        <DemoVideo data={c.video} links={links} />
         <Counters data={c.counters} />
         <Hardware data={c.hardware} />
         <Pricing data={c.pricing} links={links} />

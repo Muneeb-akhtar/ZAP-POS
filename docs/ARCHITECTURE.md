@@ -22,6 +22,7 @@ ZAP POS/
       ├─ vite.config.js          dev port 5173, four inputs (main, admin, account, invoice), build → dist/
       ├─ vercel.json             Vercel build: `npm run build`, output `dist/`, /admin, /account and /invoice rewrites + noindex and CSP headers, immutable cache for /assets
       ├─ public/favicon.svg      blue square + white bolt
+      ├─ public/media/           the demo video section's files: zap-pos-demo.mp4 (1280x720, ~5 MB, faststart) + zap-pos-demo-poster.jpg; addresses live in the `video` content key
       └─ src/
          ├─ main.jsx             font imports (Latin subsets) + styles.css + <App/>
          ├─ App.jsx              loads content (cache → Supabase), renders sections, demo form (#demo links), tracking listeners, cursor glow
@@ -62,13 +63,14 @@ Rendered by `App.jsx` in this order (plus `LeadForm.jsx`, the demo request modal
 | 2 | `Hero` | Hero.jsx | `hero`, `brand`, `links` | `#home` | Hero, Monitor frame |
 | 3 | `Ticker` | Sections.jsx | `ticker` | n/a | Ticker |
 | 4 | `Day` | Day.jsx | `day` | `#day` | A day at the counter |
-| 5 | `Counters` | Counters.jsx | `counters` | `#counters` | Live multi-counter demo |
-| 6 | `Hardware` | Sections.jsx | `hardware` | n/a | Hardware stickers |
-| 7 | `Pricing` | Pricing.jsx | `pricing` | `#pricing` | Pricing as receipts |
-| 8 | `Reviews` | Reviews.jsx | `reviewsSection`, `reviews` | `#reviews` | Reviews: sticky notes |
-| 9 | `Faq` | Faq.jsx | `faq`, `brand`, `links` | `#faq` | FAQ as WhatsApp chat |
-| 10 | `FinalCta` | Sections.jsx | `finalCta`, `links`, `brand` | n/a | Final CTA (night) |
-| 11 | `Footer` | Sections.jsx | `brand`, `footer`, `links` | `#contact` | Footer |
+| 5 | `DemoVideo` | DemoVideo.jsx | `video`, `links` | `#video` | Demo video |
+| 6 | `Counters` | Counters.jsx | `counters` | `#counters` | Live multi-counter demo |
+| 7 | `Hardware` | Sections.jsx | `hardware` | n/a | Hardware stickers |
+| 8 | `Pricing` | Pricing.jsx | `pricing` | `#pricing` | Pricing as receipts |
+| 9 | `Reviews` | Reviews.jsx | `reviewsSection`, `reviews` | `#reviews` | Reviews: sticky notes |
+| 10 | `Faq` | Faq.jsx | `faq`, `brand`, `links` | `#faq` | FAQ as WhatsApp chat |
+| 11 | `FinalCta` | Sections.jsx | `finalCta`, `links`, `brand` | n/a | Final CTA (night) |
+| 12 | `Footer` | Sections.jsx | `brand`, `footer`, `links` | `#contact` | Footer |
 
 Shared building blocks:
 - `Icons.jsx`: `<Icon name size fill className />` (stroke icons from the `paths` map; adds class `icon icon-<name>`) and `<Logo size />` (blue gradient square + white bolt).
@@ -78,6 +80,7 @@ Shared building blocks:
 
 ### Interactive behaviour (state lives in each component)
 - **Hero**: `.hero-grid` 2 columns. **Left** `.hero-copy`: kicker, `.h-rows` headline (3 `.hr-row` lines, "every …" in `.hl` blue, yellow `Squiggle` underline drawn under the last row), lead, CTAs, **Internet switch** (`.net-toggle`, `role="switch"`) + handwritten note, trust list. **Right** `.hero-stage` (owner-locked layout, don't change): `Monitor` + `PosBillingScreen`, `.hero-receipt` (bottom-left overlap), `.hero-chip` (top-right), `.hero-phone-tag`. **Internet demo state machine** `phase`: `online` → (switch OFF) `offline` (auto-returns after `OFFLINE_MS` 5.6s; offline bills pile up as `.slip` paper slips in `.slip-stack` beside the monitor; warm `.hero::before` glow, one-shot `glitch` on the screen, chip `signalLost` ring + orange `.chip-count`, a bill saved every 1.6s) → (auto, or switch ON) `syncing` (slips fold away and `.plane` paper planes fly one by one, `FLY_GAP` 0.38s apart, into the chip; `.sync-bar` fills; switch is ignored until the demo finishes) → `synced` (2.6s: green chip "All N bills synced · Nothing lost") → `online`. Hero class is `is-<phase>`; screen status, receipt `.r-status.<phase>` and chip `.hero-chip.<phase>` follow it. No night mode (a power cut would turn the PC off too). Pointer movement over `.hero-stage` sets `--px/--py` for the 3D tilt/parallax.
+- **DemoVideo**: `playing`. Shows the poster as one big button (yellow play badge, `data-track="demo-video-play"`); tapping it swaps in a `<video controls autoPlay playsInline>` (the file is not downloaded before that), and it goes back to the poster when the video ends. Empty `video.src` hides the whole section. Below: tick chips and a "Book a free demo" button (`links.demo`, `data-track="demo"`).
 - **App**: one global `pointermove` listener sets `--mx/--my` on the nearest `.glow` element (cursor spotlight on timeline cards and tills).
 - **Counters**: `stock` (starts at `counters.stock`) and `last = {i, n}`. The tills use `key={i-n}` so they remount and replay animations on every sale. The SVG has three layers: `.wire` (dashes always flowing master→counters), `.flow` (always-moving glowing packets) and `.pulse` (one-shot bright pulse from the counter that sold, remounted per sale via `key`).
 - **Pricing**: `annual` (monthly/yearly prices) and `open` (comparison table). Compare table begins with Monthly/Yearly price rows (current one highlighted); the toggle note "save up to N% yearly" is computed by `bestSaving` unless `pricing.saveLabel` is set (currently "save up to 30% yearly").
@@ -85,12 +88,13 @@ Shared building blocks:
 - **FinalCta**: `spin` set on click; cleared on `animationend` of `boltTap`. Background is `StarField` (7 hand-placed `STARS` that glow/dim + two `.shooting` stars that start when an IntersectionObserver adds `.final.in-view`).
 
 ## 4. Content schema (`landing-content.json`)
-Top-level keys: `_note, brand, nav, links, hero, ticker, day, counters, hardware, pricing, reviewsSection, reviews, faq, finalCta, leadForm, footer`.
+Top-level keys: `_note, brand, nav, links, hero, ticker, day, video, counters, hardware, pricing, reviewsSection, reviews, faq, finalCta, leadForm, footer`.
 - `brand`: `name, phone, email, address, about`
 - `links`: `demo` (`#demo` = open the demo form; any other URL is followed normally), `portal, windowsInstaller, googlePlay, appStore, whatsapp, social{linkedin,facebook,instagram,x}`
 - `leadForm`: `title, description, nameLabel, phoneLabel, phonePlaceholder, phoneError, shopLabel, cityLabel, planLabel, notSure, branchesLabel, messageLabel, messagePlaceholder, submit, sending, privacy, successTitle, successText, errorText` (plan options come from `pricing.plans[].name`)
 - `hero`: `kicker, rows[] {lead, accent}, description, primaryCta, secondaryCta, switchLabel, switchNote, offlineNote, syncedNote, trust[]`
 - `day.stops[]`: `time` (12-hour, "9:00 AM"; rendered as clock + `.ampm`), `period, title, text, visual` (`visual` ∈ `open|counters|offline|stock|phone`, rendered by `visuals` in Day.jsx; `period` maps to an icon via `periodIcon`)
+- `video`: `kicker, title, titleHighlight, description, src, poster, videoLabel, playLabel, playNote, points[], cta`. `src`/`poster` are addresses of files in `public/media/` (e.g. `/media/zap-pos-demo.mp4`); to change the video, replace the files there (or add new ones) and edit the addresses in the admin. Empty `src` hides the section. Keep the video H.264 + AAC with `faststart` and under about 8 MB.
 - `counters`: `kicker, title, titleHighlight, description, product, stock, note, points[]`
 - `hardware.items[]`: `icon, label` (icon = a key in Icons.jsx)
 - `pricing.plans[]`: `id, name, tag, monthly (per month, or null → "On request"), annual (yearly TOTAL; yearly view shows only annual/12 per month + "billed yearly"; never display the yearly total), unit? (e.g. "branch" → "/branch/month"), priceLabel?, description, cta, featured?, lines[[qty, label]]`. Plans today: Dukaan (1 shop, 1 counter), Brand (1–3 branches, per branch, featured), Enterprise (4+ branches, custom). Keep the receipts' lines and the `compare` rows in sync, and keep branch ranges non-overlapping. `monthly: null` shows `priceLabel` (e.g. "Custom").

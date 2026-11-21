@@ -354,6 +354,24 @@ h2 .hl { display: block; }
 .dv-bars { display: flex; align-items: flex-end; gap: 6px; height: 56px; margin-top: 14px; }
 .dv-bars i { flex: 1; border-radius: 4px 4px 0 0; background: linear-gradient(180deg, #93c5fd, rgba(147,197,253,.2)); }
 
+/* ---------- Demo video ---------- */
+.video-head { max-width: 760px; margin: 0 auto 48px; text-align: center; }
+.video-head h2 { margin: 20px 0 16px; }
+.video-head p { font-size: 17px; }
+.video-frame { position: relative; max-width: 1040px; margin: 0 auto; aspect-ratio: 16 / 9; padding: 10px; border-radius: 30px; background: var(--solid); box-shadow: var(--shadow-lg), 0 0 0 1px var(--line); }
+.video-frame video, .video-play { display: block; width: 100%; height: 100%; border-radius: 21px; background: #000; }
+.video-play { position: relative; padding: 0; border: 0; overflow: hidden; cursor: pointer; font: inherit; }
+.video-play img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.video-play:focus-visible { outline: 3px solid var(--brand-500); outline-offset: 3px; }
+.video-badge { position: absolute; z-index: 1; left: 50%; top: 50%; width: 96px; height: 96px; margin: -48px 0 0 -48px; border-radius: 50%; display: grid; place-items: center; background: var(--yellow); color: var(--on-paper); box-shadow: 0 0 0 10px rgba(255, 214, 10, .28), 0 18px 40px -10px rgba(0, 0, 0, .55); transition: transform .2s; animation: videoPulse 3.2s ease-in-out infinite; }
+.video-badge svg { margin-left: 5px; }
+@keyframes videoPulse { 50% { box-shadow: 0 0 0 18px rgba(255, 214, 10, .12), 0 18px 40px -10px rgba(0, 0, 0, .55); } }
+.video-note { position: absolute; z-index: 1; left: 50%; top: calc(50% + 66px); transform: translateX(-50%); padding: 6px 14px; border-radius: 999px; background: rgba(6, 12, 26, .78); color: #fff; font-weight: 600; font-size: 14px; letter-spacing: .02em; white-space: nowrap; }
+.video-points { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin: 38px 0 0; padding: 0; list-style: none; }
+.video-points li { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); color: var(--ink); font-weight: 600; font-size: 15px; box-shadow: var(--shadow-sm); }
+.video-points svg { color: var(--brand-500); flex: none; }
+.video-cta { display: flex; justify-content: center; margin-top: 32px; }
+
 /* ---------- Live multi-counter demo ---------- */
 .counters-head { display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: end; margin-bottom: 64px; }
 .counters-head h2 { margin-top: 20px; }
@@ -694,6 +712,14 @@ html.modal-open { overflow: hidden; }
 }
 
 @media (max-width: 720px) {
+  .video-head { margin-bottom: 32px; }
+  .video-frame { padding: 6px; border-radius: 20px; }
+  .video-frame video, .video-play { border-radius: 15px; }
+  .video-badge { width: 72px; height: 72px; margin: -36px 0 0 -36px; box-shadow: 0 0 0 8px rgba(255, 214, 10, .28), 0 14px 30px -10px rgba(0, 0, 0, .55); }
+  .video-badge svg { width: 26px; height: 26px; }
+  .video-note { top: 10px; left: 10px; transform: none; font-size: 12px; padding: 5px 11px; }
+  .video-points { margin-top: 26px; gap: 8px; }
+  .video-points li { font-size: 14px; padding: 8px 13px; }
   .container { padding: 0 16px; }
   .section { padding: 84px 0; }
   .navbar { top: 10px; padding: 0 10px; }
@@ -754,6 +780,9 @@ html.modal-open { overflow: hidden; }
 .stop-4 .glow::after { background: radial-gradient(320px circle at var(--mx, 50%) var(--my, 50%), rgba(147,197,253,.16), transparent 60%); }
 
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+
+  /* Demo video: the play button grows a little */
+  .video-play:hover .video-badge { transform: scale(1.08); }
 
   /* Buttons: light sweep + arrow nudge */
   .btn { position: relative; overflow: hidden; }
