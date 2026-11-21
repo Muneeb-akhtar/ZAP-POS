@@ -3,6 +3,10 @@
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
 
+## 2026-11-21 (night): "Starting download…" then "Downloading…"
+- The Download buttons now go Starting download… (spinner) → Downloading… (download icon) → back to normal after 25 s. A web page is never told when a browser really starts a download (GitHub's server does not allow the page to watch it), so "Downloading…" appears as soon as the browser reacts (the page loses focus when the download box or save window opens) or after 5 seconds, whichever comes first. It is a best guess, not a measured progress.
+- Files: `components/DownloadLink.jsx` (props `startText`, `doneText`), `components/Sections.jsx`.
+
 ## 2026-11-21 (evening): Download buttons say "Starting download…"
 - GitHub sends the browser on to its download server first, so the "save" box can take a few seconds to appear and the page looked frozen. The buttons now show a small spinner and "Starting download…" for 12 seconds after a tap (new `components/DownloadLink.jsx`, used by navbar, hero, final call-to-action and `/account/`). The file still comes from GitHub; the wait itself cannot be shortened. Light and dark, 1366 and 390 px, no sideways scroll; spinner stops moving with reduced-motion.
 - Files: `components/DownloadLink.jsx` (new), `Hero.jsx`, `Sections.jsx`, `account/AccountApp.jsx`, `styles.css` (`.dl-spin`).

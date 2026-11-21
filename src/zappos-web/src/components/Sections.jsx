@@ -66,7 +66,7 @@ export function Navbar({ brand, nav, links }) {
         <div className="nav-actions">
           <ThemeToggle />
           <a href={links.portal} data-track="portal" className="nav-login">Log in</a>
-          <DownloadLink href={links.windowsInstaller} className="btn btn-primary btn-sm" busyText="Starting…"><Icon name="windows" size={13} fill /> Download</DownloadLink>
+          <DownloadLink href={links.windowsInstaller} className="btn btn-primary btn-sm" startText="Starting…" doneText="Downloading…"><Icon name="windows" size={13} fill /> Download</DownloadLink>
         </div>
         <button className="menu-btn" onClick={() => setOpen(!open)} aria-label="Toggle menu"><Icon name={open ? 'close' : 'menu'} size={20} /></button>
       </div>
