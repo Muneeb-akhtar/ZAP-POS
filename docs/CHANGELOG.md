@@ -3,6 +3,9 @@
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
 
+## 2026-11-22 (night, 2): WhatsApp link set on the live site
+- Owner request: the site's WhatsApp buttons (FAQ, footer, demo form, `/account/` "Pay or renew") pointed to `#`. The published content's `links.whatsapp` is now `https://wa.me/923390035603?text=…` (the owner's number already shown as `brand.phone`, with a short Roman Urdu starter message). Changed directly in the published `site_content` row, not in code; the built-in default in `landing-content.json` stays a placeholder. To change it later: Admin → Links → "WhatsApp link" → Publish.
+
 ## 2026-11-22 (night): demo video section on the landing page
 - New section **"See ZAP POS in one minute"** (`#video`, menu item "Watch demo") between "A day at the counter" and the multi-counter demo. A 16:9 frame shows the poster with a yellow play button; tapping it plays the 62-second demo (real ZAP POS screens in the new clean look, music, English/Roman Urdu captions, ZAPPOS.pk at the end). The video file is only downloaded after the tap. Under it: three tick chips and a "Book a free demo" button. Works in light and dark, no sideways scroll at 390 px.
 - Content in the new `video` key (admin tab "Demo video"); `src` empty hides the section. Files: `public/media/zap-pos-demo.mp4` (1280x720, about 5.4 MB, H.264 + AAC, faststart) and `zap-pos-demo-poster.jpg`. No voiceover yet; when one exists, make a new mp4 and replace the file.
