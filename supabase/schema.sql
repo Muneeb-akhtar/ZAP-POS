@@ -920,3 +920,61 @@ begin
   return new;
 end $$;
 revoke all on function public.link_signup() from public, anon, authenticated;
+
+-- ============================================================
+-- 21) ZAP POS setup progress (22 Nov 2026): who reached the licence-key step, who asked for a key.
+--     The setup screen registers the owner first (their sign-up already makes or finds the lead), then asks for the key.
+--     When it shows the key page it calls setup_progress('at_key'); when the owner presses "WhatsApp me for a key" it
+--     calls it with 'asked_key'. The lead's `setup_stage` only ever moves forward (registered, at_key, asked_key,
+--     key_sent); making a key for the lead in Admin > Plans sets 'key_sent' by itself. It never changes the lead's
+--     status (that stays yours: New, Contacted, Demo, Won, Lost), except a Lost lead that comes back becomes New.
+--     Same rules as the demo form: one lead per email / mobile number, flood-limited, visitors read nothing.
+-- ============================================================
+alter table public.leads add column if not exists setup_stage text
+  check (setup_stage in ('registered', 'at_key', 'asked_key', 'key_sent'));
+
+create or replace function public.setup_progress(
+  p_name text, p_phone text, p_email text default null, p_shop text default null, p_stage text default 'at_key')
+returns void language plpgsql security definer set search_path = public as $$
+declare
+  v_email text := nullif(lower(trim(p_email)), '');
+  v_stages text[] := array['registered', 'at_key', 'asked_key', 'key_sent'];
+  v_id uuid; v_old text; v_note text;
+begin
+  if p_stage is null or not (p_stage = any (v_stages)) or p_stage = 'key_sent' then return; end if;   -- key_sent is set only by the admin's key
+  if char_length(coalesce(p_name, '')) < 2 or char_length(coalesce(p_phone, '')) < 7 then return; end if;
+  select id, setup_stage into v_id, v_old from public.leads
+   where (v_email is not null and lower(email) = v_email) or phone_key = public.phone_key(p_phone)
+   order by (v_email is not null and lower(email) = v_email) desc
+   limit 1 for update;
+  v_note := case p_stage when 'asked_key' then 'Asked for a licence key from the ZAP POS setup on '
+                         when 'at_key' then 'Reached the licence-key step of the ZAP POS setup on '
+                         else 'Registered in the ZAP POS setup on ' end
+            || to_char(now() at time zone 'Asia/Karachi', 'DD Mon YYYY, HH12:MI AM');
+  if v_id is null then
+    insert into public.leads (name, phone, email, shop, source, setup_stage, notes)
+    values (left(trim(p_name), 80), left(trim(p_phone), 20), v_email, left(nullif(trim(p_shop), ''), 100), 'ZAP POS setup', p_stage, v_note);
+  elsif v_old is null or array_position(v_stages, p_stage) > array_position(v_stages, v_old) then
+    update public.leads l set
+      setup_stage = p_stage,
+      email  = coalesce(l.email, v_email),
+      shop   = coalesce(l.shop, left(nullif(trim(p_shop), ''), 100)),
+      status = case when l.status = 'lost' then 'new' else l.status end,
+      notes  = left(concat_ws(E'\n', l.notes, v_note), 4000)
+    where l.id = v_id;
+  end if;
+exception when unique_violation then
+  null;   -- the same shop was saved a moment ago by a parallel request
+end $$;
+revoke all on function public.setup_progress(text, text, text, text, text) from public, authenticated;
+grant execute on function public.setup_progress(text, text, text, text, text) to anon;
+
+-- A key made for a lead in Admin > Plans: they are no longer waiting for one.
+create or replace function public.plan_codes_mark_sent() returns trigger language plpgsql security definer set search_path = '' as $$
+begin
+  update public.leads set setup_stage = 'key_sent' where id = new.lead_id and setup_stage is distinct from 'key_sent';
+  return new;
+end $$;
+revoke all on function public.plan_codes_mark_sent() from public, anon, authenticated;
+drop trigger if exists plan_codes_mark_sent on public.plan_codes;
+create trigger plan_codes_mark_sent after insert on public.plan_codes for each row execute function public.plan_codes_mark_sent();

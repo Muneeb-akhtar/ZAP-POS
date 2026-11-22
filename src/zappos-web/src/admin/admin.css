@@ -289,6 +289,13 @@ code { font-family: var(--font-mono); font-size: .88em; padding: 1px 6px; border
 .adm-acct { display: inline-flex; align-items: center; gap: 4px; padding: 3px 8px; border-radius: 8px; font-size: 12px; font-weight: 600; color: #b45309; background: #fff7e6; white-space: nowrap; }
 .adm-acct.paid { color: #15803d; background: #eafaf0; }
 .adm-unpaid { color: #b45309; }
+/* Setup stage chip on lead rows (blue = at the key step or asked for one, green = key made) */
+.adm-stage { display: inline-flex; align-items: center; padding: 3px 8px; border-radius: 8px; font-size: 12px; font-weight: 600; color: #1d4ed8; background: #e8f1ff; white-space: nowrap; }
+.adm-stage.asked_key { color: #fff; background: #1d4ed8; }
+.adm-stage.key_sent { color: #15803d; background: #eafaf0; }
+:root[data-theme="dark"] .adm-stage { color: #93c5fd; background: rgba(59, 130, 246, .16); }
+:root[data-theme="dark"] .adm-stage.asked_key { color: #fff; background: #2563eb; }
+:root[data-theme="dark"] .adm-stage.key_sent { color: #4ade80; background: rgba(22, 163, 74, .14); }
 :root[data-theme="dark"] .adm-acct, :root[data-theme="dark"] .adm-unpaid { color: #fcd34d; }
 :root[data-theme="dark"] .adm-acct { background: rgba(217, 119, 6, .14); }
 :root[data-theme="dark"] .adm-acct.paid { color: #4ade80; background: rgba(22, 163, 74, .14); }

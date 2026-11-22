@@ -3,6 +3,12 @@
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
 
+## 2026-11-22 (night, 4): leads from the ZAP POS setup (key step, "asked for a key")
+- Owner request: when someone reaches the licence-key page of the ZAP POS setup, or presses "WhatsApp me for a key", the lead must show in Admin → Leads so the owner can follow up and set the status by hand. New column `leads.setup_stage` (`registered` → `at_key` → `asked_key` → `key_sent`, only ever forward) and anon RPC `setup_progress(name, phone, email, shop, stage)` (flood-limited through the `leads_limit` trigger, finds the lead by email, else mobile number, else creates it with source "ZAP POS setup", adds a dated line to Notes, never changes `status` except Lost → New when the person comes back). Making a key for a lead in Admin → Plans sets `key_sent` by itself (trigger `plan_codes_mark_sent`).
+- Admin: a stage chip on each lead row ("At key step", "Asked for a key" in solid blue, "Key sent" in green), filters "Asked for a key" and "Waiting for a key", and a dashboard alert "N shops asked for a licence key" (opens that filter).
+- Tested live as anon: one lead from three calls, stage only forward, `key_sent` refused from outside, anon can't read `leads`, signed-in non-admins can't call the function.
+- Files: `supabase/schema.sql` (§21, also applied live as migration `setup_progress_leads`), `admin/Leads.jsx`, `admin/Dashboard.jsx`, `admin/admin.css`, docs.
+
 ## 2026-11-22 (night, 3): floating WhatsApp button
 - Owner request: a WhatsApp button that stays on the right while the page scrolls. A round green button (the WhatsApp green already used by the FAQ) is fixed at the bottom-right of the landing page; on mouse devices it grows to show "Chat with us on WhatsApp" on hover. It opens the WhatsApp link in a new tab and is counted in Analytics as "WhatsApp". It stays hidden until a real WhatsApp link is set. Works in light and dark, 390 px (smaller, 14 px from the edge), no sideways scroll.
 - Content key `whatsappButton.label` (Admin → Links, last field; an empty label hides the button).

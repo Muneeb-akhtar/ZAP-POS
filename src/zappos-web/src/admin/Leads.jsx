@@ -123,7 +123,13 @@ function LeadDetail({ lead, onEdit, onPay }) {
 }
 
 // #leads/account and #leads/unpaid open those filters; any other #leads/<id> opens that lead.
-const FILTER_LINKS = ['account', 'unpaid']
+// Where a shop is in the ZAP POS setup (set by the setup screen and by making a key in Plans); your own Status stays yours
+const STAGE_CHIP = {
+  at_key: { label: 'At key step', hint: 'Registered in the ZAP POS setup and is on the licence-key page' },
+  asked_key: { label: 'Asked for a key', hint: 'Pressed WhatsApp me for a key in the ZAP POS setup: make their key in Plans, then mark them Contacted' },
+  key_sent: { label: 'Key sent', hint: 'A licence key was made for this shop in Plans' },
+}
+const FILTER_LINKS = ['account', 'unpaid', 'askedkey', 'waitkey']
 
 export default function Leads({ focus, plans, onPay }) {
   const { leads, payments } = useBiz()
@@ -136,9 +142,11 @@ export default function Leads({ focus, plans, onPay }) {
   useEffect(() => { if (focus && !linkFilter) document.getElementById(`lead-${focus}`)?.scrollIntoView({ block: 'center' }) }, [focus])
 
   const counts = useMemo(() => {
-    const c = { all: leads.length, open: 0, followup: 0, account: 0, unpaid: 0 }
+    const c = { all: leads.length, open: 0, followup: 0, account: 0, unpaid: 0, askedkey: 0, waitkey: 0 }
     for (const l of leads) {
       if (l.user_id) { c.account++; if (!payers.has(l.id)) c.unpaid++ }
+      if (l.setup_stage === 'asked_key') c.askedkey++
+      if (l.setup_stage === 'asked_key' || l.setup_stage === 'at_key') c.waitkey++
       c[l.status] = (c[l.status] ?? 0) + 1
       if (['new', 'contacted', 'demo'].includes(l.status)) c.open++
       if (l.follow_up && daysUntil(l.follow_up) <= 0 && l.status !== 'won' && l.status !== 'lost') c.followup++
@@ -153,13 +161,17 @@ export default function Leads({ focus, plans, onPay }) {
       if (filter === 'followup' && !(l.follow_up && daysUntil(l.follow_up) <= 0 && l.status !== 'won' && l.status !== 'lost')) return false
       if (filter === 'account' && !l.user_id) return false
       if (filter === 'unpaid' && !(l.user_id && !payers.has(l.id))) return false
-      if (!['all', 'open', 'followup', 'account', 'unpaid'].includes(filter) && l.status !== filter) return false
+      if (filter === 'askedkey' && l.setup_stage !== 'asked_key') return false
+      if (filter === 'waitkey' && !['at_key', 'asked_key'].includes(l.setup_stage)) return false
+      if (!['all', 'open', 'followup', 'account', 'unpaid', 'askedkey', 'waitkey'].includes(filter) && l.status !== filter) return false
       return !t || [l.name, l.phone, l.email, l.shop, l.city, l.plan, l.notes].some((v) => v?.toLowerCase().includes(t))
     })
   }, [leads, q, filter, payers])
 
   const tabs = [
     { id: 'open', label: 'Open' },
+    { id: 'askedkey', label: 'Asked for a key' },
+    { id: 'waitkey', label: 'Waiting for a key' },
     { id: 'followup', label: 'Call back today' },
     { id: 'unpaid', label: 'Signed up, not paid' },
     { id: 'account', label: 'Has account' },
@@ -187,7 +199,7 @@ export default function Leads({ focus, plans, onPay }) {
           <div className="adm-search"><Icon name="search" size={16} /><input type="search" placeholder="Search name, phone, email, shop, city…" value={q} onChange={(e) => setQ(e.target.value)} /></div>
           <div className="adm-chips" role="tablist">
             {tabs.map((t) => (
-              <button key={t.id} role="tab" aria-selected={filter === t.id} className={`${filter === t.id ? 'on' : ''} ${(t.id === 'followup' && counts.followup) || (t.id === 'unpaid' && counts.unpaid) ? 'alert' : ''}`} onClick={() => setFilter(t.id)}>
+              <button key={t.id} role="tab" aria-selected={filter === t.id} className={`${filter === t.id ? 'on' : ''} ${(t.id === 'followup' && counts.followup) || (t.id === 'unpaid' && counts.unpaid) || (t.id === 'askedkey' && counts.askedkey) ? 'alert' : ''}`} onClick={() => setFilter(t.id)}>
                 {t.label} <em>{counts[t.id] ?? 0}</em>
               </button>
             ))}
@@ -212,6 +224,7 @@ export default function Leads({ focus, plans, onPay }) {
                       <b>{l.name}{l.shop && <small> · {l.shop}</small>}</b>
                       <small>{l.phone}{l.city && ` · ${l.city}`}{l.plan && ` · ${l.plan}`}</small>
                     </span>
+                    {STAGE_CHIP[l.setup_stage] && <span className={`adm-stage ${l.setup_stage}`} title={STAGE_CHIP[l.setup_stage].hint}>{STAGE_CHIP[l.setup_stage].label}</span>}
                     {l.user_id && <span className={`adm-acct ${payers.has(l.id) ? 'paid' : ''}`} title={payers.has(l.id) ? 'Has an account and has paid' : 'Signed up but has not paid'}><Icon name="lock" size={11} /> {payers.has(l.id) ? 'Account' : 'Not paid'}</span>}
                     {due != null && <span className={`adm-due ${due < 0 ? 'late' : due === 0 ? 'today' : ''}`}><Icon name="calendar" size={12} /> {due < 0 ? `${-due} d late` : due === 0 ? 'Today' : dateFmt(l.follow_up)}</span>}
                     <StatusPill status={l.status} />
