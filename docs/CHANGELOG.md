@@ -3,6 +3,10 @@
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
 
+## 2026-11-22 (night, 5): `my_licence()` for the ZAP POS "Log in" page
+- Owner request: an owner who already registered logs in from the ZAP POS setup instead of registering again. New function `my_licence()` (signed-in users only, not anon): the newest licence key made for the lead linked to the logged-in account, `{code, status, paid_until}`, or null. Only the owner's own key. Applied live as migration `my_licence` and added to `supabase/schema.sql` (§22). Tested with a throw-away user (null with no key, the key once made, null for another user), rolled back.
+- Files: `supabase/schema.sql`, docs.
+
 ## 2026-11-22 (night, 4): leads from the ZAP POS setup (key step, "asked for a key")
 - Owner request: when someone reaches the licence-key page of the ZAP POS setup, or presses "WhatsApp me for a key", the lead must show in Admin → Leads so the owner can follow up and set the status by hand. New column `leads.setup_stage` (`registered` → `at_key` → `asked_key` → `key_sent`, only ever forward) and anon RPC `setup_progress(name, phone, email, shop, stage)` (flood-limited through the `leads_limit` trigger, finds the lead by email, else mobile number, else creates it with source "ZAP POS setup", adds a dated line to Notes, never changes `status` except Lost → New when the person comes back). Making a key for a lead in Admin → Plans sets `key_sent` by itself (trigger `plan_codes_mark_sent`).
 - Admin: a stage chip on each lead row ("At key step", "Asked for a key" in solid blue, "Key sent" in green), filters "Asked for a key" and "Waiting for a key", and a dashboard alert "N shops asked for a licence key" (opens that filter).

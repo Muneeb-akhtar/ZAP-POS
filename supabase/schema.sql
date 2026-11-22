@@ -978,3 +978,20 @@ end $$;
 revoke all on function public.plan_codes_mark_sent() from public, anon, authenticated;
 drop trigger if exists plan_codes_mark_sent on public.plan_codes;
 create trigger plan_codes_mark_sent after insert on public.plan_codes for each row execute function public.plan_codes_mark_sent();
+
+-- ============================================================
+-- 22) ZAP POS setup, "Log in" for an owner who already registered (22 Nov 2026).
+--     After the owner logs in with email + password (Supabase Auth), the setup screen asks for their key with this
+--     function, so a returning owner doesn't paste it again: the newest key made for the lead linked to the logged-in
+--     account, with its status (active / replaced / revoked). Only the owner's own key, only when signed in.
+-- ============================================================
+create or replace function public.my_licence()
+returns jsonb language sql stable security definer set search_path = public as $$
+  select jsonb_build_object('code', c.code, 'status', c.status, 'paid_until', c.paid_until)
+  from public.leads l
+  join lateral (select pc.code, pc.status, pc.paid_until from public.plan_codes pc
+                where pc.lead_id = l.id order by pc.created_at desc limit 1) c on true
+  where l.user_id = auth.uid()
+$$;
+revoke all on function public.my_licence() from public, anon;
+grant execute on function public.my_licence() to authenticated;
