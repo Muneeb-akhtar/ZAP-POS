@@ -287,6 +287,12 @@ code { font-family: var(--font-mono); font-size: .88em; padding: 1px 6px; border
 :root[data-theme="dark"] .adm-due.late { color: #fca5a5; background: rgba(239, 68, 68, .14); }
 /* Customer account chip on lead rows: amber = signed up, not paid; green = has paid */
 .adm-acct { display: inline-flex; align-items: center; gap: 4px; padding: 3px 8px; border-radius: 8px; font-size: 12px; font-weight: 600; color: #b45309; background: #fff7e6; white-space: nowrap; }
+.adm-pending { display: grid; grid-template-columns: auto 1fr auto; gap: 14px; align-items: center; margin: 14px 0; padding: 14px 16px; border-radius: 14px; border: 1px solid #fde3a7; background: #fff7e6; color: var(--text); }
+.adm-pending b { color: var(--ink); }
+.adm-pending p { font-size: 13.5px; margin-top: 4px; line-height: 1.5; }
+.adm-pending-actions { display: flex; gap: 8px; }
+:root[data-theme="dark"] .adm-pending { background: rgba(245, 158, 11, .1); border-color: rgba(245, 158, 11, .35); }
+@media (max-width: 720px) { .adm-pending { grid-template-columns: auto 1fr; } .adm-pending-actions { grid-column: 1 / -1; } }
 .adm-acct.paid { color: #15803d; background: #eafaf0; }
 .adm-unpaid { color: #b45309; }
 /* Setup stage chip on lead rows (blue = at the key step or asked for one, green = key made) */
@@ -410,6 +416,8 @@ code { font-family: var(--font-mono); font-size: .88em; padding: 1px 6px; border
 .adm-center-top:has(+ .adm-box.acc-main) { max-width: 760px; }
 .acc-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
 .acc-head h1 { font-size: 24px; }
+.acc-claim { display: grid; gap: 8px; margin-top: 6px; padding-top: 16px; border-top: 1px dashed var(--line); }
+.acc-claim b { color: var(--ink); }
 .acc-plan { display: grid; gap: 4px; padding: 18px; border-radius: 16px; background: var(--bg-soft); border: 1px solid var(--line); }
 .acc-plan b { font-family: var(--font-head); font-size: 22px; color: var(--ink); }
 .acc-plan span { font-size: 14px; color: var(--muted); }

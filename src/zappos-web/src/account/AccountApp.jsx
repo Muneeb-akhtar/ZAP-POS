@@ -140,8 +140,22 @@ function MyAccount({ t, ti, links, session }) {
   const [acc, setAcc] = useState(undefined) // undefined = loading, null = not linked to a shop
   const [isAdmin, setIsAdmin] = useState(false)
   const [error, setError] = useState('')
-  useEffect(() => {
+  const [state, setState] = useState('none') // linked / pending (matched only by mobile number, waits for ZAP) / none
+  const [code, setCode] = useState('')
+  const [claim, setClaim] = useState({ busy: false, wrong: false })
+  const load = () => {
     supabase.rpc('my_account').then(({ data, error }) => { if (error) setError(error.message); else setAcc(data) })
+    supabase.rpc('my_signup_state').then(({ data }) => data && setState(data))
+  }
+  // Holding the shop's active licence key proves it's theirs: link at once (schema §23).
+  const claimShop = async (e) => {
+    e.preventDefault(); setClaim({ busy: true, wrong: false })
+    const { data, error } = await supabase.rpc('claim_shop', { p_code: code })
+    if (error || !data) { setClaim({ busy: false, wrong: true }); return }
+    setClaim({ busy: false, wrong: false }); setAcc(undefined); load()
+  }
+  useEffect(() => {
+    load()
     supabase.from('admins').select('user_id').eq('user_id', session.user.id).maybeSingle().then(({ data }) => setIsAdmin(Boolean(data)))
   }, [session.user.id])
   const signOut = <button className="btn btn-quiet btn-sm" onClick={() => supabase.auth.signOut()}><Icon name="logout" size={14} /> {t.signOut}</button>
@@ -151,11 +165,24 @@ function MyAccount({ t, ti, links, session }) {
   if (acc === null) {
     return (
       <div className="adm-box">
-        <h1>{session.user.email}</h1>
-        <p>{isAdmin ? t.adminText : t.notLinkedText}</p>
+        <h1>{state === 'pending' ? t.pendingTitle : session.user.email}</h1>
+        <p>{isAdmin ? t.adminText : state === 'pending' ? t.pendingText : t.notLinkedText}</p>
         {isAdmin
           ? <a className="btn btn-primary btn-block" href="/admin/">{t.adminLink}</a>
-          : <a className="btn btn-outline btn-block" href={links.whatsapp}><Icon name="whatsapp" size={16} /> WhatsApp</a>}
+          : (
+            <>
+              <a className="btn btn-outline btn-block" href={links.whatsapp}><Icon name="whatsapp" size={16} /> WhatsApp</a>
+              <form className="acc-claim" onSubmit={claimShop}>
+                <b>{t.claimTitle}</b>
+                <small className="adm-muted">{t.claimText}</small>
+                <label className="adm-field"><span className="adm-label">{t.claimLabel}</span>
+                  <input required value={code} onChange={(e) => setCode(e.target.value)} autoComplete="off" spellCheck="false" placeholder="XXXX-XXXX-XXXX" />
+                </label>
+                {claim.wrong && <p className="adm-error" role="alert">{t.claimWrong}</p>}
+                <button className="btn btn-primary btn-block" disabled={claim.busy}>{t.claimButton}</button>
+              </form>
+            </>
+          )}
         {signOut}
       </div>
     )

@@ -60,12 +60,14 @@ export default function Dashboard({ content, published, updatedAt, go, onAddLead
   const paidIds = new Set(payments.map((p) => p.lead_id))
   const unpaidSignups = leads.filter((l) => l.user_id && !paidIds.has(l.id))
   const askedKey = leads.filter((l) => l.setup_stage === 'asked_key')
+  const waitingSignups = leads.filter((l) => l.pending_user_id)
   const callbacks = leads.filter((l) => l.follow_up && daysUntil(l.follow_up) <= 0 && l.status !== 'won' && l.status !== 'lost')
   const checks = checklist(content, published)
   const done = checks.filter((x) => x.done).length
 
   const attention = [
     fresh.length && { icon: 'users', tone: 'blue', text: `${fresh.length} new lead${fresh.length > 1 ? 's' : ''} waiting for a call`, go: 'leads' },
+    waitingSignups.length && { icon: 'lock', tone: 'amber', text: `${waitingSignups.length} sign-up${waitingSignups.length > 1 ? 's' : ''} waiting for your approval`, go: 'leads/pending' },
     askedKey.length && { icon: 'whatsapp', tone: 'blue', text: `${askedKey.length} shop${askedKey.length > 1 ? 's' : ''} asked for a licence key`, go: 'leads/askedkey' },
     unpaidSignups.length && { icon: 'lock', tone: 'amber', text: `${unpaidSignups.length} shop${unpaidSignups.length > 1 ? 's' : ''} signed up but ${unpaidSignups.length > 1 ? "haven't" : "hasn't"} paid yet`, go: 'leads/unpaid' },
     callbacks.length && { icon: 'calendar', tone: 'amber', text: `${callbacks.length} call-back${callbacks.length > 1 ? 's' : ''} due today`, go: 'leads' },

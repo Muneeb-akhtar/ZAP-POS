@@ -995,3 +995,114 @@ returns jsonb language sql stable security definer set search_path = public as $
 $$;
 revoke all on function public.my_licence() from public, anon;
 grant execute on function public.my_licence() to authenticated;
+
+-- ============================================================
+-- 23) Tenancy (23 Nov 2026, owner decision): a phone number is not proof that someone owns a shop.
+--     A sign-up links to a shop at once only by its licence key (ZAP POS setup) or the lead's own email. A sign-up that
+--     matches a shop ONLY by mobile number is held as "waiting for approval" (leads.pending_user_id) and sees nothing of
+--     the shop until the ZAP team approves it in Admin > Leads, or the person enters that shop's active licence key
+--     (claim_shop), since only the real owner has the key. Only one sign-up can wait per shop; a later one stays unlinked.
+-- ============================================================
+alter table public.leads add column if not exists pending_user_id uuid unique references auth.users(id) on delete set null;
+alter table public.leads add column if not exists pending_email text;
+alter table public.leads add column if not exists pending_at timestamptz;
+
+create or replace function public.link_signup()
+returns trigger language plpgsql security definer set search_path = public as $$
+declare
+  m jsonb := coalesce(new.raw_user_meta_data, '{}'::jsonb);
+  v_phone text := nullif(trim(m->>'phone'), '');
+  v_plan text := nullif(replace(upper(trim(m->>'plan_code')), '-', ''), '');
+  v_id uuid; v_user uuid; v_pending uuid;
+begin
+  -- 1) signed up from the ZAP POS setup screen with a licence key: that key's shop
+  if v_plan is not null then
+    select l.id, l.user_id into v_id, v_user
+      from public.plan_codes p join public.leads l on l.id = p.lead_id
+     where replace(upper(p.code), '-', '') = v_plan
+     limit 1 for update of l;
+  end if;
+  -- 2) the lead's own email
+  if v_id is null then
+    select id, user_id into v_id, v_user from public.leads where lower(email) = lower(new.email) limit 1 for update;
+  end if;
+  if v_id is not null then
+    if v_user is not null and v_user <> new.id then
+      raise exception 'ZAP_ACCOUNT_EXISTS: this shop already has an account';
+    end if;
+    update public.leads l set
+      user_id = new.id, signed_up_at = now(), pending_user_id = null, pending_email = null, pending_at = null,
+      email = coalesce(l.email, lower(new.email)),
+      shop  = coalesce(l.shop, nullif(trim(m->>'shop'), '')),
+      city  = coalesce(l.city, nullif(trim(m->>'city'), '')),
+      status = case when l.status = 'lost' then 'new' else l.status end
+    where l.id = v_id;
+    return new;
+  end if;
+  if v_phone is null then return new; end if;   -- e.g. the owner's own login made in the dashboard
+  -- 3) only the mobile number matches: wait for approval (or the licence key)
+  select id, user_id, pending_user_id into v_id, v_user, v_pending from public.leads
+   where phone_key = public.phone_key(v_phone) limit 1 for update;
+  if v_id is null then
+    insert into public.leads (name, phone, email, shop, city, source, user_id, signed_up_at)
+    values (coalesce(nullif(trim(m->>'name'), ''), split_part(new.email, '@', 1)), v_phone, lower(new.email),
+            nullif(trim(m->>'shop'), ''), nullif(trim(m->>'city'), ''), 'Sign-up', new.id, now());
+  elsif v_user is not null then
+    raise exception 'ZAP_ACCOUNT_EXISTS: this shop already has an account';
+  elsif v_pending is null then
+    update public.leads set pending_user_id = new.id, pending_email = lower(new.email), pending_at = now(),
+           status = case when status = 'lost' then 'new' else status end
+    where id = v_id;
+  end if;
+  return new;
+end $$;
+revoke all on function public.link_signup() from public, anon, authenticated;
+
+-- The signed-in person proves the shop is theirs with its active licence key: link now.
+create or replace function public.claim_shop(p_code text)
+returns boolean language plpgsql security definer set search_path = public as $$
+declare v_uid uuid := auth.uid(); v_lead uuid; v_user uuid;
+begin
+  if v_uid is null then return false; end if;
+  if exists (select 1 from public.leads where user_id = v_uid) then return true; end if;
+  if not public.rate_ok('claim_shop', 20, 2000) then
+    raise exception 'Too many requests. Please try again later.' using errcode = 'P0429';
+  end if;
+  select l.id, l.user_id into v_lead, v_user
+    from public.plan_codes p join public.leads l on l.id = p.lead_id
+   where p.status = 'active' and replace(upper(p.code), '-', '') = replace(upper(trim(coalesce(p_code, ''))), '-', '')
+   limit 1 for update of l;
+  if v_lead is null or (v_user is not null and v_user <> v_uid) then return false; end if;
+  update public.leads set pending_user_id = null, pending_email = null, pending_at = null where pending_user_id = v_uid and id <> v_lead;
+  update public.leads set user_id = v_uid, signed_up_at = now(), pending_user_id = null, pending_email = null, pending_at = null
+  where id = v_lead;
+  return true;
+end $$;
+revoke all on function public.claim_shop(text) from public, anon;
+grant execute on function public.claim_shop(text) to authenticated;
+
+-- Admin > Leads: approve or reject a sign-up that is waiting.
+create or replace function public.approve_signup(p_lead uuid, p_approve boolean)
+returns void language plpgsql security definer set search_path = public as $$
+begin
+  if not public.is_admin() then raise exception 'Only the ZAP team can do this' using errcode = '42501'; end if;
+  if p_approve then
+    update public.leads set user_id = pending_user_id, signed_up_at = now(),
+           pending_user_id = null, pending_email = null, pending_at = null
+    where id = p_lead and pending_user_id is not null and user_id is null;
+  else
+    update public.leads set pending_user_id = null, pending_email = null, pending_at = null where id = p_lead;
+  end if;
+end $$;
+revoke all on function public.approve_signup(uuid, boolean) from public, anon;
+grant execute on function public.approve_signup(uuid, boolean) to authenticated;
+
+-- The account page: a waiting sign-up only learns that it is waiting (nothing about the shop).
+create or replace function public.my_signup_state()
+returns text language sql stable security definer set search_path = public as $$
+  select case when exists (select 1 from public.leads where user_id = auth.uid()) then 'linked'
+              when exists (select 1 from public.leads where pending_user_id = auth.uid()) then 'pending'
+              else 'none' end
+$$;
+revoke all on function public.my_signup_state() from public, anon;
+grant execute on function public.my_signup_state() to authenticated;

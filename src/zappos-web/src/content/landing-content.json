@@ -618,7 +618,14 @@
     "error": "Something went wrong. Please try again in a moment.",
     "invoicesTitle": "Your invoices",
     "noInvoices": "No invoices yet.",
-    "viewInvoice": "View"
+    "viewInvoice": "View",
+    "pendingTitle": "We're confirming your shop",
+    "pendingText": "Your account matches a shop by mobile number. To keep every shop's data safe, we check it's really you first. We'll message you on WhatsApp shortly.",
+    "claimTitle": "Have your licence key?",
+    "claimText": "Enter the licence key we sent you to link your shop right away.",
+    "claimLabel": "Licence key",
+    "claimButton": "Link my shop",
+    "claimWrong": "That key isn't an active key of a shop without an account. Check it, or message us on WhatsApp."
   },
   "footer": {
     "copyright": "ZAP POS. All rights reserved.",
