@@ -83,7 +83,7 @@ export default function App({ initialContent, path = '/' }) {
   if (page) return (
     <>
       <Navbar brand={c.brand} nav={c.nav} links={links} home={false} />
-      <main className="inner-page"><InfoPage page={page} pages={c.pages} pricing={c.pricing} links={links} release={release} /></main>
+      <main className="inner-page"><InfoPage page={page} pages={c.pages} pricing={c.pricing} finalCta={c.finalCta} brand={c.brand} links={links} release={release} /></main>
       <Footer brand={c.brand} footer={c.footer} links={links} />
       <WhatsAppFloat data={c.whatsappButton} links={links} />
       {lead && <LeadForm plan={lead.plan} plans={c.pricing.plans} data={c.leadForm} links={links} brand={c.brand} onClose={closeLead} />}

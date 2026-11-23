@@ -1,28 +1,47 @@
 import Icon from './Icons.jsx'
-import { Kicker } from './Bits.jsx'
+import { Kicker, Scribble, Squiggle, Barcode } from './Bits.jsx'
 import Pricing from './Pricing.jsx'
 import DownloadLink from './DownloadLink.jsx'
+import { FinalCta } from './Sections.jsx'
 import { sizeLabel } from '../lib/release.js'
 
-// One template for every inner page (/fbr-invoicing, /plans, /download …). All text comes from the `pages` content key;
-// each block shows only when its fields are filled, so a page can be as short or long as it needs.
-// The FAQ uses <details>, so answers open without JavaScript and are in the page HTML for search engines.
+// One template for every inner page (/fbr-invoicing, /plans, /download …), drawn in ZAP's own look: the page's
+// facts print on a receipt, problems are sticky notes, steps are paper tickets, needs are stickers, the FAQ is a
+// WhatsApp chat and the page ends with the night section. All text comes from the `pages` content key; each block
+// shows only when filled. Everything is plain HTML (no clicks needed), so search engines read every answer.
+
+const TINTS = ['yellow', 'blue', 'mint']
 
 function PageHero({ page, links }) {
+  const receipt = page.stats?.length > 0
   return (
     <section className="ip-hero">
-      <div className="container">
-        <nav className="ip-crumbs" aria-label="Breadcrumb"><a href="/">Home</a><Icon name="arrow" size={12} /><span>{page.menu}</span></nav>
-        <Kicker icon={page.icon}>{page.kicker}</Kicker>
-        <h1>{page.title} <span className="hl">{page.titleHighlight}</span></h1>
-        <p className="ip-lead">{page.description}</p>
-        <div className="ip-actions">
-          <a href={links.demo} data-track="demo" className="btn btn-primary btn-lg">Book a free demo <Icon name="arrow" size={16} /></a>
-          <a href={links.whatsapp} data-track="whatsapp" className="btn btn-outline btn-lg"><Icon name="whatsapp" size={16} /> Ask on WhatsApp</a>
+      <div className={`container ${receipt ? 'ip-hero-grid' : 'ip-hero-solo'}`}>
+        <div className="ip-hero-copy">
+          <nav className="ip-crumbs" aria-label="Breadcrumb"><a href="/">Home</a><Icon name="arrow" size={12} /><span>{page.menu}</span></nav>
+          <Kicker icon={page.icon}>{page.kicker}</Kicker>
+          <h1>{page.title} <span className="ip-hl">{page.titleHighlight}<Squiggle /></span></h1>
+          <p className="ip-lead">{page.description}</p>
+          <div className="ip-actions">
+            <a href={links.demo} data-track="demo" className="btn btn-primary btn-lg">Book a free demo <Icon name="arrow" size={16} /></a>
+            <a href={links.whatsapp} data-track="whatsapp" className="btn btn-outline btn-lg"><Icon name="whatsapp" size={16} /> Ask on WhatsApp</a>
+          </div>
         </div>
-        {page.stats?.length > 0 && (
-          <div className="ip-stats">
-            {page.stats.map((s) => <div key={s.label} className="ip-stat"><b>{s.value}</b><span>{s.label}</span></div>)}
+        {receipt && (
+          <div className="ip-receipt paper zz zz-top" aria-label={`${page.menu} at a glance`}>
+            <div className="rp-head">
+              <span className="rp-logo"><Icon name="zap" size={14} fill /></span>
+              <b>ZAP POS</b>
+              <small>{page.menu.toUpperCase()}</small>
+            </div>
+            <div className="r-rule" />
+            <div className="ip-rlines">
+              {page.stats.map((s) => <div key={s.label}><b>{s.value}</b><span>{s.label}</span></div>)}
+            </div>
+            <div className="r-rule" />
+            <div className="ip-rtotal"><span>TOTAL</span><b>✓ ALL INCLUDED</b></div>
+            <Barcode seed={page.slug} />
+            <small className="ip-rthanks">*** zappos.pk ***</small>
           </div>
         )}
       </div>
@@ -34,7 +53,7 @@ function DownloadCard({ page, links, release }) {
   return (
     <section className="ip-block">
       <div className="container">
-        <div className="ip-download">
+        <div className="ip-download glow">
           <span className="ip-dl-icon"><Icon name="windows" size={34} fill /></span>
           <div>
             <h2>{page.downloadTitle}</h2>
@@ -51,7 +70,7 @@ const Head = ({ title, text }) => (
   <div className="ip-head"><h2>{title}</h2>{text && <p>{text}</p>}</div>
 )
 
-export default function InfoPage({ page, pages, pricing, links, release }) {
+export default function InfoPage({ page, pages, pricing, finalCta, brand, links, release }) {
   const related = pages.items.filter((p) => p.slug !== page.slug)
   return (
     <>
@@ -61,12 +80,17 @@ export default function InfoPage({ page, pages, pricing, links, release }) {
 
       {page.problems?.length > 0 && (
         <section className="ip-block">
-          <div className="container ip-narrow">
+          <div className="container">
             <Head title={page.problemsTitle} />
-            <ul className="ip-problems">
-              {page.problems.map((t) => <li key={t}><Icon name="close" size={14} />{t}</li>)}
-            </ul>
-            {page.solvedLine && <p className="ip-solved"><Icon name="zap" size={16} fill /> {page.solvedLine}</p>}
+            <div className="ip-notes">
+              {page.problems.map((t, i) => (
+                <figure key={t} className={`note ${TINTS[i % TINTS.length]} n${i % 3}`}>
+                  <span className="tape" aria-hidden="true" />
+                  <blockquote>{t}</blockquote>
+                </figure>
+              ))}
+            </div>
+            {page.solvedLine && <div className="ip-solved"><Scribble dir="up">{page.solvedLine}</Scribble></div>}
           </div>
         </section>
       )}
@@ -92,9 +116,14 @@ export default function InfoPage({ page, pages, pricing, links, release }) {
         <section className="ip-block">
           <div className="container">
             <Head title={page.stepsTitle} />
-            <ol className="ip-steps">
+            <ol className="ip-tickets">
               {page.steps.map((st, i) => (
-                <li key={st.title}><span className="ip-num">{String(i + 1).padStart(2, '0')}</span><h3>{st.title}</h3><p>{st.text}</p></li>
+                <li key={st.title} className={`paper zz zz-top t${i % 4}`}>
+                  <span className="ip-tnum">STEP #{String(i + 1).padStart(2, '0')}</span>
+                  <div className="r-rule" />
+                  <h3>{st.title}</h3>
+                  <p>{st.text}</p>
+                </li>
               ))}
             </ol>
           </div>
@@ -105,9 +134,9 @@ export default function InfoPage({ page, pages, pricing, links, release }) {
         <section className="ip-block">
           <div className="container">
             <Head title={page.specsTitle} />
-            <div className="ip-specs">
-              {page.specs.map((s) => (
-                <div key={s.label} className="ip-spec"><span className="ip-ic"><Icon name={s.icon} size={18} /></span><div><small>{s.label}</small><b>{s.value}</b></div></div>
+            <div className="stickers ip-stickers">
+              {page.specs.map((s, i) => (
+                <span key={s.label} className={`sticker s${i % 6}`}><Icon name={s.icon} size={18} /><span><small>{s.label}</small>{s.value}</span></span>
               ))}
             </div>
           </div>
@@ -116,35 +145,35 @@ export default function InfoPage({ page, pages, pricing, links, release }) {
 
       {page.faq?.length > 0 && (
         <section className="ip-block">
-          <div className="container ip-narrow">
+          <div className="container">
             <Head title={page.faqTitle} />
-            <div className="ip-faq">
-              {page.faq.map((f) => (
-                <details key={f.q}><summary>{f.q}<Icon name="plus" size={16} /></summary><p>{f.a}</p></details>
-              ))}
+            <div className="chat ip-chat">
+              <div className="chat-top">
+                <span className="chat-avatar"><Icon name="zap" size={18} fill /><i className="chat-presence" /></span>
+                <div className="chat-who"><b>ZAP POS Support</b><small><i className="dot" /> {brand.phone}</small></div>
+                <a href={links.whatsapp} data-track="whatsapp" className="ip-chat-wa" aria-label="Message us on WhatsApp"><Icon name="whatsapp" size={19} /></a>
+              </div>
+              <div className="chat-body">
+                {page.faq.map((f) => (
+                  <div key={f.q} className="exchange">
+                    <h3 className="bubble out">{f.q}</h3>
+                    <p className="bubble in">{f.a}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </section>
       )}
 
-      <section className="ip-block">
-        <div className="container">
-          <div className="ip-cta">
-            <h2>{page.ctaTitle}</h2>
-            <p>{page.ctaText}</p>
-            <div className="ip-actions">
-              <a href={links.demo} data-track="demo" className="btn btn-primary btn-lg">Book a free demo <Icon name="arrow" size={16} /></a>
-              <a href={links.whatsapp} data-track="whatsapp" className="btn btn-glass btn-lg"><Icon name="whatsapp" size={16} /> WhatsApp us</a>
-            </div>
-          </div>
-          {related.length > 0 && (
-            <div className="ip-related">
-              <h4>{pages.relatedTitle}</h4>
-              <div>{related.map((p) => <a key={p.slug} href={`/${p.slug}`} className="ip-rel glow"><Icon name={p.icon} size={16} />{p.menu}<Icon name="arrow" size={14} /></a>)}</div>
-            </div>
-          )}
+      {related.length > 0 && (
+        <div className="container ip-related">
+          <h4>{pages.relatedTitle}</h4>
+          <div>{related.map((p) => <a key={p.slug} href={`/${p.slug}`} className="ip-rel"><Icon name={p.icon} size={16} />{p.menu}<Icon name="arrow" size={14} /></a>)}</div>
         </div>
-      </section>
+      )}
+
+      <FinalCta data={{ ...finalCta, title: page.ctaTitle, titleHighlight: '', description: page.ctaText }} links={links} brand={brand} />
     </>
   )
 }

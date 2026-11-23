@@ -901,7 +901,25 @@
           }
         ],
         "ctaTitle": "Not sure which plan fits?",
-        "ctaText": "Tell us how many counters and branches you run, and we'll suggest one on WhatsApp."
+        "ctaText": "Tell us how many counters and branches you run, and we'll suggest one on WhatsApp.",
+        "stats": [
+          {
+            "value": "3 plans",
+            "label": "Dukaan, Brand, Enterprise"
+          },
+          {
+            "value": "PKR",
+            "label": "monthly or yearly"
+          },
+          {
+            "value": "Offline",
+            "label": "billing in every plan"
+          },
+          {
+            "value": "WhatsApp",
+            "label": "setup help"
+          }
+        ]
       },
       {
         "slug": "download",
@@ -1011,7 +1029,25 @@
           }
         ],
         "ctaTitle": "Need help installing?",
-        "ctaText": "Message us on WhatsApp and we'll walk you through setup and your first bill."
+        "ctaText": "Message us on WhatsApp and we'll walk you through setup and your first bill.",
+        "stats": [
+          {
+            "value": "1 setup",
+            "label": "for the main PC and counters"
+          },
+          {
+            "value": "Win 10/11",
+            "label": "64-bit"
+          },
+          {
+            "value": "Offline",
+            "label": "billing after setup"
+          },
+          {
+            "value": "Auto",
+            "label": "updates from the main PC"
+          }
+        ]
       }
     ]
   }
