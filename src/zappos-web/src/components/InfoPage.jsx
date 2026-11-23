@@ -77,6 +77,16 @@ export default function InfoPage({ page, pages, pricing, finalCta, brand, links,
   return (
     <>
       <PageHero page={page} links={links} />
+      {page.shortAnswer && (
+        <section className="ip-block ip-short-wrap">
+          <div className="container">
+            <div className="ip-short paper zz zz-top">
+              <span className="ip-short-label">{page.shortLabel ?? pages.shortLabel}</span>
+              <p>{page.shortAnswer}</p>
+            </div>
+          </div>
+        </section>
+      )}
       {page.showDownload && <DownloadCard page={page} links={links} release={release} />}
       {page.showPricing && <Pricing data={pricing} links={links} />}
 

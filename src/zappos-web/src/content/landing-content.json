@@ -708,6 +708,14 @@
           {
             "label": "Billing in load shedding",
             "href": "/billing-during-load-shedding"
+          },
+          {
+            "label": "ZAP POS at a glance",
+            "href": "/zap-pos-facts"
+          },
+          {
+            "label": "Sawal jawab",
+            "href": "/pos-software-sawal-jawab"
           }
         ]
       },
@@ -1667,7 +1675,8 @@
         ],
         "ctaTitle": "Put ZAP POS through the test",
         "ctaText": "Book a free demo and try every question on this page with your own products.",
-        "published": "2026-11-23"
+        "published": "2026-11-23",
+        "shortAnswer": "The best POS for a Pakistani shop keeps billing when the internet drops, reports to FBR or PRA if you are required to, works with standard printers and scanners, shows its prices in rupees and has a real person to help on WhatsApp. Test all of this in a demo with the internet unplugged."
       },
       {
         "slug": "pos-vs-register-excel",
@@ -1728,7 +1737,8 @@
         ],
         "ctaTitle": "Ready to put the register away?",
         "ctaText": "Book a free demo and we'll help you bring your product list across.",
-        "published": "2026-11-23"
+        "published": "2026-11-23",
+        "shortAnswer": "A register is cheap but gets slow and error-prone as a shop grows. Excel is good for records but not for billing customers. A POS bills, updates stock and counts the cash in one step. Switch when stock-outs, cash that doesn't match or a second counter start costing you money."
       },
       {
         "slug": "billing-during-load-shedding",
@@ -1789,7 +1799,8 @@
         ],
         "ctaTitle": "Make load shedding a non-event",
         "ctaText": "Book a free demo and we'll show you billing with the internet unplugged.",
-        "published": "2026-11-23"
+        "published": "2026-11-23",
+        "shortAnswer": "Load shedding causes two problems that need two fixes. Put your PCs, receipt printer and network switch on a UPS so they stay on, and use a POS that bills without internet so the counter keeps working while the router is off."
       },
       {
         "slug": "how-it-works",
@@ -2249,7 +2260,157 @@
         ],
         "ctaTitle": "Questions about your data?",
         "ctaText": "Message us on WhatsApp and we'll answer."
+      },
+      {
+        "slug": "zap-pos-facts",
+        "menu": "ZAP POS at a glance",
+        "icon": "id",
+        "seoTitle": "ZAP POS at a Glance: Facts, Features and Limits | POS Pakistan",
+        "seoDescription": "Plain facts about ZAP POS: what it is, who it is for, what it does, how it works, and what it doesn't do yet. Point of sale software for shops in Pakistan.",
+        "kicker": "At a glance",
+        "title": "ZAP POS,",
+        "titleHighlight": "in plain facts.",
+        "description": "Everything about ZAP POS on one page, written so it can be quoted as it is: what it does, how it works and what it doesn't do yet.",
+        "shortAnswer": "ZAP POS is point of sale software for shops in Pakistan, made in Lahore. It runs on Windows PCs, keeps billing without internet, sends bills to FBR or PRA, and lets several counters share one live stock.",
+        "specs": [
+          {
+            "icon": "windows",
+            "label": "Runs on",
+            "value": "Windows 10 and 11, 64-bit"
+          },
+          {
+            "icon": "pin",
+            "label": "Made in",
+            "value": "Lahore, Pakistan"
+          },
+          {
+            "icon": "wifi",
+            "label": "Internet",
+            "value": "Not needed to bill"
+          },
+          {
+            "icon": "receipt",
+            "label": "Tax",
+            "value": "FBR and PRA invoicing built in"
+          }
+        ],
+        "specsTitle": "Quick facts",
+        "article": [
+          {
+            "h": "What it is",
+            "p": [
+              "ZAP POS is point of sale software that a shop installs on its own Windows PCs. One PC in each branch is the main PC and holds the shop's data; the other PCs are counters that bill through it over the shop's network."
+            ]
+          },
+          {
+            "h": "Who it is for",
+            "p": [
+              "Kiryana and general stores, supermarkets, pharmacies and medical stores, bakeries and sweet shops, and restaurants and cafes, from a single counter to several counters and branches."
+            ]
+          },
+          {
+            "h": "What it does",
+            "p": [
+              "Billing by barcode, search or product tiles, with holds, discounts, returns and quick sales. Stock with packs (dozen, carton, strip, box), items sold by weight, expiry dates that block sales, low-stock levels, purchases and supplier ledgers. Restaurant tables, takeaway, delivery and kitchen printers by station. Sales tax by payment method and sending bills to FBR with the invoice number and QR code on the receipt. Staff PIN logins, manager approvals, cash per shift, daily reports, barcode labels, nightly backups and automatic updates."
+            ]
+          },
+          {
+            "h": "How it keeps billing",
+            "p": [
+              "The internet is never needed to make a bill. If the main PC goes off, counters keep billing on their own for a few hours and send their bills back when it returns, each saved exactly once. FBR bills made offline are queued and sent later."
+            ]
+          },
+          {
+            "h": "What it doesn't do yet",
+            "p": [
+              "Size and colour variants for clothing and shoes, an owner app for Android and iPhone, an online dashboard of all branches for owners, versions for Mac or Android counters, and an Urdu interface (the app is in English). These are planned."
+            ]
+          },
+          {
+            "h": "Plans and setup",
+            "p": [
+              "Plans are Dukaan (one shop, one counter), Brand (several counters, priced per branch) and Enterprise (4 or more branches, custom price), billed monthly or yearly in rupees. Setup needs a licence key from ZAP POS, and help is given over WhatsApp."
+            ]
+          }
+        ],
+        "faqTitle": "Quick answers",
+        "faq": [
+          {
+            "q": "What is ZAP POS?",
+            "a": "Point of sale software for shops in Pakistan, made in Lahore. It runs on Windows PCs and keeps billing without internet."
+          },
+          {
+            "q": "Does ZAP POS work offline?",
+            "a": "Yes. Billing never needs the internet, and counters keep billing for a few hours even if the main PC goes off."
+          },
+          {
+            "q": "Is ZAP POS FBR integrated?",
+            "a": "Yes. It can send each bill to FBR and print FBR's invoice number and QR code on the receipt."
+          },
+          {
+            "q": "Which businesses use ZAP POS?",
+            "a": "Kiryana stores, supermarkets, pharmacies, bakeries, restaurants and cafes, from one counter to several branches."
+          }
+        ],
+        "ctaTitle": "See it for yourself",
+        "ctaText": "Book a free demo and we'll show you every point on this page."
+      },
+      {
+        "slug": "pos-software-sawal-jawab",
+        "menu": "Sawal jawab (Roman Urdu)",
+        "icon": "whatsapp",
+        "seoTitle": "POS Software Sawal Jawab | Internet Ke Baghair Billing | ZAP POS",
+        "seoDescription": "POS software ke baare mein aam sawal aur jawab Roman Urdu mein: internet ke baghair billing, load shedding, FBR, counters, printer aur expiry.",
+        "kicker": "Sawal jawab",
+        "title": "POS software ke sawal,",
+        "titleHighlight": "aasaan jawab.",
+        "description": "Dukaandaar jo sawal humein WhatsApp par poochte hain, unke seedhe jawab Roman Urdu mein.",
+        "shortAnswer": "ZAP POS Pakistan ki dukaanon ke liye POS software hai. Bill banane ke liye internet nahi chahiye, FBR ko bill bhej sakta hai, aur kai counters ek hi stock par chalte hain.",
+        "faqTitle": "Aam sawal",
+        "faq": [
+          {
+            "q": "POS software kya hota hai?",
+            "a": "POS (point of sale) software dukaan ke counter par bill banata hai, bechi hui cheezein stock se kam karta hai aur din ki sale ka hisaab rakhta hai. Register aur calculator ki jagah ek screen."
+          },
+          {
+            "q": "Kya ZAP POS internet ke baghair chalta hai?",
+            "a": "Ji haan. Bill banane ke liye internet ki zaroorat nahi. Bill, receipt, stock aur reports dukaan ke network par chalte hain, aur internet wapas aane par cloud mein chale jate hain."
+          },
+          {
+            "q": "Load shedding mein billing kaise chalegi?",
+            "a": "Bijli jaane par PC band ho jata hai, is liye main PC, counters, printer aur network switch UPS par lagayein. ZAP POS ko internet nahi chahiye, to router band hone par bhi billing chalti rehti hai."
+          },
+          {
+            "q": "Kya ZAP POS FBR ke saath kaam karta hai?",
+            "a": "Ji haan. ZAP POS har bill FBR ko bhej sakta hai aur receipt par FBR ka invoice number aur QR code print karta hai. Internet na ho to bill baad mein khud chala jata hai."
+          },
+          {
+            "q": "Ek dukaan mein kitne counters chala sakte hain?",
+            "a": "Jitne aapka plan allow kare. Sab counters ek hi stock aur prices istemal karte hain, aur sale chand second mein har counter par nazar aati hai."
+          },
+          {
+            "q": "Main PC band ho jaye to kya hoga?",
+            "a": "Counters kuch ghante khud billing karte rehte hain aur main PC wapas aane par sab bills bhej dete hain. Koi bill do dafa save nahi hota."
+          },
+          {
+            "q": "Kaun se printer aur scanner chalte hain?",
+            "a": "Aam thermal receipt printer (80 ya 58 mm, USB ya network), USB barcode scanner, cash drawer aur label printer."
+          },
+          {
+            "q": "Kya expired dawai bik sakti hai?",
+            "a": "Nahi. Product par expiry date daalein; date guzarne ke baad ZAP POS usay bill mein add nahi karne deta."
+          },
+          {
+            "q": "ZAP POS kahan se milega?",
+            "a": "Website ke Download page se. Setup ke liye licence key chahiye; key na ho to setup mein WhatsApp button dabayein, hum bhej denge."
+          }
+        ],
+        "ctaTitle": "Mazeed sawal?",
+        "ctaText": "WhatsApp par message karein ya free demo book karein.",
+        "lang": "ur-Latn",
+        "shortLabel": "Mukhtasar jawab"
       }
-    ]
+    ],
+    "shortLabel": "Short answer"
   }
 }

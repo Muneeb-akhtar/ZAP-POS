@@ -67,6 +67,7 @@ for (const p of merged.pages.items) {
     ],
   }
   let html = template
+  if (p.lang) html = html.replace('<html lang="en">', `<html lang="${attr(p.lang)}">`)
   html = swap(html, /(<title>)[^<]*(<\/title>)/, p.seoTitle)
   html = swap(html, /(<meta name="description" content=")[^"]*(")/, p.seoDescription)
   html = swap(html, /(<link rel="canonical" href=")[^"]*(")/, address)
@@ -83,6 +84,22 @@ for (const p of merged.pages.items) {
 // Sitemap: home + every inner page.
 const urls = [`${site}/`, ...merged.pages.items.map((p) => `${site}/${p.slug}`)]
 await writeFile(resolve(root, 'dist/sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `  <url><loc>${u}</loc></url>`).join('\n')}\n</urlset>\n`)
+
+// llms.txt: a plain guide to the site for AI tools (the llms.txt convention), built from the same page list.
+const facts = merged.pages.items.find((p) => p.slug === 'zap-pos-facts')
+const llms = [
+  `# ${merged.brand.name}`,
+  '',
+  `> ${facts?.shortAnswer ?? merged.brand.about}`,
+  '',
+  ...(facts?.article ?? []).flatMap((s) => [`## ${s.h}`, '', ...s.p, '']),
+  '## Pages',
+  '',
+  `- [Home](${site}/): ${merged.brand.about}`,
+  ...merged.pages.items.map((p) => `- [${p.menu}](${site}/${p.slug}): ${p.seoDescription}`),
+  '',
+].join('\n')
+await writeFile(resolve(root, 'dist/llms.txt'), llms)
 
 await rm(resolve(root, '.ssr'), { recursive: true, force: true })
 console.log(`prerender: home + ${merged.pages.items.length} pages written, sitemap has ${urls.length} addresses (${site})`)
