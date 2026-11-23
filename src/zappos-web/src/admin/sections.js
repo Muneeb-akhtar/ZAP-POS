@@ -69,6 +69,7 @@ const LABELS = {
   groups: 'Link columns',
   article: 'Article sections (guides)',
   lang: 'Page language code (leave empty for English; ur-Latn = Roman Urdu)',
+  homeLabel: 'Home link in the menu on extra pages',
   shortLabel: 'Label above the short answer',
   shortAnswer: 'Short answer (2–3 sentences, shown first; AI tools quote it)',
   h: 'Section heading',

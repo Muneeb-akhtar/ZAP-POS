@@ -82,7 +82,7 @@ export default function App({ initialContent, path = '/' }) {
 
   if (page) return (
     <>
-      <Navbar brand={c.brand} nav={c.nav} links={links} home={false} />
+      <Navbar brand={c.brand} nav={c.nav} links={links} home={false} homeLabel={c.pages.homeLabel} />
       <main className="inner-page"><InfoPage page={page} pages={c.pages} pricing={c.pricing} finalCta={c.finalCta} brand={c.brand} links={links} release={release} /></main>
       <Footer brand={c.brand} footer={c.footer} links={links} />
       <WhatsAppFloat data={c.whatsappButton} links={links} />

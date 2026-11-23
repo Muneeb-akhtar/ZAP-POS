@@ -653,6 +653,9 @@ html.modal-open { overflow: hidden; }
   .lead-head h3 { font-size: 21px; }
 }
 
+/* Inner pages: "Home" link at the start of the menu */
+.nav-links .nav-home { display: inline-flex; align-items: center; gap: 4px; color: var(--brand-500); font-weight: 600; }
+
 /* ---------- Inner pages (/fbr-invoicing, /plans, /download …: components/InfoPage.jsx) ----------
    ZAP's own look: facts on a receipt, problems as sticky notes, steps as paper tickets, needs as stickers,
    FAQ as a WhatsApp chat, then the night section. */

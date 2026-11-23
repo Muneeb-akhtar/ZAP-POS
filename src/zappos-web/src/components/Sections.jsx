@@ -50,7 +50,7 @@ export function ThemeToggle() {
 // On inner pages (/plans …) the section links (#pricing) point back to the home page.
 const onHome = (href, home) => (home || !href.startsWith('#') || href === '#demo' ? href : `/${href}`)
 
-export function Navbar({ brand, nav, links, home = true }) {
+export function Navbar({ brand, nav, links, home = true, homeLabel }) {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   useEffect(() => {
@@ -65,6 +65,7 @@ export function Navbar({ brand, nav, links, home = true }) {
       <div className="nav-pill">
         <a href={home ? '#home' : '/'} className="brand"><Logo size={32} /><BrandName name={brand.name} /></a>
         <nav className={`nav-links ${open ? 'open' : ''}`}>
+          {!home && <a href="/" className="nav-home"><Icon name="chevL" size={15} />{homeLabel}</a>}
           {nav.map((n) => <a key={n.href} href={onHome(n.href, home)} onClick={() => setOpen(false)}>{n.label}</a>)}
           <a href={links.portal} data-track="portal" className="nav-mobile-only" onClick={() => setOpen(false)}>Portal login</a>
         </nav>
