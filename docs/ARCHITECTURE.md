@@ -33,7 +33,7 @@ ZAP POS/
          ├─ lib/content.js       Supabase config, defaultContent, mergeContent, fetchPublishedContent, localStorage cache
          ├─ lib/track.js         anonymous visit/click/view events, leadSource()
          ├─ admin/               admin panel (see §9)
-         ├─ account/             customer sign-up / log-in / my account (see §10)
+         ├─ account/             customer sign-up / log-in; OwnerConsole.jsx = linked owner's console (see §10)
          ├─ invoice/             InvoiceDoc.jsx (the invoice, shared with the admin) + invoice.css (paper look, print), InvoicePage.jsx + page.css + main.jsx (the /invoice/?t= page, see §9)
          ├─ styles.css           all styles (see §5)
          ├─ content/landing-content.json   ALL page content (see §4)
@@ -211,6 +211,8 @@ Gotchas:
 - **Supabase:** see §8. Add an admin: create the user in Supabase Auth, then `insert into public.admins (user_id) select id from auth.users where email = '…';`.
 
 ## 10. Customer account (`/account/`)
+
+**Owner console (`account/OwnerConsole.jsx`, 23 Nov 2026).** A linked owner sees the admin panel's frame with their branches: `#all` (today's sales/bills/cash/refunds/discounts vs the same weekday last week, branches online = synced within 10 min, 30-day sales `Area`, today-by-branch `Donut`, branch table), `#<branch id>` (that branch + 7-day table), `#plan` (the plan, invoices and payments content from `AccountApp.jsx`). Data: `my_branches(35)` every 60 s (each main PC sends `daily_totals` every 30 s once connected). No branch → steps to connect (Settings › Sign-in and PINs › ZAP cloud in the desktop app). CSS: "Owner console" block at the end of `admin/admin.css`. Texts: `account.owner`. An account that isn't linked, or is waiting for approval, still gets the small boxes (`Shell`).
 - **Entry:** `account/index.html` → `src/account/main.jsx` (fonts, `styles.css`, `admin/admin.css` for boxes/fields/tables) → `AccountApp.jsx`. Landing "Log in" buttons use `links.portal` (default `/account/`); `/account/#signup` opens the sign-up tab.
 - **Screens:** `Auth` (tabs Log in / Sign up, plus Forgot password; sign-up sends `{ name, phone, shop, city }` as user metadata and `emailRedirectTo` `/account/`; "check your email" when confirmation is on), `NewPassword` (on the `PASSWORD_RECOVERY` auth event), `MyAccount` (`rpc('my_account')`: greeting, plan card green = active / red = expired, Download + "Pay or renew on WhatsApp" buttons, invoices table with View links to `/invoice/?t=`, payments table). A login that isn't linked to a shop sees the WhatsApp help, or a link to `/admin/` if it is the admin.
 - **Errors → text:** "already registered" / empty `identities` → `emailTaken`; "Database error saving new user" (trigger `ZAP_ACCOUNT_EXISTS`) → `shopTaken`; unconfirmed email → `notConfirmed`.
