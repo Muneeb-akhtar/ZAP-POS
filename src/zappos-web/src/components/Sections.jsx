@@ -65,8 +65,8 @@ export function Navbar({ brand, nav, links, home = true, homeLabel }) {
       <div className="nav-pill">
         <a href={home ? '#home' : '/'} className="brand"><Logo size={32} /><BrandName name={brand.name} /></a>
         <nav className={`nav-links ${open ? 'open' : ''}`}>
-          {!home && <a href="/" className="nav-home"><Icon name="chevL" size={15} />{homeLabel}</a>}
-          {nav.map((n) => <a key={n.href} href={onHome(n.href, home)} onClick={() => setOpen(false)}>{n.label}</a>)}
+          <a href={home ? '#home' : '/'} className={home ? 'on' : ''} onClick={() => setOpen(false)}><Icon name="zap" size={14} />{homeLabel}</a>
+          {nav.map((n) => <a key={n.href} href={onHome(n.href, home)} onClick={() => setOpen(false)}>{n.icon && <Icon name={n.icon} size={14} />}{n.label}</a>)}
           <a href={links.portal} data-track="portal" className="nav-mobile-only" onClick={() => setOpen(false)}>Portal login</a>
         </nav>
         <div className="nav-actions">

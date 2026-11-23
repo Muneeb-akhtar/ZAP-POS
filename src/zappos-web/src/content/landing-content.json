@@ -10,27 +10,28 @@
   "nav": [
     {
       "href": "/how-it-works",
-      "label": "How it works"
+      "label": "How it works",
+      "icon": "layers"
     },
     {
-      "href": "#video",
-      "label": "Watch demo"
+      "href": "/multi-branch-pos",
+      "label": "Branches",
+      "icon": "server"
     },
     {
       "href": "/fbr-invoicing",
-      "label": "FBR"
+      "label": "FBR",
+      "icon": "receipt"
     },
     {
       "href": "/plans",
-      "label": "Plans"
+      "label": "Plans",
+      "icon": "card"
     },
     {
       "href": "/download",
-      "label": "Download"
-    },
-    {
-      "href": "#faq",
-      "label": "FAQ"
+      "label": "Download",
+      "icon": "download"
     }
   ],
   "links": {
@@ -641,6 +642,10 @@
           {
             "label": "Many counters",
             "href": "/multi-counter-pos"
+          },
+          {
+            "label": "Branches",
+            "href": "/multi-branch-pos"
           },
           {
             "label": "Printers & scanners",
@@ -2069,6 +2074,99 @@
         "ctaText": "Book a free demo and we'll show it on your own products."
       },
       {
+        "slug": "multi-branch-pos",
+        "menu": "Branches",
+        "icon": "server",
+        "seoTitle": "Multi-Branch POS Software in Pakistan | Chains & Brands | ZAP POS",
+        "seoDescription": "POS for Pakistani chains and brands with several branches: every branch bills on its own even when the internet or another branch is down, with its own numbers, tax and counters.",
+        "kicker": "For chains & brands",
+        "title": "Every branch keeps billing.",
+        "titleHighlight": "On its own feet.",
+        "description": "Each branch runs ZAP POS on its own main PC, so a problem in one branch, or a dead internet line, never stops the others. Every branch has its own counters, invoice numbers and tax settings, under one owner account and one plan priced per branch.",
+        "stats": [
+          {
+            "value": "Independent",
+            "label": "each branch bills on its own"
+          },
+          {
+            "value": "Own series",
+            "label": "invoice numbers per branch"
+          },
+          {
+            "value": "Per branch",
+            "label": "plan pricing"
+          },
+          {
+            "value": "Soon",
+            "label": "all branches live on your phone"
+          }
+        ],
+        "problemsTitle": "What goes wrong across branches",
+        "problems": [
+          "One branch's internet goes down and its sales stop.",
+          "Two branches print the same invoice number.",
+          "Every branch keeps its own notebook and nothing adds up.",
+          "The owner has to visit each branch to know the day's sale."
+        ],
+        "solvedLine": "ZAP POS is built so every branch stands on its own, and the owner's view of all of them is on the way.",
+        "featuresTitle": "How ZAP POS runs a chain",
+        "features": [
+          {
+            "icon": "server",
+            "title": "A main PC in every branch",
+            "text": "Each branch keeps its own data and keeps billing whatever happens to the internet or to the other branches."
+          },
+          {
+            "icon": "receipt",
+            "title": "Invoice numbers per branch",
+            "text": "Each branch has its own invoice series, so two branches can never print the same number."
+          },
+          {
+            "icon": "monitor",
+            "title": "As many counters as each branch needs",
+            "text": "Every branch gets its own counters sharing live stock within the branch."
+          },
+          {
+            "icon": "card",
+            "title": "Tax and FBR per branch",
+            "text": "Each branch has its own tax rates and its own FBR or PRA settings."
+          },
+          {
+            "icon": "chart",
+            "title": "All branches on one screen",
+            "text": "See today's sales, bills and top products of every branch together from your phone or the web.",
+            "soon": true
+          },
+          {
+            "icon": "box",
+            "title": "Stock across branches",
+            "text": "See which branch has stock of a product before you transfer or reorder.",
+            "soon": true
+          }
+        ],
+        "faqTitle": "Branch questions",
+        "faq": [
+          {
+            "q": "Does each branch need its own internet?",
+            "a": "No. Each branch bills without internet. The internet is only used to send a copy of the branch's records and to check the licence."
+          },
+          {
+            "q": "Can two branches print the same invoice number?",
+            "a": "No. Each branch has its own invoice series."
+          },
+          {
+            "q": "How is a chain priced?",
+            "a": "The Brand plan is priced per branch, and chains with 4 or more branches get a custom price on the Enterprise plan."
+          },
+          {
+            "q": "Can I see all my branches' sales from my phone?",
+            "a": "That owner view is coming soon. Today each branch's sales and reports are on its own main PC."
+          }
+        ],
+        "ctaTitle": "Running more than one branch?",
+        "ctaText": "Book a free demo and we'll plan your branches with you."
+      },
+      {
         "slug": "pos-hardware",
         "menu": "Printers & scanners",
         "icon": "printer",
@@ -2412,6 +2510,7 @@
       }
     ],
     "shortLabel": "Short answer",
-    "homeLabel": "Home"
+    "homeLabel": "Home",
+    "soonLabel": "Coming soon"
   }
 }

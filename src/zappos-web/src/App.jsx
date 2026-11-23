@@ -92,7 +92,7 @@ export default function App({ initialContent, path = '/' }) {
 
   return (
     <>
-      <Navbar brand={c.brand} nav={c.nav} links={links} />
+      <Navbar brand={c.brand} nav={c.nav} links={links} homeLabel={c.pages.homeLabel} />
       <main>
         <Hero hero={c.hero} brand={c.brand} links={links} release={release} />
         <Ticker items={c.ticker} />

@@ -126,7 +126,8 @@ export default function InfoPage({ page, pages, pricing, finalCta, brand, links,
             <Head title={page.featuresTitle} text={page.featuresText} />
             <div className="ip-grid">
               {page.features.map((f) => (
-                <div key={f.title} className="ip-card glow">
+                <div key={f.title} className={`ip-card glow ${f.soon ? 'soon' : ''}`}>
+                  {f.soon && <span className="ip-soon">{pages.soonLabel}</span>}
                   <span className="ip-ic"><Icon name={f.icon} size={20} /></span>
                   <h3>{f.title}</h3>
                   <p>{f.text}</p>

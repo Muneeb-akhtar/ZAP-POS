@@ -128,17 +128,19 @@ h2 .hl { display: block; }
 
 /* ---------- Navbar (floating pill) ---------- */
 .navbar { position: fixed; top: 14px; left: 0; right: 0; z-index: 50; padding: 0 16px; pointer-events: none; }
-.nav-pill { pointer-events: auto; max-width: 1100px; margin: 0 auto; display: flex; align-items: center; gap: 20px; justify-content: space-between; padding: 8px 8px 8px 14px; border-radius: 999px; background: rgba(255,255,255,.78); backdrop-filter: blur(14px) saturate(1.4); -webkit-backdrop-filter: blur(14px) saturate(1.4); border: 1px solid rgba(15,23,42,.08); box-shadow: 0 6px 24px -12px rgba(15,23,42,.25); transition: box-shadow .3s, background .3s; position: relative; }
+.nav-pill { pointer-events: auto; max-width: 1180px; margin: 0 auto; display: flex; align-items: center; gap: 20px; justify-content: space-between; padding: 8px 8px 8px 14px; border-radius: 999px; background: rgba(255,255,255,.78); backdrop-filter: blur(14px) saturate(1.4); -webkit-backdrop-filter: blur(14px) saturate(1.4); border: 1px solid rgba(15,23,42,.08); box-shadow: 0 6px 24px -12px rgba(15,23,42,.25); transition: box-shadow .3s, background .3s; position: relative; }
 .navbar.scrolled .nav-pill { background: rgba(255,255,255,.92); box-shadow: 0 14px 34px -16px rgba(15,23,42,.35); }
-.brand { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-head); font-weight: 800; font-size: 20px; color: var(--ink); letter-spacing: -.03em; }
+.brand { white-space: nowrap; display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-head); font-weight: 800; font-size: 20px; color: var(--ink); letter-spacing: -.03em; }
 .brand-accent { color: var(--brand-500); transition: color .5s; }
 .footer .brand-accent { color: var(--brand-400); }
 .nav-links { display: flex; gap: 2px; }
-.nav-links > a { font-size: 14.5px; font-weight: 500; padding: 8px 14px; border-radius: 999px; color: var(--text); transition: background .15s, color .15s; }
+.nav-links > a { display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; font-size: 14.5px; font-weight: 500; padding: 8px 12px; border-radius: 999px; color: var(--text); transition: background .15s, color .15s; }
 .nav-links > a:hover { color: var(--ink); background: rgba(15,23,42,.05); }
-.nav-mobile-only { display: none; }
+.nav-links > a svg { color: var(--brand-500); flex-shrink: 0; }
+.nav-links > a.on { color: var(--ink); font-weight: 600; }
+.nav-links > a.nav-mobile-only { display: none; }
 .nav-actions { display: flex; align-items: center; gap: 6px; }
-.nav-login { font-size: 14.5px; font-weight: 600; color: var(--ink); padding: 8px 12px; }
+.nav-login { white-space: nowrap; font-size: 14.5px; font-weight: 600; color: var(--ink); padding: 8px 12px; }
 .nav-login:hover { color: var(--brand-600); }
 .menu-btn { display: none; }
 
@@ -653,9 +655,6 @@ html.modal-open { overflow: hidden; }
   .lead-head h3 { font-size: 21px; }
 }
 
-/* Inner pages: "Home" link at the start of the menu */
-.nav-links .nav-home { display: inline-flex; align-items: center; gap: 4px; color: var(--brand-500); font-weight: 600; }
-
 /* ---------- Inner pages (/fbr-invoicing, /plans, /download …: components/InfoPage.jsx) ----------
    ZAP's own look: facts on a receipt, problems as sticky notes, steps as paper tickets, needs as stickers,
    FAQ as a WhatsApp chat, then the night section. */
@@ -701,6 +700,8 @@ html.modal-open { overflow: hidden; }
 .ip-card { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 26px; transition: transform .25s, border-color .25s; }
 .ip-card h3 { font-size: 20px; margin: 18px 0 8px; letter-spacing: -.02em; line-height: 1.2; }
 .ip-card p { color: var(--text); font-size: 15px; line-height: 1.6; }
+.ip-card.soon { border-style: dashed; }
+.ip-soon { position: absolute; top: 16px; right: 16px; font-family: var(--font-hand); font-size: 20px; font-weight: 700; color: var(--on-paper); background: var(--yellow); padding: 1px 10px 2px; border-radius: 6px; transform: rotate(3deg); }
 .ip-ic { width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; background: var(--brand-50); color: var(--brand-600); flex-shrink: 0; }
 .ip-tickets { list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: 26px; padding-top: 10px; }
 .ip-tickets li { padding: 22px 20px 24px; }
@@ -744,6 +745,18 @@ html.modal-open { overflow: hidden; }
 /* ---------- Responsive ---------- */
 @media (max-width: 1080px) {
   .nav-links > a { padding: 8px 10px; }
+}
+
+/* The top menu folds into the ☰ button once its links no longer fit on one line */
+@media (max-width: 1100px) {
+  .nav-links { position: absolute; top: calc(100% + 8px); left: 0; right: 0; flex-direction: column; padding: 10px; border-radius: 22px; background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow-lg); display: none; }
+  .nav-links.open { display: flex; }
+  .nav-links > a { padding: 12px 14px; font-size: 16px; border-radius: 12px; }
+  .nav-links > a.nav-mobile-only { display: flex; }
+  .nav-login { display: none; }
+  .menu-btn { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: var(--bg-soft); color: var(--ink); }
+  .nav-pill { gap: 8px; }
+  .nav-actions { margin-left: auto; }
   .hero-grid { grid-template-columns: 1fr; gap: 40px; }
   .hero-stage { max-width: 680px; width: 100%; margin: 0 auto; }
   .counters-head, .hw-inner, .faq-grid { grid-template-columns: 1fr; gap: 24px; }
@@ -758,14 +771,6 @@ html.modal-open { overflow: hidden; }
   .ip-tickets { grid-template-columns: 1fr 1fr; }
   .ip-download { grid-template-columns: auto 1fr; }
   .ip-download .btn { grid-column: 1 / -1; justify-content: center; }
-  .nav-links { position: absolute; top: calc(100% + 8px); left: 0; right: 0; flex-direction: column; padding: 10px; border-radius: 22px; background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow-lg); display: none; }
-  .nav-links.open { display: flex; }
-  .nav-links > a { padding: 12px 14px; font-size: 16px; border-radius: 12px; }
-  .nav-mobile-only { display: block; }
-  .nav-login { display: none; }
-  .menu-btn { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: var(--bg-soft); color: var(--ink); }
-  .nav-pill { gap: 8px; }
-  .nav-actions { margin-left: auto; }
 
   .timeline::before { left: 20px; }
   .stop { grid-template-columns: 40px 1fr; row-gap: 12px; }
