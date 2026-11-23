@@ -3,6 +3,11 @@
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
 
+## 2026-11-24: Terms of Use page
+- Why: a Terms page was on the to-do list next to Privacy. Plain-language terms: licence (one active plan, counters per plan), data stays the shop's, payments recorded not processed, owner's responsibilities, support, limits (no claim that billing works without power), Pakistan law.
+- `landing-content.json`: new page `terms` after `privacy` in `pages.items`. `components/Sections.jsx`: footer bottom row now links Privacy and Terms. Pre-rendered like the other pages (24 sitemap addresses).
+- Text is a plain draft with no prices, phone numbers or refund promises: the owner (or a lawyer) should read it before the domain goes live.
+
 ## 2026-11-24: owner's page shows top sellers and low stock
 - Why: owners with branches want to see what sells and what is running out in each one (approved preview).
 - `account/OwnerConsole.jsx`: a branch's view adds "Top sellers today" (top 10 by amount, bars grow in) and "Running low" (Out / n left chips, first 8, "+n more"); "All branches" table adds a Stock column ("2 out · 3 low" or "All stocked"). Data comes from `my_branches()` → `branch.top` / `branch.stock` (desktop repo `cloud/0005`, applied to Supabase; sent by ZAP POS 1.9.148). Older main PCs send none: the cards are not shown and the column shows "–".

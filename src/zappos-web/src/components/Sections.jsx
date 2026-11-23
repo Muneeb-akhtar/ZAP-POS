@@ -198,7 +198,7 @@ export function Footer({ brand, footer, links }) {
         <div className="footer-bottom">
           <span>© {year} {footer.copyright}</span>
           <div className="socials">{socials.map((s) => <a key={s} href={links.social[s]} aria-label={s}><Icon name={s} size={15} /></a>)}</div>
-          <span className="legal"><a href="/privacy">Privacy</a></span>
+          <span className="legal"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></span>
         </div>
       </div>
       <div className="wordmark" aria-hidden="true">ZAP POS</div>

@@ -2639,6 +2639,62 @@
         "ctaText": "Message us on WhatsApp and we'll answer."
       },
       {
+        "slug": "terms",
+        "menu": "Terms",
+        "icon": "receipt",
+        "seoTitle": "Terms of Use | ZAP POS",
+        "seoDescription": "The simple terms for using the ZAP POS website and app: your licence, your data, payments, support and what we ask of you.",
+        "kicker": "Terms",
+        "title": "The rules,",
+        "titleHighlight": "kept simple.",
+        "description": "What you can expect from ZAP POS and what we ask of you, in plain words.",
+        "published": "2026-11-24",
+        "article": [
+          {
+            "h": "Your licence",
+            "p": [
+              "A ZAP POS plan gives your shop the right to use the software on the counters your plan allows. A shop has one active plan at a time, and the plan sets how many counters you can pair with your main PC.",
+              "The licence is for your own shop or chain. Please don't share your licence key or resell the software."
+            ]
+          },
+          {
+            "h": "Your shop's data stays yours",
+            "p": [
+              "Your products, bills, customers and staff belong to you and are kept on your own main PC. We use the copy in our cloud only to show you your account and branches, and to support you when you ask.",
+              "Bills, invoices, payments and stock records are never deleted by the app. They are cancelled or reversed, so your history stays complete."
+            ]
+          },
+          {
+            "h": "Payments and plans",
+            "p": [
+              "Payments for your plan are recorded by us when you pay; the website does not take online payments. Each paid period has a start and an end date, and periods for one shop don't overlap.",
+              "To switch plans, we end the current period first and then start the new one."
+            ]
+          },
+          {
+            "h": "Your responsibilities",
+            "p": [
+              "Keep your main PC backed up and your staff PINs private. Check your tax settings, such as FBR or PRA reporting, with your accountant. You are responsible for the prices, taxes and bills you issue to your own customers."
+            ]
+          },
+          {
+            "h": "Support and changes",
+            "p": [
+              "We help with setup and problems through WhatsApp and email. We may improve the software and these terms over time, and the date at the top of this page shows the latest version."
+            ]
+          },
+          {
+            "h": "Limits",
+            "p": [
+              "We work hard to keep ZAP POS reliable, but no software is perfect. ZAP POS is provided as it is, and we are not responsible for losses caused by things outside our control, such as hardware failure, power cuts or internet outages. Offline billing keeps your counters selling when the internet drops, but it can't run on a PC that has no power.",
+              "These terms are governed by the laws of Pakistan."
+            ]
+          }
+        ],
+        "ctaTitle": "Questions about these terms?",
+        "ctaText": "Message us on WhatsApp and we'll explain."
+      },
+      {
         "slug": "zap-pos-facts",
         "menu": "ZAP POS at a glance",
         "icon": "id",
