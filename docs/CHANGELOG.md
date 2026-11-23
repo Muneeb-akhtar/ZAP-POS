@@ -3,6 +3,13 @@
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
 
+## 2026-11-24: clothing and shoe shop pages
+- Why: ZAP POS 1.9.147 (desktop) added sizes and colours, so the site now targets garment, boutique and shoe shops too.
+- New extra pages in `landing-content.json` → `pages.items` (after Bakeries): `/clothing-store-pos` ("Know every size, in every colour.") and `/shoe-store-pos` ("Find size 9 in black before you check the store room."), each with stats receipt, short answer, problems, features, FAQ (clothing also has 4 setup steps). Copy only describes what 1.9.147 really does: stock/barcode/price per size and colour, renamable options, counter picker (sizes in shop/number order, sold-out crossed out), tags with old price crossed out, returns with a manager's approval and a credit note, branches on the owner's page, offline billing. No branch-to-branch stock transfer claimed (not built).
+- Footer "For your shop" links both pages. `zap-pos-facts`: clothing and shoe shops added to who it's for, and a new FAQ "Does ZAP POS handle sizes and colours?" (reaches `llms.txt`).
+- Published Supabase content has no `pages` or `footer.groups`, so the built-in JSON is what goes live; nothing to publish in the admin.
+- Checked: build writes 22 pages + home, sitemap 23 addresses; clothing page at 1366 px (light) and 390 px (dark), shoe page at 390 px: no sideways scroll, no console errors.
+
 ## 2026-11-23: zappos.pk domain + SEO foundation (step 1)
 - Domain: `zappos.pk` registered at PKNIC (2 years, to 2028-11-23, owner "Muneeb Akhtar (ZAP POS)", technical contact 273992), nameservers set to Vercel (`ns1.vercel-dns.com`, `ns2.vercel-dns.com`), added to the Vercel project `zappos-web`: `zappos.pk` = Production, `www.zappos.pk` = 308 redirect to it. Waiting for DNS to spread (Vercel showed "Invalid Configuration" at first).
 - Head tags in `index.html`: title "ZAP POS | Best POS Software in Pakistan, Offline Billing", a 160-character description (no "free trial" wording: the owner has not decided it), canonical `https://zappos.pk/`, robots, theme colour, Open Graph + Twitter large-image tags, favicon links (ico, svg, 192 px png) and apple-touch icon.

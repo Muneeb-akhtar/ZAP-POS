@@ -748,6 +748,14 @@
           {
             "label": "Bakeries",
             "href": "/bakery-pos"
+          },
+          {
+            "label": "Clothing stores",
+            "href": "/clothing-store-pos"
+          },
+          {
+            "label": "Shoe stores",
+            "href": "/shoe-store-pos"
           }
         ]
       },
@@ -1627,6 +1635,214 @@
         "ctaText": "Book a free demo and we'll set it up with your own products."
       },
       {
+        "slug": "clothing-store-pos",
+        "menu": "Clothing stores",
+        "icon": "jeans",
+        "seoTitle": "Clothing Store POS Software in Pakistan | Sizes & Colours | ZAP POS",
+        "seoDescription": "POS for boutiques and garment shops in Pakistan: stock by size and colour, a barcode tag for each size, sale-price tags, returns with credit notes, branches, FBR.",
+        "kicker": "For boutiques & garment shops",
+        "title": "Know every size,",
+        "titleHighlight": "in every colour.",
+        "description": "ZAP POS keeps stock for each size and colour, prints a barcode tag for each one, and shows the cashier exactly what is left before the bill is made. Run one shop or several branches, and keep billing when the internet drops.",
+        "stats": [
+          {
+            "value": "Size × colour",
+            "label": "stock kept for each"
+          },
+          {
+            "value": "1 card",
+            "label": "per product at the counter"
+          },
+          {
+            "value": "Own tag",
+            "label": "barcode for every size"
+          },
+          {
+            "value": "Branches",
+            "label": "each one's sales in one place"
+          }
+        ],
+        "shortAnswer": "ZAP POS is a Windows point of sale for Pakistani clothing shops. Each product can have sizes and colours (up to two options you can rename, like Waist and Length). Every size/colour has its own barcode, price and stock; the counter shows one card per product and a picker for the size and colour.",
+        "problemsTitle": "Every garment shop knows these",
+        "problems": [
+          "The register says 20 shirts, but nobody knows how many are Medium in navy.",
+          "A customer wants a Large; the cashier sells a Medium by mistake and the stock is wrong for weeks.",
+          "Price tags are hand-written, and the sale price on the tag doesn't match the bill.",
+          "Returns are written on paper, and the money given back never shows up in the day's cash.",
+          "Each branch keeps its own copy, and the owner only finds out the totals at month end."
+        ],
+        "solvedLine": "ZAP POS handles each of these at the counter.",
+        "featuresTitle": "Made for the clothing counter",
+        "features": [
+          {
+            "icon": "layers",
+            "title": "Sizes and colours",
+            "text": "Type the sizes and colours once (S, M, L and Navy, Black) and ZAP POS makes every combination, each with its own stock and warn-at level."
+          },
+          {
+            "icon": "grid",
+            "title": "A quick size picker",
+            "text": "The cashier taps the product and picks the size, then the colour. Sizes with nothing left are crossed out, so a wrong size is not sold."
+          },
+          {
+            "icon": "scan",
+            "title": "A barcode tag for each size",
+            "text": "ZAP POS can make a barcode for every size and print its price tag on your label printer. Scanning the tag adds that exact size."
+          },
+          {
+            "icon": "tag",
+            "title": "Sale prices that match the tag",
+            "text": "Change the product's price and every size follows, unless a size has its own price. Tags can show the old price crossed out."
+          },
+          {
+            "icon": "receipt",
+            "title": "Returns with credit notes",
+            "text": "Find the bill by its number, take back what was returned, and the stock goes back on the shelf. A manager approves it and a credit note is printed."
+          },
+          {
+            "icon": "server",
+            "title": "Branches in one place",
+            "text": "Each branch bills on its own, even without internet. The owner sees every branch's sales today from the owner's page on the website."
+          }
+        ],
+        "stepsTitle": "Setting up a product with sizes",
+        "steps": [
+          {
+            "title": "Add the product",
+            "text": "Name, price and category, once. For example: Cotton Polo, Rs 1,800."
+          },
+          {
+            "title": "Type its sizes and colours",
+            "text": "S, M, L, XL and Navy, Black. Press Make the list to get all eight."
+          },
+          {
+            "title": "Count and tag them",
+            "text": "Enter the stock of each, press Make missing barcodes, and print the tags."
+          },
+          {
+            "title": "Sell",
+            "text": "Scan a tag, or tap the product and pick the size and colour."
+          }
+        ],
+        "faqTitle": "Clothing shop questions",
+        "faq": [
+          {
+            "q": "Can ZAP POS keep stock by size and colour?",
+            "a": "Yes. Each size and colour of a product is counted on its own, with its own barcode and low-stock warning. The product's total is shown in Inventory."
+          },
+          {
+            "q": "Can one size have a different price?",
+            "a": "Yes. Every size uses the product's price unless you give it its own (for example XXL costs Rs 150 more)."
+          },
+          {
+            "q": "What if my options aren't Size and Colour?",
+            "a": "Rename them. Trousers can use Waist and Length; shoes can use Size only."
+          },
+          {
+            "q": "Can I print barcode tags for each size?",
+            "a": "Yes. ZAP POS makes a barcode for each size that has none and prints price tags on common label sizes such as 38 x 28 mm."
+          },
+          {
+            "q": "How are returns and exchanges handled?",
+            "a": "Take the item back on its bill (a manager approves and a credit note is printed), then bill the new size as a normal sale."
+          }
+        ],
+        "ctaTitle": "Run your clothing shop on ZAP POS",
+        "ctaText": "Book a free demo and we'll set up a few of your products with their sizes and colours."
+      },
+      {
+        "slug": "shoe-store-pos",
+        "menu": "Shoe stores",
+        "icon": "tag",
+        "seoTitle": "Shoe Store POS Software in Pakistan | Stock by Size | ZAP POS",
+        "seoDescription": "POS for shoe shops in Pakistan: stock for every size and colour, sizes in number order, barcode tags per pair, returns with credit notes, branches and FBR invoicing.",
+        "kicker": "For shoe & footwear shops",
+        "title": "Find size 9 in black",
+        "titleHighlight": "before you check the store room.",
+        "description": "ZAP POS tells the cashier how many pairs are left in each size and colour, so nobody walks to the store room for a size that isn't there. Each pair's box gets its own barcode tag.",
+        "stats": [
+          {
+            "value": "6 → 12",
+            "label": "sizes shown in number order"
+          },
+          {
+            "value": "Per pair",
+            "label": "stock for each size"
+          },
+          {
+            "value": "Box tag",
+            "label": "scan adds the exact size"
+          },
+          {
+            "value": "Offline",
+            "label": "billing when the internet drops"
+          }
+        ],
+        "shortAnswer": "ZAP POS is a Windows point of sale for Pakistani shoe shops. A shoe can have sizes and colours, each with its own barcode and stock. The counter's picker lists sizes in number order with the pairs left, and scanning the box's tag adds the exact size.",
+        "problemsTitle": "Every shoe shop knows these",
+        "problems": [
+          "A customer waits while someone searches the store room for a size that sold last week.",
+          "The stock register counts boxes, not sizes, so reordering is guesswork.",
+          "The wrong size is billed and the stock is off from then on.",
+          "Returned pairs are put back without a record."
+        ],
+        "solvedLine": "ZAP POS keeps each size honest.",
+        "featuresTitle": "Made for the shoe counter",
+        "features": [
+          {
+            "icon": "layers",
+            "title": "Every size counted",
+            "text": "Sizes 6 to 12 in black and brown become their own items, each with stock and a warn-at level, from one product."
+          },
+          {
+            "icon": "grid",
+            "title": "Sizes in the right order",
+            "text": "The picker shows 6, 7, 8, 9, 10 (not 10 before 6), with the pairs left under each size."
+          },
+          {
+            "icon": "scan",
+            "title": "Barcode on every box",
+            "text": "Make and print a tag for each size. Scanning the box adds that size and colour, no picking needed."
+          },
+          {
+            "icon": "receipt",
+            "title": "Returns and exchanges",
+            "text": "Take a pair back on its bill with a manager's approval and a credit note; it goes back into that size's stock."
+          },
+          {
+            "icon": "users",
+            "title": "Customers and udhaar",
+            "text": "Keep regular customers' accounts and what they owe, with every payment recorded."
+          },
+          {
+            "icon": "wifiOff",
+            "title": "Bills without internet",
+            "text": "If the router goes off during load shedding (PC on UPS), the counter keeps billing and syncs later."
+          }
+        ],
+        "faqTitle": "Shoe shop questions",
+        "faq": [
+          {
+            "q": "Can ZAP POS count stock for each shoe size?",
+            "a": "Yes. Each size (and colour) of a shoe has its own stock, barcode and low-stock warning."
+          },
+          {
+            "q": "Can I use only sizes, without colours?",
+            "a": "Yes. Leave the colours empty and each size is its own item."
+          },
+          {
+            "q": "Does scanning the box add the right size?",
+            "a": "Yes. Each size has its own barcode, so scanning the box's tag adds that size and colour directly."
+          },
+          {
+            "q": "Can I give bigger sizes a higher price?",
+            "a": "Yes. Every size uses the shoe's price unless you set its own."
+          }
+        ],
+        "ctaTitle": "Run your shoe shop on ZAP POS",
+        "ctaText": "Book a free demo and we'll set up your shoes with their sizes."
+      },
+      {
         "slug": "best-pos-software-pakistan",
         "menu": "Choosing a POS",
         "icon": "search",
@@ -2455,7 +2671,7 @@
           {
             "h": "Who it is for",
             "p": [
-              "Kiryana and general stores, supermarkets, pharmacies and medical stores, bakeries and sweet shops, and restaurants and cafes, from a single counter to several counters and branches."
+              "Kiryana and general stores, supermarkets, pharmacies and medical stores, bakeries and sweet shops, clothing and shoe shops (stock by size and colour), and restaurants and cafes, from a single counter to several counters and branches."
             ]
           },
           {
@@ -2498,8 +2714,12 @@
             "a": "Yes. It can send each bill to FBR and print FBR's invoice number and QR code on the receipt."
           },
           {
+            "q": "Does ZAP POS handle sizes and colours?",
+            "a": "Yes. A product can have up to two options (Size and Colour by default, renamable), and each combination has its own barcode, price and stock. Made for clothing and shoe shops."
+          },
+          {
             "q": "Which businesses use ZAP POS?",
-            "a": "Kiryana stores, supermarkets, pharmacies, bakeries, restaurants and cafes, from one counter to several branches."
+            "a": "Kiryana stores, supermarkets, pharmacies, bakeries, clothing and shoe shops, restaurants and cafes, from one counter to several branches."
           }
         ],
         "ctaTitle": "See it for yourself",
