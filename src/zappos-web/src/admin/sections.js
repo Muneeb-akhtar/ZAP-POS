@@ -18,7 +18,8 @@ export const SECTIONS = [
   { id: 'leadForm', label: 'Demo form', icon: 'mail', keys: ['leadForm'], hint: 'The "Book a free demo" form. It opens from every demo button; requests arrive under Leads.' },
   { id: 'account', label: 'Customer account', icon: 'lock', keys: ['account'], hint: 'The /account/ page where shops sign up and log in (same login as the POS app). {email}, {name} and {date} are filled in automatically.' },
   { id: 'invoice', label: 'Invoice page', icon: 'receipt', keys: ['invoice'], hint: 'Words on the invoice your clients open from the link you send (and its PDF). {date} is filled in automatically. Your business details and how to pay are set in Bills → Invoice details.' },
-  { id: 'footer', label: 'Footer', icon: 'layers', keys: ['footer'], hint: 'Footer link columns and popular searches.' },
+  { id: 'pages', label: 'Extra pages', icon: 'grid', keys: ['pages'], hint: 'The extra pages (zappos.pk/fbr-invoicing, /plans, /download …). Each page has its address, menu name, Google title and description, then its blocks: problems, features, steps, specs, FAQ and the closing box. Leave a block empty to hide it. A new or renamed page reaches Google after the next deploy (Vercel → Redeploy).' },
+  { id: 'footer', label: 'Footer', icon: 'layers', keys: ['footer'], hint: 'Footer link columns. Links can point to a page (/plans), a home section (/#faq) or #demo (opens the demo form).' },
 ]
 
 // Friendly labels for keys (anything not listed is turned from camelCase into words).
@@ -50,7 +51,6 @@ const LABELS = {
   trust: 'Small ticks under the buttons',
   windowsInstaller: 'Windows installer link (leave as # to use the newest GitHub release)',
   githubRepo: 'GitHub repository that holds the installer (owner/name)',
-  downloadLink: 'Footer link that downloads ZAP POS (type its text exactly)',
   downloadNote: 'Small line under the buttons (version and size are added)',
   googlePlay: 'Google Play link',
   appStore: 'App Store link',
@@ -58,6 +58,15 @@ const LABELS = {
   demo: 'Book a demo link',
   portal: 'Portal login link',
   stops: 'Timeline stops',
+  slug: 'Page address (after zappos.pk/, small letters and dashes)',
+  menu: 'Page name (breadcrumb, links)',
+  seoTitle: 'Google title (about 60 letters)',
+  seoDescription: 'Google description (about 155 letters)',
+  showPricing: 'Show the plans (Pricing section)',
+  showDownload: 'Show the download box',
+  solvedLine: 'Line under the problems',
+  relatedTitle: 'Title above the links to other pages',
+  groups: 'Link columns',
   visual: 'Picture in the card',
   stock: 'Starting stock',
   src: 'Video file (address, e.g. /media/zap-pos-demo.mp4)',
@@ -67,7 +76,6 @@ const LABELS = {
   playNote: 'Small line on the picture',
   points: 'Ticks under the video',
   searches: 'Popular searches',
-  searchesTitle: 'Popular searches title',
   seoColumns: 'Extra link columns',
   business: 'Shop name & city',
 }

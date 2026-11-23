@@ -16,6 +16,10 @@
     {
       "source": "/invoice",
       "destination": "/invoice/index.html"
+    },
+    {
+      "source": "/:slug((?!admin$|account$|invoice$|assets$|media$)[a-z0-9-]+)",
+      "destination": "/:slug/index.html"
     }
   ],
   "headers": [

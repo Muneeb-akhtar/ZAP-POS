@@ -621,55 +621,60 @@
     "viewInvoice": "View"
   },
   "footer": {
-    "downloadLink": "Download",
-    "columns": [
+    "copyright": "ZAP POS. All rights reserved.",
+    "groups": [
       {
-        "title": "Product",
+        "title": "ZAP POS",
         "links": [
-          "How it works",
-          "Multi-counter",
-          "Pricing",
-          "Download"
+          {
+            "label": "How it works",
+            "href": "/#day"
+          },
+          {
+            "label": "Watch the demo",
+            "href": "/#video"
+          },
+          {
+            "label": "Many counters",
+            "href": "/#counters"
+          },
+          {
+            "label": "FAQ",
+            "href": "/#faq"
+          }
         ]
       },
       {
-        "title": "Resources",
+        "title": "Explore",
         "links": [
-          "Help Center",
-          "Hardware Guide",
-          "Contact Support",
-          "FAQs"
+          {
+            "label": "FBR invoicing",
+            "href": "/fbr-invoicing"
+          },
+          {
+            "label": "Plans",
+            "href": "/plans"
+          },
+          {
+            "label": "Get ZAP POS",
+            "href": "/download"
+          }
         ]
       },
       {
-        "title": "Company",
+        "title": "Help",
         "links": [
-          "About Us",
-          "Careers",
-          "Partners",
-          "Contact"
+          {
+            "label": "Book a free demo",
+            "href": "#demo"
+          },
+          {
+            "label": "Customer portal",
+            "href": "/account/"
+          }
         ]
       }
-    ],
-    "searchesTitle": "Popular searches",
-    "searches": [
-      "POS Lahore",
-      "POS Karachi",
-      "POS Islamabad",
-      "POS Rawalpindi",
-      "POS Faisalabad",
-      "POS Multan",
-      "POS Peshawar",
-      "POS Sialkot",
-      "Clothing Store POS",
-      "Pharmacy POS",
-      "Supermarket POS",
-      "Restaurant POS",
-      "Shoe Store POS",
-      "Bakery POS",
-      "Electronics Shop POS"
-    ],
-    "copyright": "ZAP POS. All rights reserved."
+    ]
   },
   "invoice": {
     "title": "Invoice",
@@ -701,5 +706,313 @@
     "downloadButton": "Download PDF",
     "notFound": "This invoice link is not valid any more. Ask us for a new one on WhatsApp.",
     "loading": "Loading your invoice…"
+  },
+  "pages": {
+    "relatedTitle": "Keep exploring",
+    "items": [
+      {
+        "slug": "fbr-invoicing",
+        "menu": "FBR invoicing",
+        "icon": "receipt",
+        "seoTitle": "FBR Integrated POS Software in Pakistan | ZAP POS",
+        "seoDescription": "ZAP POS sends every bill to FBR, prints FBR's invoice number and QR code, sets sales tax by payment method and keeps billing when the internet drops.",
+        "kicker": "FBR & PRA invoicing",
+        "title": "Every bill reported.",
+        "titleHighlight": "The queue keeps moving.",
+        "description": "ZAP POS sends each sale to FBR in its fiscal format, prints FBR's invoice number and QR code on the receipt, and charges the right sales tax for how the customer paid. If the internet drops, billing carries on and the bills are sent later.",
+        "stats": [
+          {
+            "value": "QR",
+            "label": "FBR number on every receipt"
+          },
+          {
+            "value": "Per method",
+            "label": "tax for cash, card and wallets"
+          },
+          {
+            "value": "Offline",
+            "label": "bills wait, then send"
+          },
+          {
+            "value": "Rs 1",
+            "label": "FBR fee added for you"
+          }
+        ],
+        "problemsTitle": "What worries shop owners about FBR",
+        "problems": [
+          "The internet drops and the counter stops while it waits for FBR.",
+          "Cash and card carry different tax rates, and staff work them out by hand.",
+          "A bill gets sent twice after a retry, and the records stop matching.",
+          "A refund is given at the counter but never reported.",
+          "Nobody can see which bills reached FBR and which are stuck."
+        ],
+        "solvedLine": "ZAP POS handles each of these by itself, so your cashiers just bill.",
+        "featuresTitle": "What ZAP POS does for FBR",
+        "features": [
+          {
+            "icon": "receipt",
+            "title": "FBR number and QR on the receipt",
+            "text": "The receipt waits a few seconds for FBR's invoice number and prints it with a QR code the customer can scan to verify."
+          },
+          {
+            "icon": "card",
+            "title": "Tax by how the customer pays",
+            "text": "One rate each for cash, card, JazzCash, Easypaisa and bank transfer. A bill paid two ways uses the higher rate."
+          },
+          {
+            "icon": "wifi",
+            "title": "No internet? Keep billing",
+            "text": "The bill is saved with a note that it will be sent, and goes to FBR by itself once the connection is back."
+          },
+          {
+            "icon": "check",
+            "title": "Never sent twice",
+            "text": "A bill that got no answer is marked unsure and is only sent again when you choose. A refused bill keeps FBR's reason."
+          },
+          {
+            "icon": "tag",
+            "title": "Refunds as credit notes",
+            "text": "Returns go to FBR as credit notes against the original bill, so both records agree."
+          },
+          {
+            "icon": "id",
+            "title": "NTN, STRN and PCT codes",
+            "text": "Your NTN and STRN print on every receipt, with your tax office (FBR, PRA, SRB or KPRA) and a PCT code for products without their own."
+          }
+        ],
+        "stepsTitle": "Switching it on",
+        "steps": [
+          {
+            "title": "Get your POS ID",
+            "text": "Register your point of sale with FBR or PRA and get its POS ID and token."
+          },
+          {
+            "title": "Enter it once",
+            "text": "On the main PC, as the owner, open Settings › FBR and tax and add the POS ID, token and tax rates."
+          },
+          {
+            "title": "Choose how to send",
+            "text": "Send through FBR's fiscal program on the PC, or straight to FBR's online address."
+          },
+          {
+            "title": "Bill as usual",
+            "text": "Every bill and refund now goes to FBR. Anything pending shows in Notifications with a Send again button."
+          }
+        ],
+        "faqTitle": "FBR questions",
+        "faq": [
+          {
+            "q": "Does ZAP POS work with FBR's POS integration?",
+            "a": "Yes. ZAP POS sends bills in FBR's fiscal format, the same one PRA's fiscal component uses. You add your own POS ID and token, and each receipt prints FBR's invoice number with a QR code."
+          },
+          {
+            "q": "What happens to FBR reporting when the internet is down?",
+            "a": "Billing carries on. The receipt says the bill will be sent, and ZAP POS sends it to FBR by itself once the connection returns. Pending bills show in Notifications."
+          },
+          {
+            "q": "Can I charge different sales tax for cash and card?",
+            "a": "Yes. Each payment method has its own rate, and you can change the rates whenever the budget or your province changes them."
+          },
+          {
+            "q": "Who can change the FBR settings?",
+            "a": "Only the owner, on the main PC. The token is stored sealed on the main PC and is never shown again."
+          },
+          {
+            "q": "Are refunds reported to FBR?",
+            "a": "Yes, as credit notes linked to the original bill."
+          },
+          {
+            "q": "Does FBR charge a fee on each bill?",
+            "a": "FBR's Rs 1 service fee is added to each bill automatically while sending to FBR is switched on."
+          }
+        ],
+        "ctaTitle": "Want FBR set up on your counter?",
+        "ctaText": "Book a free demo and we'll go through your POS ID and tax rates with you."
+      },
+      {
+        "slug": "plans",
+        "menu": "Plans",
+        "icon": "card",
+        "seoTitle": "ZAP POS Plans and Prices in Pakistan | POS Software Cost",
+        "seoDescription": "Compare ZAP POS plans for a single shop, a growing brand and multi-branch chains. Prices in PKR, monthly or yearly, with setup help on WhatsApp.",
+        "kicker": "Plans",
+        "title": "One shop or many branches.",
+        "titleHighlight": "Pay for what you run.",
+        "description": "Every plan includes full offline billing, barcode and thermal printer support, inventory and daily reports. Pick the plan that matches your counters and branches, and move up as you grow.",
+        "showPricing": true,
+        "featuresTitle": "In every plan",
+        "features": [
+          {
+            "icon": "wifi",
+            "title": "Billing without internet",
+            "text": "Counters keep billing when the internet drops, and sync when it returns."
+          },
+          {
+            "icon": "scan",
+            "title": "Barcodes and labels",
+            "text": "USB barcode scanners, your own barcodes and printed shelf or product labels."
+          },
+          {
+            "icon": "printer",
+            "title": "Receipt printers",
+            "text": "Standard thermal receipt printers and cash drawers."
+          },
+          {
+            "icon": "box",
+            "title": "Stock and purchases",
+            "text": "Inventory, purchases, expenses and supplier ledgers in one place."
+          },
+          {
+            "icon": "chart",
+            "title": "Daily reports",
+            "text": "Sales, top products and cash drawer totals for every day."
+          },
+          {
+            "icon": "download",
+            "title": "Automatic updates",
+            "text": "New versions arrive by themselves and install when no bill is open."
+          }
+        ],
+        "faqTitle": "Plan questions",
+        "faq": [
+          {
+            "q": "Which plan suits a single shop?",
+            "a": "Dukaan is made for one shop with one counter. When you add counters or branches, move to Brand."
+          },
+          {
+            "q": "Can I add counters later?",
+            "a": "Yes. Tell us on WhatsApp and we send a new licence key. It replaces the old one by itself, with no reinstall."
+          },
+          {
+            "q": "Monthly or yearly?",
+            "a": "Both. Use the Monthly / Yearly switch above the plans to see what each costs per month."
+          },
+          {
+            "q": "Do I need internet to keep my plan active?",
+            "a": "No. Your licence key holds its own end date and works without internet, so a slow connection never locks your counter."
+          },
+          {
+            "q": "What happens when my plan ends?",
+            "a": "From the day after the end date, new bills pause until you renew. Your data, reports and the syncing of offline bills carry on."
+          },
+          {
+            "q": "How do I pay?",
+            "a": "Message us on WhatsApp. We confirm your plan, record your payment and send your licence key."
+          }
+        ],
+        "ctaTitle": "Not sure which plan fits?",
+        "ctaText": "Tell us how many counters and branches you run, and we'll suggest one on WhatsApp."
+      },
+      {
+        "slug": "download",
+        "menu": "Get ZAP POS",
+        "icon": "windows",
+        "seoTitle": "Download ZAP POS for Windows 10 and 11 | POS Software",
+        "seoDescription": "Download the ZAP POS installer for Windows. One program for the main PC and every counter, with offline billing, printer and barcode support and automatic updates.",
+        "kicker": "Download",
+        "title": "Get ZAP POS",
+        "titleHighlight": "on your counter.",
+        "description": "One installer for the main PC and every counter. Set it up in a few minutes, then bill with or without the internet.",
+        "showDownload": true,
+        "downloadTitle": "ZAP POS for Windows",
+        "downloadNote": "Windows 10 or 11, 64-bit",
+        "featuresTitle": "What you get",
+        "features": [
+          {
+            "icon": "cart",
+            "title": "Billing screen",
+            "text": "Fast product tiles, search, barcode scanning, holds, discounts and returns."
+          },
+          {
+            "icon": "printer",
+            "title": "Receipt and kitchen printers",
+            "text": "Thermal receipts at the counter, tickets straight to kitchen printers."
+          },
+          {
+            "icon": "drawer",
+            "title": "Cash drawer and shifts",
+            "text": "Opens with the sale, and counts cash in and out for every shift."
+          },
+          {
+            "icon": "tag",
+            "title": "Label studio",
+            "text": "Print barcode labels in common label sizes."
+          },
+          {
+            "icon": "server",
+            "title": "Nightly backups",
+            "text": "The main PC backs up the shop every night and keeps the last two weeks."
+          },
+          {
+            "icon": "download",
+            "title": "Automatic updates",
+            "text": "Counters get new versions from the main PC, never in the middle of a bill."
+          }
+        ],
+        "stepsTitle": "Set up in four steps",
+        "steps": [
+          {
+            "title": "Download and run",
+            "text": "Download ZAP-POS-Setup.exe and run it on the PC that will be your main PC."
+          },
+          {
+            "title": "Create your account",
+            "text": "Register as the owner. This is also your login for the customer portal."
+          },
+          {
+            "title": "Add your licence key",
+            "text": "Paste the key we sent you. No key yet? Tap the WhatsApp button and we'll send one."
+          },
+          {
+            "title": "Add your counters",
+            "text": "Install on each counter PC and pair it with the code shown on the main PC."
+          }
+        ],
+        "specsTitle": "What you need",
+        "specs": [
+          {
+            "icon": "windows",
+            "label": "Windows",
+            "value": "Windows 10 or 11, 64-bit"
+          },
+          {
+            "icon": "server",
+            "label": "Main PC",
+            "value": "Holds the shop's data and backups. Keep it on a UPS."
+          },
+          {
+            "icon": "monitor",
+            "label": "Counters",
+            "value": "Any Windows PC on the same shop network"
+          },
+          {
+            "icon": "wifi",
+            "label": "Internet",
+            "value": "Needed to download and set up. Billing works without it."
+          }
+        ],
+        "faqTitle": "Download questions",
+        "faq": [
+          {
+            "q": "Do I need a licence key?",
+            "a": "Yes. Setup asks for one after you create your owner account. If you don't have one yet, tap the WhatsApp button in setup and we'll send it."
+          },
+          {
+            "q": "Can I install ZAP POS on more than one PC?",
+            "a": "Yes. The first PC becomes the main PC, and the others join as counters, as many as your plan allows."
+          },
+          {
+            "q": "How do updates work?",
+            "a": "When a new version is out, the main PC downloads it and each counter gets it from the main PC. ZAP POS installs it when you close the app or press Update now, never during a bill."
+          },
+          {
+            "q": "What if the main PC is switched off?",
+            "a": "Counters keep billing on their own for a few hours and send their bills to the main PC when it is back."
+          }
+        ],
+        "ctaTitle": "Need help installing?",
+        "ctaText": "Message us on WhatsApp and we'll walk you through setup and your first bill."
+      }
+    ]
   }
 }

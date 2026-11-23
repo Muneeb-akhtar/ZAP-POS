@@ -47,7 +47,10 @@ export function ThemeToggle() {
   )
 }
 
-export function Navbar({ brand, nav, links }) {
+// On inner pages (/plans …) the section links (#pricing) point back to the home page.
+const onHome = (href, home) => (home || !href.startsWith('#') || href === '#demo' ? href : `/${href}`)
+
+export function Navbar({ brand, nav, links, home = true }) {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   useEffect(() => {
@@ -60,9 +63,9 @@ export function Navbar({ brand, nav, links }) {
   return (
     <header className={`navbar ${scrolled ? 'scrolled' : ''}`}>
       <div className="nav-pill">
-        <a href="#home" className="brand"><Logo size={32} /><BrandName name={brand.name} /></a>
+        <a href={home ? '#home' : '/'} className="brand"><Logo size={32} /><BrandName name={brand.name} /></a>
         <nav className={`nav-links ${open ? 'open' : ''}`}>
-          {nav.map((n) => <a key={n.href} href={n.href} onClick={() => setOpen(false)}>{n.label}</a>)}
+          {nav.map((n) => <a key={n.href} href={onHome(n.href, home)} onClick={() => setOpen(false)}>{n.label}</a>)}
           <a href={links.portal} data-track="portal" className="nav-mobile-only" onClick={() => setOpen(false)}>Portal login</a>
         </nav>
         <div className="nav-actions">
@@ -176,7 +179,7 @@ export function Footer({ brand, footer, links }) {
       <div className="container">
         <div className="footer-top">
           <div className="footer-brand">
-            <a href="#home" className="brand"><Logo size={32} /><BrandName name={brand.name} /></a>
+            <a href="/" className="brand"><Logo size={32} /><BrandName name={brand.name} /></a>
             <p>{brand.about}</p>
             <div className="footer-contact-list">
               <span><Icon name="call" size={14} /> {brand.phone}</span>
@@ -184,18 +187,12 @@ export function Footer({ brand, footer, links }) {
               <span><Icon name="pin" size={14} /> {brand.address}</span>
             </div>
           </div>
-          {footer.columns.map((col) => (
-            <div className="footer-col" key={col.title}>
-              <h4>{col.title}</h4>
-              {col.links.map((l) => (l === footer.downloadLink
-                ? <a key={l} href={links.windowsInstaller} data-track="download">{l}</a>
-                : <a key={l} href="#">{l}</a>))}
+          {footer.groups.map((g) => (
+            <div className="footer-col" key={g.title}>
+              <h4>{g.title}</h4>
+              {g.links.map((l) => <a key={l.href} href={l.href}>{l.label}</a>)}
             </div>
           ))}
-        </div>
-        <div className="footer-searches">
-          <h4>{footer.searchesTitle}</h4>
-          <div className="chips">{footer.searches.map((s) => <a key={s} href="#" className="chip">{s}</a>)}</div>
         </div>
         <div className="footer-bottom">
           <span>© {year} {footer.copyright}</span>

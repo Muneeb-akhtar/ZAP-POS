@@ -39,6 +39,7 @@ Env: copy `src/zappos-web/.env.example` to `.env.local` and fill `VITE_SUPABASE_
 | Hover animations | the `@media (hover: hover)…` block at the **end** of `styles.css` |
 | The Download button / installer | Admin → Releases → publish with the "Also put it on the website" switch (or the "Website download" card): it starts `.github/workflows/publish-installer.yml`, which publishes the GitHub release the site finds by itself (see CHANGELOG 2026-11-22). By hand: publish a GitHub release of `links.githubRepo` with `ZAP-POS-Setup.exe` attached. `src/lib/release.js` |
 | Search/share tags, structured data, robots, sitemap, share image | `src/zappos-web/index.html` (title, description, canonical, OG, JSON-LD) and `src/zappos-web/public/` (`robots.txt`, `sitemap.xml`, `og-image.png`, favicons). No prices/ratings/phone in JSON-LD until real. Address in the tags is `https://zappos-web.vercel.app` for now; switch to `https://zappos.pk` (Vercel main; `www` redirects) once the domain is live (CHANGELOG 2026-11-23 evening) |
+| Extra pages (/fbr-invoicing, /plans, /download …) | Text: admin → Extra pages (`pages` key). Template: `components/InfoPage.jsx`. Each page is pre-rendered with its own head tags (`scripts/prerender.mjs`); ARCHITECTURE §7 SEO |
 | Icons | `components/Icons.jsx` (`paths` map; use `<Icon name="…" />`) |
 
 ## Rules (follow these)

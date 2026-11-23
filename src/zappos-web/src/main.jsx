@@ -17,9 +17,10 @@ import './styles.css'
 const root = document.getElementById('root')
 const snapshot = document.getElementById('zap-content')
 const initialContent = snapshot && root.hasChildNodes() ? JSON.parse(snapshot.textContent) : undefined
+const path = location.pathname.replace(/\/+$/, '') || '/'
 const app = (
   <React.StrictMode>
-    <App initialContent={initialContent} />
+    <App initialContent={initialContent} path={path} />
   </React.StrictMode>
 )
 if (initialContent) ReactDOM.hydrateRoot(root, app)

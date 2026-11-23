@@ -10,6 +10,7 @@ import Reviews from './components/Reviews.jsx'
 import Faq from './components/Faq.jsx'
 import LeadForm from './components/LeadForm.jsx'
 import WhatsAppFloat from './components/WhatsAppFloat.jsx'
+import InfoPage from './components/InfoPage.jsx'
 import { trackClick, trackView, trackVisit } from './lib/track.js'
 import { installerLink, useLatestRelease } from './lib/release.js'
 
@@ -20,7 +21,8 @@ import { installerLink, useLatestRelease } from './lib/release.js'
 
 // `initialContent` is the content the page was pre-rendered with (see scripts/prerender.mjs). The first browser render
 // must match that HTML exactly so React can reuse it; the saved copy and the live copy are applied right after.
-export default function App({ initialContent }) {
+// `path` is the page's address ('/' = home, '/plans' = an inner page from the `pages` content key).
+export default function App({ initialContent, path = '/' }) {
   const [c, setC] = useState(() => initialContent ?? mergeContent(defaultContent, readCachedContent()))
 
   const release = useLatestRelease(c.links.githubRepo)
@@ -75,6 +77,18 @@ export default function App({ initialContent }) {
     document.addEventListener('pointermove', move, { passive: true })
     return () => document.removeEventListener('pointermove', move)
   }, [])
+
+  const page = path === '/' ? null : c.pages.items.find((p) => `/${p.slug}` === path)
+
+  if (page) return (
+    <>
+      <Navbar brand={c.brand} nav={c.nav} links={links} home={false} />
+      <main className="inner-page"><InfoPage page={page} pages={c.pages} pricing={c.pricing} links={links} release={release} /></main>
+      <Footer brand={c.brand} footer={c.footer} links={links} />
+      <WhatsAppFloat data={c.whatsappButton} links={links} />
+      {lead && <LeadForm plan={lead.plan} plans={c.pricing.plans} data={c.leadForm} links={links} brand={c.brand} onClose={closeLead} />}
+    </>
+  )
 
   return (
     <>
