@@ -65,14 +65,14 @@ export function Navbar({ brand, nav, links, home = true, homeLabel }) {
       <div className="nav-pill">
         <a href={home ? '#home' : '/'} className="brand"><Logo size={32} /><BrandName name={brand.name} /></a>
         <nav className={`nav-links ${open ? 'open' : ''}`}>
-          <a href={home ? '#home' : '/'} className={home ? 'on' : ''} onClick={() => setOpen(false)}><Icon name="zap" size={14} />{homeLabel}</a>
-          {nav.map((n) => <a key={n.href} href={onHome(n.href, home)} onClick={() => setOpen(false)}>{n.icon && <Icon name={n.icon} size={14} />}{n.label}</a>)}
+          <a href={home ? '#home' : '/'} className={home ? 'on' : ''} onClick={() => setOpen(false)}><span className="nav-tile t0"><Icon name="zap" size={14} fill /></span>{homeLabel}</a>
+          {nav.map((n, i) => <a key={n.href} href={onHome(n.href, home)} onClick={() => setOpen(false)}>{n.icon && <span className={`nav-tile t${(i + 1) % 6}`}><Icon name={n.icon} size={14} /></span>}{n.label}</a>)}
           <a href={links.portal} data-track="portal" className="nav-mobile-only" onClick={() => setOpen(false)}>Portal login</a>
         </nav>
         <div className="nav-actions">
           <ThemeToggle />
           <a href={links.portal} data-track="portal" className="nav-login">Log in</a>
-          <DownloadLink href={links.windowsInstaller} className="btn btn-primary btn-sm" startText="Starting…" doneText="Downloading…"><Icon name="windows" size={13} fill /> Download</DownloadLink>
+          <a href="/download" data-track="download-page" className="btn btn-primary btn-sm"><Icon name="windows" size={13} fill /> Download</a>
         </div>
         <button className="menu-btn" onClick={() => setOpen(!open)} aria-label="Toggle menu"><Icon name={open ? 'close' : 'menu'} size={20} /></button>
       </div>

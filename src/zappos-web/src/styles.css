@@ -134,9 +134,16 @@ h2 .hl { display: block; }
 .brand-accent { color: var(--brand-500); transition: color .5s; }
 .footer .brand-accent { color: var(--brand-400); }
 .nav-links { display: flex; gap: 2px; }
-.nav-links > a { display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; font-size: 14.5px; font-weight: 500; padding: 8px 12px; border-radius: 999px; color: var(--text); transition: background .15s, color .15s; }
+.nav-links > a { display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; font-size: 14.5px; font-weight: 500; padding: 8px 12px; border-radius: 999px; color: var(--text); transition: background .15s, color .15s; }
 .nav-links > a:hover { color: var(--ink); background: rgba(15,23,42,.05); }
-.nav-links > a svg { color: var(--brand-500); flex-shrink: 0; }
+.nav-tile { width: 26px; height: 26px; border-radius: 8px; display: grid; place-items: center; flex-shrink: 0; color: #fff; }
+/* Menu icon tiles: the same colours as the ZAP POS app's Settings tiles (same in light and dark) */
+.nav-tile.t0 { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+.nav-tile.t1 { background: linear-gradient(135deg, #8b5cf6, #6d4ae0); }
+.nav-tile.t2 { background: linear-gradient(135deg, #f97316, #ef4444); }
+.nav-tile.t3 { background: linear-gradient(135deg, #14b8a6, #0e9488); }
+.nav-tile.t4 { background: linear-gradient(135deg, #ec4899, #be3a85); }
+.nav-tile.t5 { background: linear-gradient(135deg, #22c55e, #16a34a); }
 .nav-links > a.on { color: var(--ink); font-weight: 600; }
 .nav-links > a.nav-mobile-only { display: none; }
 .nav-actions { display: flex; align-items: center; gap: 6px; }

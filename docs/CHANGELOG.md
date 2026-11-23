@@ -11,6 +11,11 @@ Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, 
 - Not done yet: shop-type and comparison pages, Urdu pages, switching the site's own links and the Supabase redirect addresses to zappos.pk (after the domain is live).
 - Files: `index.html`, `public/*`, docs.
 
+## 2026-11-23 (night): menu icons in the app's colours; Download button opens the Download page
+- Owner: the menu icons should be in ZAP's own theme (picked style A of three previews: the colourful flat tiles of the ZAP POS app's Settings, white icon on a coloured rounded tile, same in light and dark; `.nav-tile.t0`–`t5`, colours from the desktop app's `Gloss.TileColours`). Only the icons changed.
+- Owner: "Download" appeared twice (menu item + blue button). The menu item is removed, and the blue navbar **Download** button now opens `/download` (tracked as `download-page`, "Opened the Download page" in Analytics) instead of starting the installer. The hero and final section's "Download for Windows" buttons still download directly. Published `nav` updated to match.
+- Files: `components/Sections.jsx`, `content/landing-content.json`, `styles.css`, `admin/Analytics.jsx`, docs.
+
 ## 2026-11-23 (night): Branches page and a compact top menu
 - Owner: multi-branch is the major selling point and must be visible at the top. New page `/multi-branch-pos` ("Branches"): what works today (a main PC per branch that bills on its own, invoice series per branch, counters per branch, tax/FBR per branch, per-branch pricing) and, marked **Coming soon**, the owner's all-branches view and stock across branches (they need `zap_cloud` sync in Supabase and the owner dashboard, not built yet). New feature flag `soon` on page features (dashed card + yellow handwritten "Coming soon" label from `pages.soonLabel`).
 - Top menu (owner showed the competitor's short menu with icons): now **Home · How it works · Branches · FBR · Plans · Download**, each with a small brand-blue icon (`nav[].icon`). Home is always first (on the home page it scrolls to the top and is shown as current). "Watch demo" and "FAQ" moved to the footer. Labels never wrap (`white-space: nowrap`), the pill is up to 1180 px wide, and the menu folds into ☰ below 1100 px (was 900 px). Fix: "Portal login" (phones only) no longer shows in the desktop menu. The published content's `nav` was updated to match.

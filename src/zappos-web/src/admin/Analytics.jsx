@@ -5,7 +5,7 @@ import { Card, PageBar } from './ui.jsx'
 
 const CLICK_LABELS = {
   demo: 'Book a demo', whatsapp: 'WhatsApp', download: 'Download for Windows', portal: 'Portal login',
-  android: 'Google Play', ios: 'App Store', email: 'Email', 'demo-video-play': 'Played the demo video',
+  android: 'Google Play', ios: 'App Store', email: 'Email', 'demo-video-play': 'Played the demo video', 'download-page': 'Opened the Download page',
 }
 const DEVICE_LABELS = { mobile: 'Mobile', desktop: 'Desktop', tablet: 'Tablet' }
 

@@ -27,11 +27,6 @@
       "href": "/plans",
       "label": "Plans",
       "icon": "card"
-    },
-    {
-      "href": "/download",
-      "label": "Download",
-      "icon": "download"
     }
   ],
   "links": {
