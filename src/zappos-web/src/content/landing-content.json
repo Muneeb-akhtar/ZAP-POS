@@ -9,24 +9,28 @@
   },
   "nav": [
     {
-      "label": "How it works",
-      "href": "#day"
+      "href": "#day",
+      "label": "How it works"
     },
     {
-      "label": "Watch demo",
-      "href": "#video"
+      "href": "#video",
+      "label": "Watch demo"
     },
     {
-      "label": "Multi-counter",
-      "href": "#counters"
+      "href": "/fbr-invoicing",
+      "label": "FBR"
     },
     {
-      "label": "Pricing",
-      "href": "#pricing"
+      "href": "/plans",
+      "label": "Plans"
     },
     {
-      "label": "FAQ",
-      "href": "#faq"
+      "href": "/download",
+      "label": "Download"
+    },
+    {
+      "href": "#faq",
+      "label": "FAQ"
     }
   ],
   "links": {
@@ -662,6 +666,31 @@
         ]
       },
       {
+        "title": "For your shop",
+        "links": [
+          {
+            "label": "Pharmacies",
+            "href": "/pharmacy-pos"
+          },
+          {
+            "label": "Restaurants & cafes",
+            "href": "/restaurant-pos"
+          },
+          {
+            "label": "Supermarkets",
+            "href": "/supermarket-pos"
+          },
+          {
+            "label": "Kiryana stores",
+            "href": "/kiryana-store-pos"
+          },
+          {
+            "label": "Bakeries",
+            "href": "/bakery-pos"
+          }
+        ]
+      },
+      {
         "title": "Help",
         "links": [
           {
@@ -1048,6 +1077,460 @@
             "label": "updates from the main PC"
           }
         ]
+      },
+      {
+        "slug": "pharmacy-pos",
+        "menu": "Pharmacies",
+        "icon": "box",
+        "seoTitle": "Pharmacy POS Software in Pakistan | Expiry Alerts | ZAP POS",
+        "seoDescription": "POS software for medical stores in Pakistan: expired medicines can't be sold, 30-day expiry alerts, strip and box packs, supplier purchases, FBR invoicing.",
+        "kicker": "For pharmacies & medical stores",
+        "title": "Never sell an",
+        "titleHighlight": "expired strip again.",
+        "description": "ZAP POS checks the expiry date before a medicine reaches the bill, sells by strip or by box from the same stock, and keeps supplier purchases and dues in one place. If the internet drops, the counter keeps billing.",
+        "stats": [
+          {
+            "value": "Blocked",
+            "label": "expired items can't be billed"
+          },
+          {
+            "value": "30 days",
+            "label": "expiry warning ahead"
+          },
+          {
+            "value": "Strip / box",
+            "label": "packs from one stock"
+          },
+          {
+            "value": "FBR",
+            "label": "invoicing built in"
+          }
+        ],
+        "problemsTitle": "Every medical store knows these",
+        "problems": [
+          "An expired medicine is sold because nobody checked the date.",
+          "Strips and boxes are counted separately and the stock never matches.",
+          "Staff give discounts below cost when the owner isn't there.",
+          "Supplier bills and dues live in a register that only one person understands.",
+          "The internet goes and the counter can't print a bill."
+        ],
+        "solvedLine": "ZAP POS takes care of each of these at the counter.",
+        "featuresTitle": "Made for the pharmacy counter",
+        "features": [
+          {
+            "icon": "calendar",
+            "title": "Expiry dates that stop the sale",
+            "text": "Add an expiry date to a product and ZAP POS refuses it once the date has passed, by barcode or by search."
+          },
+          {
+            "icon": "settings",
+            "title": "Warnings 30 days ahead",
+            "text": "Notifications list products that have expired or will expire within 30 days, so you can return them to the supplier in time."
+          },
+          {
+            "icon": "layers",
+            "title": "Strips, boxes and cartons",
+            "text": "Give a product its packs, each with its own barcode and price. Selling a box takes the right number of strips off stock."
+          },
+          {
+            "icon": "lock",
+            "title": "Lowest allowed price",
+            "text": "Set a floor price. A discount that goes below it needs a manager's PIN."
+          },
+          {
+            "icon": "users",
+            "title": "Suppliers and dues",
+            "text": "Record purchases, add stock by scanning what arrived, and keep each supplier's ledger."
+          },
+          {
+            "icon": "receipt",
+            "title": "FBR and PRA invoicing",
+            "text": "Each bill can go to FBR with its invoice number and QR code on the receipt."
+          }
+        ],
+        "faqTitle": "Pharmacy questions",
+        "faq": [
+          {
+            "q": "Can ZAP POS stop expired medicines from being sold?",
+            "a": "Yes. Once a product's expiry date has passed, ZAP POS refuses to add it to a bill, whether it is scanned or searched."
+          },
+          {
+            "q": "Can I sell both strips and full boxes?",
+            "a": "Yes. Add a box as a pack of the strip, with its own barcode and price. Stock is kept in strips, so both sales count correctly."
+          },
+          {
+            "q": "Will I know which medicines are about to expire?",
+            "a": "Yes. Notifications show products already expired and those expiring within 30 days."
+          },
+          {
+            "q": "Does it work with FBR?",
+            "a": "Yes. ZAP POS can send every bill to FBR and print FBR's invoice number and QR code. See the FBR invoicing page for details."
+          }
+        ],
+        "ctaTitle": "Run your medical store on ZAP POS",
+        "ctaText": "Book a free demo and we'll set it up with your own products."
+      },
+      {
+        "slug": "restaurant-pos",
+        "menu": "Restaurants & cafes",
+        "icon": "receipt",
+        "seoTitle": "Restaurant POS Software in Pakistan | Tables, Kitchen | ZAP POS",
+        "seoDescription": "Restaurant and cafe POS for Pakistan: tables, takeaway and delivery, tickets to kitchen printers, tax by cash or card, FBR/PRA invoicing, and billing without internet.",
+        "kicker": "For restaurants & cafes",
+        "title": "Orders to the kitchen.",
+        "titleHighlight": "Bills at the counter.",
+        "description": "Take table, takeaway and delivery orders, send each item to the right kitchen printer, and charge the right tax for cash or card. Late-night sales count for the next day, and counters keep billing when the internet or the main PC is down.",
+        "stats": [
+          {
+            "value": "Tables",
+            "label": "takeaway and delivery too"
+          },
+          {
+            "value": "Kitchen",
+            "label": "tickets to each station"
+          },
+          {
+            "value": "Cash / card",
+            "label": "different tax rates"
+          },
+          {
+            "value": "Offline",
+            "label": "counters keep billing"
+          }
+        ],
+        "problemsTitle": "Rush hour problems we hear about",
+        "problems": [
+          "The waiter's paper slip gets lost and the order never reaches the kitchen.",
+          "The tandoor and the kitchen get each other's tickets.",
+          "Card and cash need different sales tax, and the cashier guesses.",
+          "A cancelled order disappears and nobody knows who cancelled it.",
+          "The internet drops on a Saturday night and billing stops."
+        ],
+        "solvedLine": "ZAP POS keeps the kitchen, the counter and the books in step.",
+        "featuresTitle": "Built for a busy kitchen",
+        "features": [
+          {
+            "icon": "grid",
+            "title": "Tables, takeaway and delivery",
+            "text": "Open a bill on a table, as takeaway or for delivery, and hold it until the customer pays."
+          },
+          {
+            "icon": "printer",
+            "title": "Kitchen stations",
+            "text": "Each product goes to its station's printer, with a backup station if a printer stops answering."
+          },
+          {
+            "icon": "card",
+            "title": "Tax by payment method",
+            "text": "Set one rate for cash and another for card or wallets, as provinces require. The counter shows the total for the method chosen."
+          },
+          {
+            "icon": "close",
+            "title": "Cancelled orders on record",
+            "text": "Every cancelled order and removed item is kept with who did it and why."
+          },
+          {
+            "icon": "wifi",
+            "title": "Keeps billing offline",
+            "text": "If the main PC goes off, counters keep billing and still print kitchen tickets, then sync when it is back."
+          },
+          {
+            "icon": "calendar",
+            "title": "Open past midnight",
+            "text": "Sales after 12 AM count for the next calendar day, so a late night stays out of the day before's report."
+          }
+        ],
+        "faqTitle": "Restaurant questions",
+        "faq": [
+          {
+            "q": "Does ZAP POS print kitchen tickets?",
+            "a": "Yes. Each product belongs to a kitchen station with its own printer, and tickets go there directly from the counter. A backup station can take over if a printer stops answering."
+          },
+          {
+            "q": "Can I charge different tax for cash and card?",
+            "a": "Yes. Each payment method has its own rate, and you can change them when the rules change."
+          },
+          {
+            "q": "What if the internet goes down during dinner?",
+            "a": "Billing doesn't depend on the internet. Bills, kitchen tickets and receipts all work on your shop network, and the cloud catches up later."
+          },
+          {
+            "q": "Can waiters log in?",
+            "a": "Yes. Cashiers and waiters have their own 4-digit PIN logins, and managers approve the actions that need approval."
+          }
+        ],
+        "ctaTitle": "Bring ZAP POS to your restaurant",
+        "ctaText": "Book a free demo and we'll set up your tables, kitchen stations and tax rates."
+      },
+      {
+        "slug": "supermarket-pos",
+        "menu": "Supermarkets",
+        "icon": "cart",
+        "seoTitle": "Supermarket POS Software in Pakistan | Multi-Counter | ZAP POS",
+        "seoDescription": "Supermarket POS for Pakistan: many counters sharing live stock, fast barcode billing, cartons and dozens, bulk prices, weighed items and scale labels, billing without internet.",
+        "kicker": "For supermarkets & marts",
+        "title": "Five counters.",
+        "titleHighlight": "One stock count.",
+        "description": "Every counter scans fast and sees the same stock within seconds. Sell by piece, dozen or carton, give bulk prices, weigh loose items and print your own barcode labels. If the main PC goes off, counters keep billing and share their sales with each other.",
+        "stats": [
+          {
+            "value": "Many",
+            "label": "counters on one stock"
+          },
+          {
+            "value": "Seconds",
+            "label": "for stock to update"
+          },
+          {
+            "value": "Carton",
+            "label": "dozen and piece packs"
+          },
+          {
+            "value": "Offline",
+            "label": "counters keep billing"
+          }
+        ],
+        "problemsTitle": "What slows a supermarket down",
+        "problems": [
+          "Counter 2 sells the last bottle that counter 1 already sold.",
+          "A carton is billed as one piece, or a piece as a carton.",
+          "Loose items are weighed and priced by hand.",
+          "New products arrive without barcodes.",
+          "The queue stops whenever the internet drops."
+        ],
+        "solvedLine": "ZAP POS fixes these at every counter at once.",
+        "featuresTitle": "Built for many counters",
+        "features": [
+          {
+            "icon": "monitor",
+            "title": "Live stock across counters",
+            "text": "A sale on one counter shows on every other within seconds, and out-of-stock products can't be billed."
+          },
+          {
+            "icon": "layers",
+            "title": "Pieces, dozens and cartons",
+            "text": "Each pack has its own barcode and price, and stock comes off in pieces."
+          },
+          {
+            "icon": "tag",
+            "title": "Bulk prices",
+            "text": "Set a lower price from a number of pieces on one line. Counters apply it automatically, even offline."
+          },
+          {
+            "icon": "scan",
+            "title": "Your own barcodes and labels",
+            "text": "Make barcodes for products that have none and print them in common label sizes, including weighing-scale labels."
+          },
+          {
+            "icon": "box",
+            "title": "Add stock by scanning",
+            "text": "Scan what arrived from the supplier to add it to stock in seconds."
+          },
+          {
+            "icon": "wifi",
+            "title": "Counters that never stop",
+            "text": "If the main PC is off, counters keep billing and tell each other what they sold, so stock stays right."
+          }
+        ],
+        "faqTitle": "Supermarket questions",
+        "faq": [
+          {
+            "q": "How many counters can a supermarket run?",
+            "a": "As many as your plan allows. Every counter shares the same products, prices and stock over your shop network."
+          },
+          {
+            "q": "Can I sell loose items by weight?",
+            "a": "Yes. Mark a product as sold by weight or volume, and print labels in weighing-scale sizes."
+          },
+          {
+            "q": "Will two counters sell the same last item?",
+            "a": "Stock updates on every counter within seconds, and an out-of-stock product can't be added to a bill."
+          },
+          {
+            "q": "What happens if the main PC switches off?",
+            "a": "Counters keep billing for hours on their own, share their sales with each other, and send everything to the main PC when it is back."
+          }
+        ],
+        "ctaTitle": "Run every counter on ZAP POS",
+        "ctaText": "Book a free demo and we'll set it up with your own products."
+      },
+      {
+        "slug": "kiryana-store-pos",
+        "menu": "Kiryana stores",
+        "icon": "tag",
+        "seoTitle": "Kiryana Store POS Software in Pakistan | Billing & Stock | ZAP POS",
+        "seoDescription": "Simple POS for kiryana and general stores in Pakistan: fast billing with or without barcodes, quick sale for loose items, stock and supplier dues, works without internet.",
+        "kicker": "For kiryana & general stores",
+        "title": "Your register,",
+        "titleHighlight": "on one screen.",
+        "description": "Bill in seconds by scanning, searching or tapping a product. Sell loose items with a quick sale, see what is running low, and keep track of what you owe your suppliers. No internet needed at the counter.",
+        "stats": [
+          {
+            "value": "Seconds",
+            "label": "per bill"
+          },
+          {
+            "value": "Quick sale",
+            "label": "for loose items"
+          },
+          {
+            "value": "Low stock",
+            "label": "warnings"
+          },
+          {
+            "value": "Offline",
+            "label": "no internet needed"
+          }
+        ],
+        "problemsTitle": "Life with a register",
+        "problems": [
+          "You only find out an item is finished when a customer asks for it.",
+          "The day's sale never matches the cash in the drawer.",
+          "Supplier dues are scribbled in a notebook.",
+          "Totalling a long bill by hand takes time and mistakes happen."
+        ],
+        "solvedLine": "ZAP POS does the counting, so you can serve customers.",
+        "featuresTitle": "Simple enough for any shop",
+        "features": [
+          {
+            "icon": "cart",
+            "title": "Fast billing",
+            "text": "Tap a product tile, search by name or scan its barcode. The total and change are worked out for you."
+          },
+          {
+            "icon": "plus",
+            "title": "Quick sale",
+            "text": "Sell something not in your list by typing a name and price."
+          },
+          {
+            "icon": "box",
+            "title": "Low stock warnings",
+            "text": "Set a low-stock level and see what to reorder before it runs out."
+          },
+          {
+            "icon": "drawer",
+            "title": "Cash that adds up",
+            "text": "Each shift counts cash in and out, so the drawer and the sales match."
+          },
+          {
+            "icon": "users",
+            "title": "Supplier ledger",
+            "text": "Record purchases and payments to see what you owe each supplier."
+          },
+          {
+            "icon": "chart",
+            "title": "Daily reports",
+            "text": "See today's sales, top products and profit in one place."
+          }
+        ],
+        "faqTitle": "Kiryana store questions",
+        "faq": [
+          {
+            "q": "Do I need barcodes on every product?",
+            "a": "No. You can tap a product tile or search by name. You can also make your own barcodes and print labels."
+          },
+          {
+            "q": "Is ZAP POS hard to learn?",
+            "a": "No. The screens are simple, and we help you set up over WhatsApp."
+          },
+          {
+            "q": "Do I need internet?",
+            "a": "Only for setup. Billing, stock and reports work without internet."
+          },
+          {
+            "q": "Can I sell items that aren't in my product list?",
+            "a": "Yes, with a quick sale: type a name and price and add it to the bill."
+          }
+        ],
+        "ctaTitle": "Put your kiryana store on ZAP POS",
+        "ctaText": "Book a free demo and we'll help you add your products."
+      },
+      {
+        "slug": "bakery-pos",
+        "menu": "Bakeries",
+        "icon": "zap",
+        "seoTitle": "Bakery POS Software in Pakistan | Weight & Expiry | ZAP POS",
+        "seoDescription": "Bakery and sweets POS for Pakistan: sell by kg or piece, expiry dates on fresh items, dozen and box packs, labels for weighed items, billing without internet.",
+        "kicker": "For bakeries & sweet shops",
+        "title": "By the kg,",
+        "titleHighlight": "by the dozen.",
+        "description": "Sell mithai by weight, rusks by the packet and cakes by the piece. Put expiry dates on fresh items so they aren't sold past their day, and print labels for weighed boxes. Counters keep billing when the internet drops.",
+        "stats": [
+          {
+            "value": "kg / piece",
+            "label": "sell by weight or count"
+          },
+          {
+            "value": "Dozen / box",
+            "label": "packs from one stock"
+          },
+          {
+            "value": "Expiry",
+            "label": "dates on fresh items"
+          },
+          {
+            "value": "Offline",
+            "label": "counters keep billing"
+          }
+        ],
+        "problemsTitle": "Bakery counter headaches",
+        "problems": [
+          "Weighed items are priced by hand and mistakes add up.",
+          "Yesterday's cake is still on sale today.",
+          "A dozen and a single piece are billed as the same item.",
+          "Busy evenings and slow internet don't mix."
+        ],
+        "solvedLine": "ZAP POS handles weight, packs and dates for you.",
+        "featuresTitle": "Made for fresh food",
+        "features": [
+          {
+            "icon": "tag",
+            "title": "Sold by weight",
+            "text": "Mark a product as sold by weight or volume and bill any amount."
+          },
+          {
+            "icon": "calendar",
+            "title": "Expiry dates",
+            "text": "Fresh items with an expiry date can't be sold once it has passed."
+          },
+          {
+            "icon": "layers",
+            "title": "Dozens and boxes",
+            "text": "Packs with their own barcode and price, counted from the same stock."
+          },
+          {
+            "icon": "scan",
+            "title": "Labels",
+            "text": "Print price and barcode labels, including weighing-scale sizes."
+          },
+          {
+            "icon": "chart",
+            "title": "What sells today",
+            "text": "Daily reports show your top items, so you bake the right amount."
+          },
+          {
+            "icon": "wifi",
+            "title": "No internet needed",
+            "text": "Billing works on your shop network and syncs later."
+          }
+        ],
+        "faqTitle": "Bakery questions",
+        "faq": [
+          {
+            "q": "Can I sell mithai by weight?",
+            "a": "Yes. Mark the product as sold by weight and enter the amount on the bill."
+          },
+          {
+            "q": "Can ZAP POS stop old items from being sold?",
+            "a": "Yes. Give a product an expiry date and it can't be billed once that date has passed."
+          },
+          {
+            "q": "Can I print labels for boxes?",
+            "a": "Yes. The label studio prints price and barcode labels in common sizes, including weighing-scale labels."
+          }
+        ],
+        "ctaTitle": "Bring ZAP POS to your bakery",
+        "ctaText": "Book a free demo and we'll set it up with your own products."
       }
     ]
   }

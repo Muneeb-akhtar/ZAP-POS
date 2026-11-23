@@ -11,6 +11,13 @@ Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, 
 - Not done yet: shop-type and comparison pages, Urdu pages, switching the site's own links and the Supabase redirect addresses to zappos.pk (after the domain is live).
 - Files: `index.html`, `public/*`, docs.
 
+## 2026-11-23 (late night): shop-type pages + top menu — on branch `shop-pages` for review
+- Five new pages in the `pages` key, written only from what the desktop app really does (checked against its CHANGELOG): `/pharmacy-pos` (expiry blocking ZP017, 30-day expiry list, strip/box packs, lowest allowed price, suppliers, FBR), `/restaurant-pos` (tables, takeaway, delivery, kitchen stations with backup printers, tax by payment method, cancelled orders, offline counters, after-midnight = next day), `/supermarket-pos` (live stock across counters, packs, bulk price, own barcodes and scale labels, add stock by scanning, counters sharing sales while the main PC is off), `/kiryana-store-pos` (fast billing, quick sale, low stock, shifts, supplier ledger) and `/bakery-pos` (sold by weight, expiry, packs, labels). Single-segment, keyword addresses so the existing `/:slug` rewrite serves them.
+- **Not written yet, on purpose:** clothing and shoe pages. They need size/colour variants, which the app does not have yet (gap to build first).
+- Footer: new "For your shop" column (`footer.groups`); `.footer-top` is now 1.6fr + 4 columns.
+- Top menu (`nav`), also changed in the live published content on the owner's OK: How it works · Watch demo · FBR · Plans · Download · FAQ.
+- Files: `content/landing-content.json`, `styles.css` (`.footer-top`), docs.
+
 ## 2026-11-23 (night): extra pages, batch 1 (FBR invoicing, Plans, Get ZAP POS) — on branch `seo-pages` for review
 - Owner request: a multi-page site like the competitor's, with ZAP POS's own page names, built deeply for SEO. First three pages: `/fbr-invoicing` (FBR/PRA invoicing is already in the desktop app since 1.9.86; copy follows what it really does), `/plans` (the Pricing section plus "in every plan" and plan FAQ) and `/download` (installer box with version/size, what you get, four setup steps, what you need, FAQ). All text in the new `pages` content key (admin tab "Extra pages").
 - One template, `components/InfoPage.jsx`, in ZAP's own look (owner: not the competitor's design): breadcrumb + h1 with the yellow squiggle, the page's facts printed on a paper receipt (`stats`), problems as taped sticky notes with a handwritten scribble, feature cards, steps as paper tickets, needs as stickers, the FAQ as a WhatsApp chat (all answers in the HTML), links to the other pages, then the home page's night section (`FinalCta`) with the page's own title and text. Each block shows only when filled.

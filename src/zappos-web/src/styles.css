@@ -595,7 +595,7 @@ h2 .hl { display: block; }
 .footer { position: relative; overflow: hidden; background: var(--night); color: #64748b; padding: 30px 0 0; border-top: 1px solid rgba(255,255,255,.06); }
 .footer .brand { color: #fff; }
 .footer h4 { color: #e2e8f0; font-family: var(--font); font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 16px; }
-.footer-top { display: grid; grid-template-columns: 1.8fr 1fr 1fr 1fr; gap: 40px; padding: 40px 0; border-bottom: 1px solid rgba(255,255,255,.07); }
+.footer-top { display: grid; grid-template-columns: 1.6fr repeat(4, 1fr); gap: 40px; padding: 40px 0; border-bottom: 1px solid rgba(255,255,255,.07); }
 .footer-brand p { margin: 16px 0 18px; max-width: 340px; font-size: 14px; }
 .footer-contact-list { display: grid; gap: 8px; font-size: 14px; color: #cbd5e1; }
 .footer-contact-list span { display: flex; align-items: center; gap: 8px; }
