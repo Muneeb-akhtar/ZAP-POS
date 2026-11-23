@@ -3,6 +3,11 @@
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
 
+## 2026-11-24: site addresses switched to zappos.pk
+- Why: `zappos.pk` and `www.zappos.pk` show Valid Configuration in Vercel (www redirects with 308), so the search and share tags now point to the real domain.
+- `index.html` (canonical, og:url, share image, JSON-LD ids/urls/logo) and `public/robots.txt` (sitemap line) use `https://zappos.pk`; the pre-render builds the sitemap and `llms.txt` from that address. `zappos-web.vercel.app` keeps working.
+- Docs: ARCHITECTURE SEO note and CLAUDE.md updated.
+
 ## 2026-11-24: Terms of Use page
 - Why: a Terms page was on the to-do list next to Privacy. Plain-language terms: licence (one active plan, counters per plan), data stays the shop's, payments recorded not processed, owner's responsibilities, support, limits (no claim that billing works without power), Pakistan law.
 - `landing-content.json`: new page `terms` after `privacy` in `pages.items`. `components/Sections.jsx`: footer bottom row now links Privacy and Terms. Pre-rendered like the other pages (24 sitemap addresses).
