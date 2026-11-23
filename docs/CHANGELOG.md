@@ -6,7 +6,8 @@ Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, 
 ## 2026-11-24: Terms of Use page
 - Why: a Terms page was on the to-do list next to Privacy. Plain-language terms: licence (one active plan, counters per plan), data stays the shop's, payments recorded not processed, owner's responsibilities, support, limits (no claim that billing works without power), Pakistan law.
 - `landing-content.json`: new page `terms` after `privacy` in `pages.items`. `components/Sections.jsx`: footer bottom row now links Privacy and Terms. Pre-rendered like the other pages (24 sitemap addresses).
-- Text is a plain draft with no prices, phone numbers or refund promises: the owner (or a lawyer) should read it before the domain goes live.
+- Owner decision (same day): no refunds once a licence is purchased; the price shown is final. Added as a "No refunds" section.
+- Text is a plain draft with no prices or phone numbers: the owner (or a lawyer) should read it before the domain goes live.
 
 ## 2026-11-24: owner's page shows top sellers and low stock
 - Why: owners with branches want to see what sells and what is running out in each one (approved preview).
