@@ -11,6 +11,10 @@ Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, 
 - Not done yet: shop-type and comparison pages, Urdu pages, switching the site's own links and the Supabase redirect addresses to zappos.pk (after the domain is live).
 - Files: `index.html`, `public/*`, docs.
 
+## 2026-11-23 (evening): search/share addresses pointed at the Vercel address for now
+- Owner request: until `zappos.pk` answers (DNS still spreading), the canonical link, `og:url`, share image, Twitter image, JSON-LD addresses, `robots.txt` sitemap line and `sitemap.xml` use `https://zappos-web.vercel.app` so share previews work today. **Temporary:** when `zappos.pk` is live, replace that host with `https://zappos.pk` in `index.html`, `public/robots.txt` and `public/sitemap.xml` (one search-and-replace), rebuild and push, so Google only ever indexes the real domain.
+- Files: `index.html`, `public/robots.txt`, `public/sitemap.xml`, docs.
+
 ## 2026-11-23 (later): SEO step 2, the landing page is pre-rendered into the HTML
 - Why: the page was drawn only in the browser, so Google's first pass and AI crawlers that do not run JavaScript saw an empty page. Now `dist/index.html` already holds the whole landing page text (about 70 KB of HTML), made at build time from the **published** content (Supabase), so placeholders are not what crawlers read.
 - How: `npm run build` runs `vite build`, a server build of `src/entry-server.jsx`, then `scripts/prerender.mjs` (see ARCHITECTURE §7 "SEO"). The browser hydrates the HTML (`main.jsx`), so visitors see no difference.
