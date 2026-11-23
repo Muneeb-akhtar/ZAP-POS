@@ -11,6 +11,13 @@ Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, 
 - Not done yet: shop-type and comparison pages, Urdu pages, switching the site's own links and the Supabase redirect addresses to zappos.pk (after the domain is live).
 - Files: `index.html`, `public/*`, docs.
 
+## 2026-11-23 (later night): guide articles for ranking
+- Owner: "for ranking". Three guides in the `pages` key, written to answer what shop owners search and AI tools quote, without competitor names or invented numbers: `/best-pos-software-pakistan` (ten questions to ask before buying any POS, then an honest "where ZAP POS fits", naming what is still missing), `/pos-vs-register-excel`, `/billing-during-load-shedding` (power cut vs internet drop, what to put on a UPS; no claim of billing without power).
+- Template: new `article` block in `InfoPage.jsx` (`article[{h, p[]}]`, readable column, CSS `.ip-article`), plus `published` date. Prerender adds an `Article` JSON-LD item for pages with an article.
+- Related links now show up to 6 other pages, starting after the current one, so internal links spread across the site. Footer gets a "Guides" column (`.footer-top` 1.4fr + 5 columns).
+- Found while starting the owner dashboard: the `zap_cloud` schema and `public.zap_ingest()` from the desktop repo's `cloud/0001_zap_cloud.sql` are **not applied** in Supabase, so branches don't sync to the cloud yet. Must be applied before an owner dashboard.
+- Files: `components/InfoPage.jsx`, `content/landing-content.json`, `styles.css`, `scripts/prerender.mjs`, `admin/sections.js`, docs.
+
 ## 2026-11-23 (late night): shop-type pages + top menu — on branch `shop-pages` for review
 - Five new pages in the `pages` key, written only from what the desktop app really does (checked against its CHANGELOG): `/pharmacy-pos` (expiry blocking ZP017, 30-day expiry list, strip/box packs, lowest allowed price, suppliers, FBR), `/restaurant-pos` (tables, takeaway, delivery, kitchen stations with backup printers, tax by payment method, cancelled orders, offline counters, after-midnight = next day), `/supermarket-pos` (live stock across counters, packs, bulk price, own barcodes and scale labels, add stock by scanning, counters sharing sales while the main PC is off), `/kiryana-store-pos` (fast billing, quick sale, low stock, shifts, supplier ledger) and `/bakery-pos` (sold by weight, expiry, packs, labels). Single-segment, keyword addresses so the existing `/:slug` rewrite serves them.
 - **Not written yet, on purpose:** clothing and shoe pages. They need size/colour variants, which the app does not have yet (gap to build first).

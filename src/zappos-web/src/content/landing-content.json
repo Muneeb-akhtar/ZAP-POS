@@ -691,6 +691,23 @@
         ]
       },
       {
+        "title": "Guides",
+        "links": [
+          {
+            "label": "Choosing a POS",
+            "href": "/best-pos-software-pakistan"
+          },
+          {
+            "label": "POS vs register & Excel",
+            "href": "/pos-vs-register-excel"
+          },
+          {
+            "label": "Billing in load shedding",
+            "href": "/billing-during-load-shedding"
+          }
+        ]
+      },
+      {
         "title": "Help",
         "links": [
           {
@@ -1531,6 +1548,236 @@
         ],
         "ctaTitle": "Bring ZAP POS to your bakery",
         "ctaText": "Book a free demo and we'll set it up with your own products."
+      },
+      {
+        "slug": "best-pos-software-pakistan",
+        "menu": "Choosing a POS",
+        "icon": "search",
+        "seoTitle": "How to Choose the Best POS Software in Pakistan (2026 Guide)",
+        "seoDescription": "A shop owner's checklist for choosing POS software in Pakistan: offline billing, FBR integration, counters and branches, printers, support, prices and backups.",
+        "kicker": "Buyer's guide",
+        "title": "Choosing POS software",
+        "titleHighlight": "in Pakistan, the right way.",
+        "description": "Ten questions to ask before you pay for any POS, from what happens when the internet drops to who answers when something goes wrong at 9 PM. Written for shop owners, not IT people.",
+        "article": [
+          {
+            "h": "Start with how your shop really runs",
+            "p": [
+              "Before comparing features, write down three things: how many counters you bill from, how many branches you have or plan to open, and what you sell (packed goods with barcodes, loose items by weight, medicines with expiry dates, food that goes to a kitchen). Every question below is easier once you know this."
+            ]
+          },
+          {
+            "h": "1. Does billing stop when the internet drops?",
+            "p": [
+              "In Pakistan the router often goes off during load shedding, even when the PC is on a UPS. Some POS systems keep everything online and stop billing without internet. Ask where the shop's data is kept. If it is on your own PC, billing can continue offline and sync later.",
+              "In the demo, unplug the internet and make a bill. If the queue would stop in your shop, it will stop in the demo too."
+            ]
+          },
+          {
+            "h": "2. Is it ready for FBR or PRA?",
+            "p": [
+              "If you are required to report sales, the POS should send each bill to FBR (or your provincial authority) and print the invoice number and QR code on the receipt. Ask three follow-ups: what happens to reporting when the internet is down, how refunds are reported, and how it avoids sending the same bill twice."
+            ]
+          },
+          {
+            "h": "3. Can several counters share one stock?",
+            "p": [
+              "With more than one counter, every counter should see the same stock within seconds, and an item that has run out should not be billed twice. Ask what happens when the main PC is switched off: do the other counters stop, or keep billing?"
+            ]
+          },
+          {
+            "h": "4. Will your printers and scanners work?",
+            "p": [
+              "Most shops use standard thermal receipt printers, USB barcode scanners and cash drawers. Some also need label printers or kitchen printers. Bring your own hardware details to the demo and ask to see a receipt and a label print."
+            ]
+          },
+          {
+            "h": "5. Does it fit the way you sell?",
+            "p": [
+              "Check the details that matter to your trade: packs like dozens and cartons, items sold by weight, expiry dates for medicines and food, kitchen stations for restaurants, and sizes and colours for clothing and shoes. A POS that can't model your products forces staff to work around it."
+            ]
+          },
+          {
+            "h": "6. Who controls discounts and cancellations?",
+            "p": [
+              "Most cash leaks at the counter: discounts below cost, cancelled bills and quiet refunds. Look for staff logins, manager approval for big discounts, and a record of every cancelled order with who did it."
+            ]
+          },
+          {
+            "h": "7. What happens to your data?",
+            "p": [
+              "Ask where backups are kept, how often they are taken, and how a restore works if a PC's disk fails. Your sales history is your business record, so make sure you can export it."
+            ]
+          },
+          {
+            "h": "8. Are the prices clear, in rupees?",
+            "p": [
+              "Ask for the monthly and yearly price in PKR, what changes when you add counters or branches, and whether there are setup or hardware fees. Write it down so you can compare like with like."
+            ]
+          },
+          {
+            "h": "9. Who helps you, and how fast?",
+            "p": [
+              "Setup, training and the odd problem on a busy evening all need a person who answers. Ask how support works (WhatsApp, phone, visits), in which language, and how updates are delivered."
+            ]
+          },
+          {
+            "h": "10. Test it like a real rush",
+            "p": [
+              "Ask the seller to let you bill 20 items quickly, make a refund, apply a discount, close a shift and print a receipt, with the internet unplugged for part of it. Ten minutes of this tells you more than any brochure."
+            ]
+          },
+          {
+            "h": "Where ZAP POS fits",
+            "p": [
+              "ZAP POS was built around these questions: billing keeps going without internet, FBR and PRA invoicing is built in, many counters share live stock, and it works with standard printers and scanners. Today it runs on Windows PCs. Size and colour variants for clothing and an owner app for phones are still on the way, so ask us if you need them."
+            ]
+          }
+        ],
+        "faqTitle": "Quick answers",
+        "faq": [
+          {
+            "q": "What is the best POS software in Pakistan?",
+            "a": "The best POS is the one that fits your shop. For most Pakistani shops that means billing that works without internet, FBR or PRA invoicing if you must report sales, prices in rupees and support on WhatsApp. Use the ten questions on this page in every demo."
+          },
+          {
+            "q": "Do I need internet to use POS software?",
+            "a": "Not with an offline-first POS. The shop's data stays on your own PC, billing works without internet, and the cloud is updated when the connection returns."
+          },
+          {
+            "q": "Does every shop need FBR integration?",
+            "a": "No. It is required for certain businesses, such as Tier-1 retailers, and many restaurants under provincial rules. Ask your tax advisor whether it applies to you."
+          },
+          {
+            "q": "What hardware does a POS need?",
+            "a": "Usually a Windows PC, a thermal receipt printer, a USB barcode scanner and a cash drawer. Shops with more than one counter add a PC for each counter on the same network."
+          }
+        ],
+        "ctaTitle": "Put ZAP POS through the test",
+        "ctaText": "Book a free demo and try every question on this page with your own products.",
+        "published": "2026-11-23"
+      },
+      {
+        "slug": "pos-vs-register-excel",
+        "menu": "POS vs register & Excel",
+        "icon": "chart",
+        "seoTitle": "POS Software vs Register and Excel: What Changes for Your Shop",
+        "seoDescription": "Still billing on a register or in Excel? See what a POS changes for a Pakistani shop: faster bills, cash that matches, stock you can trust, and when it is time to switch.",
+        "kicker": "Guide",
+        "title": "Register, Excel or POS?",
+        "titleHighlight": "What changes for your shop.",
+        "description": "Most shops start with a register or a spreadsheet, and many run well that way for years. Here is what each one does well, where it costs you money, and the signs that it is time to move to a POS.",
+        "article": [
+          {
+            "h": "The register",
+            "p": [
+              "A register is cheap, needs no electricity and everyone understands it. The trouble starts as the shop grows: long bills are added by hand, stock is counted only when something runs out, and the day's sale rarely matches the cash in the drawer exactly. Nobody can see the numbers unless they are standing at the counter."
+            ]
+          },
+          {
+            "h": "Excel",
+            "p": [
+              "A spreadsheet is a big step up for stock lists and monthly totals. But it is not built for the counter: two people can't safely edit the same file, a wrong formula can quietly change totals, and billing a customer in Excel is slow. Most shops end up with Excel for records and a register for billing, which means typing everything twice."
+            ]
+          },
+          {
+            "h": "A POS",
+            "p": [
+              "A POS does the billing and the records in one step. Each bill is added up for you and takes the items off stock, the cash drawer is counted per shift, and reports for the day are ready when you close. With more than one counter, every counter sees the same stock."
+            ]
+          },
+          {
+            "h": "Signs it is time to switch",
+            "p": [
+              "You run out of popular items before you notice. The cash in the drawer and the day's sale don't match and you can't tell why. You have a second counter or a second branch. You need to report sales to FBR or PRA. Staff discounts and cancelled bills worry you. If two of these sound familiar, a POS will pay for itself."
+            ]
+          },
+          {
+            "h": "Moving over without stopping the shop",
+            "p": [
+              "Start with your product list: most shops already have one in Excel, and it can be imported instead of typed in again. Print barcode labels for items without them, set up your printer and scanner, and run the POS alongside the register for a day or two. Then put the register away."
+            ]
+          }
+        ],
+        "faqTitle": "Quick answers",
+        "faq": [
+          {
+            "q": "Can I move my Excel product list into ZAP POS?",
+            "a": "Yes. Import your product list from Excel instead of typing it again, then add barcodes where needed."
+          },
+          {
+            "q": "Is a POS worth it for a small shop?",
+            "a": "If you have more than a few hundred products, a second counter, or cash that rarely matches the day's sales, a POS usually pays for itself through fewer mistakes and better stock control."
+          },
+          {
+            "q": "What if the power or internet goes?",
+            "a": "A POS needs power like any PC, so keep it on a UPS. ZAP POS doesn't need the internet to bill."
+          }
+        ],
+        "ctaTitle": "Ready to put the register away?",
+        "ctaText": "Book a free demo and we'll help you bring your product list across.",
+        "published": "2026-11-23"
+      },
+      {
+        "slug": "billing-during-load-shedding",
+        "menu": "Billing in load shedding",
+        "icon": "wifi",
+        "seoTitle": "Billing During Load Shedding: Keep Your POS Running | ZAP POS",
+        "seoDescription": "What really keeps billing going during load shedding in Pakistan: what needs a UPS, why the internet drops, and how an offline POS keeps your counter running.",
+        "kicker": "Guide",
+        "title": "Billing during load shedding:",
+        "titleHighlight": "what really keeps working.",
+        "description": "Load shedding causes two different problems at the counter: the power goes, and the internet goes. They need different fixes. Here is what to put on a UPS and what your POS should do on its own.",
+        "article": [
+          {
+            "h": "Two problems, not one",
+            "p": [
+              "When the power goes, anything without a backup switches off, including your PCs, printer and router. When the power comes back, or even while you are on a UPS, the internet often stays down because the router or the exchange has no power. A good setup handles both."
+            ]
+          },
+          {
+            "h": "What to put on a UPS",
+            "p": [
+              "No software can bill on a PC that is switched off. Put the main PC, each counter PC, the receipt printer and the network switch that connects them on a UPS. Size the UPS for the longest outage your area usually gets. Laptops as counters help, because they have their own battery."
+            ]
+          },
+          {
+            "h": "What the POS should do without internet",
+            "p": [
+              "Choose a POS that keeps the shop's data on your own main PC, so billing, printing and stock work over your shop network with no internet at all. Sales then sync to the cloud when the connection is back. If your POS needs the internet for every bill, the queue stops each time the router does."
+            ]
+          },
+          {
+            "h": "If the main PC goes off too",
+            "p": [
+              "Even with a UPS, a main PC can fail. In ZAP POS, counters keep billing on their own for a few hours, print receipts and kitchen tickets, share their sales with each other so stock stays right, and send everything to the main PC when it is back."
+            ]
+          },
+          {
+            "h": "FBR and the cloud can wait",
+            "p": [
+              "Bills that must go to FBR are queued with a note on the receipt and sent once the internet returns. Your owner's view of sales catches up the same way. Nothing is lost and nothing is sent twice."
+            ]
+          }
+        ],
+        "faqTitle": "Quick answers",
+        "faq": [
+          {
+            "q": "Does ZAP POS work during a power cut?",
+            "a": "Only if your PCs have power. ZAP POS doesn't need the internet, so with the PCs, printer and network switch on a UPS, billing carries on while the router is off."
+          },
+          {
+            "q": "What should I put on a UPS for my counter?",
+            "a": "The main PC, the counter PCs, the receipt printer and the network switch. The router is optional for billing with ZAP POS."
+          },
+          {
+            "q": "Will my FBR invoices be lost when the internet is down?",
+            "a": "No. They wait in a queue, the receipt says they will be sent, and they go to FBR by themselves when the internet returns."
+          }
+        ],
+        "ctaTitle": "Make load shedding a non-event",
+        "ctaText": "Book a free demo and we'll show you billing with the internet unplugged.",
+        "published": "2026-11-23"
       }
     ]
   }

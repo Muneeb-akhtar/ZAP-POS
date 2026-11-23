@@ -71,12 +71,27 @@ const Head = ({ title, text }) => (
 )
 
 export default function InfoPage({ page, pages, pricing, finalCta, brand, links, release }) {
-  const related = pages.items.filter((p) => p.slug !== page.slug)
+  // Up to 6 other pages, starting after this one, so links are spread across the whole site.
+  const at = pages.items.findIndex((p) => p.slug === page.slug)
+  const related = [...pages.items.slice(at + 1), ...pages.items.slice(0, at)].slice(0, 6)
   return (
     <>
       <PageHero page={page} links={links} />
       {page.showDownload && <DownloadCard page={page} links={links} release={release} />}
       {page.showPricing && <Pricing data={pricing} links={links} />}
+
+      {page.article?.length > 0 && (
+        <section className="ip-block">
+          <article className="container ip-article">
+            {page.article.map((sec) => (
+              <div key={sec.h}>
+                <h2>{sec.h}</h2>
+                {sec.p.map((t) => <p key={t}>{t}</p>)}
+              </div>
+            ))}
+          </article>
+        </section>
+      )}
 
       {page.problems?.length > 0 && (
         <section className="ip-block">

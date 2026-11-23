@@ -62,6 +62,7 @@ for (const p of merged.pages.items) {
         { '@type': 'ListItem', position: 1, name: 'Home', item: `${site}/` },
         { '@type': 'ListItem', position: 2, name: p.menu, item: address },
       ] },
+      ...(p.article?.length ? [{ '@type': 'Article', headline: p.seoTitle, description: p.seoDescription, mainEntityOfPage: { '@id': `${address}#page` }, author: { '@id': `${site}/#organization` }, publisher: { '@id': `${site}/#organization` }, ...(p.published ? { datePublished: p.published } : {}) }] : []),
       ...(p.faq?.length ? [{ '@type': 'FAQPage', mainEntity: p.faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) }] : []),
     ],
   }
