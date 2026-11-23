@@ -9,7 +9,7 @@
   },
   "nav": [
     {
-      "href": "#day",
+      "href": "/how-it-works",
       "label": "How it works"
     },
     {
@@ -632,19 +632,23 @@
         "links": [
           {
             "label": "How it works",
-            "href": "/#day"
+            "href": "/how-it-works"
+          },
+          {
+            "label": "Offline billing",
+            "href": "/offline-billing"
+          },
+          {
+            "label": "Many counters",
+            "href": "/multi-counter-pos"
+          },
+          {
+            "label": "Printers & scanners",
+            "href": "/pos-hardware"
           },
           {
             "label": "Watch the demo",
             "href": "/#video"
-          },
-          {
-            "label": "Many counters",
-            "href": "/#counters"
-          },
-          {
-            "label": "FAQ",
-            "href": "/#faq"
           }
         ]
       },
@@ -717,6 +721,14 @@
           {
             "label": "Customer portal",
             "href": "/account/"
+          },
+          {
+            "label": "Our story",
+            "href": "/about"
+          },
+          {
+            "label": "FAQ",
+            "href": "/#faq"
           }
         ]
       }
@@ -1778,6 +1790,465 @@
         "ctaTitle": "Make load shedding a non-event",
         "ctaText": "Book a free demo and we'll show you billing with the internet unplugged.",
         "published": "2026-11-23"
+      },
+      {
+        "slug": "how-it-works",
+        "menu": "How it works",
+        "icon": "layers",
+        "seoTitle": "How ZAP POS Works: Main PC, Counters and Cloud | POS Pakistan",
+        "seoDescription": "How ZAP POS runs a Pakistani shop: one main PC holds your data, counters pair to it over the shop network, and the cloud gets a copy when the internet is there.",
+        "kicker": "How it works",
+        "title": "Your shop runs on your PCs.",
+        "titleHighlight": "The internet is a bonus.",
+        "description": "ZAP POS keeps your shop's data on a main PC inside the shop. Counters bill through it over your own network, and a copy goes to the cloud whenever the internet is available. Nothing at the counter waits for the internet.",
+        "stats": [
+          {
+            "value": "Main PC",
+            "label": "holds your shop's data"
+          },
+          {
+            "value": "Counters",
+            "label": "bill over the shop network"
+          },
+          {
+            "value": "Cloud",
+            "label": "gets a copy when online"
+          },
+          {
+            "value": "Nightly",
+            "label": "backup on the main PC"
+          }
+        ],
+        "featuresTitle": "The pieces",
+        "features": [
+          {
+            "icon": "server",
+            "title": "The main PC",
+            "text": "One per branch. It keeps the shop's database, hands out bill numbers, takes a backup every night and keeps the last two weeks."
+          },
+          {
+            "icon": "monitor",
+            "title": "Counters",
+            "text": "Every other PC in the shop. They find the main PC by themselves, even when its network address changes, and pair with a code."
+          },
+          {
+            "icon": "printer",
+            "title": "Printers and scanners",
+            "text": "Receipt and kitchen printers connect to the counters directly, so printing keeps working even if the main PC is off."
+          },
+          {
+            "icon": "cloud",
+            "title": "The cloud",
+            "text": "When the internet is there, sales are copied to the cloud and your licence is checked. It is never needed to bill."
+          }
+        ],
+        "stepsTitle": "From download to first bill",
+        "steps": [
+          {
+            "title": "Install on the main PC",
+            "text": "Run the installer on the PC that will hold the shop's data, create your owner account and add your licence key."
+          },
+          {
+            "title": "Add your products",
+            "text": "Import your list from a spreadsheet file, or add products with photo, barcode, price, packs and stock."
+          },
+          {
+            "title": "Pair your counters",
+            "text": "Install on each counter PC. It finds the main PC and pairs with the code shown there."
+          },
+          {
+            "title": "Start billing",
+            "text": "Staff log in with a 4-digit PIN and bill. Stock, cash and reports update on every PC within seconds."
+          }
+        ],
+        "faqTitle": "Questions about the setup",
+        "faq": [
+          {
+            "q": "Where is my shop's data kept?",
+            "a": "On your main PC, in ZAP POS's own database, with a nightly backup on the same PC. A copy goes to the cloud when the internet is available."
+          },
+          {
+            "q": "Do counters need the internet?",
+            "a": "No. Counters talk to the main PC over your shop network. The internet is only for the cloud copy, licence checks and updates."
+          },
+          {
+            "q": "What if the main PC's address changes?",
+            "a": "Counters find the main PC again by themselves. If your network blocks that, the main PC shows its address to type in."
+          },
+          {
+            "q": "Can I bring my product list from Excel?",
+            "a": "Yes. Save it from Excel as a spreadsheet file and import it into ZAP POS instead of typing it again."
+          }
+        ],
+        "ctaTitle": "See it running in your shop",
+        "ctaText": "Book a free demo and we'll show it on your own products."
+      },
+      {
+        "slug": "offline-billing",
+        "menu": "Offline billing",
+        "icon": "wifi",
+        "seoTitle": "Offline POS Software in Pakistan | Billing Without Internet | ZAP POS",
+        "seoDescription": "Offline POS for Pakistani shops: bill, print and update stock without internet. Counters even keep billing for hours if the main PC goes off, then sync with no duplicates.",
+        "kicker": "Offline billing",
+        "title": "The internet drops.",
+        "titleHighlight": "The queue doesn't.",
+        "description": "ZAP POS never needs the internet to make a bill. And if the main PC itself goes off, each counter keeps billing on its own for a few hours, then hands everything back without a single duplicate.",
+        "stats": [
+          {
+            "value": "0",
+            "label": "internet needed to bill"
+          },
+          {
+            "value": "Hours",
+            "label": "counters bill without the main PC"
+          },
+          {
+            "value": "0",
+            "label": "duplicate bills after syncing"
+          },
+          {
+            "value": "Queued",
+            "label": "FBR bills go later"
+          }
+        ],
+        "problemsTitle": "What usually goes wrong offline",
+        "problems": [
+          "The POS freezes because it can't reach its server on the internet.",
+          "Two counters give the same bill number while they are cut off.",
+          "Bills made offline are sent twice when the connection returns.",
+          "Stock goes wrong because offline counters can't see each other's sales."
+        ],
+        "solvedLine": "ZAP POS was built around each of these.",
+        "featuresTitle": "What keeps working",
+        "features": [
+          {
+            "icon": "wifi",
+            "title": "No internet needed",
+            "text": "Billing, printing, stock and reports all run on your shop network. The cloud catches up later."
+          },
+          {
+            "icon": "monitor",
+            "title": "Counters on their own",
+            "text": "If the main PC goes off, counters keep billing, print receipts and kitchen tickets, and keep a safe record of every step."
+          },
+          {
+            "icon": "receipt",
+            "title": "Numbers that never clash",
+            "text": "Each counter has its own offline bill numbers and a reserved block of invoice numbers, so no two bills share a number."
+          },
+          {
+            "icon": "check",
+            "title": "Synced once, exactly",
+            "text": "When the main PC is back, each offline bill is saved exactly as sold, once, however many times it is sent."
+          },
+          {
+            "icon": "box",
+            "title": "Stock stays right",
+            "text": "Offline counters tell each other what they sold, so the out-of-stock check keeps working."
+          },
+          {
+            "icon": "lock",
+            "title": "Licence works offline",
+            "text": "Your licence key carries its own end date, so a dead connection never locks the counter."
+          }
+        ],
+        "faqTitle": "Offline questions",
+        "faq": [
+          {
+            "q": "Can ZAP POS bill without internet?",
+            "a": "Yes. The internet is never needed to bill. Bills, receipts, stock and reports all work on your shop network."
+          },
+          {
+            "q": "What happens if the main PC switches off?",
+            "a": "Counters keep billing on their own for a few hours and send their bills to the main PC when it is back. Each bill is saved once, exactly as it was sold."
+          },
+          {
+            "q": "Who can log in while the main PC is off?",
+            "a": "Cashiers and waiters who have logged in on that counter before. Manager and owner PINs are never stored on counters, for safety."
+          },
+          {
+            "q": "Does it work during a power cut?",
+            "a": "Only if the PCs have power. Put the main PC, counters, printer and network switch on a UPS, and billing carries on while the router is off."
+          }
+        ],
+        "ctaTitle": "Unplug the internet in your demo",
+        "ctaText": "Book a free demo and we'll bill with the router switched off."
+      },
+      {
+        "slug": "multi-counter-pos",
+        "menu": "Many counters",
+        "icon": "monitor",
+        "seoTitle": "Multi-Counter POS Software in Pakistan | Shared Live Stock | ZAP POS",
+        "seoDescription": "Run several billing counters in one shop with ZAP POS: shared stock and prices within seconds, staff PIN logins, manager approvals, and counters that keep billing offline.",
+        "kicker": "Many counters, one shop",
+        "title": "Every counter.",
+        "titleHighlight": "The same stock, live.",
+        "description": "Add as many counters as your plan allows. They share products, prices and stock over your shop network within seconds, each staff member logs in with a PIN, and the owner decides what counters can see.",
+        "stats": [
+          {
+            "value": "Seconds",
+            "label": "for stock and prices to reach every counter"
+          },
+          {
+            "value": "PIN",
+            "label": "login for each staff member"
+          },
+          {
+            "value": "Approvals",
+            "label": "for refunds and big discounts"
+          },
+          {
+            "value": "Hidden",
+            "label": "earnings and costs if you choose"
+          }
+        ],
+        "featuresTitle": "Built for a team at the counter",
+        "features": [
+          {
+            "icon": "monitor",
+            "title": "Live across counters",
+            "text": "A sale, a price change or new stock on one PC shows on every other within seconds."
+          },
+          {
+            "icon": "close",
+            "title": "No overselling",
+            "text": "A counted product can't be billed beyond its stock, on any counter."
+          },
+          {
+            "icon": "id",
+            "title": "Staff PIN logins",
+            "text": "Each cashier, waiter and manager has a 4-digit PIN, and each bill records who made it."
+          },
+          {
+            "icon": "lock",
+            "title": "Manager approvals",
+            "text": "Refunds, big discounts and unpairing a counter need a manager's or the owner's PIN."
+          },
+          {
+            "icon": "chart",
+            "title": "Hide earnings from counters",
+            "text": "The owner can keep sales totals and profit to the main PC, and hide cost prices from staff."
+          },
+          {
+            "icon": "drawer",
+            "title": "A drawer per shift",
+            "text": "Each counter's shift counts its own cash in and out, with the name of who opened it."
+          }
+        ],
+        "faqTitle": "Multi-counter questions",
+        "faq": [
+          {
+            "q": "How many counters can I run?",
+            "a": "As many as your plan allows. The licence sets the number of counters, and you can add more with a new key."
+          },
+          {
+            "q": "How fast do counters see each other's sales?",
+            "a": "Within seconds. Every PC checks the main PC for changes every couple of seconds."
+          },
+          {
+            "q": "Can cashiers see the day's earnings?",
+            "a": "Only if you allow it. The owner can hide earnings and profit from counter PCs and cost prices from staff."
+          },
+          {
+            "q": "Do counters need cables to the main PC?",
+            "a": "They need to be on the same shop network, by cable or Wi-Fi."
+          }
+        ],
+        "ctaTitle": "Add a second counter with confidence",
+        "ctaText": "Book a free demo and we'll show it on your own products."
+      },
+      {
+        "slug": "pos-hardware",
+        "menu": "Printers & scanners",
+        "icon": "printer",
+        "seoTitle": "POS Hardware in Pakistan: Printers, Scanners, Drawers | ZAP POS",
+        "seoDescription": "Which hardware works with ZAP POS: 80 mm and 58 mm thermal receipt printers (USB or network), kitchen printers, USB barcode scanners, cash drawers and label printers.",
+        "kicker": "Printers & scanners",
+        "title": "Use the hardware",
+        "titleHighlight": "you can buy anywhere.",
+        "description": "ZAP POS works with standard thermal receipt printers, USB barcode scanners, cash drawers and label printers sold across Pakistan. Settings shows at a glance whether each one is connected.",
+        "stats": [
+          {
+            "value": "80 / 58 mm",
+            "label": "thermal receipt paper"
+          },
+          {
+            "value": "USB / LAN",
+            "label": "printer connections"
+          },
+          {
+            "value": "Backup",
+            "label": "kitchen printer if one stops"
+          },
+          {
+            "value": "Live",
+            "label": "device check in Settings"
+          }
+        ],
+        "featuresTitle": "What you can connect",
+        "features": [
+          {
+            "icon": "receipt",
+            "title": "Receipt printers",
+            "text": "Thermal printers on 80 mm or 58 mm paper, by USB or on the network. The receipt is laid out for your paper width."
+          },
+          {
+            "icon": "printer",
+            "title": "Kitchen printers",
+            "text": "Network printers for each kitchen station, with a backup station if one stops answering."
+          },
+          {
+            "icon": "scan",
+            "title": "Barcode scanners",
+            "text": "Standard USB scanners. Settings can time a test scan to show if a scanner is slow."
+          },
+          {
+            "icon": "tag",
+            "title": "Label printers",
+            "text": "Barcode and price labels in common sizes, from 28×19 mm to 4×6 in, plus weighing-scale labels and your own custom size."
+          },
+          {
+            "icon": "drawer",
+            "title": "Cash drawers",
+            "text": "A drawer connected to the receipt printer, with cash counted per shift."
+          },
+          {
+            "icon": "settings",
+            "title": "Device check",
+            "text": "Settings › General shows whether the receipt printer, kitchen printers and scanner are connected, without printing anything."
+          }
+        ],
+        "specsTitle": "A typical counter",
+        "specs": [
+          {
+            "icon": "monitor",
+            "label": "PC",
+            "value": "Windows 10 or 11, 64-bit"
+          },
+          {
+            "icon": "receipt",
+            "label": "Printer",
+            "value": "80 mm thermal, USB or network"
+          },
+          {
+            "icon": "scan",
+            "label": "Scanner",
+            "value": "USB barcode scanner"
+          },
+          {
+            "icon": "drawer",
+            "label": "Drawer",
+            "value": "Cash drawer on the printer"
+          }
+        ],
+        "faqTitle": "Hardware questions",
+        "faq": [
+          {
+            "q": "Which receipt printers work with ZAP POS?",
+            "a": "Standard thermal receipt printers on 80 mm or 58 mm paper, connected by USB or to the network."
+          },
+          {
+            "q": "Do I need a special barcode scanner?",
+            "a": "No. A standard USB barcode scanner works."
+          },
+          {
+            "q": "Can I print barcode labels?",
+            "a": "Yes. The label studio prints barcode and price labels in many common sizes, or a size you set."
+          },
+          {
+            "q": "How do I know my printer is connected?",
+            "a": "Open Settings › General. The devices card shows each printer and the scanner as connected or not answering."
+          }
+        ],
+        "ctaTitle": "Not sure what to buy?",
+        "ctaText": "Message us before you buy hardware and we'll tell you what works."
+      },
+      {
+        "slug": "about",
+        "menu": "Our story",
+        "icon": "zap",
+        "seoTitle": "About ZAP POS | Point of Sale Software Made in Pakistan",
+        "seoDescription": "ZAP POS is point of sale software built in Lahore for Pakistani shops, pharmacies and restaurants, designed around load shedding, FBR and the way shops really work.",
+        "kicker": "Our story",
+        "title": "Built in Pakistan,",
+        "titleHighlight": "for Pakistani counters.",
+        "description": "ZAP POS is made in Lahore. It is built around the things that make billing hard here: the internet going with the power, FBR and provincial tax rules, and busy counters that can't afford to stop.",
+        "article": [
+          {
+            "h": "Why ZAP POS exists",
+            "p": [
+              "Most POS software is built for places where the internet is always on. In Pakistan the router goes off with the power, and a counter that waits for a server loses customers. ZAP POS was built the other way round: the shop runs on its own PCs, and the internet is only a bonus."
+            ]
+          },
+          {
+            "h": "What we care about",
+            "p": [
+              "Every bill counted once and only once. Numbers that never repeat. Stock that is right on every counter. Tax that matches how the customer paid. And screens simple enough that a new cashier can bill on day one."
+            ]
+          },
+          {
+            "h": "Who it's for",
+            "p": [
+              "Shops of every kind: kiryana stores, supermarkets, pharmacies, bakeries, restaurants and cafes, and growing brands with several counters and branches."
+            ]
+          },
+          {
+            "h": "Talk to us",
+            "p": [
+              "We set up every shop with the owner over WhatsApp, and we're happy to answer questions before you buy. Book a free demo or message us any time."
+            ]
+          }
+        ],
+        "ctaTitle": "Let's set up your shop",
+        "ctaText": "Book a free demo, or message us on WhatsApp."
+      },
+      {
+        "slug": "privacy",
+        "menu": "Privacy",
+        "icon": "lock",
+        "seoTitle": "Privacy Policy | ZAP POS",
+        "seoDescription": "How ZAP POS and zappos.pk handle your information: what the website collects, what the app sends to the cloud, and how to ask us about your data.",
+        "kicker": "Privacy",
+        "title": "Your data,",
+        "titleHighlight": "in plain words.",
+        "description": "What we collect on this website and through the ZAP POS app, why, and how to reach us about it.",
+        "published": "2026-11-23",
+        "article": [
+          {
+            "h": "On this website",
+            "p": [
+              "We count visits anonymously: a random browser id kept in your browser, the kind of device, the website that sent you and any campaign tag in the link. We don't record your name, your IP address or the full pages you visit in these counts.",
+              "When you book a demo, we keep what you type in the form (name, mobile number, email, shop, city and message) so we can contact you. Visitors can't read other people's requests."
+            ]
+          },
+          {
+            "h": "Your ZAP POS account",
+            "p": [
+              "If you create an account, we keep your email address and a protected password to sign you in, and the details of your plan and payments so you can see them in your account."
+            ]
+          },
+          {
+            "h": "Inside the ZAP POS app",
+            "p": [
+              "Your shop's data (products, bills, stock, customers and staff) is kept on your own main PC. When the internet is available, a copy of the records needed for your account and licence is sent to ZAP POS's cloud. During setup, the owner's name, mobile number, email and shop name are sent to us so we can issue and support your licence.",
+              "If you switch on FBR or PRA reporting, your bills are sent to the tax authority as the law requires."
+            ]
+          },
+          {
+            "h": "Who else handles it",
+            "p": [
+              "The website runs on Vercel and our database and sign-in run on Supabase. We don't sell your information or share it for advertising."
+            ]
+          },
+          {
+            "h": "Your choices",
+            "p": [
+              "You can ask us what we hold about you, ask us to correct it, or ask us to delete it where we are not required to keep it. Contact us on WhatsApp or by email, and we'll reply."
+            ]
+          }
+        ],
+        "ctaTitle": "Questions about your data?",
+        "ctaText": "Message us on WhatsApp and we'll answer."
       }
     ]
   }
