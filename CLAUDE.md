@@ -23,7 +23,7 @@ Env: copy `src/zappos-web/.env.example` to `.env.local` and fill `VITE_SUPABASE_
 ## Deployment (Vercel)
 - The landing page is hosted on **Vercel** as a static site, auto-deployed on every push to `main`.
 - Vercel project **Root Directory = `src/zappos-web`**; build settings come from `src/zappos-web/vercel.json` (`npm run build` → `dist/`).
-- Vercel env vars: `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY` (redeploy after changing). `/admin` is rewritten to `/admin/index.html` and sent with `noindex`.
+- Domain: `zappos.pk` (PKNIC, to 2028-11-23, nameservers at Vercel, so DNS is edited in Vercel). Vercel env vars: `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY` (redeploy after changing). `/admin` is rewritten to `/admin/index.html` and sent with `noindex`.
 
 ## Where things are
 | Need to change… | Edit |
@@ -38,6 +38,7 @@ Env: copy `src/zappos-web/.env.example` to `.env.local` and fill `VITE_SUPABASE_
 | The demo video section | Admin → Demo video (addresses); the files are in `src/zappos-web/public/media/` (keep the mp4 under ~8 MB, H.264 + AAC, faststart); component `components/DemoVideo.jsx` |
 | Hover animations | the `@media (hover: hover)…` block at the **end** of `styles.css` |
 | The Download button / installer | Admin → Releases → publish with the "Also put it on the website" switch (or the "Website download" card): it starts `.github/workflows/publish-installer.yml`, which publishes the GitHub release the site finds by itself (see CHANGELOG 2026-11-22). By hand: publish a GitHub release of `links.githubRepo` with `ZAP-POS-Setup.exe` attached. `src/lib/release.js` |
+| Search/share tags, structured data, robots, sitemap, share image | `src/zappos-web/index.html` (title, description, canonical, OG, JSON-LD) and `src/zappos-web/public/` (`robots.txt`, `sitemap.xml`, `og-image.png`, favicons). No prices/ratings/phone in JSON-LD until real. Live address: `https://zappos.pk` (Vercel main; `www` redirects) |
 | Icons | `components/Icons.jsx` (`paths` map; use `<Icon name="…" />`) |
 
 ## Rules (follow these)

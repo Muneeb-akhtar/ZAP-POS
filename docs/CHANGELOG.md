@@ -3,6 +3,14 @@
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
 
+## 2026-11-23: zappos.pk domain + SEO foundation (step 1)
+- Domain: `zappos.pk` registered at PKNIC (2 years, to 2028-11-23, owner "Muneeb Akhtar (ZAP POS)", technical contact 273992), nameservers set to Vercel (`ns1.vercel-dns.com`, `ns2.vercel-dns.com`), added to the Vercel project `zappos-web`: `zappos.pk` = Production, `www.zappos.pk` = 308 redirect to it. Waiting for DNS to spread (Vercel showed "Invalid Configuration" at first).
+- Head tags in `index.html`: title "ZAP POS | Best POS Software in Pakistan, Offline Billing", a 160-character description (no "free trial" wording: the owner has not decided it), canonical `https://zappos.pk/`, robots, theme colour, Open Graph + Twitter large-image tags, favicon links (ico, svg, 192 px png) and apple-touch icon.
+- JSON-LD in `index.html`: Organization, WebSite and SoftwareApplication (Windows 10/11, BusinessApplication). No prices, ratings, phone, email or social links (placeholders; rule 2).
+- New files in `public/`: `og-image.png` (1200x630, 270 KB), `favicon.ico`, `icon-192.png`, `apple-touch-icon.png`, `robots.txt` (allow all + sitemap), `sitemap.xml` (home page only). `/admin`, `/account`, `/invoice` stay out of search through their `X-Robots-Tag: noindex` header; they are not blocked in robots.txt so Google can see that header.
+- Not done yet: pre-rendering the page text into the HTML, shop-type and comparison pages, Urdu pages, switching the site's own links and the Supabase redirect addresses to zappos.pk (after the domain is live).
+- Files: `index.html`, `public/*`, docs.
+
 ## 2026-11-22 (night, 5): `my_licence()` for the ZAP POS "Log in" page
 - Owner request: an owner who already registered logs in from the ZAP POS setup instead of registering again. New function `my_licence()` (signed-in users only, not anon): the newest licence key made for the lead linked to the logged-in account, `{code, status, paid_until}`, or null. Only the owner's own key. Applied live as migration `my_licence` and added to `supabase/schema.sql` (§22). Tested with a throw-away user (null with no key, the key once made, null for another user), rolled back.
 - Files: `supabase/schema.sql`, docs.

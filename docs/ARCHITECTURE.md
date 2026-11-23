@@ -14,14 +14,16 @@ ZAP POS/
 ├─ supabase/schema.sql           tables, RLS, grants, functions, sign-up trigger (run in Supabase SQL editor; safe to re-run)
 └─ src/
    └─ zappos-web/                React 18 + Vite 5 landing page + admin + customer account
-      ├─ index.html              title/meta, mounts #root
+      ├─ index.html              title/description, canonical https://zappos.pk/, Open Graph + Twitter tags, icon links, JSON-LD (Organization, WebSite, SoftwareApplication); mounts #root
       ├─ admin/index.html        admin entry (noindex, same theme script), loads src/admin/main.jsx
       ├─ account/index.html      customer account entry (noindex, same theme script), loads src/account/main.jsx
       ├─ invoice/index.html      a client's invoice by private link (noindex, same theme script), loads src/invoice/main.jsx
       ├─ .env.example            VITE_SUPABASE_URL / VITE_SUPABASE_ANON_KEY template (copy to .env.local)
       ├─ vite.config.js          dev port 5173, four inputs (main, admin, account, invoice), build → dist/
       ├─ vercel.json             Vercel build: `npm run build`, output `dist/`, /admin, /account and /invoice rewrites + noindex and CSP headers, immutable cache for /assets
-      ├─ public/favicon.svg      blue square + white bolt
+      ├─ public/favicon.svg, favicon.ico (16/32/48), icon-192.png, apple-touch-icon.png   blue square + white bolt (PNGs/ico made from the same shape)
+      ├─ public/og-image.png     1200x630 share preview (logo, headline, cropped POS screen; under 300 KB for WhatsApp)
+      ├─ public/robots.txt, sitemap.xml   allow all + sitemap line; /admin, /account, /invoice stay out of Google through their noindex header (not through robots.txt, which would hide that header)
       ├─ public/media/           the demo video section's files: zap-pos-demo.mp4 (1280x720, ~5 MB, faststart) + zap-pos-demo-poster.jpg; addresses live in the `video` content key
       └─ src/
          ├─ main.jsx             font imports (Latin subsets) + styles.css + <App/>
@@ -134,7 +136,12 @@ Gotchas:
 ## 7. Deployment
 - Vercel env vars: `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY` (same values as `.env.local`). Redeploy after changing them.
 - Vercel project: import GitHub repo `Muneeb-akhtar/ZAP-POS`, **Root Directory `src/zappos-web`**, framework Vite (read from `vercel.json`). Every push to `main` deploys to production; other branches/PRs get preview URLs.
-- Custom domain: Vercel → Settings → Domains.
+- Custom domain: **zappos.pk** (registered at PKNIC 2026-11-23, expires 2028-11-23; nameservers `ns1.vercel-dns.com` / `ns2.vercel-dns.com`, so all DNS is managed in Vercel). Vercel → Settings → Domains: `zappos.pk` is the main address (Production), `www.zappos.pk` redirects to it (308). `zappos-web.vercel.app` stays as a working address.
+
+### SEO (head, structured data, crawl files)
+- `index.html` carries everything a search or share crawler reads without running JavaScript: title, description, canonical, robots, Open Graph/Twitter, icons and one JSON-LD `@graph`. The JSON-LD has **no prices, ratings, reviews, phone, email or social links** on purpose (CLAUDE.md rule 2): add them only when real values exist. No FAQPage schema yet, because the FAQ text is edited in the admin and a fixed copy would drift.
+- Title keyword choice: "Best POS Software in Pakistan" + "Offline Billing". The hero headline is owner-locked, so the keyword lives in the title, description, hero kicker and description text.
+- To change the sitemap/robots/OG image, edit the files in `public/` (the OG image was drawn from an SVG with `rsvg-convert`; regenerate at 1200x630).
 
 ### Download (installer)
 `lib/release.js`: `useLatestRelease(repo)` asks GitHub for the newest release (cached 10 minutes in sessionStorage), `installerLink(links, release)` picks the link (admin-typed link, else the release's `.exe`, else GitHub's `releases/latest/download/ZAP-POS-Setup.exe`, so the release file must keep that name). The footer link named by `footer.downloadLink` uses it too. `components/DownloadLink.jsx` is the button used for the four Windows download buttons: after a tap it shows "Starting download…", then "Downloading…" (when the page loses focus or after 5 s; the browser never reports a download start), then resets when the person returns to the page (focus, tap or key after 1.5 s) or after 25 s; finish, cancel and pause are never reported to a page (GitHub redirects before the file starts). Used by `App.jsx` (navbar, hero, final CTA, with a version/size line in `Hero.jsx`) and `AccountApp.jsx`. The exe is not served by us: it sits in a GitHub release of `links.githubRepo` (the repo must stay public). `/account/` needs `https://api.github.com` in the CSP `connect-src` (`vercel.json`).
