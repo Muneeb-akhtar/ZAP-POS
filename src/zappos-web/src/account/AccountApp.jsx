@@ -6,9 +6,10 @@ import { installerLink, useLatestRelease } from '../lib/release.js'
 import DownloadLink from '../components/DownloadLink.jsx'
 import { BILLING, METHODS, dateFmt, phoneKey, rs, supabase } from '../admin/biz.js'
 import { invoiceNo, invoiceState } from '../invoice/InvoiceDoc.jsx'
+import OwnerConsole from './OwnerConsole.jsx'
 
-// Customer account at /account/: sign up, log in, reset password, and "My account"
-// (plan, renewal date, payments). The same email + password works in the ZAP POS app.
+// Customer account at /account/: sign up, log in, reset password, and for a linked owner the owner console
+// (OwnerConsole.jsx: all branches' sales, each branch, and the plan, renewal date, invoices and payments). The same email + password works in the ZAP POS app.
 // Sign-up details go into the user's metadata; a database trigger links the account to the
 // shop's lead (same email, else same mobile number). Customers read only their own data,
 // through my_account() (see supabase/schema.sql §10). Text: `account` in landing-content.json.
@@ -136,7 +137,7 @@ function NewPassword({ t, onDone }) {
   )
 }
 
-function MyAccount({ t, ti, links, session }) {
+function MyAccount({ t, ti, links, session, brand }) {
   const [acc, setAcc] = useState(undefined) // undefined = loading, null = not linked to a shop
   const [isAdmin, setIsAdmin] = useState(false)
   const [error, setError] = useState('')
@@ -160,11 +161,11 @@ function MyAccount({ t, ti, links, session }) {
   }, [session.user.id])
   const signOut = <button className="btn btn-quiet btn-sm" onClick={() => supabase.auth.signOut()}><Icon name="logout" size={14} /> {t.signOut}</button>
 
-  if (error) return <div className="adm-box"><p className="adm-error">{t.error}</p>{signOut}</div>
-  if (acc === undefined) return <div className="adm-box"><p className="adm-muted">…</p></div>
+  if (error) return <Shell brand={brand}><div className="adm-box"><p className="adm-error">{t.error}</p>{signOut}</div></Shell>
+  if (acc === undefined) return <Shell brand={brand}><div className="adm-box"><p className="adm-muted">…</p></div></Shell>
   if (acc === null) {
     return (
-      <div className="adm-box">
+      <Shell brand={brand}><div className="adm-box">
         <h1>{state === 'pending' ? t.pendingTitle : session.user.email}</h1>
         <p>{isAdmin ? t.adminText : state === 'pending' ? t.pendingText : t.notLinkedText}</p>
         {isAdmin
@@ -184,19 +185,12 @@ function MyAccount({ t, ti, links, session }) {
             </>
           )}
         {signOut}
-      </div>
+      </div></Shell>
     )
   }
 
   return (
-    <div className="adm-box wide acc-main">
-      <div className="acc-head">
-        <div>
-          <h1>{fill(t.hello, { name: acc.name })}</h1>
-          <p className="adm-muted">{[acc.shop, acc.city].filter(Boolean).join(' · ')}{acc.shop || acc.city ? ' · ' : ''}{acc.email}</p>
-        </div>
-        {signOut}
-      </div>
+    <OwnerConsole acc={acc} t={t} links={links}>
 
       <div className={`acc-plan ${acc.active ? 'on' : acc.paid_until ? 'late' : ''}`}>
         <span className="acc-plan-label">{t.planLabel}</span>
@@ -249,7 +243,7 @@ function MyAccount({ t, ti, links, session }) {
           </table>
         </div>
       ) : <p className="adm-muted">{t.noPayments}</p>}
-    </div>
+    </OwnerConsole>
   )
 }
 
@@ -279,6 +273,6 @@ export default function AccountApp() {
   else if (session === undefined) body = <div className="adm-box"><p className="adm-muted">…</p></div>
   else if (recovering) body = <NewPassword t={t} onDone={() => setRecovering(false)} />
   else if (!session) body = <Auth t={t} mode={mode} setMode={setMode} />
-  else body = <MyAccount key={session.user.id} t={t} ti={content.invoice} links={links} session={session} />
+  else return <MyAccount key={session.user.id} t={t} ti={content.invoice} links={links} session={session} brand={content.brand} />
   return <Shell brand={content.brand}>{body}</Shell>
 }

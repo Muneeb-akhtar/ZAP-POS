@@ -167,7 +167,7 @@ export function Area({ data, name, format = (v) => v.toLocaleString('en-PK'), he
   )
 }
 
-// Ring with a number in the middle; segments fill in once. parts: [{ label, value, tone }] (tone = a CSS class).
+// Ring with a number in the middle; segments fill in once. parts: [{ label, value, tone, show? }] (tone = a CSS class; show = how the value is written in the key).
 export function Donut({ parts, middle, sub }) {
   const total = parts.reduce((s, p) => s + p.value, 0)
   const R = 38, C = 2 * Math.PI * R
@@ -184,7 +184,7 @@ export function Donut({ parts, middle, sub }) {
         })}
       </svg>
       <div className="adm-donut-mid"><b><CountUp value={middle ?? total} /></b>{sub && <small>{sub}</small>}</div>
-      <ul className="adm-donut-key">{parts.map((p) => <li key={p.label}><i className={p.tone} />{p.label} <b>{p.value}</b></li>)}</ul>
+      <ul className="adm-donut-key">{parts.map((p) => <li key={p.label}><i className={p.tone} />{p.label} <b>{p.show ?? p.value}</b></li>)}</ul>
     </div>
   )
 }
