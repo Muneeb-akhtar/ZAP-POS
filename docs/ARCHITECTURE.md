@@ -19,6 +19,7 @@ ZAP POS/
       ├─ account/index.html      customer account entry (noindex, same theme script), loads src/account/main.jsx
       ├─ invoice/index.html      a client's invoice by private link (noindex, same theme script), loads src/invoice/main.jsx
       ├─ .env.example            VITE_SUPABASE_URL / VITE_SUPABASE_ANON_KEY template (copy to .env.local)
+      ├─ scripts/prerender.mjs   build step: puts the landing page's HTML + its content (`<script id="zap-content">`) into dist/index.html (see §7 SEO)
       ├─ vite.config.js          dev port 5173, four inputs (main, admin, account, invoice), build → dist/
       ├─ vercel.json             Vercel build: `npm run build`, output `dist/`, /admin, /account and /invoice rewrites + noindex and CSP headers, immutable cache for /assets
       ├─ public/favicon.svg, favicon.ico (16/32/48), icon-192.png, apple-touch-icon.png   blue square + white bolt (PNGs/ico made from the same shape)
@@ -26,7 +27,8 @@ ZAP POS/
       ├─ public/robots.txt, sitemap.xml   allow all + sitemap line; /admin, /account, /invoice stay out of Google through their noindex header (not through robots.txt, which would hide that header)
       ├─ public/media/           the demo video section's files: zap-pos-demo.mp4 (1280x720, ~5 MB, faststart) + zap-pos-demo-poster.jpg; addresses live in the `video` content key
       └─ src/
-         ├─ main.jsx             font imports (Latin subsets) + styles.css + <App/>
+         ├─ main.jsx             font imports (Latin subsets) + styles.css + <App/>; hydrates the pre-rendered HTML when `#zap-content` is present, else draws the page (dev)
+         ├─ entry-server.jsx     build-time only: `render(published)` → page HTML + merged content (used by scripts/prerender.mjs)
          ├─ App.jsx              loads content (cache → Supabase), renders sections, demo form (#demo links), tracking listeners, cursor glow
          ├─ lib/content.js       Supabase config, defaultContent, mergeContent, fetchPublishedContent, localStorage cache
          ├─ lib/track.js         anonymous visit/click/view events, leadSource()
@@ -141,6 +143,8 @@ Gotchas:
 ### SEO (head, structured data, crawl files)
 - `index.html` carries everything a search or share crawler reads without running JavaScript: title, description, canonical, robots, Open Graph/Twitter, icons and one JSON-LD `@graph`. The JSON-LD has **no prices, ratings, reviews, phone, email or social links** on purpose (CLAUDE.md rule 2): add them only when real values exist. No FAQPage schema yet, because the FAQ text is edited in the admin and a fixed copy would drift.
 - Title keyword choice: "Best POS Software in Pakistan" + "Offline Billing". The hero headline is owner-locked, so the keyword lives in the title, description, hero kicker and description text.
+- **Pre-rendering:** `npm run build` = `vite build` (browser files) → `vite build --ssr src/entry-server.jsx --outDir .ssr` (server copy of the page) → `node scripts/prerender.mjs`, which reads the published content from Supabase (same public REST read as the browser, using `VITE_SUPABASE_*`; falls back to the built-in JSON with a warning), draws the page to HTML, writes it into `#root` of `dist/index.html` together with the content it used (`<script id="zap-content" type="application/json">`), and deletes `.ssr/`. In the browser `main.jsx` hydrates that HTML; `App` takes the snapshot as `initialContent`, so the first browser render equals the server render, then applies the visitor's saved copy and the live copy. Rules that keep hydration working: nothing read from `window`/`document`/`localStorage` during render (only in effects; the theme button starts as "dark" and syncs in an effect), nothing random or time-based in render except the footer year.
+- **A published change reaches crawlers only after the next deploy** (visitors still get it at once). To refresh it without a code change, redeploy the latest production deployment in Vercel (or add a Deploy Hook later).
 - To change the sitemap/robots/OG image, edit the files in `public/` (the OG image was drawn from an SVG with `rsvg-convert`; regenerate at 1200x630).
 
 ### Download (installer)

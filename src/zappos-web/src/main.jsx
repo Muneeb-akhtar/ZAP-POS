@@ -12,8 +12,15 @@ import '@fontsource/jetbrains-mono/latin-700.css'
 import '@fontsource/caveat/latin-700.css'
 import './styles.css'
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+// The built page already holds the landing page as plain HTML (scripts/prerender.mjs), plus the content it was made
+// from. When both are there, React reuses that HTML (hydrates); in `npm run dev` there is neither, so it draws the page.
+const root = document.getElementById('root')
+const snapshot = document.getElementById('zap-content')
+const initialContent = snapshot && root.hasChildNodes() ? JSON.parse(snapshot.textContent) : undefined
+const app = (
   <React.StrictMode>
-    <App />
+    <App initialContent={initialContent} />
   </React.StrictMode>
 )
+if (initialContent) ReactDOM.hydrateRoot(root, app)
+else ReactDOM.createRoot(root).render(app)

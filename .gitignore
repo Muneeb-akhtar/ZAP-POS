@@ -20,3 +20,6 @@ Claude outputs/
 
 # Personal Claude Code settings (shared settings.json IS committed)
 .claude/settings.local.json
+
+# Build-time server bundle used for pre-rendering
+.ssr/

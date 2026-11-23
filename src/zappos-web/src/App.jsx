@@ -18,13 +18,19 @@ import { installerLink, useLatestRelease } from './lib/release.js'
 // - Until it loads: the copy this browser saw last time, else the bundled landing-content.json.
 // - If Supabase is unreachable or not configured: the bundled JSON.
 
-export default function App() {
-  const [c, setC] = useState(() => mergeContent(defaultContent, readCachedContent()))
+// `initialContent` is the content the page was pre-rendered with (see scripts/prerender.mjs). The first browser render
+// must match that HTML exactly so React can reuse it; the saved copy and the live copy are applied right after.
+export default function App({ initialContent }) {
+  const [c, setC] = useState(() => initialContent ?? mergeContent(defaultContent, readCachedContent()))
 
   const release = useLatestRelease(c.links.githubRepo)
   const links = useMemo(() => ({ ...c.links, windowsInstaller: installerLink(c.links, release) }), [c.links, release])
 
   useEffect(() => {
+    if (initialContent) {
+      const cached = readCachedContent()
+      if (cached) setC(mergeContent(defaultContent, cached))
+    }
     fetchPublishedContent()
       .then((data) => {
         if (!data) return
@@ -35,7 +41,7 @@ export default function App() {
   }, [])
 
   // Demo form: any link to #demo opens it (pricing buttons pass their plan). Opening the page at /#demo opens it too.
-  const [lead, setLead] = useState(() => (location.hash === '#demo' ? { plan: null } : null))
+  const [lead, setLead] = useState(() => (typeof location !== 'undefined' && location.hash === '#demo' ? { plan: null } : null))
   const closeLead = useCallback(() => {
     setLead(null)
     if (location.hash === '#demo') history.replaceState(null, '', location.pathname + location.search)

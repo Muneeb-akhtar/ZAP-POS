@@ -15,7 +15,9 @@ const THEME_KEY = 'zap-theme'
 const saveTheme = (t) => { try { localStorage.setItem(THEME_KEY, t) } catch { /* private mode etc. */ } }
 
 function useTheme() {
-  const [theme, setTheme] = useState(() => document.documentElement.dataset.theme || 'dark')
+  // Starts as dark (the same on the server-made page and in the browser, so the page can hydrate), then reads the real value.
+  const [theme, setTheme] = useState('dark')
+  useEffect(() => { setTheme(document.documentElement.dataset.theme || 'dark') }, [])
   return [theme, setTheme]
 }
 
