@@ -9,7 +9,8 @@ import { Card, PageBar } from '../admin/ui.jsx'
 // Same frame and parts as the admin panel (top bar, sidebar, stat cards, charts), phone first: on a phone the sidebar
 // becomes a row of branch chips and every table turns into labelled cards.
 // Data: my_branches() (only this shop's branches, see supabase/schema.sql §23 and the desktop repo's cloud/*.sql).
-// Each branch's main PC sends its daily totals (sales, bills, cash, refunds, discounts, cancelled) every 30 s when online.
+// Each branch's main PC sends its daily totals (sales, bills, cash, refunds, discounts, cancelled) every 30 s when online,
+// and from 1.9.148 today's top sellers (branch.top) and what is out or low (branch.stock).
 // Text: account.owner in landing-content.json.
 
 const fill = (text, vals) => text.replace(/\{(\w+)\}/g, (_, k) => vals[k] ?? '')
@@ -27,6 +28,44 @@ function SyncPill({ b, o }) {
     ? <span className="own-sync ok"><i />{fill(o.synced, { ago: timeAgo(b.lastSeen) })}</span>
     : <span className="own-sync off"><i />{fill(o.internetOff, { ago: timeAgo(b.lastSeen) })}</span>
 }
+
+// Today's top sellers and what is running low, sent by each branch's main PC from ZAP POS 1.9.148 (null before: not shown).
+const qty = (n) => Number(n).toLocaleString('en-PK', { maximumFractionDigits: 3 })
+function TopCard({ items, o }) {
+  const max = Math.max(1, ...items.map((x) => Number(x.amount)))
+  return (
+    <Card title={o.topTitle} className="own-top">
+      {items.length ? (
+        <ol className="own-list">{items.map((x, i) => (
+          <li key={x.name} style={{ '--i': i }}>
+            <span className="own-list-row"><b>{x.name}</b><small>{qty(x.qty)} · {rs(Number(x.amount))}</small></span>
+            <span className="own-bar"><i style={{ '--w': `${Math.max(4, (Number(x.amount) / max) * 100)}%` }} /></span>
+          </li>
+        ))}</ol>
+      ) : <p className="adm-muted">{o.topEmpty}</p>}
+      {items.length > 0 && <p className="own-note">{fill(o.topNote, { n: items.length })}</p>}
+    </Card>
+  )
+}
+function LowCard({ stock, o }) {
+  const shown = stock.items.slice(0, 8), more = Number(stock.out) + Number(stock.low) - shown.length
+  return (
+    <Card title={o.lowTitle} className="own-low" action={<span className="own-note">{fill(o.lowCount, { out: stock.out, low: stock.low })}</span>}>
+      {shown.length ? (
+        <ul className="own-list">{shown.map((x, i) => (
+          <li key={x.name} style={{ '--i': i }} className="own-list-row">
+            <b>{x.name}</b>
+            {Number(x.stock) <= 0 ? <span className="own-chip out">{o.outChip}</span> : <span className="own-chip low">{fill(o.leftChip, { n: qty(x.stock) })}</span>}
+          </li>
+        ))}</ul>
+      ) : <p className="adm-muted">{o.lowEmpty}</p>}
+      {more > 0 && <p className="own-note">{fill(o.lowMore, { n: more })}</p>}
+    </Card>
+  )
+}
+const stockChip = (b, o) => !b.stock ? <span className="adm-muted">–</span>
+  : Number(b.stock.out) + Number(b.stock.low) === 0 ? <span className="own-chip ok">{o.stockOk}</span>
+  : <span className={`own-chip ${Number(b.stock.out) ? 'out' : 'low'}`}>{fill(o.lowCount, { out: b.stock.out, low: b.stock.low })}</span>
 
 function Empty({ o, links }) {
   return (
@@ -113,6 +152,13 @@ export default function OwnerConsole({ acc, t, links, children }) {
           )}
         </div>
 
+        {branch && (branch.top || branch.stock) && (
+          <div className="adm-wide-two own-pair">
+            {branch.top && <TopCard items={branch.top} o={o} />}
+            {branch.stock && <LowCard stock={branch.stock} o={o} />}
+          </div>
+        )}
+
         {branch ? (
           <Card title={o.weekTable}>
             <div className="adm-table-wrap"><table className="adm-table own-table">
@@ -131,7 +177,7 @@ export default function OwnerConsole({ acc, t, links, children }) {
         ) : (
           <Card title={o.branchTable}>
             <div className="adm-table-wrap"><table className="adm-table own-table">
-              <thead><tr><th>{o.colBranch}</th><th className="num">{o.colSales}</th><th className="num">{o.colBills}</th><th className="num">{o.colCash}</th><th className="num">{o.colRefunds}</th><th>{o.colSync}</th></tr></thead>
+              <thead><tr><th>{o.colBranch}</th><th className="num">{o.colSales}</th><th className="num">{o.colBills}</th><th className="num">{o.colCash}</th><th className="num">{o.colRefunds}</th><th>{o.colStock}</th><th>{o.colSync}</th></tr></thead>
               <tbody>{branches.map((b, i) => (
                 <tr key={b.id} style={{ '--i': i }} className="own-row" onClick={() => go(b.id)}>
                   <td data-label={o.colBranch}><b>{b.name}</b><small>{b.code}</small></td>
@@ -139,6 +185,7 @@ export default function OwnerConsole({ acc, t, links, children }) {
                   <td data-label={o.colBills} className="num">{todayOf(b, 'bills')}</td>
                   <td data-label={o.colCash} className="num">{rs(todayOf(b, 'cash'))}</td>
                   <td data-label={o.colRefunds} className="num">{rs(todayOf(b, 'refunds'))}</td>
+                  <td data-label={o.colStock}>{stockChip(b, o)}</td>
                   <td data-label={o.colSync}><SyncPill b={b} o={o} /></td>
                 </tr>
               ))}</tbody>

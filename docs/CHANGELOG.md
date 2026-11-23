@@ -3,6 +3,12 @@
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
 
+## 2026-11-24: owner's page shows top sellers and low stock
+- Why: owners with branches want to see what sells and what is running out in each one (approved preview).
+- `account/OwnerConsole.jsx`: a branch's view adds "Top sellers today" (top 10 by amount, bars grow in) and "Running low" (Out / n left chips, first 8, "+n more"); "All branches" table adds a Stock column ("2 out · 3 low" or "All stocked"). Data comes from `my_branches()` → `branch.top` / `branch.stock` (desktop repo `cloud/0005`, applied to Supabase; sent by ZAP POS 1.9.148). Older main PCs send none: the cards are not shown and the column shows "–".
+- Texts: new keys in `account.owner` (`colStock`, `topTitle`, `topEmpty`, `topNote`, `lowTitle`, `lowCount`, `lowEmpty`, `lowMore`, `outChip`, `leftChip`, `stockOk`). CSS: owner block in `admin/admin.css` (`.own-pair`, `.own-list`, `.own-bar`, `.own-chip` with dark twins; animations off with reduced motion).
+- Checked with sample data (pretend sign-in, local dev server): desktop 1366 px light and dark, phone 390 px dark; fixed a phone overflow from long product names (list column `minmax(0, 1fr)`, names cut with "…"). No console errors.
+
 ## 2026-11-24: clothing and shoe shop pages
 - Why: ZAP POS 1.9.147 (desktop) added sizes and colours, so the site now targets garment, boutique and shoe shops too.
 - New extra pages in `landing-content.json` → `pages.items` (after Bakeries): `/clothing-store-pos` ("Know every size, in every colour.") and `/shoe-store-pos` ("Find size 9 in black before you check the store room."), each with stats receipt, short answer, problems, features, FAQ (clothing also has 4 setup steps). Copy only describes what 1.9.147 really does: stock/barcode/price per size and colour, renamable options, counter picker (sizes in shop/number order, sold-out crossed out), tags with old price crossed out, returns with a manager's approval and a credit note, branches on the owner's page, offline billing. No branch-to-branch stock transfer claimed (not built).
