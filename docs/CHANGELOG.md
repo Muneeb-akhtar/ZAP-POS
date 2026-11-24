@@ -3,6 +3,12 @@
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
 
+## 2026-11-25: Owner console is installable on phones (PWA)
+- Owner decision: no store apps yet (Android app "soon", iPhone later); until then `/account/` installs from the browser at no cost. Android/Chrome shows an "Install app" button; iPhone Safari has no prompt, so a hint explains Share → Add to Home Screen. Opens full screen with the ZAP icon.
+- `public/account/manifest.webmanifest` (scope and start `/account/`, standalone, 192/512/maskable icons), `public/account/sw.js` (service worker, scope `/account/`: keeps only the page shell and hashed `/assets/`, never Supabase data, so no business data is stored on the phone; offline it opens the saved shell and the console says it can't load). `account/index.html` gets the manifest, theme-color and Apple meta tags; `src/account/main.jsx` registers the worker; `src/account/InstallHint.jsx` is the card (hidden when installed or dismissed, remembered in localStorage); text in `account.owner.install*`; CSS `.own-install*` at the end of `admin/admin.css`.
+- No CSP change needed (`worker-src` and `manifest-src` fall back to `'self'`). Real store apps later could wrap this same page.
+- Files: as above, `landing-content.json`, docs.
+
 ## 2026-11-24: X icon removed from the footer
 - Owner request: no X (Twitter) icon. Removed it from the footer list in `Sections.jsx`, the now-unused `x` icon in `Icons.jsx`, and `links.social.x` in the built-in JSON and the published Supabase `site_content`. Footer social icons are now LinkedIn, Facebook and Instagram.
 - Files: `Sections.jsx`, `Icons.jsx`, `landing-content.json`, docs; Supabase `site_content` (`links.social`).

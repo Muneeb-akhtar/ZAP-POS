@@ -15,3 +15,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <AccountApp />
   </React.StrictMode>
 )
+
+// Makes /account/ installable on phones (public/account/sw.js; caches only the app's own files, never business data).
+if ('serviceWorker' in navigator) window.addEventListener('load', () => navigator.serviceWorker.register('/account/sw.js', { scope: '/account/' }).catch(() => {}))

@@ -4,6 +4,7 @@ import { ThemeToggle } from '../components/Sections.jsx'
 import { rs, supabase, timeAgo } from '../admin/biz.js'
 import { Area, Donut, Stat } from '../admin/Charts.jsx'
 import { Card, PageBar } from '../admin/ui.jsx'
+import InstallHint from './InstallHint.jsx'
 
 // The shop owner's console at /account/: today's sales of every branch, each branch on its own, and the plan.
 // Same frame and parts as the admin panel (top bar, sidebar, stat cards, charts), phone first: on a phone the sidebar
@@ -252,6 +253,7 @@ export default function OwnerConsole({ acc, t, links, children }) {
         </div>
       </aside>
       <main className="adm-main">
+        <InstallHint o={o} />
         <PageBar icon={view === 'plan' ? 'card' : branch ? 'server' : 'grid'} title={title} sub={sub} />
         {main}
       </main>
