@@ -6,7 +6,7 @@ Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, 
 ## 2026-11-24: Owner app and dashboard wording (owner decision)
 - Owner's decision: the dashboard of all branches is live through sign-in at `zappos.pk/account` on any phone or browser; a dedicated owner app is "coming soon" for Android (an iPhone app is planned for later, per the owner).
 - Removed the old promises of an iPhone and Android app: the "Night" step of `day` ("Check sales from bed") and the plan feature row "Live sales app (iOS + Android)" (`pricing`), in the built-in JSON **and** in the published Supabase `site_content` (`day`, `pricing`; published text overrides the built-in). `zap-pos-facts` "What it doesn't do yet" no longer lists the owner app or the all-branch dashboard, and the cloud-vs-offline guide's "Where ZAP POS fits" says the same.
-- **Still open:** size and colour variants. `zap-pos-facts` ("doesn't do yet") and the cloud-vs-offline guide say planned; the facts FAQ, clothing and shoe pages say they exist. Waiting for the owner's answer.
+- Size and colour variants: settled as **live** (ZAP POS 1.9.147 added them, per the 2026-11-24 clothing and shoe pages entry; the stale "planned" lines in `zap-pos-facts` and the cloud-vs-offline guide were left over from before). Both now say they exist. The facts "doesn't do yet" section keeps only Mac or Android counters and an Urdu interface, plus the Android owner app.
 - Files: `landing-content.json`, docs; Supabase `site_content` (`day`, `pricing`).
 
 ## 2026-11-24: 404 page and two more comparison pages (OneClickPOS, TransactFlow)
