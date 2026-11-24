@@ -3,6 +3,10 @@
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
 
+## 2026-11-24: Urdu summary on every page (replaces the separate Urdu pages)
+- Owner asked for a few lines of Roman Urdu and Urdu on each page instead of separate pages, so the three extra pages (`fbr-pos-integration-kya-hai`, `cloud-pos-ya-offline-pos`, `fbr-pos-integration-urdu`) were reverted and every extra page got an `urdu` field: a card "Urdu mein · اردو میں" under the short answer with 1-2 sentences in Roman Urdu and in Urdu script.
+- Files: `landing-content.json`, `InfoPage.jsx`, `styles.css` (`.ip-urdu`, `--urdu-font`), docs. The Urdu text was written by Claude: have a native reader check it. Not added to the home page.
+
 ## 2026-11-24: Cloud vs offline-first POS guide
 - New guide `/cloud-pos-vs-offline-pos` (footer "Guides", sitemap, `llms.txt`): compares the two kinds of POS on internet drops, speed, branches, FBR/PRA, data and cost, with a buyer checklist. It names no competitor and makes no claims about any other product's features; it says to test each vendor. Keeps rule 5b (a power cut also stops the PC). File: `landing-content.json`.
 

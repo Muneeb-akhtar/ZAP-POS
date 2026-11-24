@@ -1022,7 +1022,12 @@
           }
         ],
         "ctaTitle": "Want FBR set up on your counter?",
-        "ctaText": "Book a free demo and we'll go through your POS ID and tax rates with you."
+        "ctaText": "Book a free demo and we'll go through your POS ID and tax rates with you.",
+        "urdu": {
+          "title": "Urdu mein · اردو میں",
+          "roman": "ZAP POS har bill FBR ko bhejta hai aur receipt par FBR ka invoice number aur QR code chhapta hai. Internet band ho to billing jari rehti hai aur bills baad mein chale jate hain.",
+          "ur": "زیپ پوس ہر بل ایف بی آر کو بھیجتا ہے اور رسید پر ایف بی آر کا انوائس نمبر اور کیو آر کوڈ چھاپتا ہے۔ انٹرنیٹ بند ہو تو بلنگ جاری رہتی ہے اور بل بعد میں چلے جاتے ہیں۔"
+        }
       },
       {
         "slug": "fbr-pos-integration-guide",
@@ -1117,7 +1122,12 @@
               "This guide is a summary, not legal or tax advice, and the rules change. Check them at the source: the FBR POS Integration pages and POS Booklet at fbr.gov.pk, FBR's frequently asked questions on electronic invoicing, SRO 69(I)/2025 on electronic invoicing, and Punjab Revenue Authority notices on e-IMS. Business Recorder, Dawn and Express Tribune have reported the integration numbers and enforcement actions mentioned here."
             ]
           }
-        ]
+        ],
+        "urdu": {
+          "title": "Urdu mein · اردو میں",
+          "roman": "Sab dukaanon par FBR integration lazmi nahi, lekin Tier-1 retailers ko licensed integrator ke zariye integrate karna hota hai, warna jurmana aur dukaan seal ho sakti hai. ZAP POS ke paas FBR integrator ka licence hai.",
+          "ur": "تمام دکانوں پر ایف بی آر انٹیگریشن لازمی نہیں، لیکن ٹیئر ون ریٹیلرز کو لائسنس یافتہ انٹیگریٹر کے ذریعے انٹیگریٹ کرنا ہوتا ہے، ورنہ جرمانہ اور دکان سیل ہو سکتی ہے۔ زیپ پوس کے پاس ایف بی آر انٹیگریٹر کا لائسنس ہے۔"
+        }
       },
       {
         "slug": "plans",
@@ -1209,7 +1219,12 @@
             "value": "WhatsApp",
             "label": "setup help"
           }
-        ]
+        ],
+        "urdu": {
+          "title": "Urdu mein · اردو میں",
+          "roman": "Har plan mein offline billing, barcode, thermal printer, inventory aur daily reports shamil hain. Qeemat rupayon mein saaf likhi hai.",
+          "ur": "ہر پلان میں آف لائن بلنگ، بارکوڈ، تھرمل پرنٹر، انوینٹری اور روزانہ رپورٹس شامل ہیں۔ قیمت روپوں میں صاف لکھی ہے۔"
+        }
       },
       {
         "slug": "download",
@@ -1337,7 +1352,12 @@
             "value": "Auto",
             "label": "updates from the main PC"
           }
-        ]
+        ],
+        "urdu": {
+          "title": "Urdu mein · اردو میں",
+          "roman": "Ek hi installer main PC aur har counter ke liye hai. Chand minute mein set up karein aur internet ke saath ya baghair billing karein.",
+          "ur": "ایک ہی انسٹالر مین پی سی اور ہر کاؤنٹر کے لیے ہے۔ چند منٹ میں سیٹ اپ کریں اور انٹرنیٹ کے ساتھ یا بغیر بلنگ کریں۔"
+        }
       },
       {
         "slug": "pharmacy-pos",
@@ -1429,7 +1449,12 @@
           }
         ],
         "ctaTitle": "Run your medical store on ZAP POS",
-        "ctaText": "Book a free demo and we'll set it up with your own products."
+        "ctaText": "Book a free demo and we'll set it up with your own products.",
+        "urdu": {
+          "title": "Urdu mein · اردو میں",
+          "roman": "ZAP POS bill se pehle dawai ki expiry check karta hai aur strip ya box, dono tarah ek hi stock se bechne deta hai.",
+          "ur": "زیپ پوس بل سے پہلے دوا کی ایکسپائری چیک کرتا ہے اور اسٹرپ یا ڈبے، دونوں طرح ایک ہی اسٹاک سے بیچنے دیتا ہے۔"
+        }
       },
       {
         "slug": "restaurant-pos",
@@ -1521,7 +1546,12 @@
           }
         ],
         "ctaTitle": "Bring ZAP POS to your restaurant",
-        "ctaText": "Book a free demo and we'll set up your tables, kitchen stations and tax rates."
+        "ctaText": "Book a free demo and we'll set up your tables, kitchen stations and tax rates.",
+        "urdu": {
+          "title": "Urdu mein · اردو میں",
+          "roman": "Table, takeaway aur delivery orders lein, har item sahi kitchen printer par bhejein, aur sahi tax lagayein.",
+          "ur": "ٹیبل، ٹیک اوے اور ڈیلیوری آرڈرز لیں، ہر آئٹم صحیح کچن پرنٹر پر بھیجیں، اور صحیح ٹیکس لگائیں۔"
+        }
       },
       {
         "slug": "supermarket-pos",
@@ -1613,7 +1643,12 @@
           }
         ],
         "ctaTitle": "Run every counter on ZAP POS",
-        "ctaText": "Book a free demo and we'll set it up with your own products."
+        "ctaText": "Book a free demo and we'll set it up with your own products.",
+        "urdu": {
+          "title": "Urdu mein · اردو میں",
+          "roman": "Har counter tez scan karta hai aur sab ko ek hi stock nazar aata hai. Piece, darjan ya carton mein bechein aur bulk qeemat dein.",
+          "ur": "ہر کاؤنٹر تیز اسکین کرتا ہے اور سب کو ایک ہی اسٹاک نظر آتا ہے۔ پیس، درجن یا کارٹن میں بیچیں اور تھوک قیمت دیں۔"
+        }
       },
       {
         "slug": "kiryana-store-pos",
@@ -1704,7 +1739,12 @@
           }
         ],
         "ctaTitle": "Put your kiryana store on ZAP POS",
-        "ctaText": "Book a free demo and we'll help you add your products."
+        "ctaText": "Book a free demo and we'll help you add your products.",
+        "urdu": {
+          "title": "Urdu mein · اردو میں",
+          "roman": "Scan, search ya tap karke chand second mein bill banayein. Khula saman quick sale se bechein aur dekhein ke kya khatam ho raha hai.",
+          "ur": "اسکین، سرچ یا ٹیپ کر کے چند سیکنڈ میں بل بنائیں۔ کھلا سامان کوئیک سیل سے بیچیں اور دیکھیں کہ کیا ختم ہو رہا ہے۔"
+        }
       },
       {
         "slug": "bakery-pos",
@@ -1791,7 +1831,12 @@
           }
         ],
         "ctaTitle": "Bring ZAP POS to your bakery",
-        "ctaText": "Book a free demo and we'll set it up with your own products."
+        "ctaText": "Book a free demo and we'll set it up with your own products.",
+        "urdu": {
+          "title": "Urdu mein · اردو میں",
+          "roman": "Mithai wazan se, rusk packet se aur cake piece se bechein. Taaza cheezon par expiry date lagayein.",
+          "ur": "مٹھائی وزن سے، رسک پیکٹ سے اور کیک پیس سے بیچیں۔ تازہ چیزوں پر ایکسپائری ڈیٹ لگائیں۔"
+        }
       },
       {
         "slug": "clothing-store-pos",
@@ -1907,7 +1952,12 @@
           }
         ],
         "ctaTitle": "Run your clothing shop on ZAP POS",
-        "ctaText": "Book a free demo and we'll set up a few of your products with their sizes and colours."
+        "ctaText": "Book a free demo and we'll set up a few of your products with their sizes and colours.",
+        "urdu": {
+          "title": "Urdu mein · اردو میں",
+          "roman": "ZAP POS har size aur rang ka alag stock rakhta hai aur har ek ka barcode tag chhapta hai, taake cashier ko sahi cheez nazar aaye.",
+          "ur": "زیپ پوس ہر سائز اور رنگ کا الگ اسٹاک رکھتا ہے اور ہر ایک کا بارکوڈ ٹیگ چھاپتا ہے، تاکہ کیشیئر کو صحیح چیز نظر آئے۔"
+        }
       },
       {
         "slug": "shoe-store-pos",
@@ -1999,7 +2049,12 @@
           }
         ],
         "ctaTitle": "Run your shoe shop on ZAP POS",
-        "ctaText": "Book a free demo and we'll set up your shoes with their sizes."
+        "ctaText": "Book a free demo and we'll set up your shoes with their sizes.",
+        "urdu": {
+          "title": "Urdu mein · اردو میں",
+          "roman": "Cashier ko batata hai ke har size aur rang ke kitne jore bache hain, taake store room tak jana na pare.",
+          "ur": "کیشیئر کو بتاتا ہے کہ ہر سائز اور رنگ کے کتنے جوڑے بچے ہیں، تاکہ اسٹور روم تک جانا نہ پڑے۔"
+        }
       },
       {
         "slug": "cosmetics-store-pos",
@@ -2091,7 +2146,12 @@
           }
         ],
         "ctaTitle": "Put your cosmetics shop on ZAP POS",
-        "ctaText": "Book a free demo and we'll help you add your products."
+        "ctaText": "Book a free demo and we'll help you add your products.",
+        "urdu": {
+          "title": "Urdu mein · اردو میں",
+          "roman": "Product par expiry date lagayein, aur date guzarne ke baad ZAP POS use bechne se mana kar deta hai.",
+          "ur": "پروڈکٹ پر ایکسپائری ڈیٹ لگائیں، اور تاریخ گزرنے کے بعد زیپ پوس اسے بیچنے سے منع کر دیتا ہے۔"
+        }
       },
       {
         "slug": "mobile-accessories-shop-pos",
@@ -2183,7 +2243,12 @@
           }
         ],
         "ctaTitle": "Put your accessories shop on ZAP POS",
-        "ctaText": "Book a free demo and we'll help you add your products."
+        "ctaText": "Book a free demo and we'll help you add your products.",
+        "urdu": {
+          "title": "Urdu mein · اردو میں",
+          "roman": "Cover, charger, cable aur earphones har rang aur model mein aate hain. ZAP POS har ek ko alag barcode aur qeemat deta hai.",
+          "ur": "کور، چارجر، کیبل اور ایئر فونز ہر رنگ اور ماڈل میں آتے ہیں۔ زیپ پوس ہر ایک کو الگ بارکوڈ اور قیمت دیتا ہے۔"
+        }
       },
       {
         "slug": "hardware-store-pos",
@@ -2275,7 +2340,12 @@
           }
         ],
         "ctaTitle": "Put your hardware store on ZAP POS",
-        "ctaText": "Book a free demo and we'll help you add your products."
+        "ctaText": "Book a free demo and we'll help you add your products.",
+        "urdu": {
+          "title": "Urdu mein · اردو میں",
+          "roman": "Nut, pipe, paint aur tools ek ek ya box mein bechein, har ek ka apna barcode aur qeemat ho.",
+          "ur": "نٹ، پائپ، پینٹ اور اوزار ایک ایک یا ڈبے میں بیچیں، ہر ایک کا اپنا بارکوڈ اور قیمت ہو۔"
+        }
       },
       {
         "slug": "best-pos-software-pakistan",
@@ -2384,7 +2454,12 @@
         "ctaTitle": "Put ZAP POS through the test",
         "ctaText": "Book a free demo and try every question on this page with your own products.",
         "published": "2026-11-23",
-        "shortAnswer": "The best POS for a Pakistani shop keeps billing when the internet drops, reports to FBR or PRA if you are required to, works with standard printers and scanners, shows its prices in rupees and has a real person to help on WhatsApp. Test all of this in a demo with the internet unplugged."
+        "shortAnswer": "The best POS for a Pakistani shop keeps billing when the internet drops, reports to FBR or PRA if you are required to, works with standard printers and scanners, shows its prices in rupees and has a real person to help on WhatsApp. Test all of this in a demo with the internet unplugged.",
+        "urdu": {
+          "title": "Urdu mein · اردو میں",
+          "roman": "POS kharidne se pehle dus sawal poochein: internet band ho to kya hota hai, FBR ke liye tayyar hai ya nahi, aur madad kaun deta hai.",
+          "ur": "پوس خریدنے سے پہلے دس سوال پوچھیں: انٹرنیٹ بند ہو تو کیا ہوتا ہے، ایف بی آر کے لیے تیار ہے یا نہیں، اور مدد کون دیتا ہے۔"
+        }
       },
       {
         "slug": "pos-vs-register-excel",
@@ -2446,7 +2521,12 @@
         "ctaTitle": "Ready to put the register away?",
         "ctaText": "Book a free demo and we'll help you bring your product list across.",
         "published": "2026-11-23",
-        "shortAnswer": "A register is cheap but gets slow and error-prone as a shop grows. Excel is good for records but not for billing customers. A POS bills, updates stock and counts the cash in one step. Switch when stock-outs, cash that doesn't match or a second counter start costing you money."
+        "shortAnswer": "A register is cheap but gets slow and error-prone as a shop grows. Excel is good for records but not for billing customers. A POS bills, updates stock and counts the cash in one step. Switch when stock-outs, cash that doesn't match or a second counter start costing you money.",
+        "urdu": {
+          "title": "Urdu mein · اردو میں",
+          "roman": "Bahut si dukaanein register ya Excel par saalon chalti hain. Yeh guide batati hai ke kab POS par jana chahiye.",
+          "ur": "بہت سی دکانیں رجسٹر یا ایکسل پر سالوں چلتی ہیں۔ یہ گائیڈ بتاتی ہے کہ کب پوس پر جانا چاہیے۔"
+        }
       },
       {
         "slug": "cloud-pos-vs-offline-pos",
@@ -2543,7 +2623,12 @@
               "ZAP POS is offline-first: counters keep billing when the internet or the main PC's network is down, and sync later, with branch reports for owners in the cloud. We hold a licence for FBR integration, and you keep your data. A free demo shows all of this with the router off."
             ]
           }
-        ]
+        ],
+        "urdu": {
+          "title": "Urdu mein · اردو میں",
+          "roman": "Cloud POS aur offline-first POS dono chalte hain, lekin internet band hone par farq parta hai. Router band karke dono ko test karein.",
+          "ur": "کلاؤڈ پوس اور آف لائن فرسٹ پوس دونوں چلتے ہیں، لیکن انٹرنیٹ بند ہونے پر فرق پڑتا ہے۔ راؤٹر بند کر کے دونوں کو ٹیسٹ کریں۔"
+        }
       },
       {
         "slug": "billing-during-load-shedding",
@@ -2605,7 +2690,12 @@
         "ctaTitle": "Make load shedding a non-event",
         "ctaText": "Book a free demo and we'll show you billing with the internet unplugged.",
         "published": "2026-11-23",
-        "shortAnswer": "Load shedding causes two problems that need two fixes. Put your PCs, receipt printer and network switch on a UPS so they stay on, and use a POS that bills without internet so the counter keeps working while the router is off."
+        "shortAnswer": "Load shedding causes two problems that need two fixes. Put your PCs, receipt printer and network switch on a UPS so they stay on, and use a POS that bills without internet so the counter keeps working while the router is off.",
+        "urdu": {
+          "title": "Urdu mein · اردو میں",
+          "roman": "Load shedding mein do masle hote hain: bijli jati hai aur internet jata hai. UPS par PC chalta rahe to internet band hone par bhi billing jari rehti hai.",
+          "ur": "لوڈ شیڈنگ میں دو مسئلے ہوتے ہیں: بجلی جاتی ہے اور انٹرنیٹ جاتا ہے۔ یو پی ایس پر پی سی چلتا رہے تو انٹرنیٹ بند ہونے پر بھی بلنگ جاری رہتی ہے۔"
+        }
       },
       {
         "slug": "what-is-pos-software",
@@ -2671,7 +2761,12 @@
           }
         ],
         "published": "2026-11-24",
-        "shortAnswer": "POS software is the program at your counter that bills customers, records payments and updates stock in one step. You need a Windows PC, ideally a barcode scanner and a receipt printer, and software that keeps working when the internet drops."
+        "shortAnswer": "POS software is the program at your counter that bills customers, records payments and updates stock in one step. You need a Windows PC, ideally a barcode scanner and a receipt printer, and software that keeps working when the internet drops.",
+        "urdu": {
+          "title": "Urdu mein · اردو میں",
+          "roman": "POS ka matlab point of sale hai, yani jahan customer paisay deta hai. POS software counter par bill banata hai aur stock ka hisaab rakhta hai.",
+          "ur": "پوس کا مطلب پوائنٹ آف سیل ہے، یعنی جہاں گاہک پیسے دیتا ہے۔ پوس سافٹ ویئر کاؤنٹر پر بل بناتا ہے اور اسٹاک کا حساب رکھتا ہے۔"
+        }
       },
       {
         "slug": "barcode-system-for-your-shop",
@@ -2734,7 +2829,12 @@
           }
         ],
         "published": "2026-11-24",
-        "shortAnswer": "Use the manufacturer's barcode where a product has one. For loose or unlabelled products, make your own barcode, print it on a label, and stick it on. Scan every barcode once into your POS with its name and price, then bill by scanning."
+        "shortAnswer": "Use the manufacturer's barcode where a product has one. For loose or unlabelled products, make your own barcode, print it on a label, and stick it on. Scan every barcode once into your POS with its name and price, then bill by scanning.",
+        "urdu": {
+          "title": "Urdu mein · اردو میں",
+          "roman": "Barcode se billing tez aur stock sahi hota hai. Yeh guide batati hai ke har product par barcode kaise lagayein.",
+          "ur": "بارکوڈ سے بلنگ تیز اور اسٹاک درست ہوتا ہے۔ یہ گائیڈ بتاتی ہے کہ ہر پروڈکٹ پر بارکوڈ کیسے لگائیں۔"
+        }
       },
       {
         "slug": "how-to-count-stock-in-a-shop",
@@ -2802,7 +2902,12 @@
           }
         ],
         "published": "2026-11-24",
-        "shortAnswer": "Record every purchase and return, count one section of the shop at a time instead of everything at once, compare the count with the system, and investigate differences while they are small. Watch low stock and expiry dates."
+        "shortAnswer": "Record every purchase and return, count one section of the shop at a time instead of everything at once, compare the count with the system, and investigate differences while they are small. Watch low stock and expiry dates.",
+        "urdu": {
+          "title": "Urdu mein · اردو میں",
+          "roman": "Aksar dukaanein woh stock kho deti hain jo nazar nahi aata. Yeh guide dukaan mein stock gin'ne ka saada tareeqa batati hai.",
+          "ur": "اکثر دکانیں وہ اسٹاک کھو دیتی ہیں جو نظر نہیں آتا۔ یہ گائیڈ دکان میں اسٹاک گننے کا سادہ طریقہ بتاتی ہے۔"
+        }
       },
       {
         "slug": "pos-software-kya-hai",
@@ -2868,7 +2973,12 @@
         ],
         "published": "2026-11-24",
         "shortAnswer": "POS software counter par bill banata hai, paisay darj karta hai aur stock apne aap update karta hai. Shuru karne ke liye Windows computer chahiye; barcode scanner aur receipt printer se kaam tez hota hai. Acha POS internet band hone par bhi bill banata rehta hai.",
-        "lang": "ur-Latn"
+        "lang": "ur-Latn",
+        "urdu": {
+          "title": "Urdu mein · اردو میں",
+          "roman": "",
+          "ur": "پوس کا مطلب پوائنٹ آف سیل ہے، یعنی جہاں گاہک پیسے دیتا ہے۔ پوس سافٹ ویئر کاؤنٹر کے کمپیوٹر پر چلتا ہے اور بل اور اسٹاک سنبھالتا ہے۔"
+        }
       },
       {
         "slug": "how-it-works",
@@ -2960,7 +3070,12 @@
           }
         ],
         "ctaTitle": "See it running in your shop",
-        "ctaText": "Book a free demo and we'll show it on your own products."
+        "ctaText": "Book a free demo and we'll show it on your own products.",
+        "urdu": {
+          "title": "Urdu mein · اردو میں",
+          "roman": "ZAP POS dukaan ke main PC par data rakhta hai. Counter apne network par us se bill banate hain aur data cloud mein sync hota hai.",
+          "ur": "زیپ پوس دکان کے مین پی سی پر ڈیٹا رکھتا ہے۔ کاؤنٹر اپنے نیٹ ورک پر اس سے بل بناتے ہیں اور ڈیٹا کلاؤڈ میں سنک ہوتا ہے۔"
+        }
       },
       {
         "slug": "offline-billing",
@@ -3051,7 +3166,12 @@
           }
         ],
         "ctaTitle": "Unplug the internet in your demo",
-        "ctaText": "Book a free demo and we'll bill with the router switched off."
+        "ctaText": "Book a free demo and we'll bill with the router switched off.",
+        "urdu": {
+          "title": "Urdu mein · اردو میں",
+          "roman": "ZAP POS ko bill banane ke liye internet nahi chahiye. Main PC band ho jaye to bhi har counter billing jari rakhta hai aur baad mein sync karta hai.",
+          "ur": "زیپ پوس کو بل بنانے کے لیے انٹرنیٹ نہیں چاہیے۔ مین پی سی بند ہو جائے تو بھی ہر کاؤنٹر بلنگ جاری رکھتا ہے اور بعد میں سنک کرتا ہے۔"
+        }
       },
       {
         "slug": "multi-counter-pos",
@@ -3134,7 +3254,12 @@
           }
         ],
         "ctaTitle": "Add a second counter with confidence",
-        "ctaText": "Book a free demo and we'll show it on your own products."
+        "ctaText": "Book a free demo and we'll show it on your own products.",
+        "urdu": {
+          "title": "Urdu mein · اردو میں",
+          "roman": "Apne plan ke mutabiq jitne chahein counter jorein. Sab ek hi product, qeemat aur stock share karte hain.",
+          "ur": "اپنے پلان کے مطابق جتنے چاہیں کاؤنٹر جوڑیں۔ سب ایک ہی پروڈکٹ، قیمت اور اسٹاک شیئر کرتے ہیں۔"
+        }
       },
       {
         "slug": "multi-branch-pos",
@@ -3229,7 +3354,12 @@
           }
         ],
         "ctaTitle": "Running more than one branch?",
-        "ctaText": "Book a free demo and we'll plan your branches with you."
+        "ctaText": "Book a free demo and we'll plan your branches with you.",
+        "urdu": {
+          "title": "Urdu mein · اردو میں",
+          "roman": "Har branch apne main PC par chalti hai, is liye ek branch ka masla ya internet band hona baqi branches ko nahi rokta. Owner sab branches ek jagah dekhta hai.",
+          "ur": "ہر برانچ اپنے مین پی سی پر چلتی ہے، اس لیے ایک برانچ کا مسئلہ یا انٹرنیٹ بند ہونا باقی برانچوں کو نہیں روکتا۔ مالک سب برانچیں ایک جگہ دیکھتا ہے۔"
+        }
       },
       {
         "slug": "branch-stock-transfer",
@@ -3319,7 +3449,12 @@
           }
         ],
         "ctaTitle": "Running more than one branch?",
-        "ctaText": "Book a free demo and we'll show you a transfer between two branches."
+        "ctaText": "Book a free demo and we'll show you a transfer between two branches.",
+        "urdu": {
+          "title": "Urdu mein · اردو میں",
+          "roman": "Manager dusri branch aur products chunta hai, aur ZAP POS stock fauran kam kar ke transfer slip chhapta hai.",
+          "ur": "مینیجر دوسری برانچ اور پروڈکٹس چنتا ہے، اور زیپ پوس اسٹاک فوراً کم کر کے ٹرانسفر سلپ چھاپتا ہے۔"
+        }
       },
       {
         "slug": "pos-hardware",
@@ -3425,7 +3560,12 @@
           }
         ],
         "ctaTitle": "Not sure what to buy?",
-        "ctaText": "Message us before you buy hardware and we'll tell you what works."
+        "ctaText": "Message us before you buy hardware and we'll tell you what works.",
+        "urdu": {
+          "title": "Urdu mein · اردو میں",
+          "roman": "ZAP POS standard thermal printer, USB barcode scanner, cash drawer aur label printer ke saath chalta hai.",
+          "ur": "زیپ پوس اسٹینڈرڈ تھرمل پرنٹر، یو ایس بی بارکوڈ اسکینر، کیش ڈرانر اور لیبل پرنٹر کے ساتھ چلتا ہے۔"
+        }
       },
       {
         "slug": "about",
@@ -3464,7 +3604,12 @@
           }
         ],
         "ctaTitle": "Let's set up your shop",
-        "ctaText": "Book a free demo, or message us on WhatsApp."
+        "ctaText": "Book a free demo, or message us on WhatsApp.",
+        "urdu": {
+          "title": "Urdu mein · اردو میں",
+          "roman": "ZAP POS Lahore mein bana hai, un masail ko samne rakh kar jo yahan billing mushkil banate hain, jaise internet ka jana.",
+          "ur": "زیپ پوس لاہور میں بنا ہے، ان مسائل کو سامنے رکھ کر جو یہاں بلنگ مشکل بناتے ہیں، جیسے انٹرنیٹ کا جانا۔"
+        }
       },
       {
         "slug": "privacy",
@@ -3512,7 +3657,12 @@
           }
         ],
         "ctaTitle": "Questions about your data?",
-        "ctaText": "Message us on WhatsApp and we'll answer."
+        "ctaText": "Message us on WhatsApp and we'll answer.",
+        "urdu": {
+          "title": "Urdu mein · اردو میں",
+          "roman": "Hum is website aur ZAP POS app par kya jama karte hain, kyun, aur is bare mein humse kaise rabta karein, yeh yahan saaf likha hai.",
+          "ur": "ہم اس ویب سائٹ اور زیپ پوس ایپ پر کیا جمع کرتے ہیں، کیوں، اور اس بارے میں ہم سے کیسے رابطہ کریں، یہ یہاں صاف لکھا ہے۔"
+        }
       },
       {
         "slug": "terms",
@@ -3574,7 +3724,12 @@
           }
         ],
         "ctaTitle": "Questions about these terms?",
-        "ctaText": "Message us on WhatsApp and we'll explain."
+        "ctaText": "Message us on WhatsApp and we'll explain.",
+        "urdu": {
+          "title": "Urdu mein · اردو میں",
+          "roman": "Aap ZAP POS se kya umeed rakh sakte hain aur hum aap se kya chahte hain, saaf alfaaz mein.",
+          "ur": "آپ زیپ پوس سے کیا امید رکھ سکتے ہیں اور ہم آپ سے کیا چاہتے ہیں، صاف الفاظ میں۔"
+        }
       },
       {
         "slug": "zap-pos-facts",
@@ -3680,7 +3835,12 @@
           }
         ],
         "ctaTitle": "See it for yourself",
-        "ctaText": "Book a free demo and we'll show you every point on this page."
+        "ctaText": "Book a free demo and we'll show you every point on this page.",
+        "urdu": {
+          "title": "Urdu mein · اردو میں",
+          "roman": "ZAP POS ek offline-first POS hai jo Pakistani dukaanon ke liye bana hai. Yeh page uski sab khususiyat ek jagah batata hai.",
+          "ur": "زیپ پوس ایک آف لائن فرسٹ پوس ہے جو پاکستانی دکانوں کے لیے بنا ہے۔ یہ صفحہ اس کی تمام خصوصیات ایک جگہ بتاتا ہے۔"
+        }
       },
       {
         "slug": "pos-software-sawal-jawab",
@@ -3743,7 +3903,12 @@
         "ctaTitle": "Mazeed sawal?",
         "ctaText": "WhatsApp par message karein ya free demo book karein.",
         "lang": "ur-Latn",
-        "shortLabel": "Mukhtasar jawab"
+        "shortLabel": "Mukhtasar jawab",
+        "urdu": {
+          "title": "Urdu mein · اردو میں",
+          "roman": "",
+          "ur": "دکاندار جو سوال ہم سے واٹس ایپ پر پوچھتے ہیں، ان کے سیدھے جواب یہاں رومن اردو میں ہیں۔"
+        }
       }
     ],
     "shortLabel": "Short answer",

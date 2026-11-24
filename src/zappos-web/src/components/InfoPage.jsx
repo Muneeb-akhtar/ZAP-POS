@@ -87,6 +87,17 @@ export default function InfoPage({ page, pages, pricing, finalCta, brand, links,
           </div>
         </section>
       )}
+      {page.urdu && (
+        <section className="ip-block ip-urdu-wrap">
+          <div className="container">
+            <div className="ip-urdu">
+              <span className="ip-urdu-label">{page.urdu.title}</span>
+              {page.urdu.roman && <p lang="ur-Latn">{page.urdu.roman}</p>}
+              <p lang="ur" dir="rtl" className="ip-urdu-ur">{page.urdu.ur}</p>
+            </div>
+          </div>
+        </section>
+      )}
       {page.showDownload && <DownloadCard page={page} links={links} release={release} />}
       {page.showPricing && <Pricing data={pricing} links={links} />}
 
