@@ -11,6 +11,7 @@ import { Card, PageBar } from '../admin/ui.jsx'
 // Data: my_branches() (only this shop's branches, see supabase/schema.sql §23 and the desktop repo's cloud/*.sql).
 // Each branch's main PC sends its daily totals (sales, bills, cash, refunds, discounts, cancelled) every 30 s when online,
 // and from 1.9.148 today's top sellers (branch.top) and what is out or low (branch.stock).
+// From 1.9.149 also my_transfers(): stock sent between this shop's branches (on the way, received, short, cancelled, sent back).
 // Text: account.owner in landing-content.json.
 
 const fill = (text, vals) => text.replace(/\{(\w+)\}/g, (_, k) => vals[k] ?? '')
@@ -67,6 +68,32 @@ const stockChip = (b, o) => !b.stock ? <span className="adm-muted">–</span>
   : Number(b.stock.out) + Number(b.stock.low) === 0 ? <span className="own-chip ok">{o.stockOk}</span>
   : <span className={`own-chip ${Number(b.stock.out) ? 'out' : 'low'}`}>{fill(o.lowCount, { out: b.stock.out, low: b.stock.low })}</span>
 
+function TransfersCard({ list, o }) {
+  const chip = (x) => {
+    const short = x.status === 'received' ? Number(x.units) - Number(x.received) : 0
+    if (x.status === 'sent') return <span className="own-chip low">{o.trSent}</span>
+    if (x.status === 'received') return short > 0 ? <span className="own-chip out">{fill(o.trShort, { n: qty(short) })}</span> : <span className="own-chip ok">{o.trReceived}</span>
+    return <span className="own-chip mute">{x.status === 'returned' ? o.trReturned : o.trCancelled}</span>
+  }
+  return (
+    <Card title={o.transfersTitle} className="own-transfers" action={<span className="own-note">{fill(o.transfersCount, { n: list.length })}</span>}>
+      <div className="adm-table-wrap"><table className="adm-table own-table">
+        <thead><tr><th>{o.colTransfer}</th><th>{o.colRoute}</th><th className="num">{o.colUnits}</th><th>{o.colStatus}</th><th>{o.colWhen}</th></tr></thead>
+        <tbody>{list.map((x, i) => (
+          <tr key={x.id} style={{ '--i': i }} title={(x.items ?? []).map((it) => `${it.name} × ${qty(it.qty)}`).join('\n')}>
+            <td data-label={o.colTransfer}><b>{x.no}</b></td>
+            <td data-label={o.colRoute}>{x.from.name} → {x.to.name}</td>
+            <td data-label={o.colUnits} className="num">{qty(x.units)}</td>
+            <td data-label={o.colStatus}>{chip(x)}</td>
+            <td data-label={o.colWhen}>{timeAgo(x.updatedAt ?? x.createdAt)}</td>
+          </tr>
+        ))}</tbody>
+      </table></div>
+      <p className="own-note">{o.transfersNote}</p>
+    </Card>
+  )
+}
+
 function Empty({ o, links }) {
   return (
     <Card title={o.emptyTitle} className="own-empty">
@@ -81,6 +108,7 @@ function Empty({ o, links }) {
 export default function OwnerConsole({ acc, t, links, children }) {
   const o = t.owner
   const [data, setData] = useState(null)
+  const [transfers, setTransfers] = useState([])
   const [error, setError] = useState('')
   const [view, setView] = useState(() => location.hash.slice(1) || 'all')   // 'all' | 'plan' | a branch id
   const go = (v) => { setView(v); history.replaceState(null, '', `#${v}`); window.scrollTo({ top: 0, behavior: 'smooth' }) }
@@ -91,8 +119,9 @@ export default function OwnerConsole({ acc, t, links, children }) {
       if (!live) return
       if (e) setError(e.message); else { setError(''); setData(d) }
     })
-    load()
-    const timer = setInterval(load, 60000)   // branches sync every 30 s; a minute keeps the page fresh without hammering
+    const loadTransfers = () => supabase.rpc('my_transfers', { p_days: 30 }).then(({ data: d, error: e }) => { if (live && !e && Array.isArray(d)) setTransfers(d) })   // a failure here must not hide the sales
+    load(); loadTransfers()
+    const timer = setInterval(() => { load(); loadTransfers() }, 60000)   // branches sync every 30 s; a minute keeps the page fresh without hammering
     return () => { live = false; clearInterval(timer) }
   }, [])
 
@@ -107,6 +136,7 @@ export default function OwnerConsole({ acc, t, links, children }) {
   }), [scope, today])   // eslint-disable-line react-hooks/exhaustive-deps
   const todayOf = (b, k) => (data?.days ?? []).filter((d) => d.branch === b.id && d.businessDay === today).reduce((s, d) => s + Number(d[k] ?? 0), 0)
   const online = branches.filter(isOnline).length
+  const shownTransfers = transfers.filter((x) => !branch || x.from.code === branch.code || x.to.code === branch.code)
 
   const nav = (
     <>
@@ -158,6 +188,8 @@ export default function OwnerConsole({ acc, t, links, children }) {
             {branch.stock && <LowCard stock={branch.stock} o={o} />}
           </div>
         )}
+
+        {shownTransfers.length > 0 && <TransfersCard list={shownTransfers} o={o} />}
 
         {branch ? (
           <Card title={o.weekTable}>

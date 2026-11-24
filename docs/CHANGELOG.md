@@ -3,6 +3,12 @@
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
 
+## 2026-11-24: branch stock transfer (ZAP POS 1.9.149): owner console card and info page
+- Why: ZAP POS 1.9.149 lets a manager send stock from one branch to another (numbered slip, receiver counts, short counts recorded). The owner should see these on the web, and the site must say so only now that it is true.
+- Owner console (`account/OwnerConsole.jsx`): new `TransfersCard` from `my_transfers(30)` (desktop repo `cloud/0006_stock_transfers.sql`, tenant-scoped like `my_branches()`): number, from → to, units, status chip (On the way / Received / Received, n short / Sent back / Cancelled), updated. On a branch's view only that branch's transfers. A failure of this call never hides the sales; no transfers means no card. Chip `own-chip.mute` (+ dark twin) in `admin/admin.css`. Texts: `account.owner` (`transfers*`, `col*`, `tr*`).
+- New page `/branch-stock-transfer` ("Stock transfer", after Branches) in `pages.items`; the multi-branch page's "Stock across branches (soon)" item became "Send stock between branches" plus a FAQ. The "all branches on one screen" item there is still marked soon although the owner console exists (left for the owner to decide). **Published content replaces arrays wholesale: republish the pages in Admin → Extra pages or the live site keeps the old text.**
+- Not checked here: the card with real data in light/dark at 1366px and 390px (needs a signed-in owner with transfers).
+
 ## 2026-11-24: site addresses switched to zappos.pk
 - Why: `zappos.pk` and `www.zappos.pk` show Valid Configuration in Vercel (www redirects with 308), so the search and share tags now point to the real domain.
 - `index.html` (canonical, og:url, share image, JSON-LD ids/urls/logo) and `public/robots.txt` (sitemap line) use `https://zappos.pk`; the pre-render builds the sitemap and `llms.txt` from that address. `zappos-web.vercel.app` keeps working.

@@ -682,6 +682,19 @@
         "Type this account's email, password and your PIN, then press Connect."
       ],
       "emptyNote": "Sales appear within a minute of the next bill. Billing never depends on the internet.",
+      "transfersTitle": "Stock transfers",
+      "transfersCount": "last 30 days · {n}",
+      "transfersNote": "Stock a branch sent to another branch. Short means fewer units were counted than were sent.",
+      "colTransfer": "Transfer",
+      "colRoute": "From → to",
+      "colUnits": "Units",
+      "colStatus": "Status",
+      "colWhen": "Updated",
+      "trSent": "On the way",
+      "trReceived": "Received",
+      "trShort": "Received, {n} short",
+      "trReturned": "Sent back",
+      "trCancelled": "Cancelled",
       "updates": "Updates whenever a branch has internet",
       "morning": "Good morning",
       "afternoon": "Good afternoon",
@@ -2418,9 +2431,8 @@
           },
           {
             "icon": "box",
-            "title": "Stock across branches",
-            "text": "See which branch has stock of a product before you transfer or reorder.",
-            "soon": true
+            "title": "Send stock between branches",
+            "text": "Move stock from one of your branches to another with a numbered slip. It leaves the sender at once, and the receiving branch counts what arrived."
           }
         ],
         "faqTitle": "Branch questions",
@@ -2440,10 +2452,104 @@
           {
             "q": "Can I see all my branches' sales from my phone?",
             "a": "That owner view is coming soon. Today each branch's sales and reports are on its own main PC."
+          },
+          {
+            "q": "Can one branch send stock to another?",
+            "a": "Yes, from ZAP POS 1.9.149 a manager can send stock to any other branch of the same owner. See the stock transfer page for how it works."
           }
         ],
         "ctaTitle": "Running more than one branch?",
         "ctaText": "Book a free demo and we'll plan your branches with you."
+      },
+      {
+        "slug": "branch-stock-transfer",
+        "menu": "Stock transfer",
+        "icon": "box",
+        "seoTitle": "Branch Stock Transfer in Pakistan | Move Stock Between Shops | ZAP POS",
+        "seoDescription": "Move stock from one branch to another with a numbered slip. Stock leaves the sender at once, the receiving branch counts what arrived, and short counts are recorded, never hidden.",
+        "kicker": "For shops with more than one branch",
+        "title": "Move stock between branches.",
+        "titleHighlight": "Every unit accounted for.",
+        "description": "A manager picks the other branch and the products, and ZAP POS takes the stock off the shelf at once and prints a numbered slip that travels with the goods. The other branch counts what arrived and receives it. Nothing is deleted, and a short count is recorded for the owner.",
+        "stats": [
+          {
+            "value": "Numbered",
+            "label": "slip per branch per year, no gaps"
+          },
+          {
+            "value": "Counted",
+            "label": "the receiver enters what arrived"
+          },
+          {
+            "value": "Kept",
+            "label": "cancelled and returned transfers stay on record"
+          },
+          {
+            "value": "1.9.149",
+            "label": "version that adds it"
+          }
+        ],
+        "problemsTitle": "What goes wrong with stock moved by phone call",
+        "problems": [
+          "Stock leaves one shop but is never added at the other.",
+          "The truck arrives short and nobody can say where the units went.",
+          "Both branches count the same stock as theirs.",
+          "Nobody can tell which transfer a slip belongs to."
+        ],
+        "solvedLine": "ZAP POS records the move on both sides with one number, so the two branches always agree.",
+        "featuresTitle": "How a transfer works",
+        "features": [
+          {
+            "icon": "box",
+            "title": "Send",
+            "text": "A manager picks the branch, scans or searches the products and presses Send. The stock leaves that branch at once and a slip prints. Sending works even when the internet is down; it is delivered at the next sync."
+          },
+          {
+            "icon": "receipt",
+            "title": "A number you can trace",
+            "text": "Slips are numbered like LHR-2026-0007, per branch and per year. A cancelled number is kept, so there are no unexplained gaps."
+          },
+          {
+            "icon": "check",
+            "title": "Receive and count",
+            "text": "The receiving branch sees the transfer as incoming, counts what really arrived and receives it into stock. Fewer units than sent is recorded as short and shown to the owner."
+          },
+          {
+            "icon": "server",
+            "title": "Cancel or send back",
+            "text": "The sender can cancel a transfer that has not been received, and the receiver can send it all back. Either way the stock returns to the sender. Both need internet so the two branches cannot disagree."
+          },
+          {
+            "icon": "chart",
+            "title": "Visible to the owner",
+            "text": "The owner console at zappos.pk/account lists the transfers between the shop's branches: on the way, received, short, cancelled or sent back."
+          }
+        ],
+        "faqTitle": "Stock transfer questions",
+        "faq": [
+          {
+            "q": "Does it need internet?",
+            "a": "Sending does not: the stock leaves the sender and the transfer is delivered at the next sync. Receiving, cancelling and sending back need internet, so that two branches acting at the same moment cannot both be right."
+          },
+          {
+            "q": "Which products can be transferred?",
+            "a": "Products that track stock, matched between branches by barcode and then by SKU. If the receiving branch does not have the product yet, it must add it in Inventory first."
+          },
+          {
+            "q": "Can I send stock to a branch of another owner?",
+            "a": "No. Transfers only work between branches of the same owner account."
+          },
+          {
+            "q": "What if fewer units arrive than were sent?",
+            "a": "The receiver enters the count. The difference is recorded as short on the transfer and shown to the owner. Nothing is changed or deleted afterwards."
+          },
+          {
+            "q": "Do older versions still work?",
+            "a": "Yes. A branch on an older version keeps billing normally; it just cannot send or receive transfers until its main PC is updated to 1.9.149 or newer."
+          }
+        ],
+        "ctaTitle": "Running more than one branch?",
+        "ctaText": "Book a free demo and we'll show you a transfer between two branches."
       },
       {
         "slug": "pos-hardware",
