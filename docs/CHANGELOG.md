@@ -3,6 +3,11 @@
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
 
+## 2026-11-24: Contact point in the search data
+- The Organization data in `index.html` now has a `contactPoint` (phone +92 339 0035603, email zappos.contact@gmail.com, Pakistan, English/Urdu). Both are the real values already published in the admin (`brand`), so search engines can show them. No address is added (the site address is still just "Pakistan"), no prices and no ratings.
+- If the phone or email changes in the admin, change them in `index.html` too.
+- Files: `index.html`, `CLAUDE.md`.
+
 ## 2026-11-24: LinkedIn company page wired into the site
 - The ZAP POS LinkedIn company page now exists (`linkedin.com/company/zap-pos`, logo, banner, About, three posts). `links.social.linkedin` points to it (footer icon), and the Organization data in `index.html` has `sameAs` with it, so search and AI answers can tie the site to the page.
 - The published copy in Supabase (`site_content`, `links.social.linkedin`) was set to the same address, because published values replace the built-in ones. Facebook, Instagram and X are still `#`.
