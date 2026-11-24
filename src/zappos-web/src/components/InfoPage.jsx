@@ -98,6 +98,24 @@ export default function InfoPage({ page, pages, pricing, finalCta, brand, links,
           </div>
         </section>
       )}
+      {page.compare && (
+        <section className="ip-block">
+          <div className="container">
+            <Head title={page.compare.title} />
+            <div className="ip-compare">
+              <div className="ip-cmp-head" aria-hidden="true"><span /><b>{page.compare.columns[0]}</b><b>{page.compare.columns[1]}</b></div>
+              {page.compare.rows.map((r) => (
+                <div key={r.f} className="ip-cmp-row">
+                  <h3>{r.f}</h3>
+                  <p><b>{page.compare.columns[0]}</b>{r.a}</p>
+                  <p><b>{page.compare.columns[1]}</b>{r.b}</p>
+                </div>
+              ))}
+            </div>
+            <p className="ip-cmp-note">{page.compare.note}</p>
+          </div>
+        </section>
+      )}
       {page.showDownload && <DownloadCard page={page} links={links} release={release} />}
       {page.showPricing && <Pricing data={pricing} links={links} />}
 

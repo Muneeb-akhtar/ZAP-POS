@@ -845,6 +845,23 @@
         ]
       },
       {
+        "title": "Compare",
+        "links": [
+          {
+            "label": "ZAP POS vs Oscar POS",
+            "href": "/zap-pos-vs-oscar-pos"
+          },
+          {
+            "label": "ZAP POS vs Moneypex",
+            "href": "/zap-pos-vs-moneypex"
+          },
+          {
+            "label": "Cloud vs offline POS",
+            "href": "/cloud-pos-vs-offline-pos"
+          }
+        ]
+      },
+      {
         "title": "Guides",
         "links": [
           {
@@ -3405,6 +3422,202 @@
           "title": "Urdu mein · اردو میں",
           "roman": "Cloud POS aur offline-first POS dono chalte hain, lekin internet band hone par farq parta hai. Router band karke dono ko test karein.",
           "ur": "کلاؤڈ پوس اور آف لائن فرسٹ پوس دونوں چلتے ہیں، لیکن انٹرنیٹ بند ہونے پر فرق پڑتا ہے۔ راؤٹر بند کر کے دونوں کو ٹیسٹ کریں۔"
+        }
+      },
+      {
+        "slug": "zap-pos-vs-oscar-pos",
+        "menu": "ZAP POS vs Oscar POS",
+        "icon": "receipt",
+        "seoTitle": "ZAP POS vs Oscar POS: Honest Comparison for Pakistani Shops (2026)",
+        "seoDescription": "ZAP POS and Oscar POS compared on how they run, offline billing, FBR, branches, pricing, hardware and support, using each company's own public pages. Which fits your shop.",
+        "kicker": "Comparison",
+        "title": "ZAP POS vs Oscar POS,",
+        "titleHighlight": "which fits your shop?",
+        "description": "Both are made for Pakistani shops and both report to FBR. They are built differently: ZAP POS runs on your own PCs, Oscar is a cloud platform that is marketed as free to start. Here is the side-by-side.",
+        "shortAnswer": "Oscar POS is a cloud platform marketed as free to start, with FBR reporting and multi-branch control. ZAP POS runs on your own Windows PCs in the shop, so every counter bills from your own network, and it is paid from Rs 3,499 a month. Test both with the router switched off.",
+        "compare": {
+          "title": "Side by side",
+          "columns": [
+            "ZAP POS",
+            "Oscar POS"
+          ],
+          "rows": [
+            {
+              "f": "How it runs",
+              "a": "Installed on your own Windows PCs. One main PC per branch holds the data; counters bill through it over your shop network.",
+              "b": "A cloud platform, according to its site. Its pages also say it works online and offline."
+            },
+            {
+              "f": "Billing when the internet drops",
+              "a": "Yes. The internet is never needed to make a bill, and bills are sent when it returns. If the main PC goes off, counters keep billing on their own for a few hours.",
+              "b": "Its restaurant page says billing continues when the internet is unstable and syncs once back online. Its clothing page does not mention offline."
+            },
+            {
+              "f": "FBR",
+              "a": "Prints FBR's invoice number and QR code on the receipt, sends returns as credit notes. ZAP POS holds an FBR integrator licence.",
+              "b": "Says every invoice is auto-reported to FBR in real time, with a QR code on the receipt."
+            },
+            {
+              "f": "PRA, SRB and other authorities",
+              "a": "FBR and PRA invoicing built in. Your NTN, STRN and tax office print on every receipt.",
+              "b": "Says it covers SRB, PRA and all major provincial tax authorities."
+            },
+            {
+              "f": "Several branches",
+              "a": "Each branch runs its own main PC, so one branch's problem does not stop the others. Brand plan adds the multi-branch dashboard.",
+              "b": "Says branches and inventory are managed from one dashboard."
+            },
+            {
+              "f": "Price",
+              "a": "Dukaan (1 shop, 1 counter) Rs 3,499 a month. Brand Rs 8,999 a month per branch. Enterprise is custom. Free trial on every plan.",
+              "b": "Marketed as free to start, with free POS software on its clothing page. Paid plans are not stated on the pages we read."
+            },
+            {
+              "f": "Hardware",
+              "a": "Standard thermal receipt printers, USB barcode scanners, cash drawers, label printers.",
+              "b": "A card payment device is listed as included. Other hardware is not stated."
+            },
+            {
+              "f": "Setup and support",
+              "a": "Set up with the owner over WhatsApp. Made in Lahore.",
+              "b": "Phone, a talk-to-an-expert button and a demo form. Support hours are not stated."
+            }
+          ],
+          "note": "Checked on 24 November 2026 from each company's own public pages. Features and prices change, so confirm with them before you decide. Where their site does not say, we write that it is not stated, not that it is missing."
+        },
+        "faqTitle": "Quick answers",
+        "faq": [
+          {
+            "q": "Is Oscar POS free?",
+            "a": "Oscar markets itself as free to start, and its clothing page lists free POS software. It does not state paid plans on the pages we read, so ask them what is and is not included."
+          },
+          {
+            "q": "Does Oscar POS work offline?",
+            "a": "Its restaurant page says billing continues when the internet is unstable and syncs later. Ask for a demo with the router off."
+          },
+          {
+            "q": "Does ZAP POS need the internet?",
+            "a": "No, not to make a bill. It needs the internet only to sync to the cloud and send bills to FBR, and those wait if it drops."
+          },
+          {
+            "q": "Can I switch between them?",
+            "a": "Ask any vendor how your items, customers and sales history are exported before you start."
+          }
+        ],
+        "ctaTitle": "See ZAP POS with the router off",
+        "ctaText": "Book a free demo and compare it with whatever you are using now.",
+        "published": "2026-11-24",
+        "article": [
+          {
+            "h": "Who each one suits",
+            "p": [
+              "Oscar POS suits a shop that wants a cloud system with a low starting cost, and that has an internet connection it can rely on for most of the day. ZAP POS suits a shop that wants every counter to bill from its own computers in the shop, with the internet as a bonus, and that is happy to pay a monthly fee in rupees for that.",
+              "Neither is right for everyone. The best test is the same for both: switch the router off, make a bill, then check what the owner sees afterwards."
+            ]
+          }
+        ],
+        "urdu": {
+          "title": "Urdu mein · اردو میں",
+          "roman": "Oscar POS cloud par chalta hai aur shuru mein free bataya jata hai. ZAP POS aap ke apne PC par chalta hai, is liye har counter dukaan ke network se bill banata hai. Dono ko router band karke test karein.",
+          "ur": "آسکر پوس کلاؤڈ پر چلتا ہے اور شروع میں مفت بتایا جاتا ہے۔ زیپ پوس آپ کے اپنے پی سی پر چلتا ہے، اس لیے ہر کاؤنٹر دکان کے نیٹ ورک سے بل بناتا ہے۔ دونوں کو راؤٹر بند کر کے ٹیسٹ کریں۔"
+        }
+      },
+      {
+        "slug": "zap-pos-vs-moneypex",
+        "menu": "ZAP POS vs Moneypex",
+        "icon": "receipt",
+        "seoTitle": "ZAP POS vs Moneypex POS: Honest Comparison for Pakistani Shops (2026)",
+        "seoDescription": "ZAP POS and Moneypex POS compared on offline mode, FBR, branches, pricing, pharmacy and restaurant features, using each company's own public pages. Which fits your shop.",
+        "kicker": "Comparison",
+        "title": "ZAP POS vs Moneypex,",
+        "titleHighlight": "which fits your shop?",
+        "description": "Moneypex offers cloud and offline desktop options for retail, pharmacy and restaurants. ZAP POS is a Windows desktop system built offline-first. Here is how they line up.",
+        "shortAnswer": "Moneypex lists offline and online modes, multi-store support, FBR integration and a retail plan from PKR 2,500 a month, plus pre-loaded medicines for pharmacies. ZAP POS runs on your own Windows PCs and is paid from Rs 3,499 a month. Test both with the router switched off.",
+        "compare": {
+          "title": "Side by side",
+          "columns": [
+            "ZAP POS",
+            "Moneypex"
+          ],
+          "rows": [
+            {
+              "f": "How it runs",
+              "a": "Installed on your own Windows PCs. One main PC per branch holds the data; counters bill through it.",
+              "b": "Cloud-based, with a one-time desktop option, and a 100% offline desktop app at a price on request, per its site."
+            },
+            {
+              "f": "Billing when the internet drops",
+              "a": "Yes. The internet is never needed to make a bill, and bills are sent when it returns.",
+              "b": "Lists offline and online mode, and says sales are recorded offline and synced when the internet returns."
+            },
+            {
+              "f": "FBR",
+              "a": "Prints FBR's invoice number and QR code, returns as credit notes. ZAP POS holds an FBR integrator licence.",
+              "b": "Lists FBR integration. Its restaurant page lists FBR, PRA and SRB tax sync."
+            },
+            {
+              "f": "Several branches",
+              "a": "Each branch runs its own main PC. Brand plan adds the multi-branch dashboard.",
+              "b": "Lists multi-store support from one dashboard."
+            },
+            {
+              "f": "Price",
+              "a": "Dukaan Rs 3,499 a month (1 shop, 1 counter). Brand Rs 8,999 a month per branch. Free trial on every plan.",
+              "b": "Its site lists a Standard plan at PKR 2,500 a month with a 7-day free trial and 10% off yearly billing. Extra items such as FBR integration are priced separately on some pages."
+            },
+            {
+              "f": "Pharmacies",
+              "a": "Checks expiry before a medicine reaches the bill, and sells by strip or box from one stock.",
+              "b": "Says it comes with 25,000+ pre-loaded medicines registered in Pakistan."
+            },
+            {
+              "f": "Restaurants",
+              "a": "Table, takeaway and delivery orders, kitchen printers by station, tax by payment method.",
+              "b": "Lists table management, kitchen display, ingredient inventory, waiter tablet app and online menu sync."
+            },
+            {
+              "f": "Setup and support",
+              "a": "Set up with the owner over WhatsApp. Made in Lahore.",
+              "b": "Lists 24/7 support. Languages are not stated on the pages we read."
+            }
+          ],
+          "note": "Checked on 24 November 2026 from each company's own public pages. Features and prices change, so confirm with them before you decide. Where their site does not say, we write that it is not stated, not that it is missing."
+        },
+        "faqTitle": "Quick answers",
+        "faq": [
+          {
+            "q": "Does Moneypex work offline?",
+            "a": "Its site lists offline and online mode and a 100% offline desktop app. Ask them which plan includes it and what it costs."
+          },
+          {
+            "q": "Which is cheaper?",
+            "a": "Moneypex lists a Standard plan from PKR 2,500 a month and ZAP POS starts at Rs 3,499 a month, but they include different things. Compare the all-in price for your counters, branches and FBR."
+          },
+          {
+            "q": "Does Moneypex have more pharmacy features?",
+            "a": "It says it comes with 25,000+ pre-loaded medicines, which can save typing. ZAP POS checks expiry and sells by strip or box. See a demo of each with your own products."
+          },
+          {
+            "q": "Can I try both?",
+            "a": "Both offer a free trial. Use the same test on each: router off, make a bill, check the report."
+          }
+        ],
+        "ctaTitle": "See ZAP POS with the router off",
+        "ctaText": "Book a free demo and compare it with whatever you are using now.",
+        "published": "2026-11-24",
+        "article": [
+          {
+            "h": "Who each one suits",
+            "p": [
+              "Moneypex suits a shop that wants a choice between cloud and desktop options, or a pharmacy that wants a ready list of medicines. ZAP POS suits a shop that wants every counter to bill from its own computers, with FBR integration and several branches handled by one company.",
+              "Neither is right for everyone. The best test is the same for both: switch the router off, make a bill, then check what the owner sees afterwards."
+            ]
+          }
+        ],
+        "urdu": {
+          "title": "Urdu mein · اردو میں",
+          "roman": "Moneypex cloud aur desktop dono tarah ke options batata hai aur pharmacy ke liye pehle se medicines ki list deta hai. ZAP POS aap ke apne PC par chalta hai aur har counter wahin se bill banata hai. Dono ko router band karke test karein.",
+          "ur": "منی پیکس کلاؤڈ اور ڈیسک ٹاپ دونوں طرح کے آپشنز بتاتا ہے اور فارمیسی کے لیے پہلے سے دواؤں کی فہرست دیتا ہے۔ زیپ پوس آپ کے اپنے پی سی پر چلتا ہے اور ہر کاؤنٹر وہیں سے بل بناتا ہے۔ دونوں کو راؤٹر بند کر کے ٹیسٹ کریں۔"
         }
       },
       {

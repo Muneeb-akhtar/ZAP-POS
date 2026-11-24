@@ -3,6 +3,12 @@
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
 
+## 2026-11-24: Comparison pages (Oscar POS, Moneypex)
+- New pages `/zap-pos-vs-oscar-pos` and `/zap-pos-vs-moneypex` (footer group "Compare"), with a new `compare` block in `InfoPage` (table on desktop, stacked cards on mobile; `.ip-compare`). Every competitor cell comes from that company's own public pages (checked 24 Nov 2026); where their site is silent the cell says "not stated", never a cross. Each page has a "checked on" note. The first draft idea of copying Mint POS's table was dropped because its claims that Oscar has no offline mode and no FBR contradict Oscar's own site.
+- CisePOS and LookPOS pages not built: only third-party listings found.
+- **Open problem for the owner:** `zap-pos-facts` says size and colour variants, the owner app and the online all-branch dashboard are "planned", while `clothing-store-pos`, `shoe-store-pos` and the plans page say they exist. The comparison pages avoid those claims; fix whichever page is out of date, and re-check the Brand plan row.
+- Files: `landing-content.json`, `InfoPage.jsx`, `styles.css`, docs.
+
 ## 2026-11-24: City pages
 - Ten city pages `/pos-software-<city>` (lahore, karachi, islamabad, rawalpindi, faisalabad, multan, peshawar, sialkot, gujranwala, quetta) with a footer group "POS by city". Lahore is the main one and has two extra sections (made in Lahore, which Lahore shops use what). Each city has its own markets and shop types, tax authority note (PRA for Punjab, SRB for Karachi, KPRA for Peshawar, FBR for goods; Quetta and Islamabad say to check) and a local paragraph, plus the short Urdu box.
 - Claims kept true: no on-site visit or local office promised (setup is "over WhatsApp"), no SRB/BRA integration claimed (only that the tax office prints on the receipt), power-cut rule kept. Market names are general knowledge, not verified per city: check them.
