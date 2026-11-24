@@ -3,6 +3,11 @@
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
 
+## 2026-11-24: City pages
+- Ten city pages `/pos-software-<city>` (lahore, karachi, islamabad, rawalpindi, faisalabad, multan, peshawar, sialkot, gujranwala, quetta) with a footer group "POS by city". Lahore is the main one and has two extra sections (made in Lahore, which Lahore shops use what). Each city has its own markets and shop types, tax authority note (PRA for Punjab, SRB for Karachi, KPRA for Peshawar, FBR for goods; Quetta and Islamabad say to check) and a local paragraph, plus the short Urdu box.
+- Claims kept true: no on-site visit or local office promised (setup is "over WhatsApp"), no SRB/BRA integration claimed (only that the tax office prints on the receipt), power-cut rule kept. Market names are general knowledge, not verified per city: check them.
+- Files: `landing-content.json`.
+
 ## 2026-11-24: Urdu summary on every page (replaces the separate Urdu pages)
 - Owner asked for a few lines of Roman Urdu and Urdu on each page instead of separate pages, so the three extra pages (`fbr-pos-integration-kya-hai`, `cloud-pos-ya-offline-pos`, `fbr-pos-integration-urdu`) were reverted and every extra page got an `urdu` field: a card "Urdu mein · اردو میں" under the short answer with 1-2 sentences in Roman Urdu and in Urdu script.
 - Files: `landing-content.json`, `InfoPage.jsx`, `styles.css` (`.ip-urdu`, `--urdu-font`), docs. The Urdu text was written by Claude: have a native reader check it. Not added to the home page.
