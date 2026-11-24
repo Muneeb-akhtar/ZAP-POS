@@ -3,6 +3,10 @@
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
 
+## 2026-11-25: Install card on the log-in page too
+- The owner could not see the install option: it only appeared inside a linked owner's console, so an admin login, a not-yet-linked account or a logged-out visitor never saw it. `Shell` in `AccountApp.jsx` (log-in, sign-up and the small account boxes) now shows `InstallHint` under the box. CSS `.acc-install` in `admin/admin.css`.
+- Files: `AccountApp.jsx`, `admin.css`, docs.
+
 ## 2026-11-25: Owner console as a phone app (PhoneConsole)
 - Owner request ("make it a masterpiece, human, not AI-looking"). On a phone (≤700px, also when installed) `/account/` now shows `src/account/PhoneConsole.jsx` instead of the shrunken desktop console: built like a shop register, not a dashboard. Today = sales in the receipt font (`--font-mono`) that settles slowly to its value, the comparison in plain words ("2% less than last Wednesday (Rs …)"), a hairline ledger (bills, cash, refunds, discounts, cancelled), last 7 days as plain bars with today's in yellow, and a ranked branch list. Tabs at the bottom: Today, Branches (tap a branch for its day, top sellers numbered like a bill, running low), Stock (out, low, transfers on the way across all branches), Plan (the plan/invoices content plus help, theme and log out). Pull down to refresh (an installed iPhone app has no reload), and figures reload when the app is reopened.
 - Offline (owner left it to me; chose the useful default): the last figures and account loaded are kept on the phone (`zap-owner-cache`, `zap-account-cache` in localStorage) and shown with "No internet on this phone. These are the figures from 9:38 pm." Both are removed on sign-out (`AccountApp.jsx`). This replaces the earlier "no business data on the phone" note. The service worker (`zap-account-v2`) now saves the page **and** the script/style files it names at install, so the app opens offline the first time too.
