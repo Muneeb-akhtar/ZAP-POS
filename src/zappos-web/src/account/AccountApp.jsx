@@ -7,6 +7,7 @@ import DownloadLink from '../components/DownloadLink.jsx'
 import { BILLING, METHODS, dateFmt, phoneKey, rs, supabase } from '../admin/biz.js'
 import { invoiceNo, invoiceState } from '../invoice/InvoiceDoc.jsx'
 import OwnerConsole from './OwnerConsole.jsx'
+import { OWNER_CACHE } from './ownerData.js'
 
 // Customer account at /account/: sign up, log in, reset password, and for a linked owner the owner console
 // (OwnerConsole.jsx: all branches' sales, each branch, and the plan, renewal date, invoices and payments). The same email + password works in the ZAP POS app.
@@ -137,15 +138,23 @@ function NewPassword({ t, onDone }) {
   )
 }
 
+// The last account this phone loaded, so the installed app still opens without internet (removed on sign-out).
+const ACC_CACHE = 'zap-account-cache'
+const savedAcc = (uid) => { try { const c = JSON.parse(localStorage.getItem(ACC_CACHE)); return c?.uid === uid ? c.acc : undefined } catch { return undefined } }
+const saveAcc = (uid, acc) => { try { if (acc) localStorage.setItem(ACC_CACHE, JSON.stringify({ uid, acc })); else localStorage.removeItem(ACC_CACHE) } catch { /* private mode: online only */ } }
+
 function MyAccount({ t, ti, links, session, brand }) {
-  const [acc, setAcc] = useState(undefined) // undefined = loading, null = not linked to a shop
+  const [acc, setAcc] = useState(() => savedAcc(session.user.id)) // undefined = loading, null = not linked to a shop
   const [isAdmin, setIsAdmin] = useState(false)
   const [error, setError] = useState('')
   const [state, setState] = useState('none') // linked / pending (matched only by mobile number, waits for ZAP) / none
   const [code, setCode] = useState('')
   const [claim, setClaim] = useState({ busy: false, wrong: false })
   const load = () => {
-    supabase.rpc('my_account').then(({ data, error }) => { if (error) setError(error.message); else setAcc(data) })
+    supabase.rpc('my_account').then(({ data, error }) => {
+      if (!error) { setAcc(data); saveAcc(session.user.id, data) }
+      else if (savedAcc(session.user.id) === undefined) setError(error.message)   // no internet but a saved account: keep showing it
+    })
     supabase.rpc('my_signup_state').then(({ data }) => data && setState(data))
   }
   // Holding the shop's active licence key proves it's theirs: link at once (schema §23).
@@ -260,6 +269,7 @@ export default function AccountApp() {
     supabase.auth.getSession().then(({ data }) => setSession(data.session))
     const { data } = supabase.auth.onAuthStateChange((event, s) => {
       if (event === 'PASSWORD_RECOVERY') setRecovering(true)
+      if (event === 'SIGNED_OUT') { try { localStorage.removeItem(ACC_CACHE); localStorage.removeItem(OWNER_CACHE) } catch { /* nothing saved */ } }   // no shop figures stay on a signed-out phone
       setSession(s)
     })
     return () => data.subscription.unsubscribe()

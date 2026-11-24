@@ -1,10 +1,12 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import Icon, { Logo } from '../components/Icons.jsx'
 import { ThemeToggle } from '../components/Sections.jsx'
 import { rs, supabase, timeAgo } from '../admin/biz.js'
 import { Area, Donut, Stat } from '../admin/Charts.jsx'
 import { Card, PageBar } from '../admin/ui.jsx'
 import InstallHint from './InstallHint.jsx'
+import PhoneConsole from './PhoneConsole.jsx'
+import { OWNER_CACHE, addDays, fill, greet, isOnline, pkDay, qty, shortL } from './ownerData.js'
 
 // The shop owner's console at /account/: today's sales of every branch, each branch on its own, and the plan.
 // Same frame and parts as the admin panel (top bar, sidebar, stat cards, charts), phone first: on a phone the sidebar
@@ -15,14 +17,7 @@ import InstallHint from './InstallHint.jsx'
 // From 1.9.149 also my_transfers(): stock sent between this shop's branches (on the way, received, short, cancelled, sent back).
 // Text: account.owner in landing-content.json.
 
-const fill = (text, vals) => text.replace(/\{(\w+)\}/g, (_, k) => vals[k] ?? '')
 const TONES = ['blue', 'amber', 'red', 'green', 'violet', 'pink']
-const ONLINE_MS = 10 * 60 * 1000
-const pkDay = (d = new Date()) => d.toLocaleDateString('en-CA', { timeZone: 'Asia/Karachi' })
-const addDays = (day, n) => { const d = new Date(`${day}T12:00:00Z`); d.setUTCDate(d.getUTCDate() + n); return d.toISOString().slice(0, 10) }
-const shortL = (n) => (n >= 1e5 ? `Rs ${(n / 1e5).toFixed(n >= 1e6 ? 0 : 1)}L` : rs(n))   // lakh, as shops say it
-const isOnline = (b) => b.lastSeen && Date.now() - new Date(b.lastSeen).getTime() < ONLINE_MS
-const greet = (o) => { const h = Number(new Date().toLocaleString('en-GB', { hour: 'numeric', hour12: false, timeZone: 'Asia/Karachi' })); return h < 12 ? o.morning : h < 17 ? o.afternoon : o.evening }
 
 function SyncPill({ b, o }) {
   if (!b.lastSeen) return <span className="own-sync wait"><i />{o.waitingFirst}</span>
@@ -32,7 +27,6 @@ function SyncPill({ b, o }) {
 }
 
 // Today's top sellers and what is running low, sent by each branch's main PC from ZAP POS 1.9.148 (null before: not shown).
-const qty = (n) => Number(n).toLocaleString('en-PK', { maximumFractionDigits: 3 })
 function TopCard({ items, o }) {
   const max = Math.max(1, ...items.map((x) => Number(x.amount)))
   return (
@@ -106,25 +100,51 @@ function Empty({ o, links }) {
   )
 }
 
+// The last figures this phone loaded, so the app can still show them without internet (labelled with their time).
+// Kept for this login only and removed on sign-out (AccountApp.jsx).
+const readCache = (email) => { try { const c = JSON.parse(localStorage.getItem(OWNER_CACHE)); return c?.email === email ? c : null } catch { return null } }
+const writeCache = (c) => { try { localStorage.setItem(OWNER_CACHE, JSON.stringify(c)) } catch { /* storage full or private mode: the app still works online */ } }
+const PHONE = '(max-width: 700px)'
+
 export default function OwnerConsole({ acc, t, links, children }) {
   const o = t.owner
-  const [data, setData] = useState(null)
-  const [transfers, setTransfers] = useState([])
+  const cached = useMemo(() => readCache(acc.email), [acc.email])
+  const [data, setData] = useState(cached?.data ?? null)
+  const [transfers, setTransfers] = useState(cached?.transfers ?? [])
+  const [loadedAt, setLoadedAt] = useState(cached?.at ?? null)
   const [error, setError] = useState('')
-  const [view, setView] = useState(() => location.hash.slice(1) || 'all')   // 'all' | 'plan' | a branch id
+  const [online, setOnline] = useState(() => navigator.onLine)
+  const [phone, setPhone] = useState(() => window.matchMedia(PHONE).matches)
+  const [view, setView] = useState(() => location.hash.slice(1) || 'all')   // 'all' | 'plan' | a branch id (phone also 'branches', 'stock')
   const go = (v) => { setView(v); history.replaceState(null, '', `#${v}`); window.scrollTo({ top: 0, behavior: 'smooth' }) }
 
+  const refresh = useCallback(async () => {
+    const [b, tr] = await Promise.all([
+      supabase.rpc('my_branches', { p_days: 35 }),
+      supabase.rpc('my_transfers', { p_days: 30 }),   // a failure here must not hide the sales
+    ])
+    if (b.error) { setError(b.error.message); return }
+    const list = !tr.error && Array.isArray(tr.data) ? tr.data : []
+    const at = Date.now()
+    setError(''); setData(b.data); setTransfers(list); setLoadedAt(at)
+    writeCache({ email: acc.email, at, data: b.data, transfers: list })
+  }, [acc.email])
+
   useEffect(() => {
-    let live = true
-    const load = () => supabase.rpc('my_branches', { p_days: 35 }).then(({ data: d, error: e }) => {
-      if (!live) return
-      if (e) setError(e.message); else { setError(''); setData(d) }
-    })
-    const loadTransfers = () => supabase.rpc('my_transfers', { p_days: 30 }).then(({ data: d, error: e }) => { if (live && !e && Array.isArray(d)) setTransfers(d) })   // a failure here must not hide the sales
-    load(); loadTransfers()
-    const timer = setInterval(() => { load(); loadTransfers() }, 60000)   // branches sync every 30 s; a minute keeps the page fresh without hammering
-    return () => { live = false; clearInterval(timer) }
-  }, [])
+    refresh()
+    const timer = setInterval(refresh, 60000)   // branches sync every 30 s; a minute keeps the page fresh without hammering
+    const back = () => { if (document.visibilityState === 'visible') refresh() }   // reopening the app shows today's figures at once
+    const up = () => { setOnline(true); refresh() }, down = () => setOnline(false)
+    const mq = window.matchMedia(PHONE), size = () => setPhone(mq.matches)
+    document.addEventListener('visibilitychange', back)
+    window.addEventListener('online', up); window.addEventListener('offline', down)
+    mq.addEventListener('change', size)
+    return () => {
+      clearInterval(timer); document.removeEventListener('visibilitychange', back)
+      window.removeEventListener('online', up); window.removeEventListener('offline', down)
+      mq.removeEventListener('change', size)
+    }
+  }, [refresh])
 
   const branches = data?.branches ?? []
   const today = pkDay(), lastWeek = addDays(today, -7)
@@ -136,8 +156,13 @@ export default function OwnerConsole({ acc, t, links, children }) {
     return { key: day, short: String(d.getUTCDate()), label: d.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' }), value: sum(day, 'sales') }
   }), [scope, today])   // eslint-disable-line react-hooks/exhaustive-deps
   const todayOf = (b, k) => (data?.days ?? []).filter((d) => d.branch === b.id && d.businessDay === today).reduce((s, d) => s + Number(d[k] ?? 0), 0)
-  const online = branches.filter(isOnline).length
+  const onlineCount = branches.filter(isOnline).length
   const shownTransfers = transfers.filter((x) => !branch || x.from.code === branch.code || x.to.code === branch.code)
+
+  if (phone) {
+    return <PhoneConsole acc={acc} o={o} t={t} links={links} data={data} transfers={transfers} loadedAt={loadedAt}
+      offline={!online || Boolean(error)} refresh={refresh} view={view} go={go}>{children}</PhoneConsole>
+  }
 
   const nav = (
     <>
@@ -155,7 +180,7 @@ export default function OwnerConsole({ acc, t, links, children }) {
 
   let main
   if (view === 'plan') main = <div className="adm-panel wide own-plan">{children}</div>
-  else if (error) main = <div className="adm-panel wide"><p className="adm-error">{t.error}</p></div>
+  else if (error && !data) main = <div className="adm-panel wide"><p className="adm-error">{t.error}</p></div>
   else if (!data) main = <div className="adm-panel wide"><div className="adm-skel" /><div className="adm-skel short" /></div>
   else if (!branches.length) main = <div className="adm-panel wide"><Empty o={o} links={links} /></div>
   else {
@@ -170,7 +195,7 @@ export default function OwnerConsole({ acc, t, links, children }) {
           <Stat icon="tag" label={o.discounts} value={rs(sum(today, 'discounts'))} />
           {branch
             ? <Stat icon="server" label={o.lastSync} value={branch.lastSeen ? timeAgo(branch.lastSeen) : o.neverSynced} sub={branch.code} />
-            : <Stat icon="server" label={o.online} value={`${online} / ${branches.length}`} sub={o.onlineSub} />}
+            : <Stat icon="server" label={o.online} value={`${onlineCount} / ${branches.length}`} sub={o.onlineSub} />}
         </div>
 
         <div className={branch ? '' : 'adm-wide-two'}>

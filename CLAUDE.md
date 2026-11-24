@@ -4,7 +4,7 @@ Read this first. For deeper detail see `docs/ARCHITECTURE.md`; for recent histor
 
 ## What this is
 ZAP POS: offline-first point of sale software for shops in Pakistan (owner: Muneeb Akhtar).
-This repo holds the **public landing page**, the **admin panel** at `/admin/` (dashboard, leads, payments, customers, analytics, website editor), the **customer account page** at `/account/` (installable on phones as a PWA; shop sign-up / log-in; for a linked owner the owner console: every branch's sales today and each branch, plus plan, invoices and payments; same login as the POS app) and the **client invoice page** `/invoice/?t=<token>` (opened from a link, no login), all React, backed by **Supabase**. There is no custom server.
+This repo holds the **public landing page**, the **admin panel** at `/admin/` (dashboard, leads, payments, customers, analytics, website editor), the **customer account page** at `/account/` (installable on phones as a PWA, with its own phone layout `PhoneConsole.jsx`; shop sign-up / log-in; for a linked owner the owner console: every branch's sales today and each branch, plus plan, invoices and payments; same login as the POS app) and the **client invoice page** `/invoice/?t=<token>` (opened from a link, no login), all React, backed by **Supabase**. There is no custom server.
 
 ## Stack
 - `src/zappos-web/`: React 18 + Vite 5, plain CSS (no Tailwind, no UI library), fonts bundled via @fontsource.

@@ -39,6 +39,7 @@ const paths = {
   card: <><rect x="2" y="5" width="20" height="14" rx="2" /><path d="M2 10h20" /><path d="M6 15h4" /></>,
   chevD: <path d="m6 9 6 6 6-6" />,
   minus: <path d="M5 12h14" />,
+  share: <><path d="M12 3v12" /><path d="m8 7 4-4 4 4" /><path d="M6 11H5v10h14V11h-1" /></>,
   plus: <><path d="M12 5v14" /><path d="M5 12h14" /></>,
   logout: <><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" /><path d="m16 17 5-5-5-5" /><path d="M21 12H9" /></>,
   external: <><path d="M15 3h6v6" /><path d="M10 14 21 3" /><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /></>,
