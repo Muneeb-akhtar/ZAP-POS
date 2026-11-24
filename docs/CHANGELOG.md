@@ -3,6 +3,13 @@
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
 
+## 2026-11-25: Phone app rebuilt in card style (step 1 of the owner app)
+- Owner sent screenshots of Mint POS (dashboard tiles, sales filters, products, profile menu, floating bottom bar) and asked for the same features and a similar layout without copying it. `PhoneConsole.jsx` is rewritten as a card-based app in ZAP blue (yellow only for today's bar): Home, Branches, Sales, Stock, Me, plus Shifts & cash, Stock transfers, Support from branches and Plan screens, a branch picker, a bill receipt sheet, and a floating bottom bar with a sliding blue pill (Mint POS uses a green bubble in a curved notch; ours is deliberately different).
+- New Supabase functions (schema §24, applied as migration `owner_app_reads`): `my_sales` (bills by date range and branch, with totals), `my_shifts` (open drawers and today's closed shifts, cash taken, counters), `my_support` (help requests from the owner's branches). Signed-in only, owner's own branches only; tested with throwaway data in a rolled-back transaction (owner sees own bills, another login sees none, anon refused).
+- Step 2 (needs a ZAP POS desktop update): opening/closing shifts from the phone (owner chose to allow it), and the full product list, parties, ledger, purchases and categories, which the cloud does not receive yet. The app says so where those would be.
+- Old phone texts `account.owner.ph*` and the `.ph-*` CSS removed; new texts `account.owner.app`, CSS `.pa-*`. New icons `home`, `refresh`, `user`, `swap`, `headset`, `key`, `trash`.
+- Files: `src/account/PhoneConsole.jsx`, `admin/admin.css`, `components/Icons.jsx`, `landing-content.json`, `supabase/schema.sql`, docs.
+
 ## 2026-11-25: The owner app installs on phones only
 - Owner request: Windows (and Mac) users must not install the owner app. The manifest link is no longer in `account/index.html`; `src/account/main.jsx` adds it and registers `sw.js` only when `isPhone()` (`ownerData.js`: Android, iPhone, iPad), so Chrome/Edge on a computer never show "Install app". On a computer, a worker left from an earlier visit is unregistered. `InstallHint.jsx` shows nothing on a computer, except after the home page's Android/iPhone button, where it says to open zappos.pk/account on the phone (`account.owner.installOnPhone`).
 - Files: `account/index.html`, `src/account/{main.jsx,ownerData.js,InstallHint.jsx}`, `landing-content.json`, docs.

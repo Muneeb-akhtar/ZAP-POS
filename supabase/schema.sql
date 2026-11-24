@@ -1106,3 +1106,88 @@ returns text language sql stable security definer set search_path = public as $$
 $$;
 revoke all on function public.my_signup_state() from public, anon;
 grant execute on function public.my_signup_state() to authenticated;
+
+-- ============================================================
+-- 24) Owner app reads (25 Nov 2026): what the phone app (/account/, PhoneConsole.jsx) shows beyond my_branches():
+--     every bill, the cash drawers (shifts) and support requests from the owner's own branches.
+--     They only read zap_cloud.records / support_requests, which each branch's main PC sends (desktop repo cloud/*.sql).
+--     Same tenancy as my_branches(): signed in, and the branch's org belongs to the lead linked to this login.
+--     Signed-in users only (no anon), read-only.
+-- ============================================================
+
+-- Bills issued between two days (Pakistan time), newest first, for all branches or one. Totals cover the whole range.
+create or replace function public.my_sales(p_from date default null, p_to date default null, p_branch uuid default null, p_limit int default 300)
+returns jsonb language sql stable security definer set search_path = zap_cloud, public, pg_temp as $$
+    with mine as (select b.id, b.name, b.code from zap_cloud.branches b join zap_cloud.orgs o on o.id = b.org_id
+                  join public.leads l on l.id = o.lead_id
+                  where auth.uid() is not null and l.user_id = auth.uid() and (p_branch is null or b.id = p_branch)),
+    inv as (select r.branch_id, r.payload p from zap_cloud.records r join mine m on m.id = r.branch_id
+            where r.kind = 'invoice'
+              and (((r.payload->>'issued_at')::timestamptz) at time zone 'Asia/Karachi')::date
+                  between coalesce(p_from, date '2000-01-01') and coalesce(p_to, date '2999-12-31')),
+    paid as (select r.branch_id, r.payload->>'invoice_id' inv, jsonb_agg(distinct r.payload->>'method') methods
+             from zap_cloud.records r join mine m on m.id = r.branch_id
+             where r.kind = 'payment' and (r.payload->>'amount')::numeric > 0
+               and (((r.payload->>'created_at')::timestamptz) at time zone 'Asia/Karachi')::date
+                   between coalesce(p_from, date '2000-01-01') - 1 and coalesce(p_to, date '2999-12-31') + 1
+             group by 1, 2),
+    page as (select i.*, m.name branch_name from inv i join mine m on m.id = i.branch_id
+             order by i.p->>'issued_at' desc limit least(greatest(coalesce(p_limit, 300), 1), 500))
+    select jsonb_build_object(
+        'count', (select count(*) from inv),
+        'total', coalesce((select sum((p->>'total')::numeric) from inv), 0),
+        'bills', coalesce((select jsonb_agg(jsonb_build_object(
+                    'id', pg.p->>'id', 'no', pg.p->>'invoice_no', 'at', pg.p->>'issued_at',
+                    'subtotal', (pg.p->>'subtotal')::numeric, 'discount', (pg.p->>'discount')::numeric,
+                    'tax', (pg.p->>'tax')::numeric, 'total', (pg.p->>'total')::numeric,
+                    'branch', pg.branch_name, 'counter', c.payload->>'code',
+                    'service', o.payload->>'service_type', 'customer', o.payload->>'customer_name',
+                    'methods', coalesce(pd.methods, '[]'::jsonb)) order by pg.p->>'issued_at' desc)
+                  from page pg
+                  left join zap_cloud.records o on o.branch_id = pg.branch_id and o.kind = 'order' and o.entity_id = pg.p->>'order_id'
+                  left join zap_cloud.records c on c.branch_id = pg.branch_id and c.kind = 'counter' and c.entity_id = pg.p->>'counter_id'
+                  left join paid pd on pd.branch_id = pg.branch_id and pd.inv = pg.p->>'id'), '[]'::jsonb))
+$$;
+
+-- Cash drawers: every shift still open, and those closed in the last p_days days, with the cash taken in each,
+-- plus how many counters the branches have.
+create or replace function public.my_shifts(p_days int default 1, p_branch uuid default null)
+returns jsonb language sql stable security definer set search_path = zap_cloud, public, pg_temp as $$
+    with mine as (select b.id, b.name from zap_cloud.branches b join zap_cloud.orgs o on o.id = b.org_id
+                  join public.leads l on l.id = o.lead_id
+                  where auth.uid() is not null and l.user_id = auth.uid() and (p_branch is null or b.id = p_branch)),
+    sh as (select r.branch_id, r.payload p, m.name branch_name from zap_cloud.records r join mine m on m.id = r.branch_id
+           where r.kind = 'shift'
+             and (r.payload->>'status' = 'open'
+                  or (r.payload->>'closed_at')::timestamptz >= now() - make_interval(days => least(greatest(coalesce(p_days, 1), 1), 31))))
+    select jsonb_build_object(
+        'counters', (select count(*) from zap_cloud.records r join mine m on m.id = r.branch_id
+                     where r.kind = 'counter' and coalesce((r.payload->>'active')::boolean, true)),
+        'shifts', coalesce((select jsonb_agg(jsonb_build_object(
+                    'id', s.p->>'id', 'branch', s.branch_name, 'counter', c.payload->>'code', 'counterName', c.payload->>'name',
+                    'status', s.p->>'status', 'openedAt', s.p->>'opened_at', 'openingCash', (s.p->>'opening_cash')::numeric,
+                    'cashTaken', coalesce((select sum((pm.payload->>'amount')::numeric) from zap_cloud.records pm
+                                           where pm.branch_id = s.branch_id and pm.kind = 'payment'
+                                             and pm.payload->>'shift_id' = s.p->>'id' and pm.payload->>'method' = 'cash'), 0),
+                    'closedAt', s.p->>'closed_at', 'counted', (s.p->>'counted_cash')::numeric,
+                    'expected', (s.p->>'expected_cash')::numeric, 'variance', (s.p->>'variance')::numeric)
+                  order by (s.p->>'status' = 'open') desc, s.p->>'opened_at' desc)
+                  from sh s left join zap_cloud.records c on c.branch_id = s.branch_id and c.kind = 'counter' and c.entity_id = s.p->>'counter_id'), '[]'::jsonb))
+$$;
+
+-- Help requests sent from the owner's branches (ZAP POS Support screen), newest first, with the last message.
+create or replace function public.my_support(p_limit int default 30)
+returns jsonb language sql stable security definer set search_path = zap_cloud, public, pg_temp as $$
+    with mine as (select b.id, b.name from zap_cloud.branches b join zap_cloud.orgs o on o.id = b.org_id
+                  join public.leads l on l.id = o.lead_id where auth.uid() is not null and l.user_id = auth.uid())
+    select coalesce(jsonb_agg(x order by x->>'updatedAt' desc), '[]'::jsonb) from (
+        select jsonb_build_object('id', s.id, 'no', s.no, 'subject', s.subject, 'status', s.status, 'branch', m.name,
+                                  'updatedAt', s.updated_at,
+                                  'last', (select jsonb_build_object('fromZap', g.from_zap, 'body', g.body, 'at', g.created_at)
+                                           from zap_cloud.support_messages g where g.request_id = s.id order by g.created_at desc limit 1)) x
+        from zap_cloud.support_requests s join mine m on m.id = s.branch_id
+        order by s.updated_at desc limit least(greatest(coalesce(p_limit, 30), 1), 100)) t
+$$;
+
+revoke all on function public.my_sales(date, date, uuid, int), public.my_shifts(int, uuid), public.my_support(int) from public, anon;
+grant execute on function public.my_sales(date, date, uuid, int), public.my_shifts(int, uuid), public.my_support(int) to authenticated;
