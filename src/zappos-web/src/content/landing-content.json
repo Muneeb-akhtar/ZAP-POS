@@ -837,6 +837,10 @@
           {
             "label": "POS kya hai?",
             "href": "/pos-software-kya-hai"
+          },
+          {
+            "label": "FBR POS guide",
+            "href": "/fbr-pos-integration-guide"
           }
         ]
       },
@@ -1015,6 +1019,100 @@
         ],
         "ctaTitle": "Want FBR set up on your counter?",
         "ctaText": "Book a free demo and we'll go through your POS ID and tax rates with you."
+      },
+      {
+        "slug": "fbr-pos-integration-guide",
+        "menu": "FBR POS guide",
+        "icon": "receipt",
+        "seoTitle": "FBR POS Integration in Pakistan: Who Must Integrate and What Changes (2026 Guide)",
+        "seoDescription": "Who has to integrate their POS with FBR, what the electronic invoice must carry, why a licensed integrator is needed, what happens if you do not integrate, and how Punjab's PRA system differs.",
+        "kicker": "Guide",
+        "title": "FBR POS integration,",
+        "titleHighlight": "explained for shop owners.",
+        "description": "Not every shop has to connect its POS to FBR, but the ones that do face real penalties if they do not. Here is who is affected, what the law asks for on the invoice, and what to check before you choose software.",
+        "faqTitle": "Quick answers",
+        "faq": [
+          {
+            "q": "Does every shop have to integrate its POS with FBR?",
+            "a": "No. The law requires it of Tier-1 retailers and of other registered persons the FBR notifies. The Tier-1 definition lists several categories, such as units of national or international chains. Ask your tax consultant or check the Sales Tax Act definition to see whether you are covered."
+          },
+          {
+            "q": "Can any POS software connect to FBR?",
+            "a": "FBR's rules say integration must be carried out through a licensed integrator. FBR's own PRAL can act as one and may provide the integration free of cost. Ask any POS vendor exactly how its integration works and which licensed integrator is involved."
+          },
+          {
+            "q": "What must the receipt show?",
+            "a": "A unique FBR invoice number and a QR code that customers can scan to verify the bill, along with the sales tax details the rules list."
+          },
+          {
+            "q": "Is Punjab's PRA system the same as FBR's?",
+            "a": "No. Punjab Revenue Authority runs its own electronic invoice monitoring system for businesses such as restaurants and hotels in Punjab. FBR and provincial authorities have separate rules, so check which authority your business falls under."
+          }
+        ],
+        "ctaTitle": "Want to see FBR-ready billing?",
+        "ctaText": "Book a free demo and we'll show you how ZAP POS prints FBR invoice numbers and QR codes.",
+        "published": "2026-11-24",
+        "shortAnswer": "Tier-1 retailers and other persons notified by FBR must connect their POS to FBR through a licensed integrator, issue invoices with an FBR invoice number and QR code, and risk penalties and sealing of premises if they do not. Punjab has a separate system, PRA's e-IMS, for restaurants and similar businesses.",
+        "article": [
+          {
+            "h": "Who has to integrate",
+            "p": [
+              "FBR requires Tier-1 retailers to connect their outlets to its computerised system so sales are reported in real time. The Sales Tax Act defines Tier-1 retailers by category; the first listed is a retailer that is a unit of a national or international chain of stores, and the definition names other categories as well. FBR also integrates other registered persons it notifies, and its published figures show restaurants and textile and leather retailers being connected as separate groups.",
+              "A single small shop is often not covered, but do not assume. Read the definition of Tier-1 retailer in the Sales Tax Act or ask your tax consultant, because the answer depends on your category and on notifications that change."
+            ]
+          },
+          {
+            "h": "What the electronic invoice must carry",
+            "p": [
+              "The rules require a real-time, verifiable electronic sales tax invoice for every sale. The system sends the invoice data to FBR, receives a unique FBR invoice number, and the receipt prints a QR code built from that number so a customer can check the bill. The invoice also carries the sales tax details the rules list, such as the amount of tax, any discount, a reference number and units of measurement.",
+              "Sales through card, QR or other digital payment must also be accepted at the counter, and a bill without the invoice number or QR code is exactly what inspectors look for."
+            ]
+          },
+          {
+            "h": "Why a licensed integrator matters",
+            "p": [
+              "Since the rules were changed in December 2023, nobody may carry out integration of registered persons through software unless FBR has licensed them as an integrator. FBR's FAQs repeat that notified persons must integrate through a licensed integrator. PRAL, FBR's technology arm, can act as a licensed integrator and may provide integration and downloadable software free of cost when asked.",
+              "In practice this means you should ask your POS vendor three things: which licensed integrator carries your invoices, what it costs you, and who is responsible if the connection fails."
+            ]
+          },
+          {
+            "h": "What happens if you do not integrate",
+            "p": [
+              "For a Tier-1 retailer that is not integrated, the rules allow the Commissioner to take action that includes a penalty under the Sales Tax Act and sealing the business premises until the penalty is paid and every POS in every branch is integrated. Issuing invoices without the prescribed number or QR code, or with a duplicate number, can also lead to proceedings. Read the rules or ask a consultant for the current penalty amounts, because they are set in the law and can change."
+            ]
+          },
+          {
+            "h": "Punjab and the other provinces",
+            "p": [
+              "Provincial taxes on services are collected by provincial authorities, and each has its own system. In Punjab, the Punjab Revenue Authority requires hotels, restaurants, coffee shops and marriage halls to issue computerised receipts through its Electronic Invoice Monitoring System, e-IMS, with a unique invoice number and a PRA QR code. Reports in 2026 put fines for non-compliance between Rs 400,000 and Rs 1 million. An earlier amendment set the threshold for restaurants at Rs 6 million of annual revenue. PRA has also been working to link e-IMS with FBR's POS system so businesses need one integration instead of two.",
+              "Sindh and Khyber Pakhtunkhwa have their own revenue authorities too. Check which authority your business falls under before you decide."
+            ]
+          },
+          {
+            "h": "A checklist before you choose software",
+            "p": [
+              "1. Confirm which authority you report to, FBR or a provincial authority, and whether you are required to integrate.",
+              "2. Register your outlets and each POS with that authority.",
+              "3. Ask the vendor which licensed integrator is used, and what happens if you change vendor.",
+              "4. Check that every receipt shows the invoice number and QR code, and scan one with the official verification app.",
+              "5. Check that returns are reported as credit notes against the original bill.",
+              "6. Ask what happens when the internet is down: how bills are saved and when they are sent.",
+              "7. Keep your records. The rules expect invoice data to be preserved."
+            ]
+          },
+          {
+            "h": "Where ZAP POS fits",
+            "p": [
+              "ZAP POS prints FBR's invoice number and QR code on the receipt, sends returns as credit notes against the original bill, applies a tax rate for each way of paying, and keeps billing when the internet drops, sending the bills once the connection is back. You add your own POS ID and token. Ask us how the connection is set up for your shop and which licensed integrator is involved before you decide."
+            ]
+          },
+          {
+            "h": "Sources and checking",
+            "p": [
+              "This guide is a summary, not legal or tax advice, and the rules change. Check them at the source: the FBR POS Integration pages and POS Booklet at fbr.gov.pk, FBR's frequently asked questions on electronic invoicing, SRO 69(I)/2025 on electronic invoicing, and Punjab Revenue Authority notices on e-IMS. Business Recorder, Dawn and Express Tribune have reported the integration numbers and enforcement actions mentioned here."
+            ]
+          }
+        ]
       },
       {
         "slug": "plans",
