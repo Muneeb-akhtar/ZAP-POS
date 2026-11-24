@@ -3,6 +3,11 @@
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
 
+## 2026-11-24: LinkedIn company page wired into the site
+- The ZAP POS LinkedIn company page now exists (`linkedin.com/company/zap-pos`, logo, banner, About, three posts). `links.social.linkedin` points to it (footer icon), and the Organization data in `index.html` has `sameAs` with it, so search and AI answers can tie the site to the page.
+- The published copy in Supabase (`site_content`, `links.social.linkedin`) was set to the same address, because published values replace the built-in ones. Facebook, Instagram and X are still `#`.
+- Files: `landing-content.json`, `index.html`.
+
 ## 2026-11-24: Stock transfer linked from the footer; correction about republishing
 - Footer group "ZAP POS" links to `/branch-stock-transfer`, so every page reaches it by an internal link.
 - Correction to the entries above: the published copy in Supabase (`site_content`) holds no `pages` and no `account.owner`, so the new/changed pages, the owner-console texts and the footer come from the built-in JSON and go live with the Vercel deploy. **No republish in the admin is needed** (checked 24 Nov 2026).
