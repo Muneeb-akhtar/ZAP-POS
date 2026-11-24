@@ -3,6 +3,13 @@
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
 
+## 2026-11-24: 404 page and two more comparison pages (OneClickPOS, TransactFlow)
+- **404 page:** `scripts/prerender.mjs` now writes `dist/404.html` (Vercel serves it with a 404 status for any address that is not a page; before, visitors saw Vercel's bare "NOT_FOUND"). It is plain HTML with the site styles and no script bundle (so it never tries to draw the home page at a wrong address), `noindex, follow`, no canonical, no share tags, no structured data, a home button and nine links to the main pages. Styles: block `.nf*` at the end of `styles.css` (hover twin inside a hover media query).
+- **New pages** `/zap-pos-vs-oneclickpos` and `/zap-pos-vs-transactflow` (footer group "Compare", `related` lists of the Oscar and Moneypex pages updated, share images `public/og/*.jpg`). Competitor cells come only from each company's own pages and its own vendor listings (OneClickPOS: oneclickpos.pk blog and FBR pages plus its GoodFirms listing; TransactFlow: transactflow.pk pages plus its Product Hunt, GoodFirms and SourceForge listings). Where the sources disagree the cell says so (OneClickPOS calls itself cloud-based on its pages and offline without cloud dependency in its listing), and where nothing is stated it says "not stated". Its Urdu interface, 2018 start and 1000-business claims are quoted as its own claims, not verified. Sitemap now 44 addresses.
+- **ZivoxPOS page not built:** its own site (zivoxpos.online) could not be opened from here and it is pharmacy-only, so only third-party listings were available.
+- Still open for the owner: the `zap-pos-facts` contradiction (its "doesn't do yet" section lists size/colour variants, owner app and owner dashboard as planned, its own FAQ says yes), Search Console requests for the other pages, directories, reviews, PageSpeed.
+- Files: `scripts/prerender.mjs`, `src/styles.css`, `landing-content.json`, `public/og/`, docs.
+
 ## 2026-11-24: SEO round 2 (screenshots, share images, orphans, byline)
 - Home hero description now says "point of sale (POS) software in Pakistan" (also updated in the published Supabase `site_content`, since published text overrides the built-in; the locked headline and POS scene are untouched). The demo poster has alt text (`video.posterAlt`).
 - Screenshot `public/media/zap-pos-billing-screen.jpg` (cropped from the demo poster) added with alt text to nine pages through the new `image` field (restaurant, supermarket, kiryana, bakery, offline billing, how it works, many counters, FBR invoicing, Lahore). One image repeated: more varied real screenshots would be better.

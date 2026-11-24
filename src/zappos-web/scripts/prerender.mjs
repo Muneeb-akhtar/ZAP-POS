@@ -90,6 +90,26 @@ for (const p of merged.pages.items) {
   await writeFile(resolve(root, `dist/${p.slug}/index.html`), fill(html, render(merged, `/${p.slug}`)))
 }
 
+// 404 page. Vercel serves dist/404.html (with a 404 status) for any address that is not a page. It is plain HTML with
+// the site's own styles and no script bundle, so it never tries to draw the home page at a wrong address.
+{
+  const label = (slug) => merged.pages.items.find((p) => p.slug === slug)?.menu
+  const links = ['plans', 'download', 'fbr-invoicing', 'offline-billing', 'best-pos-software-pakistan', 'pharmacy-pos', 'restaurant-pos', 'supermarket-pos', 'pos-software-lahore']
+    .filter(label).map((s) => [`/${s}`, label(s)])
+  let html = template
+    .replace(/\s*<script type="module"[^>]*><\/script>/, '')
+    .replace(/\s*<link rel="modulepreload"[^>]*>/g, '')
+    .replace(/\s*<script type="application\/ld\+json">[\s\S]*?<\/script>/g, '')
+    .replace(/\s*<!-- Structured data[\s\S]*?-->/, '')
+    .replace(/\s*<link rel="canonical"[^>]*>/, '')
+    .replace(/\s*<meta (?:property="og:|name="twitter:)[^>]*>/g, '')
+    .replace('<meta name="robots" content="index, follow, max-image-preview:large" />', '<meta name="robots" content="noindex, follow" />')
+  html = swap(html, /(<title>)[^<]*(<\/title>)/, `Page not found | ${merged.brand.name}`)
+  html = swap(html, /(<meta name="description" content=")[^"]*(")/, 'This page was not found. Go to the ZAP POS home page or pick one of the main pages.')
+  const body = `<main class="nf"><a class="nf-brand" href="/">${attr(merged.brand.name)}</a><p class="nf-code" aria-hidden="true">404</p><h1>That page is not here.</h1><p class="nf-text">The address may be mistyped, or the page may have moved. These pages will get you going again.</p><a class="btn btn-primary" href="/">Go to the home page</a><ul class="nf-links">${links.map(([h, t]) => `<li><a href="${h}">${attr(t)}</a></li>`).join('')}</ul></main>`
+  await writeFile(resolve(root, 'dist/404.html'), html.replace('<div id="root"></div>', `<div id="root">${body}</div>`))
+}
+
 // Sitemap: home + every inner page.
 const indexed = merged.pages.items.filter((p) => !p.noindex)
 // lastmod only where the page carries a real publish date; a made-up date would teach Google to ignore the field.
