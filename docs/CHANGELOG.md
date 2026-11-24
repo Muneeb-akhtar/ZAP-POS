@@ -3,6 +3,11 @@
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
 
+## 2026-11-24: City pages made distinct, weak ones noindexed
+- Following an SEO review (near-identical city pages risk Google's doorway and scaled-content policies), each city page now has its own description, headline, four-question FAQ and a "What to check before you choose in <city>" section; the repeated load-shedding and set-up sections were removed.
+- New page field `noindex` (prerender writes `noindex, follow` in place of the site-wide robots tag; page dropped from `sitemap.xml` and `llms.txt`). Set on Multan, Sialkot, Gujranwala and Quetta, whose local detail is thinnest. Remove `noindex` once a page has real local content. Sitemap is now 42 addresses.
+- Local facts (markets, authority notes) are general knowledge and unverified per city. Files: `landing-content.json`, `scripts/prerender.mjs`, docs.
+
 ## 2026-11-24: Comparison pages (Oscar POS, Moneypex)
 - New pages `/zap-pos-vs-oscar-pos` and `/zap-pos-vs-moneypex` (footer group "Compare"), with a new `compare` block in `InfoPage` (table on desktop, stacked cards on mobile; `.ip-compare`). Every competitor cell comes from that company's own public pages (checked 24 Nov 2026); where their site is silent the cell says "not stated", never a cross. Each page has a "checked on" note. The first draft idea of copying Mint POS's table was dropped because its claims that Oscar has no offline mode and no FBR contradict Oscar's own site.
 - CisePOS and LookPOS pages not built: only third-party listings found.

@@ -2417,25 +2417,25 @@
         "seoDescription": "POS software for shops, pharmacies and restaurants in Lahore: bills without internet, FBR invoice number and QR code, several counters and branches, prices in rupees. Book a free demo.",
         "kicker": "POS in Lahore",
         "title": "POS software for Lahore shops,",
-        "titleHighlight": "built for how you really sell.",
-        "description": "ZAP POS bills at the counter even when the internet drops, prints FBR's invoice number and QR code, and keeps every counter and branch in step. Set up with the owner over WhatsApp.",
+        "titleHighlight": "made in Lahore, for Lahore markets.",
+        "description": "Lahore shops bill faster and see every branch in one place. ZAP POS is made in Lahore, bills without the internet, and prints FBR and PRA-ready receipts.",
         "faqTitle": "Quick answers",
         "faq": [
           {
-            "q": "Does ZAP POS work in Lahore?",
-            "a": "Yes. ZAP POS runs on your own computers in the shop, so it works anywhere in Lahore with a PC and a printer. The internet is only needed to sync to the cloud and send bills to FBR, and both wait if it drops."
+            "q": "Is ZAP POS really made in Lahore?",
+            "a": "Yes. ZAP POS is made in Lahore, by people who know how a Lahore shop runs."
           },
           {
-            "q": "What happens when the internet or power goes?",
-            "a": "If the internet goes, billing carries on and the bills are sent later. If the power goes, a PC on a UPS keeps running, but a PC without one switches off."
+            "q": "I run a cafe in DHA or Johar Town. Do I need PRA's e-IMS?",
+            "a": "Hotels, restaurants, coffee shops and marriage halls in Punjab are expected to issue computerised receipts through PRA's e-IMS. Reports in 2026 put fines between Rs 400,000 and Rs 1 million. Check your own case with PRA or a consultant, and ask us how ZAP POS handles the receipt."
           },
           {
-            "q": "Is it ready for FBR?",
-            "a": "Yes. ZAP POS prints FBR's invoice number and QR code on the receipt and sends returns as credit notes. We hold an FBR integrator licence."
+            "q": "My shop is in Hall Road. Can ZAP POS handle many models and colours?",
+            "a": "Yes. Each model and colour gets its own barcode and price, so the cashier scans instead of searching."
           },
           {
-            "q": "How do I get started in Lahore?",
-            "a": "Book a free demo or message us on WhatsApp. We set up every shop with the owner over WhatsApp."
+            "q": "I have a shop in Gulberg and a second one in a mall. Can I see both?",
+            "a": "Each branch runs its own main PC, so one branch's problem does not stop the other. The Brand plan adds the multi-branch dashboard."
           }
         ],
         "ctaTitle": "Want to see it in your Lahore shop?",
@@ -2469,21 +2469,18 @@
             ]
           },
           {
-            "h": "Internet and load shedding",
-            "p": [
-              "When the router goes off, ZAP POS keeps billing and sends the bills once the internet is back. If the power goes, a PC on a UPS keeps running. A PC with no UPS switches off with the power, so no software can bill in a blackout."
-            ]
-          },
-          {
             "h": "Which Lahore shops use what",
             "p": [
               "Boutiques in Gulberg and Liberty keep stock by size and colour and print a barcode tag for each. Cafes and restaurants in DHA and Johar Town send each order to the right kitchen printer. Hall Road shops give each model and colour its own barcode. Pharmacies check expiry before a medicine reaches the bill. Neighbourhood kiryana stores sell loose items with a quick sale and see what is running out."
             ]
           },
           {
-            "h": "Getting set up in Lahore",
+            "h": "What to check before you choose in Lahore",
             "p": [
-              "We set up every shop with the owner over WhatsApp, and we are happy to answer questions before you buy. Book a free demo and we will show you ZAP POS with the router switched off, on your own kind of products."
+              "Lahore shops often add a second outlet in a mall or a new market. Ask how stock and sales from every outlet reach you, and what a new branch costs. ZAP POS prices the Brand plan per branch, from Rs 8,999 a month.",
+              "If you run a restaurant or cafe, PRA's e-IMS is the rule to check first. Ask the vendor how receipts carry the unique invoice number and PRA QR code, and test a bill yourself.",
+              "On a weekend rush in Liberty or Anarkali, the router can fail at the worst time. Switch it off during the demo and make a bill. A PC on a UPS keeps billing; one without a UPS switches off with the power.",
+              "We set up every shop with the owner over WhatsApp. For Lahore shops, book a free demo and we will show it on your own products."
             ]
           }
         ],
@@ -2501,25 +2498,25 @@
         "seoDescription": "POS software for shops, pharmacies and restaurants in Karachi: bills without internet, FBR invoice number and QR code, several counters and branches, prices in rupees. Book a free demo.",
         "kicker": "POS in Karachi",
         "title": "POS software for Karachi shops,",
-        "titleHighlight": "built for how you really sell.",
-        "description": "ZAP POS bills at the counter even when the internet drops, prints FBR's invoice number and QR code, and keeps every counter and branch in step. Set up with the owner over WhatsApp.",
+        "titleHighlight": "fast counters for Karachi's busiest bazaars.",
+        "description": "Karachi shops need counters that keep up in the rush and tax receipts that name the right authority. ZAP POS bills from your own PCs, with SRB or FBR on the receipt.",
         "faqTitle": "Quick answers",
         "faq": [
           {
-            "q": "Does ZAP POS work in Karachi?",
-            "a": "Yes. ZAP POS runs on your own computers in the shop, so it works anywhere in Karachi with a PC and a printer. The internet is only needed to sync to the cloud and send bills to FBR, and both wait if it drops."
+            "q": "Which tax authority does a Karachi restaurant report to?",
+            "a": "Sindh collects sales tax on services through the Sindh Revenue Board, SRB. Check your own case with SRB or a consultant. ZAP POS prints your NTN, STRN and tax office on every receipt."
           },
           {
-            "q": "What happens when the internet or power goes?",
-            "a": "If the internet goes, billing carries on and the bills are sent later. If the power goes, a PC on a UPS keeps running, but a PC without one switches off."
+            "q": "Does ZAP POS support wholesale and credit customers?",
+            "a": "ZAP POS supports bulk prices and customer accounts. Ask for a demo of the way you sell to wholesale buyers."
           },
           {
-            "q": "Is it ready for FBR?",
-            "a": "Yes. ZAP POS prints FBR's invoice number and QR code on the receipt and sends returns as credit notes. We hold an FBR integrator licence."
+            "q": "Can ZAP POS keep up with a Saddar-style rush?",
+            "a": "Billing runs on your own PC, so scanning and billing do not wait on the network. Test it with your busiest-hour items."
           },
           {
-            "q": "How do I get started in Karachi?",
-            "a": "Book a free demo or message us on WhatsApp. We set up every shop with the owner over WhatsApp."
+            "q": "Does ZAP POS have an SRB integration?",
+            "a": "ZAP POS prints your tax office, including SRB, on every receipt. Ask us what is supported for SRB reporting before you buy."
           }
         ],
         "ctaTitle": "Want to see it in your Karachi shop?",
@@ -2547,15 +2544,12 @@
             ]
           },
           {
-            "h": "Internet and load shedding",
+            "h": "What to check before you choose in Karachi",
             "p": [
-              "When the router goes off, ZAP POS keeps billing and sends the bills once the internet is back. If the power goes, a PC on a UPS keeps running. A PC with no UPS switches off with the power, so no software can bill in a blackout."
-            ]
-          },
-          {
-            "h": "Getting set up in Karachi",
-            "p": [
-              "We set up every shop with the owner over WhatsApp, and we are happy to answer questions before you buy. Book a free demo and we will show you ZAP POS with the router switched off, on your own kind of products."
+              "Ask which authority your business reports to. Restaurants and other services report to SRB, and shops that sell goods report to FBR. Then ask the vendor exactly what it supports for yours.",
+              "Karachi has many wholesale buyers. Ask how the POS handles bulk prices, credit accounts and customer ledgers, not just retail billing.",
+              "At peak hours in Saddar or Bolton Market, a slow counter loses sales. Ask for a demo with your own barcode scanner and 50 items, and watch how fast it goes.",
+              "We set up every shop with the owner over WhatsApp, so you can start from anywhere in the city."
             ]
           }
         ],
@@ -2573,25 +2567,25 @@
         "seoDescription": "POS software for shops, pharmacies and restaurants in Islamabad: bills without internet, FBR invoice number and QR code, several counters and branches, prices in rupees. Book a free demo.",
         "kicker": "POS in Islamabad",
         "title": "POS software for Islamabad shops,",
-        "titleHighlight": "built for how you really sell.",
-        "description": "ZAP POS bills at the counter even when the internet drops, prints FBR's invoice number and QR code, and keeps every counter and branch in step. Set up with the owner over WhatsApp.",
+        "titleHighlight": "FBR-ready receipts for Islamabad's stores.",
+        "description": "Islamabad chain outlets and larger stores are often Tier-1 retailers. ZAP POS prints the FBR invoice number and QR code on every receipt and holds an FBR integrator licence.",
         "faqTitle": "Quick answers",
         "faq": [
           {
-            "q": "Does ZAP POS work in Islamabad?",
-            "a": "Yes. ZAP POS runs on your own computers in the shop, so it works anywhere in Islamabad with a PC and a printer. The internet is only needed to sync to the cloud and send bills to FBR, and both wait if it drops."
+            "q": "Is a shop in Blue Area likely to be a Tier-1 retailer?",
+            "a": "It can be. A retailer that is a unit of a national or international chain of stores is Tier-1, and the definition lists other categories too. Check the Sales Tax Act definition or ask a consultant."
           },
           {
-            "q": "What happens when the internet or power goes?",
-            "a": "If the internet goes, billing carries on and the bills are sent later. If the power goes, a PC on a UPS keeps running, but a PC without one switches off."
+            "q": "Who is the licensed integrator for ZAP POS?",
+            "a": "ZAP POS holds an FBR integrator licence, so the integration is built into the software."
           },
           {
-            "q": "Is it ready for FBR?",
-            "a": "Yes. ZAP POS prints FBR's invoice number and QR code on the receipt and sends returns as credit notes. We hold an FBR integrator licence."
+            "q": "Can I verify a ZAP POS receipt?",
+            "a": "Yes. Each receipt prints FBR's invoice number and a QR code a customer can scan."
           },
           {
-            "q": "How do I get started in Islamabad?",
-            "a": "Book a free demo or message us on WhatsApp. We set up every shop with the owner over WhatsApp."
+            "q": "Does the POS keep billing if the internet drops?",
+            "a": "Yes. Bills made offline are queued and sent to FBR once the connection is back."
           }
         ],
         "ctaTitle": "Want to see it in your Islamabad shop?",
@@ -2619,15 +2613,12 @@
             ]
           },
           {
-            "h": "Internet and load shedding",
+            "h": "What to check before you choose in Islamabad",
             "p": [
-              "When the router goes off, ZAP POS keeps billing and sends the bills once the internet is back. If the power goes, a PC on a UPS keeps running. A PC with no UPS switches off with the power, so no software can bill in a blackout."
-            ]
-          },
-          {
-            "h": "Getting set up in Islamabad",
-            "p": [
-              "We set up every shop with the owner over WhatsApp, and we are happy to answer questions before you buy. Book a free demo and we will show you ZAP POS with the router switched off, on your own kind of products."
+              "Check first whether you are a Tier-1 retailer. A unit of a national or international chain is one, and Islamabad has many such outlets.",
+              "Ask which licensed integrator carries your invoices. ZAP POS holds an FBR integrator licence.",
+              "Scan a receipt with FBR's verification app before you commit. The invoice number and QR code must be there on every bill.",
+              "For F-6, F-7 or Blue Area cafes, ask your consultant which authority collects the tax on your premises."
             ]
           }
         ],
@@ -2645,25 +2636,25 @@
         "seoDescription": "POS software for shops, pharmacies and restaurants in Rawalpindi: bills without internet, FBR invoice number and QR code, several counters and branches, prices in rupees. Book a free demo.",
         "kicker": "POS in Rawalpindi",
         "title": "POS software for Rawalpindi shops,",
-        "titleHighlight": "built for how you really sell.",
-        "description": "ZAP POS bills at the counter even when the internet drops, prints FBR's invoice number and QR code, and keeps every counter and branch in step. Set up with the owner over WhatsApp.",
+        "titleHighlight": "quick billing for Pindi's busy bazaars.",
+        "description": "Rawalpindi's bazaars sell the same item in many packs and sizes. ZAP POS keeps each pack's stock and price, scans fast, and prints FBR and PRA-ready receipts.",
         "faqTitle": "Quick answers",
         "faq": [
           {
-            "q": "Does ZAP POS work in Rawalpindi?",
-            "a": "Yes. ZAP POS runs on your own computers in the shop, so it works anywhere in Rawalpindi with a PC and a printer. The internet is only needed to sync to the cloud and send bills to FBR, and both wait if it drops."
+            "q": "Can ZAP POS sell by piece, dozen and carton?",
+            "a": "Yes. Stock has packs such as dozen, carton, strip and box, and items can be sold by weight."
           },
           {
-            "q": "What happens when the internet or power goes?",
-            "a": "If the internet goes, billing carries on and the bills are sent later. If the power goes, a PC on a UPS keeps running, but a PC without one switches off."
+            "q": "Which authority applies in Rawalpindi?",
+            "a": "Rawalpindi is in Punjab. Services such as restaurants fall under PRA, and shops that sell goods report to FBR."
           },
           {
-            "q": "Is it ready for FBR?",
-            "a": "Yes. ZAP POS prints FBR's invoice number and QR code on the receipt and sends returns as credit notes. We hold an FBR integrator licence."
+            "q": "I sell mobile accessories. How do I avoid mixing models?",
+            "a": "Give each model and colour its own barcode and price."
           },
           {
-            "q": "How do I get started in Rawalpindi?",
-            "a": "Book a free demo or message us on WhatsApp. We set up every shop with the owner over WhatsApp."
+            "q": "Do I need a special printer?",
+            "a": "ZAP POS works with standard thermal receipt printers and USB barcode scanners."
           }
         ],
         "ctaTitle": "Want to see it in your Rawalpindi shop?",
@@ -2691,15 +2682,12 @@
             ]
           },
           {
-            "h": "Internet and load shedding",
+            "h": "What to check before you choose in Rawalpindi",
             "p": [
-              "When the router goes off, ZAP POS keeps billing and sends the bills once the internet is back. If the power goes, a PC on a UPS keeps running. A PC with no UPS switches off with the power, so no software can bill in a blackout."
-            ]
-          },
-          {
-            "h": "Getting set up in Rawalpindi",
-            "p": [
-              "We set up every shop with the owner over WhatsApp, and we are happy to answer questions before you buy. Book a free demo and we will show you ZAP POS with the router switched off, on your own kind of products."
+              "Raja Bazaar shops sell by the piece, dozen and carton. Ask how the POS sells one item in several packs from the same stock.",
+              "Mobile and electronics sellers in Saddar need a barcode for each model and colour. Check how fast the cashier can find the right one.",
+              "If you have a restaurant, PRA's e-IMS applies in Punjab. Ask how the receipt carries the invoice number and PRA QR code.",
+              "We set up every shop with the owner over WhatsApp."
             ]
           }
         ],
@@ -2717,25 +2705,25 @@
         "seoDescription": "POS software for shops, pharmacies and restaurants in Faisalabad: bills without internet, FBR invoice number and QR code, several counters and branches, prices in rupees. Book a free demo.",
         "kicker": "POS in Faisalabad",
         "title": "POS software for Faisalabad shops,",
-        "titleHighlight": "built for how you really sell.",
-        "description": "ZAP POS bills at the counter even when the internet drops, prints FBR's invoice number and QR code, and keeps every counter and branch in step. Set up with the owner over WhatsApp.",
+        "titleHighlight": "built for Faisalabad's cloth and garment trade.",
+        "description": "Faisalabad's cloth and garment shops need stock by size and colour and sales by length or piece. ZAP POS keeps billing going and prints FBR and PRA-ready receipts.",
         "faqTitle": "Quick answers",
         "faq": [
           {
-            "q": "Does ZAP POS work in Faisalabad?",
-            "a": "Yes. ZAP POS runs on your own computers in the shop, so it works anywhere in Faisalabad with a PC and a printer. The internet is only needed to sync to the cloud and send bills to FBR, and both wait if it drops."
+            "q": "Can ZAP POS sell cloth by length?",
+            "a": "ZAP POS sells items by weight and by piece. Ask for a demo of the way you sell cloth by length."
           },
           {
-            "q": "What happens when the internet or power goes?",
-            "a": "If the internet goes, billing carries on and the bills are sent later. If the power goes, a PC on a UPS keeps running, but a PC without one switches off."
+            "q": "Does it keep stock by size and colour?",
+            "a": "See our clothing store page, and confirm in a demo with your own products."
           },
           {
-            "q": "Is it ready for FBR?",
-            "a": "Yes. ZAP POS prints FBR's invoice number and QR code on the receipt and sends returns as credit notes. We hold an FBR integrator licence."
+            "q": "Who do Faisalabad restaurants report to?",
+            "a": "Faisalabad is in Punjab, so restaurants fall under PRA's e-IMS, and shops that sell goods report to FBR."
           },
           {
-            "q": "How do I get started in Faisalabad?",
-            "a": "Book a free demo or message us on WhatsApp. We set up every shop with the owner over WhatsApp."
+            "q": "Can I give a trader a different price?",
+            "a": "ZAP POS supports bulk prices and customer accounts. Check the setup in a demo."
           }
         ],
         "ctaTitle": "Want to see it in your Faisalabad shop?",
@@ -2763,15 +2751,12 @@
             ]
           },
           {
-            "h": "Internet and load shedding",
+            "h": "What to check before you choose in Faisalabad",
             "p": [
-              "When the router goes off, ZAP POS keeps billing and sends the bills once the internet is back. If the power goes, a PC on a UPS keeps running. A PC with no UPS switches off with the power, so no software can bill in a blackout."
-            ]
-          },
-          {
-            "h": "Getting set up in Faisalabad",
-            "p": [
-              "We set up every shop with the owner over WhatsApp, and we are happy to answer questions before you buy. Book a free demo and we will show you ZAP POS with the router switched off, on your own kind of products."
+              "Ask how the POS sells cloth by the metre as well as suits by the piece, and how it keeps stock for each length and piece.",
+              "For garment shops, check how stock is kept by size and colour and how a barcode tag is printed for each.",
+              "Many Faisalabad shops sell to both shoppers and tailors or resellers. Ask about two price levels.",
+              "We set up every shop with the owner over WhatsApp."
             ]
           }
         ],
@@ -2789,25 +2774,25 @@
         "seoDescription": "POS software for shops, pharmacies and restaurants in Multan: bills without internet, FBR invoice number and QR code, several counters and branches, prices in rupees. Book a free demo.",
         "kicker": "POS in Multan",
         "title": "POS software for Multan shops,",
-        "titleHighlight": "built for how you really sell.",
-        "description": "ZAP POS bills at the counter even when the internet drops, prints FBR's invoice number and QR code, and keeps every counter and branch in step. Set up with the owner over WhatsApp.",
+        "titleHighlight": "a gentle move from paper to POS.",
+        "description": "Many Multan shops are family businesses that bill on paper. ZAP POS is simple enough for existing staff, and we set it up with the owner over WhatsApp.",
         "faqTitle": "Quick answers",
         "faq": [
           {
-            "q": "Does ZAP POS work in Multan?",
-            "a": "Yes. ZAP POS runs on your own computers in the shop, so it works anywhere in Multan with a PC and a printer. The internet is only needed to sync to the cloud and send bills to FBR, and both wait if it drops."
+            "q": "My shop bills on paper today. Is a POS too hard?",
+            "a": "The screens are simple, and a new cashier can bill on day one. Setup is done with you over WhatsApp."
           },
           {
-            "q": "What happens when the internet or power goes?",
-            "a": "If the internet goes, billing carries on and the bills are sent later. If the power goes, a PC on a UPS keeps running, but a PC without one switches off."
+            "q": "Can I bring my item list across?",
+            "a": "Ask us about importing your items and prices before you start."
           },
           {
-            "q": "Is it ready for FBR?",
-            "a": "Yes. ZAP POS prints FBR's invoice number and QR code on the receipt and sends returns as credit notes. We hold an FBR integrator licence."
+            "q": "Which authority applies in Multan?",
+            "a": "Multan is in Punjab: PRA for services such as restaurants, FBR for shops that sell goods."
           },
           {
-            "q": "How do I get started in Multan?",
-            "a": "Book a free demo or message us on WhatsApp. We set up every shop with the owner over WhatsApp."
+            "q": "What if my electricity goes off?",
+            "a": "A PC on a UPS keeps running, but a PC without one switches off with the power."
           }
         ],
         "ctaTitle": "Want to see it in your Multan shop?",
@@ -2835,15 +2820,12 @@
             ]
           },
           {
-            "h": "Internet and load shedding",
+            "h": "What to check before you choose in Multan",
             "p": [
-              "When the router goes off, ZAP POS keeps billing and sends the bills once the internet is back. If the power goes, a PC on a UPS keeps running. A PC with no UPS switches off with the power, so no software can bill in a blackout."
-            ]
-          },
-          {
-            "h": "Getting set up in Multan",
-            "p": [
-              "We set up every shop with the owner over WhatsApp, and we are happy to answer questions before you buy. Book a free demo and we will show you ZAP POS with the router switched off, on your own kind of products."
+              "Start with how long your staff need to learn it. Ask a cashier to try the screen during the demo.",
+              "Ask how you bring across your items and prices, so you do not type everything again.",
+              "Check that the receipt prints your NTN and tax office, and that FBR numbers appear if you need them.",
+              "We set up every shop with the owner over WhatsApp, so no one needs to visit."
             ]
           }
         ],
@@ -2851,7 +2833,8 @@
           "title": "Urdu mein · اردو میں",
           "roman": "Multan ki family dukaanon ke liye aasaan screens, owner ke saath WhatsApp par setup, aur purane saman aur qeematein naye system mein.",
           "ur": "ملتان کی خاندانی دکانوں کے لیے آسان اسکرینز، مالک کے ساتھ واٹس ایپ پر سیٹ اپ، اور پرانا سامان اور قیمتیں نئے نظام میں۔"
-        }
+        },
+        "noindex": true
       },
       {
         "slug": "pos-software-peshawar",
@@ -2861,25 +2844,25 @@
         "seoDescription": "POS software for shops, pharmacies and restaurants in Peshawar: bills without internet, FBR invoice number and QR code, several counters and branches, prices in rupees. Book a free demo.",
         "kicker": "POS in Peshawar",
         "title": "POS software for Peshawar shops,",
-        "titleHighlight": "built for how you really sell.",
-        "description": "ZAP POS bills at the counter even when the internet drops, prints FBR's invoice number and QR code, and keeps every counter and branch in step. Set up with the owner over WhatsApp.",
+        "titleHighlight": "KPRA-aware billing for Peshawar shops.",
+        "description": "Peshawar shops pay by cash, card and wallet and answer to KPRA or FBR. ZAP POS applies the right tax by payment method and keeps billing when the internet drops.",
         "faqTitle": "Quick answers",
         "faq": [
           {
-            "q": "Does ZAP POS work in Peshawar?",
-            "a": "Yes. ZAP POS runs on your own computers in the shop, so it works anywhere in Peshawar with a PC and a printer. The internet is only needed to sync to the cloud and send bills to FBR, and both wait if it drops."
+            "q": "Which authority collects service tax in Peshawar?",
+            "a": "Khyber Pakhtunkhwa collects sales tax on services through KPRA. Confirm yours with KPRA or a consultant."
           },
           {
-            "q": "What happens when the internet or power goes?",
-            "a": "If the internet goes, billing carries on and the bills are sent later. If the power goes, a PC on a UPS keeps running, but a PC without one switches off."
+            "q": "Does ZAP POS print KPRA on the receipt?",
+            "a": "ZAP POS prints your NTN, STRN and tax office, including KPRA, on every receipt."
           },
           {
-            "q": "Is it ready for FBR?",
-            "a": "Yes. ZAP POS prints FBR's invoice number and QR code on the receipt and sends returns as credit notes. We hold an FBR integrator licence."
+            "q": "Can tax differ by payment method?",
+            "a": "Yes. Each payment method has its own rate, and a bill paid two ways uses the higher rate."
           },
           {
-            "q": "How do I get started in Peshawar?",
-            "a": "Book a free demo or message us on WhatsApp. We set up every shop with the owner over WhatsApp."
+            "q": "Does billing stop when the internet drops?",
+            "a": "No. The bill is saved and sent when the connection is back."
           }
         ],
         "ctaTitle": "Want to see it in your Peshawar shop?",
@@ -2907,15 +2890,12 @@
             ]
           },
           {
-            "h": "Internet and load shedding",
+            "h": "What to check before you choose in Peshawar",
             "p": [
-              "When the router goes off, ZAP POS keeps billing and sends the bills once the internet is back. If the power goes, a PC on a UPS keeps running. A PC with no UPS switches off with the power, so no software can bill in a blackout."
-            ]
-          },
-          {
-            "h": "Getting set up in Peshawar",
-            "p": [
-              "We set up every shop with the owner over WhatsApp, and we are happy to answer questions before you buy. Book a free demo and we will show you ZAP POS with the router switched off, on your own kind of products."
+              "Ask which authority your business reports to. Services fall under KPRA and shops that sell goods report to FBR.",
+              "Many customers pay by cash, card or mobile wallet. Ask whether the POS applies a different tax rate for each, as ZAP POS does.",
+              "For electronics and dry fruit shops, check how you give each product its own barcode and price.",
+              "We set up every shop with the owner over WhatsApp."
             ]
           }
         ],
@@ -2933,25 +2913,25 @@
         "seoDescription": "POS software for shops, pharmacies and restaurants in Sialkot: bills without internet, FBR invoice number and QR code, several counters and branches, prices in rupees. Book a free demo.",
         "kicker": "POS in Sialkot",
         "title": "POS software for Sialkot shops,",
-        "titleHighlight": "built for how you really sell.",
-        "description": "ZAP POS bills at the counter even when the internet drops, prints FBR's invoice number and QR code, and keeps every counter and branch in step. Set up with the owner over WhatsApp.",
+        "titleHighlight": "retail and bulk billing for Sialkot shops.",
+        "description": "Sialkot shops often sell to shoppers and to business buyers. ZAP POS keeps retail and bulk prices, customer accounts and clean sales records.",
         "faqTitle": "Quick answers",
         "faq": [
           {
-            "q": "Does ZAP POS work in Sialkot?",
-            "a": "Yes. ZAP POS runs on your own computers in the shop, so it works anywhere in Sialkot with a PC and a printer. The internet is only needed to sync to the cloud and send bills to FBR, and both wait if it drops."
+            "q": "Can I keep retail and bulk prices?",
+            "a": "ZAP POS supports bulk prices and customer accounts. Check the setup in a demo."
           },
           {
-            "q": "What happens when the internet or power goes?",
-            "a": "If the internet goes, billing carries on and the bills are sent later. If the power goes, a PC on a UPS keeps running, but a PC without one switches off."
+            "q": "How do I see who bought what?",
+            "a": "Sales are recorded on each bill, with customer accounts for regular buyers."
           },
           {
-            "q": "Is it ready for FBR?",
-            "a": "Yes. ZAP POS prints FBR's invoice number and QR code on the receipt and sends returns as credit notes. We hold an FBR integrator licence."
+            "q": "Which authority applies in Sialkot?",
+            "a": "Sialkot is in Punjab: PRA for services such as restaurants, FBR for shops that sell goods."
           },
           {
-            "q": "How do I get started in Sialkot?",
-            "a": "Book a free demo or message us on WhatsApp. We set up every shop with the owner over WhatsApp."
+            "q": "Does it work with standard printers and scanners?",
+            "a": "Yes, with standard thermal printers and USB barcode scanners."
           }
         ],
         "ctaTitle": "Want to see it in your Sialkot shop?",
@@ -2979,15 +2959,12 @@
             ]
           },
           {
-            "h": "Internet and load shedding",
+            "h": "What to check before you choose in Sialkot",
             "p": [
-              "When the router goes off, ZAP POS keeps billing and sends the bills once the internet is back. If the power goes, a PC on a UPS keeps running. A PC with no UPS switches off with the power, so no software can bill in a blackout."
-            ]
-          },
-          {
-            "h": "Getting set up in Sialkot",
-            "p": [
-              "We set up every shop with the owner over WhatsApp, and we are happy to answer questions before you buy. Book a free demo and we will show you ZAP POS with the router switched off, on your own kind of products."
+              "Ask how the POS handles two price levels, retail and bulk, and how you give a buyer an account.",
+              "Check that every sale shows what was sold, to whom, and on which bill.",
+              "For cafes and restaurants, Punjab's PRA rules apply. Ask how the receipt handles the e-IMS requirement.",
+              "We set up every shop with the owner over WhatsApp."
             ]
           }
         ],
@@ -2995,7 +2972,8 @@
           "title": "Urdu mein · اردو میں",
           "roman": "Sialkot ki dukaanon ke liye retail aur bulk alag qeematein, customer accounts, aur saaf record ke kya kis ko becha.",
           "ur": "سیالکوٹ کی دکانوں کے لیے ریٹیل اور تھوک الگ قیمتیں، کسٹمر اکاؤنٹس، اور صاف ریکارڈ کہ کیا کس کو بیچا۔"
-        }
+        },
+        "noindex": true
       },
       {
         "slug": "pos-software-gujranwala",
@@ -3005,25 +2983,25 @@
         "seoDescription": "POS software for shops, pharmacies and restaurants in Gujranwala: bills without internet, FBR invoice number and QR code, several counters and branches, prices in rupees. Book a free demo.",
         "kicker": "POS in Gujranwala",
         "title": "POS software for Gujranwala shops,",
-        "titleHighlight": "built for how you really sell.",
-        "description": "ZAP POS bills at the counter even when the internet drops, prints FBR's invoice number and QR code, and keeps every counter and branch in step. Set up with the owner over WhatsApp.",
+        "titleHighlight": "order-to-kitchen billing for Gujranwala's food trade.",
+        "description": "Gujranwala's food businesses need table, takeaway and delivery billing with kitchen printing. ZAP POS handles each order and keeps PRA's e-IMS requirement in view.",
         "faqTitle": "Quick answers",
         "faq": [
           {
-            "q": "Does ZAP POS work in Gujranwala?",
-            "a": "Yes. ZAP POS runs on your own computers in the shop, so it works anywhere in Gujranwala with a PC and a printer. The internet is only needed to sync to the cloud and send bills to FBR, and both wait if it drops."
+            "q": "Does ZAP POS send orders to the kitchen?",
+            "a": "Yes. Each item goes to the right kitchen printer by station."
           },
           {
-            "q": "What happens when the internet or power goes?",
-            "a": "If the internet goes, billing carries on and the bills are sent later. If the power goes, a PC on a UPS keeps running, but a PC without one switches off."
+            "q": "Does a Gujranwala restaurant need PRA's e-IMS?",
+            "a": "Restaurants in Punjab are expected to issue computerised receipts through e-IMS. Check your case with PRA or a consultant."
           },
           {
-            "q": "Is it ready for FBR?",
-            "a": "Yes. ZAP POS prints FBR's invoice number and QR code on the receipt and sends returns as credit notes. We hold an FBR integrator licence."
+            "q": "Can I take takeaway and delivery orders?",
+            "a": "Yes. Table, takeaway and delivery orders are supported."
           },
           {
-            "q": "How do I get started in Gujranwala?",
-            "a": "Book a free demo or message us on WhatsApp. We set up every shop with the owner over WhatsApp."
+            "q": "Can tax change by payment method?",
+            "a": "Yes, each way of paying has its own rate."
           }
         ],
         "ctaTitle": "Want to see it in your Gujranwala shop?",
@@ -3051,15 +3029,12 @@
             ]
           },
           {
-            "h": "Internet and load shedding",
+            "h": "What to check before you choose in Gujranwala",
             "p": [
-              "When the router goes off, ZAP POS keeps billing and sends the bills once the internet is back. If the power goes, a PC on a UPS keeps running. A PC with no UPS switches off with the power, so no software can bill in a blackout."
-            ]
-          },
-          {
-            "h": "Getting set up in Gujranwala",
-            "p": [
-              "We set up every shop with the owner over WhatsApp, and we are happy to answer questions before you buy. Book a free demo and we will show you ZAP POS with the router switched off, on your own kind of products."
+              "Ask how each order goes to the right kitchen printer, for table, takeaway and delivery.",
+              "Ask how the receipt shows the unique invoice number and PRA QR code that e-IMS expects.",
+              "Check what happens at the busiest hour of the day when two waiters and a delivery rider send orders at once.",
+              "We set up every shop with the owner over WhatsApp."
             ]
           }
         ],
@@ -3067,7 +3042,8 @@
           "title": "Urdu mein · اردو میں",
           "roman": "Gujranwala ke restaurants aur khane ki dukaanon ke liye table, takeaway aur delivery billing, kitchen printer, aur PRA e-IMS ke mutabiq receipts.",
           "ur": "گوجرانوالہ کے ریستورانوں اور کھانے کی دکانوں کے لیے ٹیبل، ٹیک اوے اور ڈیلیوری بلنگ، کچن پرنٹر، اور پی آر اے ای آئی ایم ایس کے مطابق رسیدیں۔"
-        }
+        },
+        "noindex": true
       },
       {
         "slug": "pos-software-quetta",
@@ -3077,25 +3053,25 @@
         "seoDescription": "POS software for shops, pharmacies and restaurants in Quetta: bills without internet, FBR invoice number and QR code, several counters and branches, prices in rupees. Book a free demo.",
         "kicker": "POS in Quetta",
         "title": "POS software for Quetta shops,",
-        "titleHighlight": "built for how you really sell.",
-        "description": "ZAP POS bills at the counter even when the internet drops, prints FBR's invoice number and QR code, and keeps every counter and branch in step. Set up with the owner over WhatsApp.",
+        "titleHighlight": "billing that keeps going when the connection does not.",
+        "description": "Where internet in Quetta is slow or drops, billing should not stop. ZAP POS bills from the shop's own computer and syncs later.",
         "faqTitle": "Quick answers",
         "faq": [
           {
-            "q": "Does ZAP POS work in Quetta?",
-            "a": "Yes. ZAP POS runs on your own computers in the shop, so it works anywhere in Quetta with a PC and a printer. The internet is only needed to sync to the cloud and send bills to FBR, and both wait if it drops."
+            "q": "Does ZAP POS need a constant internet connection?",
+            "a": "No. Billing runs on your own computer, and syncing waits for the internet."
           },
           {
-            "q": "What happens when the internet or power goes?",
-            "a": "If the internet goes, billing carries on and the bills are sent later. If the power goes, a PC on a UPS keeps running, but a PC without one switches off."
+            "q": "Which authority applies in Quetta?",
+            "a": "Balochistan has its own revenue authority for services, and shops that sell goods report to FBR. Ask us what ZAP POS supports for your authority."
           },
           {
-            "q": "Is it ready for FBR?",
-            "a": "Yes. ZAP POS prints FBR's invoice number and QR code on the receipt and sends returns as credit notes. We hold an FBR integrator licence."
+            "q": "What do I need to run it?",
+            "a": "A Windows 10 or 11 PC, a thermal receipt printer and a USB barcode scanner."
           },
           {
-            "q": "How do I get started in Quetta?",
-            "a": "Book a free demo or message us on WhatsApp. We set up every shop with the owner over WhatsApp."
+            "q": "Can I get set up without a visit?",
+            "a": "We set up every shop with the owner over WhatsApp."
           }
         ],
         "ctaTitle": "Want to see it in your Quetta shop?",
@@ -3123,15 +3099,12 @@
             ]
           },
           {
-            "h": "Internet and load shedding",
+            "h": "What to check before you choose in Quetta",
             "p": [
-              "When the router goes off, ZAP POS keeps billing and sends the bills once the internet is back. If the power goes, a PC on a UPS keeps running. A PC with no UPS switches off with the power, so no software can bill in a blackout."
-            ]
-          },
-          {
-            "h": "Getting set up in Quetta",
-            "p": [
-              "We set up every shop with the owner over WhatsApp, and we are happy to answer questions before you buy. Book a free demo and we will show you ZAP POS with the router switched off, on your own kind of products."
+              "Ask the vendor to bill with the router off, and to show the bill reaching the report later.",
+              "Check which tax authority applies to you. Balochistan has its own revenue authority for services. Ask what the vendor supports for it before you buy.",
+              "Ask what hardware you need: a Windows PC, a thermal printer and a USB scanner.",
+              "We set up every shop with the owner over WhatsApp, so distance is not a problem."
             ]
           }
         ],
@@ -3139,7 +3112,8 @@
           "title": "Urdu mein · اردو میں",
           "roman": "Quetta mein internet kamzor ho ya band ho to bhi billing jari rakhne ke liye ZAP POS dukaan ke apne computer par chalta hai aur baad mein sync karta hai.",
           "ur": "کوئٹہ میں انٹرنیٹ کمزور ہو یا بند ہو تو بھی بلنگ جاری رکھنے کے لیے زیپ پوس دکان کے اپنے کمپیوٹر پر چلتا ہے اور بعد میں سنک کرتا ہے۔"
-        }
+        },
+        "noindex": true
       },
       {
         "slug": "best-pos-software-pakistan",

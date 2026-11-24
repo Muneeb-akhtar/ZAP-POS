@@ -76,13 +76,16 @@ for (const p of merged.pages.items) {
   html = swap(html, /(<meta property="og:description" content=")[^"]*(")/, p.seoDescription)
   html = swap(html, /(<meta name="twitter:title" content=")[^"]*(")/, p.seoTitle)
   html = swap(html, /(<meta name="twitter:description" content=")[^"]*(")/, p.seoDescription)
+  // A page marked noindex gets "noindex, follow" in place of the site-wide robots tag (never two conflicting tags).
+  if (p.noindex) html = html.replace(/<meta name="robots" content="[^"]*" \/>/, '<meta name="robots" content="noindex, follow" />')
   html = html.replace('</head>', `  <script type="application/ld+json">${json(ld)}</script>\n  </head>`)
   await mkdir(resolve(root, `dist/${p.slug}`), { recursive: true })
   await writeFile(resolve(root, `dist/${p.slug}/index.html`), fill(html, render(merged, `/${p.slug}`)))
 }
 
 // Sitemap: home + every inner page.
-const urls = [`${site}/`, ...merged.pages.items.map((p) => `${site}/${p.slug}`)]
+const indexed = merged.pages.items.filter((p) => !p.noindex)
+const urls = [`${site}/`, ...indexed.map((p) => `${site}/${p.slug}`)]
 await writeFile(resolve(root, 'dist/sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `  <url><loc>${u}</loc></url>`).join('\n')}\n</urlset>\n`)
 
 // llms.txt: a plain guide to the site for AI tools (the llms.txt convention), built from the same page list.
@@ -96,7 +99,7 @@ const llms = [
   '## Pages',
   '',
   `- [Home](${site}/): ${merged.brand.about}`,
-  ...merged.pages.items.map((p) => `- [${p.menu}](${site}/${p.slug}): ${p.seoDescription}`),
+  ...indexed.map((p) => `- [${p.menu}](${site}/${p.slug}): ${p.seoDescription}`),
   '',
 ].join('\n')
 await writeFile(resolve(root, 'dist/llms.txt'), llms)
