@@ -3,6 +3,9 @@
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
 
+## 2026-11-24: SEO/AEO answers for stock transfer and the owner console
+- Why: the facts page and the Roman-Urdu Q&A page (what search and AI answers quote) did not mention branch stock transfer or the owner console. Added two questions to each (`zap-pos-facts`, `pos-software-sawal-jawab` in `landing-content.json`); they also feed FAQPage data and `llms.txt`. **Republish Extra pages in the admin.**
+
 ## 2026-11-24: Help desk reads the shops' Support threads from ZAP POS
 - Why: ZAP POS's Support screen already sends its threads to ZAP cloud (`zap_support`), but nothing in the admin read them, so a shop's message and photo went unseen and replies could not be sent. Now they can.
 - Cloud (desktop repo `cloud/0007_support_admin.sql`, applied to Supabase): admin-only `admin_support_threads()`, `admin_support_thread(id)` (messages with photos), `admin_support_reply(id, body, status, msg_id)` (a reply is a `from_zap` message, so `zap_support` returns it to the shop's main PC at its next sync; same `msg_id` twice is kept once; status only open/solved). Not granted to anon; non-admins get an error.

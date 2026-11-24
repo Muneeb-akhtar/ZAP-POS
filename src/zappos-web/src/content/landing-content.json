@@ -2898,6 +2898,14 @@
           {
             "q": "Which businesses use ZAP POS?",
             "a": "Kiryana stores, supermarkets, pharmacies, bakeries, clothing and shoe shops, restaurants and cafes, from one counter to several branches."
+          },
+          {
+            "q": "Can ZAP POS move stock between branches?",
+            "a": "Yes. From version 1.9.149 a manager can send stock to another branch of the same owner. It leaves the sender at once, a numbered slip prints, and the receiving branch counts what arrived. A short count is recorded, never hidden."
+          },
+          {
+            "q": "Can the owner see all branches from a phone?",
+            "a": "Yes. The owner signs in at zappos.pk/account with the same login as ZAP POS and sees today's sales of every branch, each branch on its own, top sellers, low stock, stock transfers and the plan."
           }
         ],
         "ctaTitle": "See it for yourself",
@@ -2951,6 +2959,14 @@
           {
             "q": "ZAP POS kahan se milega?",
             "a": "Website ke Download page se. Setup ke liye licence key chahiye; key na ho to setup mein WhatsApp button dabayein, hum bhej denge."
+          },
+          {
+            "q": "Kya ek branch se doosri branch ko stock bheja ja sakta hai?",
+            "a": "Ji haan. ZAP POS 1.9.149 se manager apni doosri branch ko stock bhej sakta hai. Stock usi waqt bhejne wali branch se kam ho jata hai, number wali parchi print hoti hai, aur dosri branch gin kar receive karti hai. Kam aaya to wo likha jata hai, chhupaya nahi jata."
+          },
+          {
+            "q": "Kya owner sab branches phone par dekh sakta hai?",
+            "a": "Ji haan. Owner zappos.pk/account par ZAP POS wale login se sign in kare to har branch ki aaj ki sale, top bikne wali cheezein, kam stock aur stock transfers dekh sakta hai."
           }
         ],
         "ctaTitle": "Mazeed sawal?",
