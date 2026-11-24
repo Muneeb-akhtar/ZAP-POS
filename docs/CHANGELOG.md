@@ -3,6 +3,9 @@
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
 
+## 2026-11-24: Branches page no longer says the owner view is coming
+- Why: the owner console at /account has been live since 1.9.148; the page still marked it "Soon". `multi-branch-pos` in `landing-content.json`: stat, feature (no `soon`), solved line and FAQ now say it is live. **Republish Extra pages in the admin** for the live site.
+
 ## 2026-11-24: branch stock transfer (ZAP POS 1.9.149): owner console card and info page
 - Why: ZAP POS 1.9.149 lets a manager send stock from one branch to another (numbered slip, receiver counts, short counts recorded). The owner should see these on the web, and the site must say so only now that it is true.
 - Owner console (`account/OwnerConsole.jsx`): new `TransfersCard` from `my_transfers(30)` (desktop repo `cloud/0006_stock_transfers.sql`, tenant-scoped like `my_branches()`): number, from → to, units, status chip (On the way / Received / Received, n short / Sent back / Cancelled), updated. On a branch's view only that branch's transfers. A failure of this call never hides the sales; no transfers means no card. Chip `own-chip.mute` (+ dark twin) in `admin/admin.css`. Texts: `account.owner` (`transfers*`, `col*`, `tr*`).

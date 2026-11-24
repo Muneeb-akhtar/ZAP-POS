@@ -2389,8 +2389,8 @@
             "label": "plan pricing"
           },
           {
-            "value": "Soon",
-            "label": "all branches live on your phone"
+            "value": "Live",
+            "label": "all branches on your phone"
           }
         ],
         "problemsTitle": "What goes wrong across branches",
@@ -2400,7 +2400,7 @@
           "Every branch keeps its own notebook and nothing adds up.",
           "The owner has to visit each branch to know the day's sale."
         ],
-        "solvedLine": "ZAP POS is built so every branch stands on its own, and the owner's view of all of them is on the way.",
+        "solvedLine": "ZAP POS is built so every branch stands on its own, and you see all of them together in the owner console.",
         "featuresTitle": "How ZAP POS runs a chain",
         "features": [
           {
@@ -2426,8 +2426,7 @@
           {
             "icon": "chart",
             "title": "All branches on one screen",
-            "text": "See today's sales, bills and top products of every branch together from your phone or the web.",
-            "soon": true
+            "text": "See today's sales, bills, cash, top sellers and low stock of every branch together from your phone or the web, after signing in at zappos.pk/account."
           },
           {
             "icon": "box",
@@ -2451,7 +2450,7 @@
           },
           {
             "q": "Can I see all my branches' sales from my phone?",
-            "a": "That owner view is coming soon. Today each branch's sales and reports are on its own main PC."
+            "a": "Yes. Sign in at zappos.pk/account with the same login as ZAP POS. Each branch's main PC sends its totals whenever it has internet, so you see today's sales of every branch, each branch on its own, and the plan."
           },
           {
             "q": "Can one branch send stock to another?",
