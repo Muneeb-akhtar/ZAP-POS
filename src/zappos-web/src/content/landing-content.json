@@ -658,6 +658,7 @@
       "installShare": "The Share button is down here",
       "installGotIt": "Got it",
       "installStepsAndroid": ["Tap the ⋮ menu at the top right of Chrome", "Tap Install app (or Add to Home screen)", "Tap Install. ZAP POS is now on your home screen"],
+      "installOnPhone": "The owner app is for your phone. Open zappos.pk/account on your Android phone or iPhone to install it. On this computer, just log in here.",
       "installDismiss": "Not now",
       "phTabToday": "Today",
       "phTabBranches": "Branches",

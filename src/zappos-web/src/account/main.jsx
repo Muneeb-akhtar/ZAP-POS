@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import AccountApp from './AccountApp.jsx'
+import { isPhone } from './ownerData.js'
 // Same fonts, tokens and form/table styles as the admin panel.
 import '@fontsource-variable/bricolage-grotesque'
 import '@fontsource/inter/latin-400.css'
@@ -18,5 +19,13 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   </React.StrictMode>
 )
 
-// Makes /account/ installable on phones (public/account/sw.js; caches only the app's own files, never business data).
-if ('serviceWorker' in navigator) window.addEventListener('load', () => navigator.serviceWorker.register('/account/sw.js', { scope: '/account/' }).catch(() => {}))
+// Makes /account/ installable on phones only (manifest + public/account/sw.js, which keeps the app's own files).
+// On a computer there is no manifest and no worker, so Chrome/Edge on Windows never show "Install app";
+// a worker left from an earlier visit on a computer is removed.
+if (isPhone()) {
+  const link = Object.assign(document.createElement('link'), { rel: 'manifest', href: '/account/manifest.webmanifest' })
+  document.head.appendChild(link)
+  if ('serviceWorker' in navigator) window.addEventListener('load', () => navigator.serviceWorker.register('/account/sw.js', { scope: '/account/' }).catch(() => {}))
+} else if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.getRegistrations().then((rs) => rs.forEach((r) => r.unregister())).catch(() => {})
+}

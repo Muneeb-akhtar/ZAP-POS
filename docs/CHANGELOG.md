@@ -3,6 +3,10 @@
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
 
+## 2026-11-25: The owner app installs on phones only
+- Owner request: Windows (and Mac) users must not install the owner app. The manifest link is no longer in `account/index.html`; `src/account/main.jsx` adds it and registers `sw.js` only when `isPhone()` (`ownerData.js`: Android, iPhone, iPad), so Chrome/Edge on a computer never show "Install app". On a computer, a worker left from an earlier visit is unregistered. `InstallHint.jsx` shows nothing on a computer, except after the home page's Android/iPhone button, where it says to open zappos.pk/account on the phone (`account.owner.installOnPhone`).
+- Files: `account/index.html`, `src/account/{main.jsx,ownerData.js,InstallHint.jsx}`, `landing-content.json`, docs.
+
 ## 2026-11-25: App buttons restyled as store-style badges
 - Owner found the final section's Android / iPhone / WhatsApp buttons dull and sent the official Play Store / App Store badges as the look to follow. Restyled `.store` (`styles.css`) to that look: black, thin white border, small line over a big name in `--font-head`, large icons (green Android robot, white Apple, green WhatsApp). The official badges themselves are **not** used: Google and Apple allow them only for apps listed in their stores, and ZAP POS isn't yet (rule 5b: copy must stay true). Swap in the real badges once the store apps exist. Hover moved into the hover media block (rule 4); the old `.final .store` and dark-theme overrides removed (the section is always dark).
 - Files: `styles.css`, `Sections.jsx`, docs.

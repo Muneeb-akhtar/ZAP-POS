@@ -11,3 +11,5 @@ export const qty = (n) => Number(n).toLocaleString('en-PK', { maximumFractionDig
 export const greet = (o) => { const h = Number(new Date().toLocaleString('en-GB', { hour: 'numeric', hour12: false, timeZone: 'Asia/Karachi' })); return h < 12 ? o.morning : h < 17 ? o.afternoon : o.evening }
 export const clock = (ms) => new Date(ms).toLocaleTimeString('en-GB', { hour: 'numeric', minute: '2-digit', hour12: true, timeZone: 'Asia/Karachi' }).replace(' ', ' ')
 export const OWNER_CACHE = 'zap-owner-cache'   // last figures loaded on this phone (OwnerConsole), removed on sign-out (AccountApp)
+// Phones and tablets only: the owner app is for the owner's phone, so computers (Windows, Mac) are never offered it.
+export const isPhone = () => navigator.userAgentData?.mobile === true || /android|iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
