@@ -108,6 +108,12 @@ h2 .hl { display: block; }
 /* ---------- Shared bits ---------- */
 .kicker { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--brand-700); background: var(--brand-50); border: 1px solid var(--brand-100); padding: 6px 13px 6px 11px; border-radius: 999px; transition: all .5s; }
 .kicker.light { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.14); color: var(--yellow); }
+/* hero badge: the bolt glows and blinks blue, slowly, like a "live" light */
+.kicker-live svg { color: var(--brand-500); animation: kickerLive 2.6s ease-in-out infinite; }
+@keyframes kickerLive {
+  0%, 100% { opacity: 1; filter: drop-shadow(0 0 2px var(--brand-400)) drop-shadow(0 0 7px var(--brand-500)); }
+  50% { opacity: .35; filter: drop-shadow(0 0 0 transparent); }
+}
 .scribble { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-hand); font-size: 25px; font-weight: 700; color: var(--brand-700); line-height: 1; transform: rotate(-3deg); }
 .scribble .arrow { flex-shrink: 0; }
 .scribble.left .arrow { transform: scaleX(1) rotate(-10deg); }

@@ -114,7 +114,7 @@ export default function Hero({ hero, brand, links, release }) {
     <section id="home" className={`hero is-${phase}`}>
       <div className="container hero-grid">
         <div className="hero-copy">
-          <Kicker>{hero.kicker}</Kicker>
+          <Kicker live>{hero.kicker}</Kicker>
 
           {/* Headline: what the POS does; the yellow line draws under the last row */}
           <h1 className="h-rows">

@@ -79,7 +79,7 @@ Rendered by `App.jsx` in this order (plus `LeadForm.jsx`, the demo request modal
 
 Shared building blocks:
 - `Icons.jsx`: `<Icon name size fill className />` (stroke icons from the `paths` map; adds class `icon icon-<name>`) and `<Logo size />` (blue gradient square + white bolt).
-- `Bits.jsx`: `Kicker` (pill label), `Scribble` (handwritten note + arrow, `dir` = left/up/right), `Squiggle` (self-drawing yellow underline, hero headline), `Stars`, `Barcode` (deterministic from a seed string), `formatRs(n)`.
+- `Bits.jsx`: `Kicker` (pill label; `live` = bolt glows and blinks blue, hero only), `Scribble` (handwritten note + arrow, `dir` = left/up/right), `Squiggle` (self-drawing yellow underline, hero headline), `Stars`, `Barcode` (deterministic from a seed string), `formatRs(n)`.
 - `Mockups.jsx`: `Monitor` (screen + stand) and `PosBillingScreen({ status })` (the fake POS UI in the hero).
 - `Sections.jsx` (internal): `BrandName` splits `brand.name` into "ZAP" + `.brand-accent` "POS" (two-tone wordmark in navbar and footer).
 

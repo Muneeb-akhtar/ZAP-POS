@@ -3,6 +3,10 @@
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
 
+## 2026-11-25: Hero badge bolt blinks blue
+- Owner request: the bolt in the hero's "Made for shops in Pakistan" badge now glows and blinks blue slowly (2.6 s), like a live light. `Kicker` gets a `live` prop (class `kicker-live`, filled bolt; used only in `Hero.jsx`), CSS `.kicker-live svg` + `@keyframes kickerLive` next to `.kicker` in `styles.css` (brand tokens, so light and dark both work; reduced motion stops it by the global rule). Named `kicker-live`, not `live`, because `.live` is the small green dot.
+- Files: `Bits.jsx`, `Hero.jsx`, `styles.css`, docs.
+
 ## 2026-11-25: WhatsApp logo on the floating button
 - Owner request: the round button bottom-right showed a plain chat bubble (the outline `whatsapp` icon drawn filled loses its phone). New filled icon `whatsappLogo` in `Icons.jsx`, the standard WhatsApp glyph (Simple Icons path; a first hand-drawn version had the wrong phone shape and was replaced the same night), used by `WhatsAppFloat.jsx` and the final section's WhatsApp badge. The outline `whatsapp` icon stays for buttons that draw it as a line.
 - Files: `Icons.jsx`, `WhatsAppFloat.jsx`, `Sections.jsx`, docs.

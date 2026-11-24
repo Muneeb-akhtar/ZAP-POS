@@ -2,8 +2,9 @@ import Icon from './Icons.jsx'
 
 // Small shared pieces used across sections.
 
-export const Kicker = ({ children, icon = 'zap', light = false }) => (
-  <span className={`kicker ${light ? 'light' : ''}`}><Icon name={icon} size={13} />{children}</span>
+// live: the icon glows and blinks blue slowly, like a "live" light (hero only)
+export const Kicker = ({ children, icon = 'zap', light = false, live = false }) => (
+  <span className={`kicker ${light ? 'light' : ''} ${live ? 'kicker-live' : ''}`}><Icon name={icon} size={13} fill={live} />{children}</span>
 )
 
 // Handwritten note with a hand-drawn arrow. dir: which way the arrow points.
