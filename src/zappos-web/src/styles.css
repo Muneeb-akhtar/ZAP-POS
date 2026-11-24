@@ -707,6 +707,9 @@ html.modal-open { overflow: hidden; }
   .ip-cmp-row:last-child { border-bottom: 0; }
   .ip-cmp-row p b { display: none; }
 }
+.ip-shot-wrap { padding-block: 0 8px; }
+.ip-shot { display: block; max-width: 760px; width: 100%; height: auto; margin-inline: auto; border-radius: 16px; border: 1px solid var(--line); }
+.ip-article .ip-byline { font-size: 14px; color: var(--text); opacity: .75; margin: 0; }
 .ip-urdu-wrap { padding-block: 0 8px; }
 .ip-urdu { max-width: 760px; margin-inline: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px 22px; display: grid; gap: 10px; }
 .ip-urdu-label { font-weight: 700; color: var(--brand-600); font-family: var(--urdu-font); }

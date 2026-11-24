@@ -3,6 +3,14 @@
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
 
+## 2026-11-24: SEO round 2 (screenshots, share images, orphans, byline)
+- Home hero description now says "point of sale (POS) software in Pakistan" (also updated in the published Supabase `site_content`, since published text overrides the built-in; the locked headline and POS scene are untouched). The demo poster has alt text (`video.posterAlt`).
+- Screenshot `public/media/zap-pos-billing-screen.jpg` (cropped from the demo poster) added with alt text to nine pages through the new `image` field (restaurant, supermarket, kiryana, bakery, offline billing, how it works, many counters, FBR invoicing, Lahore). One image repeated: more varied real screenshots would be better.
+- Per-page share images: 41 files in `public/og/` (3.5 MB) made by `scripts/make-og-images.py`; prerender points `og:image` and `twitter:image` at them. Pages marked `noindex` have none.
+- Orphan pages (Karachi, Islamabad, Rawalpindi, Faisalabad, Peshawar, About, Roman Urdu "kya hai") now get links from related lists of industry and other pages.
+- Byline on pages with a publish date: "By the ZAP POS team · Published <date>" (no invented person).
+- Still needs the owner: Search Console and Bing, backlinks and directories, verified Google profile, real reviews, PageSpeed check, YouTube demo, the `zap-pos-facts` contradiction.
+
 ## 2026-11-24: SEO clean-up (titles, links, offers, lastmod)
 - Every indexed page now has a title of 60 characters or fewer and a description of 155 or fewer (the audit found about 25 titles and 30 descriptions over the limit; they would be cut off in results).
 - Internal links: 28 pages got a curated `related` list (replacing the generic strip, which only repeated the footer), and 36 contextual links `[words](/slug)` were added in article text. New helper `withLinks` in `InfoPage.jsx`; link style `.ip-article p a`.

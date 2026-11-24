@@ -5,6 +5,7 @@
 // The published content is fetched from Supabase (same public read the browser does); if that is not possible the
 // built-in content is used and a warning is printed.
 import { readFile, writeFile, mkdir, rm } from 'node:fs/promises'
+import { existsSync } from 'node:fs'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import { resolve } from 'node:path'
 import { loadEnv } from 'vite'
@@ -78,6 +79,12 @@ for (const p of merged.pages.items) {
   html = swap(html, /(<meta name="twitter:description" content=")[^"]*(")/, p.seoDescription)
   // A page marked noindex gets "noindex, follow" in place of the site-wide robots tag (never two conflicting tags).
   if (p.noindex) html = html.replace(/<meta name="robots" content="[^"]*" \/>/, '<meta name="robots" content="noindex, follow" />')
+  // Own share image when scripts/make-og-images.py has made one for this page; otherwise the site-wide one stays.
+  if (existsSync(resolve(root, `public/og/${p.slug}.jpg`))) {
+    html = swap(html, /(<meta property="og:image" content=")[^"]*(")/, `${site}/og/${p.slug}.jpg`)
+    html = swap(html, /(<meta name="twitter:image" content=")[^"]*(")/, `${site}/og/${p.slug}.jpg`)
+    html = swap(html, /(<meta property="og:image:alt" content=")[^"]*(")/, p.seoTitle)
+  }
   html = html.replace('</head>', `  <script type="application/ld+json">${json(ld)}</script>\n  </head>`)
   await mkdir(resolve(root, `dist/${p.slug}`), { recursive: true })
   await writeFile(resolve(root, `dist/${p.slug}/index.html`), fill(html, render(merged, `/${p.slug}`)))

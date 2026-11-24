@@ -60,7 +60,7 @@
         "accent": "every branch."
       }
     ],
-    "description": "ZAP POS is point of sale software for clothing stores, supermarkets, pharmacies and restaurants. Fast billing, barcode and printer support, inventory, multi-branch sync and live sales on your phone. And it keeps billing when the internet drops.",
+    "description": "ZAP POS is point of sale (POS) software in Pakistan for clothing stores, supermarkets, pharmacies and restaurants. Fast billing, barcode and printer support, inventory, multi-branch sync and live sales on your phone. And it keeps billing when the internet drops.",
     "primaryCta": "Download for Windows",
     "downloadNote": "Windows 10 or 11, 64-bit",
     "secondaryCta": "Book a free demo",
@@ -144,7 +144,8 @@
       "Keeps billing when the internet drops",
       "Every counter in one place"
     ],
-    "cta": "Book a free demo"
+    "cta": "Book a free demo",
+    "posterAlt": "ZAP POS billing screen with a bill of two dishes, the total in rupees and a Pay and print button"
   },
   "counters": {
     "kicker": "Multi-counter, live",
@@ -1097,7 +1098,13 @@
           "plans",
           "best-pos-software-pakistan",
           "pos-software-lahore"
-        ]
+        ],
+        "image": {
+          "src": "/media/zap-pos-billing-screen.jpg",
+          "alt": "ZAP POS billing screen where a bill is paid and printed, with the receipt carrying FBR's invoice number",
+          "width": 840,
+          "height": 442
+        }
       },
       {
         "slug": "fbr-pos-integration-guide",
@@ -1546,7 +1553,7 @@
           "fbr-invoicing",
           "kiryana-store-pos",
           "multi-branch-pos",
-          "pos-hardware",
+          "pos-software-islamabad",
           "pos-software-lahore"
         ]
       },
@@ -1652,8 +1659,14 @@
           "pos-hardware",
           "bakery-pos",
           "pos-software-lahore",
-          "plans"
-        ]
+          "pos-software-islamabad"
+        ],
+        "image": {
+          "src": "/media/zap-pos-billing-screen.jpg",
+          "alt": "ZAP POS billing screen for a restaurant: dishes with prices, an open bill, and a Pay and print button",
+          "width": 840,
+          "height": 442
+        }
       },
       {
         "slug": "supermarket-pos",
@@ -1757,8 +1770,14 @@
           "barcode-system-for-your-shop",
           "how-to-count-stock-in-a-shop",
           "pos-hardware",
-          "plans"
-        ]
+          "pos-software-karachi"
+        ],
+        "image": {
+          "src": "/media/zap-pos-billing-screen.jpg",
+          "alt": "ZAP POS billing screen with product tiles, stock counts, and an open bill with the total in rupees",
+          "width": 840,
+          "height": 442
+        }
       },
       {
         "slug": "kiryana-store-pos",
@@ -1861,8 +1880,14 @@
           "barcode-system-for-your-shop",
           "offline-billing",
           "pos-vs-register-excel",
-          "plans"
-        ]
+          "pos-software-rawalpindi"
+        ],
+        "image": {
+          "src": "/media/zap-pos-billing-screen.jpg",
+          "alt": "ZAP POS billing screen with product tiles, stock counts and a quick sale button",
+          "width": 840,
+          "height": 442
+        }
       },
       {
         "slug": "bakery-pos",
@@ -1961,8 +1986,14 @@
           "pos-hardware",
           "offline-billing",
           "fbr-invoicing",
-          "plans"
-        ]
+          "pos-software-peshawar"
+        ],
+        "image": {
+          "src": "/media/zap-pos-billing-screen.jpg",
+          "alt": "ZAP POS billing screen with product tiles and prices, and an open bill ready to print",
+          "width": 840,
+          "height": 442
+        }
       },
       {
         "slug": "clothing-store-pos",
@@ -2089,7 +2120,7 @@
           "cosmetics-store-pos",
           "barcode-system-for-your-shop",
           "multi-branch-pos",
-          "branch-stock-transfer",
+          "pos-software-faisalabad",
           "pos-software-lahore"
         ]
       },
@@ -2195,7 +2226,7 @@
           "multi-branch-pos",
           "branch-stock-transfer",
           "fbr-invoicing",
-          "plans"
+          "pos-software-faisalabad"
         ]
       },
       {
@@ -2405,7 +2436,7 @@
           "pos-hardware",
           "offline-billing",
           "pos-software-lahore",
-          "plans"
+          "pos-software-peshawar"
         ]
       },
       {
@@ -2598,9 +2629,15 @@
           "restaurant-pos",
           "mobile-accessories-shop-pos",
           "pharmacy-pos",
-          "offline-billing",
-          "fbr-pos-integration-guide"
-        ]
+          "pos-software-karachi",
+          "pos-software-islamabad"
+        ],
+        "image": {
+          "src": "/media/zap-pos-billing-screen.jpg",
+          "alt": "ZAP POS billing screen as used in a Lahore shop: items, an open bill, and a Pay and print button",
+          "width": 840,
+          "height": 442
+        }
       },
       {
         "slug": "pos-software-karachi",
@@ -2676,7 +2713,8 @@
           "pharmacy-pos",
           "clothing-store-pos",
           "offline-billing",
-          "fbr-pos-integration-guide"
+          "fbr-pos-integration-guide",
+          "pos-software-lahore"
         ]
       },
       {
@@ -2830,7 +2868,8 @@
           "supermarket-pos",
           "pharmacy-pos",
           "offline-billing",
-          "fbr-pos-integration-guide"
+          "fbr-pos-integration-guide",
+          "pos-software-lahore"
         ]
       },
       {
@@ -2907,7 +2946,8 @@
           "bakery-pos",
           "kiryana-store-pos",
           "offline-billing",
-          "fbr-pos-integration-guide"
+          "fbr-pos-integration-guide",
+          "pos-software-lahore"
         ]
       },
       {
@@ -3062,7 +3102,8 @@
           "pharmacy-pos",
           "kiryana-store-pos",
           "offline-billing",
-          "fbr-pos-integration-guide"
+          "fbr-pos-integration-guide",
+          "pos-software-lahore"
         ]
       },
       {
@@ -3418,7 +3459,7 @@
           "zap-pos-vs-moneypex",
           "fbr-pos-integration-guide",
           "what-is-pos-software",
-          "plans"
+          "about"
         ]
       },
       {
@@ -3969,7 +4010,7 @@
           "pos-hardware",
           "barcode-system-for-your-shop",
           "kiryana-store-pos",
-          "plans"
+          "pos-software-kya-hai"
         ]
       },
       {
@@ -4198,7 +4239,15 @@
           "title": "Urdu mein · اردو میں",
           "roman": "",
           "ur": "پوس کا مطلب پوائنٹ آف سیل ہے، یعنی جہاں گاہک پیسے دیتا ہے۔ پوس سافٹ ویئر کاؤنٹر کے کمپیوٹر پر چلتا ہے اور بل اور اسٹاک سنبھالتا ہے۔"
-        }
+        },
+        "related": [
+          "pos-software-sawal-jawab",
+          "what-is-pos-software",
+          "offline-billing",
+          "kiryana-store-pos",
+          "plans",
+          "download"
+        ]
       },
       {
         "slug": "how-it-works",
@@ -4300,10 +4349,16 @@
           "offline-billing",
           "multi-counter-pos",
           "multi-branch-pos",
-          "pos-hardware",
+          "about",
           "download",
           "plans"
-        ]
+        ],
+        "image": {
+          "src": "/media/zap-pos-billing-screen.jpg",
+          "alt": "ZAP POS counter screen connected to the main PC, with an open bill and a synced status",
+          "width": 840,
+          "height": 442
+        }
       },
       {
         "slug": "offline-billing",
@@ -4407,7 +4462,13 @@
           "multi-counter-pos",
           "fbr-invoicing",
           "plans"
-        ]
+        ],
+        "image": {
+          "src": "/media/zap-pos-billing-screen.jpg",
+          "alt": "ZAP POS billing screen showing the main PC connected, a synced status, and an open bill",
+          "width": 840,
+          "height": 442
+        }
       },
       {
         "slug": "multi-counter-pos",
@@ -4503,7 +4564,13 @@
           "how-it-works",
           "pos-hardware",
           "plans"
-        ]
+        ],
+        "image": {
+          "src": "/media/zap-pos-billing-screen.jpg",
+          "alt": "ZAP POS counter screen showing the main PC connection and an open bill",
+          "width": 840,
+          "height": 442
+        }
       },
       {
         "slug": "multi-branch-pos",
@@ -4877,7 +4944,15 @@
           "title": "Urdu mein · اردو میں",
           "roman": "ZAP POS Lahore mein bana hai, un masail ko samne rakh kar jo yahan billing mushkil banate hain, jaise internet ka jana.",
           "ur": "زیپ پوس لاہور میں بنا ہے، ان مسائل کو سامنے رکھ کر جو یہاں بلنگ مشکل بناتے ہیں، جیسے انٹرنیٹ کا جانا۔"
-        }
+        },
+        "related": [
+          "how-it-works",
+          "zap-pos-facts",
+          "plans",
+          "pos-software-lahore",
+          "download",
+          "fbr-invoicing"
+        ]
       },
       {
         "slug": "privacy",
@@ -5108,7 +5183,15 @@
           "title": "Urdu mein · اردو میں",
           "roman": "ZAP POS ek offline-first POS hai jo Pakistani dukaanon ke liye bana hai. Yeh page uski sab khususiyat ek jagah batata hai.",
           "ur": "زیپ پوس ایک آف لائن فرسٹ پوس ہے جو پاکستانی دکانوں کے لیے بنا ہے۔ یہ صفحہ اس کی تمام خصوصیات ایک جگہ بتاتا ہے۔"
-        }
+        },
+        "related": [
+          "about",
+          "how-it-works",
+          "plans",
+          "offline-billing",
+          "fbr-invoicing",
+          "pos-software-lahore"
+        ]
       },
       {
         "slug": "pos-software-sawal-jawab",
@@ -5176,7 +5259,15 @@
           "title": "Urdu mein · اردو میں",
           "roman": "",
           "ur": "دکاندار جو سوال ہم سے واٹس ایپ پر پوچھتے ہیں، ان کے سیدھے جواب یہاں رومن اردو میں ہیں۔"
-        }
+        },
+        "related": [
+          "pos-software-kya-hai",
+          "offline-billing",
+          "fbr-invoicing",
+          "billing-during-load-shedding",
+          "plans",
+          "download"
+        ]
       }
     ],
     "shortLabel": "Short answer",

@@ -72,6 +72,8 @@ const withLinks = (text) => text.split(/(\[[^\]]+\]\(\/[a-z0-9-]+\))/).map((part
   return m ? <a key={i} href={m[2]}>{m[1]}</a> : part
 })
 
+const dateLabel = (iso) => new Date(`${iso}T00:00:00Z`).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' })
+
 const Head = ({ title, text }) => (
   <div className="ip-head"><h2>{title}</h2>{text && <p>{text}</p>}</div>
 )
@@ -91,6 +93,13 @@ export default function InfoPage({ page, pages, pricing, finalCta, brand, links,
               <span className="ip-short-label">{page.shortLabel ?? pages.shortLabel}</span>
               <p>{page.shortAnswer}</p>
             </div>
+          </div>
+        </section>
+      )}
+      {page.image && (
+        <section className="ip-block ip-shot-wrap">
+          <div className="container">
+            <img className="ip-shot" src={page.image.src} alt={page.image.alt} width={page.image.width} height={page.image.height} loading="lazy" decoding="async" />
           </div>
         </section>
       )}
@@ -129,6 +138,7 @@ export default function InfoPage({ page, pages, pricing, finalCta, brand, links,
       {page.article?.length > 0 && (
         <section className="ip-block">
           <article className="container ip-article">
+            {page.published && <p className="ip-byline">By the ZAP POS team · Published <time dateTime={page.published}>{dateLabel(page.published)}</time></p>}
             {page.article.map((sec) => (
               <div key={sec.h}>
                 <h2>{sec.h}</h2>
