@@ -13,7 +13,8 @@ import { addDays, clock, fill, greet, isOnline, pkDay, qty } from './ownerData.j
 // Texts: account.owner.app in landing-content.json. Styles: "Owner app on a phone" block at the end of admin/admin.css.
 
 const TABS = [['all', 'home'], ['branches', 'server'], ['sales', 'receipt'], ['stock', 'box'], ['me', 'user']]
-const SUBS = ['plan', 'shifts', 'transfers', 'support']   // screens opened from Me, with a back button
+const TYPES = [null, 'standard', 'weighted', 'variant']   // product filter pills (a.types)
+const SUBS = ['plan', 'shifts', 'transfers', 'support', 'customers', 'suppliers', 'purchases', 'categories']   // screens opened from Me, with a back button
 const pkDate = (iso) => (iso ? new Date(iso).toLocaleDateString('en-CA', { timeZone: 'Asia/Karachi' }) : '')
 const dayTitle = (day) => new Date(`${day}T12:00:00Z`).toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'UTC' })
 
@@ -80,18 +81,27 @@ export default function PhoneConsole({ acc, o, t, links, data, transfers, loaded
   const a = o.app
   const branches = data?.branches ?? []
   const branch = branches.find((b) => b.id === view)
-  const sub = SUBS.includes(view) ? view : null
+  const partyId = view.startsWith('party:') ? view.slice(6) : null   // a customer's or supplier's ledger
+  const sub = SUBS.includes(view) ? view : partyId ? 'ledger' : null
   const tab = branch ? 'branches' : sub ? 'me' : TABS.some(([id]) => id === view) ? view : 'all'
   const [pick, setPick] = useState(null)   // branch id the figures are narrowed to, null = all
   const [picker, setPicker] = useState(false)
-  const [shiftInfo, setShiftInfo] = useState(false)
+  const [openForm, setOpenForm] = useState(null)    // { branchId, code, cash } while the Open shift sheet is up
+  const [closeForm, setCloseForm] = useState(null)  // { shift, cash } while the Close shift sheet is up
+  const [cmd, setCmd] = useState(null)              // the command just sent: { id, status, result, error }
+  const [prodQ, setProdQ] = useState('')
+  const [prodQd, setProdQd] = useState('')          // the search, a moment after typing stops
+  const [prodType, setProdType] = useState(0)
+  const [prodStock, setProdStock] = useState(null)
+  const [partyQ, setPartyQ] = useState('')
+  const [buyAll, setBuyAll] = useState(false)
+  const [buy, setBuy] = useState(null)              // a purchase open in its sheet
   const [salesAll, setSalesAll] = useState(false)
   const [range, setRange] = useState(0)    // index into a.ranges: Today, Week, Month, All, Pick dates
   const today = pkDay()
   const [custom, setCustom] = useState({ from: addDays(today, -6), to: today })
   const [bill, setBill] = useState(null)
-  const [stockQ, setStockQ] = useState('')
-  const [stockF, setStockF] = useState(0)
+  useEffect(() => { const t = setTimeout(() => setProdQd(prodQ.trim()), 350); return () => clearTimeout(t) }, [prodQ])
   const [copied, setCopied] = useState(false)
   const picked = branches.find((b) => b.id === pick)
   const scope = picked ? [picked] : branches
@@ -105,9 +115,36 @@ export default function PhoneConsole({ acc, o, t, links, data, transfers, loaded
   const [shifts, reloadShifts] = useRpc('my_shifts', { p_days: 1, p_branch: pick }, `${pick}`, online)
   const [support, reloadSupport] = useRpc('my_support', { p_limit: 30 }, 'x', online)
   const [licence, reloadLicence] = useRpc('my_licence', {}, 'x', online && tab === 'me')
+  const [products, reloadProducts] = useRpc('my_products', { p_branch: pick, p_q: prodQd || null, p_type: TYPES[prodType], p_stock: prodStock, p_limit: 200 },
+    `${pick}|${prodQd}|${prodType}|${prodStock}`, online && (tab === 'stock' || tab === 'all'))
+  const partyKind = sub === 'suppliers' ? 'supplier' : 'customer'
+  const [parties, reloadParties] = useRpc('my_parties', { p_kind: partyKind, p_q: partyQ.trim() || null, p_limit: 300 }, `${partyKind}|${partyQ.trim()}`, online && (sub === 'customers' || sub === 'suppliers'))
+  const [ledger, reloadLedger] = useRpc('my_ledger', { p_party: partyId, p_limit: 200 }, `${partyId}`, online && !!partyId)
+  const monthStart = `${today.slice(0, 8)}01`
+  const [purchases, reloadPurchases] = useRpc('my_purchases', { p_from: buyAll ? null : monthStart, p_to: null, p_branch: pick, p_limit: 200 }, `${buyAll}|${pick}`, online && sub === 'purchases')
+  const [categories, reloadCategories] = useRpc('my_categories', { p_branch: pick }, `${pick}`, online && sub === 'categories')
 
-  const refreshAll = useCallback(() => Promise.all([refresh(), reloadSales(), reloadRecent(), reloadAllTime(), reloadShifts(), reloadSupport(), reloadLicence()]),
-    [refresh, reloadSales, reloadRecent, reloadAllTime, reloadShifts, reloadSupport, reloadLicence])
+  // A command to a branch's main PC (open or close a shift). The main PC picks it up at its next sync (within about 30 s),
+  // so the sheet watches its status for up to 2 minutes, then refreshes the drawers.
+  const send = async (kind, branchId, payload) => {
+    setCmd({ status: 'sending' })
+    const { data: id, error } = await supabase.rpc('my_command', { p_branch: branchId, p_kind: kind, p_payload: payload })
+    if (error) { setCmd({ status: 'error', error: error.message }); return }
+    setCmd({ id, status: 'waiting' })
+    const started = Date.now()
+    const poll = async () => {
+      const { data: list } = await supabase.rpc('my_commands', { p_limit: 10 })
+      const c = (list ?? []).find((x) => x.id === id)
+      if (c && c.status !== 'waiting') { setCmd({ id, status: c.status, result: c.result }); reloadShifts(); return }
+      if (Date.now() - started > 120000) { setCmd({ id, status: 'slow' }); return }
+      setTimeout(poll, 3000)
+    }
+    setTimeout(poll, 3000)
+  }
+
+  const refreshAll = useCallback(() => Promise.all([refresh(), reloadSales(), reloadRecent(), reloadAllTime(), reloadShifts(), reloadSupport(), reloadLicence(),
+    reloadProducts(), reloadParties(), reloadLedger(), reloadPurchases(), reloadCategories()]),
+    [refresh, reloadSales, reloadRecent, reloadAllTime, reloadShifts, reloadSupport, reloadLicence, reloadProducts, reloadParties, reloadLedger, reloadPurchases, reloadCategories])
   const { pull, busy } = usePull(refreshAll)
 
   const rows = (bs) => (data?.days ?? []).filter((d) => bs.some((b) => b.id === d.branch))
@@ -122,6 +159,14 @@ export default function PhoneConsole({ acc, o, t, links, data, transfers, loaded
   const waiting = (support?.data ?? []).filter((s) => s.status !== 'closed' && !s.last?.fromZap).length
   const stamp = loadedAt ? clock(loadedAt) : ''
   const needNet = <Empty icon="wifiOff" title={a.needsNetTitle} text={a.needsNet} />
+
+  const counterList = shifts?.data?.counterList ?? []
+  const startOpen = () => {
+    setCmd(null)
+    const free = counterList.find((c) => !c.open && (!pick || c.branchId === pick)) ?? counterList[0]
+    setOpenForm({ branchId: free?.branchId ?? branches[0]?.id, code: free?.code ?? '', cash: '' })
+  }
+  const balance = (n) => { const v = Number(n ?? 0); return v === 0 ? a.settled : fill(v > 0 ? a.owesYou : a.youOwe, { amt: rs(Math.abs(v)) }) }
 
   // ---------- the screens ----------
   const weekCard = (bs) => {
@@ -164,14 +209,16 @@ export default function PhoneConsole({ acc, o, t, links, data, transfers, loaded
     const open = list.filter((s) => s.status === 'open'), closed = list.filter((s) => s.status !== 'open')
     body = !online ? needNet : !shifts ? <div className="pa-wait"><i /><i /></div> : (
       <>
-        <button className="pa-action wide" onClick={() => setShiftInfo(true)}><Icon name="plus" size={18} /> {a.openButton}</button>
+        <button className="pa-action wide" onClick={() => startOpen()}><Icon name="plus" size={18} /> {a.openButton}</button>
         <h3 className="pa-day">{a.openNow}</h3>
         {open.length ? <div className="pa-card pa-list">{open.map((s) => (
           <div key={s.id} className="pa-shift">
             <span><b><i className="pa-live" />{s.branch} · {s.counter ?? '–'}</b><small>{fill(a.openedAt, { time: clock(new Date(s.openedAt).getTime()), cash: rs(s.openingCash) })} · {fill(a.cashTaken, { cash: rs(s.cashTaken) })}</small></span>
-            <span className="pa-bill-amt"><em>{rs(Number(s.openingCash) + Number(s.cashTaken))}</em><small>{a.inDrawer}</small></span>
+            <span className="pa-bill-amt"><em>{rs(Number(s.openingCash) + Number(s.cashTaken))}</em><small>{a.inDrawer}</small>
+              <button className="pa-mini" onClick={() => { setCmd(null); setCloseForm({ shift: s, cash: '' }) }}>{a.closeButton}</button></span>
           </div>
         ))}</div> : <p className="pa-note">{a.noOpen}</p>}
+        <p className="pa-note"><Icon name="zap" size={13} /> {a.phoneNote}</p>
         {closed.length > 0 && (
           <>
             <h3 className="pa-day">{a.closedToday}</h3>
@@ -188,6 +235,66 @@ export default function PhoneConsole({ acc, o, t, links, data, transfers, loaded
         )}
       </>
     )
+  } else if (sub === 'customers' || sub === 'suppliers') {
+    const res = parties?.data
+    body = (
+      <>
+        <label className="pa-search"><Icon name="search" size={18} /><input type="search" value={partyQ} onChange={(e) => setPartyQ(e.target.value)} placeholder={a.partySearch} /></label>
+        {!online ? needNet : !parties ? <div className="pa-wait"><i /><i /></div> : parties.error ? <Empty icon="users" title={a.needsNetTitle} text={t.error} /> : (
+          <>
+            <div className="pa-grid">
+              <div className="pa-stat amber"><small>{sub === 'customers' ? a.theyOweYou : a.youOweThem}</small><b>{rs(sub === 'customers' ? res.owed : res.owing)}</b></div>
+              <div className="pa-stat"><small>{sub === 'customers' ? a.customersN : a.suppliersN}</small><b>{res.count}</b></div>
+            </div>
+            {res.items.length ? <div className="pa-card pa-list">{res.items.map((x) => (
+              <button key={x.id} className="pa-bill" onClick={() => go(`party:${x.id}`)}>
+                <span><b>{x.name}</b><small>{[x.code, x.phone, branches.length > 1 ? x.branch : null].filter(Boolean).join(' · ')}</small></span>
+                <span className="pa-bill-amt"><em className={Number(x.balance) > 0 ? 'bad' : Number(x.balance) < 0 ? 'good' : ''}>{rs(Math.abs(Number(x.balance)))}</em><small>{Number(x.balance) > 0 ? a.owesYouShort : Number(x.balance) < 0 ? a.youOweShort : a.settled}</small></span>
+              </button>
+            ))}</div> : <Empty icon="users" title={sub === 'customers' ? a.noCustomersTitle : a.noSuppliersTitle} text={a.noPartiesText} />}
+          </>
+        )}
+      </>
+    )
+  } else if (sub === 'ledger') {
+    const res = ledger?.data
+    body = !online ? needNet : !ledger ? <div className="pa-wait"><i /><i /></div> : !res ? <Empty icon="users" title={a.notFound} text={a.notFoundText} /> : (
+      <>
+        <div className="pa-hero"><small>{res.party.name}{res.party.phone ? ` · ${res.party.phone}` : ''}</small><b>{rs(Math.abs(Number(res.party.balance)))}</b><span>{balance(res.party.balance)}</span></div>
+        {res.entries.length ? <div className="pa-card pa-list">{res.entries.map((e) => (
+          <div key={e.id} className="pa-shift">
+            <span><b>{a.ledgerKinds[e.kind] ?? e.kind}{e.ref ? ` · ${e.ref}` : ''}</b><small>{dateFmt(pkDate(e.at))}{e.method ? ` · ${a.methods[e.method] ?? e.method}` : ''}{e.note ? ` · ${e.note}` : ''}</small></span>
+            <span className="pa-bill-amt"><em className={Number(e.debit) > 0 ? 'bad' : 'good'}>{Number(e.debit) > 0 ? `+${rs(e.debit)}` : `−${rs(e.credit)}`}</em><small>{fill(a.runningN, { amt: rs(e.running) })}</small></span>
+          </div>
+        ))}</div> : <Empty icon="receipt" title={a.noEntries} text={a.noEntriesText} />}
+      </>
+    )
+  } else if (sub === 'purchases') {
+    const res = purchases?.data
+    body = (
+      <>
+        <div className="pa-pills">{a.buyRanges.map((r, i) => <button key={r} className={buyAll === (i === 1) ? 'on' : ''} onClick={() => setBuyAll(i === 1)}>{r}</button>)}</div>
+        {!online ? needNet : !purchases ? <div className="pa-wait"><i /><i /></div> : purchases.error ? <Empty icon="cart" title={a.needsNetTitle} text={t.error} /> : (
+          <>
+            <div className="pa-grid">
+              <div className="pa-stat tint"><small>{fill(a.purchasesN, { n: res.count })}</small><b>{rs(res.total)}</b></div>
+              <div className="pa-stat amber"><small>{a.unpaid}</small><b>{rs(res.unpaid)}</b></div>
+            </div>
+            {res.items.length ? <div className="pa-card pa-list">{res.items.map((x) => (
+              <button key={x.id} className="pa-bill" onClick={() => setBuy(x)}>
+                <span><b>{x.supplier}</b><small>{[x.billNo, dateFmt(x.receivedOn), branches.length > 1 ? x.branch : null].filter(Boolean).join(' · ')}</small></span>
+                <span className="pa-bill-amt"><em>{rs(x.total)}</em><small>{Number(x.paid) >= Number(x.total) ? a.paidFull : fill(a.leftToPay, { amt: rs(Number(x.total) - Number(x.paid)) })}</small></span>
+              </button>
+            ))}</div> : <Empty icon="cart" title={a.noPurchasesTitle} text={a.noPurchasesText} />}
+          </>
+        )}
+      </>
+    )
+  } else if (sub === 'categories') {
+    body = !online ? needNet : !categories ? <div className="pa-wait"><i /><i /></div> : categories.data?.length ? (
+      <div className="pa-card pa-list">{categories.data.map((c) => (
+        <div key={c.name} className="pa-shift"><span><b>{c.name}</b>{branches.length > 1 && <small>{c.branches.join(', ')}</small>}</span><span className="pa-chip">{fill(a.productsN, { n: c.products })}</span></div>
+      ))}</div>) : <Empty icon="layers" title={a.noCategoriesTitle} text={a.noUpdateText} />
   } else if (sub === 'transfers') {
     const chip = (x) => x.status === 'sent' ? <span className="pa-chip low">{o.trSent}</span>
       : x.status === 'received' ? (Number(x.units) - Number(x.received) > 0 ? <span className="pa-chip out">{fill(o.trShort, { n: qty(Number(x.units) - Number(x.received)) })}</span> : <span className="pa-chip ok">{o.trReceived}</span>)
@@ -284,27 +391,38 @@ export default function PhoneConsole({ acc, o, t, links, data, transfers, loaded
       </>
     )
   } else if (tab === 'stock') {
+    const res = products?.data
+    const old = res && res.total === 0 && scope.some((b) => b.stock)   // main PCs older than 1.9.150 send only the low-stock list
     const moving = transfers.filter((x) => x.status === 'sent' && (!picked || x.from.code === picked.code || x.to.code === picked.code))
-    const q = stockQ.trim().toLowerCase()
-    const shown = stockItems.filter((x) => (stockF === 0 || (stockF === 1) === (Number(x.stock) <= 0)) && (!q || x.name.toLowerCase().includes(q)))
-      .sort((x, y) => Number(x.stock) - Number(y.stock))
-    const hasLists = scope.some((b) => b.stock)
     body = (
       <>
         <div className="pa-grid three">
-          <button className={`pa-stat red${stockF === 1 ? ' sel' : ''}`} onClick={() => setStockF(stockF === 1 ? 0 : 1)}><small>{a.out}</small><b>{outN}</b></button>
-          <button className={`pa-stat amber${stockF === 2 ? ' sel' : ''}`} onClick={() => setStockF(stockF === 2 ? 0 : 2)}><small>{a.low}</small><b>{lowN}</b></button>
-          <button className="pa-stat" onClick={() => go('transfers')}><small>{a.onWay}</small><b>{moving.length}</b></button>
+          <button className={`pa-stat${prodStock === null ? ' sel' : ''}`} onClick={() => setProdStock(null)}><small>{a.total}</small><b>{res ? res.total : '–'}</b></button>
+          <button className={`pa-stat amber${prodStock === 'low' ? ' sel' : ''}`} onClick={() => setProdStock(prodStock === 'low' ? null : 'low')}><small>{a.low}</small><b>{res ? res.low : '–'}</b></button>
+          <button className={`pa-stat red${prodStock === 'out' ? ' sel' : ''}`} onClick={() => setProdStock(prodStock === 'out' ? null : 'out')}><small>{a.out}</small><b>{res ? res.out : '–'}</b></button>
         </div>
-        <label className="pa-search"><Icon name="search" size={18} /><input type="search" value={stockQ} onChange={(e) => setStockQ(e.target.value)} placeholder={a.search} /></label>
-        <div className="pa-pills">{a.stockFilters.map((f, i) => <button key={f} className={stockF === i ? 'on' : ''} onClick={() => setStockF(i)}>{f}</button>)}</div>
-        {!hasLists ? <Empty icon="box" title={a.noListTitle} text={a.noListText} />
-          : shown.length ? <div className="pa-card pa-list">{shown.map((x) => (
-            <div key={`${x.where}-${x.name}`} className="pa-shift"><span><b>{x.name}</b><small>{x.where}</small></span>
-              {Number(x.stock) <= 0 ? <span className="pa-chip out">{o.outChip}</span> : <span className="pa-chip low">{fill(o.leftChip, { n: qty(x.stock) })}</span>}</div>
-          ))}</div>
-          : <Empty icon="box" title={a.stockEmptyTitle} text={a.stockEmptyText} />}
-        <p className="pa-note"><Icon name="zap" size={13} /> {a.productsSoon}</p>
+        <label className="pa-search"><Icon name="search" size={18} /><input type="search" value={prodQ} onChange={(e) => setProdQ(e.target.value)} placeholder={a.search} /></label>
+        <div className="pa-pills">{a.types.map((f, i) => <button key={f} className={prodType === i ? 'on' : ''} onClick={() => setProdType(i)}>{f}</button>)}</div>
+        {!online ? needNet : !products ? <div className="pa-wait"><i /><i /></div> : products.error ? <Empty icon="box" title={a.needsNetTitle} text={t.error} />
+          : old ? (
+            <>
+              <div className="pa-card pa-list">{stockItems.map((x) => (
+                <div key={`${x.where}-${x.name}`} className="pa-shift"><span><b>{x.name}</b><small>{x.where}</small></span>
+                  {Number(x.stock) <= 0 ? <span className="pa-chip out">{o.outChip}</span> : <span className="pa-chip low">{fill(o.leftChip, { n: qty(x.stock) })}</span>}</div>
+              ))}</div>
+              <p className="pa-note"><Icon name="zap" size={13} /> {a.noUpdateText}</p>
+            </>
+          )
+          : res.items.length ? <div className="pa-card pa-list">{res.items.map((x) => (
+            <div key={`${x.branch}-${x.id}`} className="pa-shift">
+              <span><b>{x.name}</b><small>{[x.category, a.typeNames[x.type], branches.length > 1 ? x.branch : null].filter(Boolean).join(' · ')}</small></span>
+              <span className="pa-bill-amt"><em>{rs(x.price)}</em>
+                {x.state === 'none' ? <small>{a.notCounted}</small>
+                  : <span className={`pa-chip ${x.state === 'out' ? 'out' : x.state === 'low' ? 'low' : 'ok'}`}>{x.state === 'out' ? o.outChip : fill(a.inStock, { n: qty(x.stock), unit: x.unit === 'pcs' ? '' : x.unit })}</span>}</span>
+            </div>
+          ))}</div> : <Empty icon="box" title={res.total ? a.noMatchTitle : a.noListTitle} text={res.total ? a.noMatchText : a.noUpdateText} />}
+        {res && res.count > res.items.length && <p className="pa-note">{fill(a.newestProducts, { n: res.items.length, total: res.count })}</p>}
+        {moving.length > 0 && <button className="pa-action wide" onClick={() => go('transfers')}><Icon name="swap" size={18} /> {fill(a.onWayN, { n: moving.length })}</button>}
       </>
     )
   } else if (tab === 'me') {
@@ -322,6 +440,10 @@ export default function PhoneConsole({ acc, o, t, links, data, transfers, loaded
         <h3 className="pa-group-h">{a.shop}</h3>
         <div className="pa-card pa-menu">
           <Row icon="drawer" tone="green" label={a.shifts} value={shifts?.data ? fill(a.openN, { n: openShifts.length }) : null} onClick={() => go('shifts')} />
+          <Row icon="users" tone="teal" label={a.customers} onClick={() => go('customers')} />
+          <Row icon="cart" tone="pink" label={a.suppliers} onClick={() => go('suppliers')} />
+          <Row icon="receipt" tone="violet" label={a.purchases} onClick={() => go('purchases')} />
+          <Row icon="layers" tone="amber" label={a.categories} onClick={() => go('categories')} />
           <Row icon="swap" tone="blue" label={a.transfers} value={transfers.length || null} onClick={() => go('transfers')} />
           <Row icon="headset" tone="violet" label={a.support} value={waiting || null} onClick={() => go('support')} />
           <Row icon="server" tone="amber" label={a.tabs.branches} value={branches.length} onClick={() => go('branches')} />
@@ -352,7 +474,7 @@ export default function PhoneConsole({ acc, o, t, links, data, transfers, loaded
         <h2 className="pa-hello">{greet(o)}<span>{first || acc.shop}</span></h2>
         <div className="pa-actions">
           <button className="pa-action green" onClick={() => go('shifts')}><Icon name="drawer" size={19} /> {a.cashDrawers}</button>
-          <button className="pa-action blue" onClick={() => setShiftInfo(true)}><Icon name="plus" size={19} /> {a.openShift}</button>
+          <button className="pa-action blue" onClick={() => startOpen()}><Icon name="plus" size={19} /> {a.openShift}</button>
         </div>
         <InstallHint o={o} />
         <div className="pa-grid">
@@ -367,7 +489,9 @@ export default function PhoneConsole({ acc, o, t, links, data, transfers, loaded
           </div>
           <button className="pa-tile" onClick={() => go('stock')}>
             <span className="pa-tile-top"><i className="pa-ico blue"><Icon name="box" size={17} /></i><small>{a.tabs.stock}</small></span>
-            <b>{outN + lowN}</b><small>{fill(a.stockSub, { out: outN, low: lowN })}</small>
+            {products?.data?.total
+              ? <><b>{products.data.total}</b><small>{fill(a.stockSub, { out: products.data.out, low: products.data.low })}</small></>
+              : <><b>{outN + lowN}</b><small>{fill(a.stockSub, { out: outN, low: lowN })}</small></>}
           </button>
           <button className="pa-tile" onClick={() => go('shifts')}>
             <span className="pa-tile-top"><i className="pa-ico pink"><Icon name="drawer" size={17} /></i><small>{a.cashDrawers}</small></span>
@@ -391,9 +515,20 @@ export default function PhoneConsole({ acc, o, t, links, data, transfers, loaded
     )
   }
 
-  const titles = { all: a.tabs.home, branches: a.tabs.branches, sales: a.tabs.sales, stock: a.tabs.stock, me: a.tabs.me, plan: o.planTab, shifts: a.shifts, transfers: a.transfers, support: a.support }
+  const cmdState = cmd && (
+    <div className={`pa-cmd ${cmd.status}`} role="status">
+      {cmd.status === 'sending' || cmd.status === 'waiting' ? <><i className="pa-spin" />{a.cmdWaiting}</>
+        : cmd.status === 'done' ? <><Icon name="check" size={18} />{cmd.result?.alreadyOpen ? a.cmdAlreadyOpen : cmd.result?.alreadyClosed ? a.cmdAlreadyClosed : a.cmdDone}</>
+        : cmd.status === 'refused' ? <span>{a.cmdRefused} {cmd.result?.message}{cmd.result?.next ? `. ${cmd.result.next}` : ''}</span>
+        : cmd.status === 'expired' ? <span>{a.cmdExpired}</span>
+        : cmd.status === 'slow' ? <span>{a.cmdSlow}</span>
+        : <span>{a.cmdError} {cmd.error}</span>}
+    </div>
+  )
+  const titles = { all: a.tabs.home, branches: a.tabs.branches, sales: a.tabs.sales, stock: a.tabs.stock, me: a.tabs.me, plan: o.planTab, shifts: a.shifts, transfers: a.transfers, support: a.support,
+    customers: a.customers, suppliers: a.suppliers, purchases: a.purchases, categories: a.categories, ledger: ledger?.data?.party?.name ?? a.ledger }
   const title = branch ? branch.name : titles[sub ?? tab]
-  const back = branch ? 'branches' : sub ? 'me' : null
+  const back = branch ? 'branches' : sub === 'ledger' ? (ledger?.data?.party?.kind === 'supplier' ? 'suppliers' : 'customers') : sub ? 'me' : null
   const showPicker = !back && ['all', 'sales', 'stock'].includes(tab) && branches.length > 1
   return (
     <div className="pa">
@@ -433,10 +568,57 @@ export default function PhoneConsole({ acc, o, t, links, data, transfers, loaded
           </div>
         </Sheet>
       )}
-      {shiftInfo && (
-        <Sheet title={a.openShift} onClose={() => setShiftInfo(false)}>
-          <p className="pa-sheet-p">{a.openShiftSoon}</p>
-          <button className="btn btn-primary btn-block" onClick={() => setShiftInfo(false)}>{a.gotIt}</button>
+      {openForm && (
+        <Sheet title={a.openShift} onClose={() => setOpenForm(null)}>
+          {cmd ? <>{cmdState}<button className="btn btn-outline btn-block" onClick={() => { setOpenForm(null); setCmd(null) }}>{a.close}</button></> : (
+            <form className="pa-form" onSubmit={(e) => { e.preventDefault(); send('open_shift', openForm.branchId, { counter: openForm.code, openingCash: Number(openForm.cash || 0) }) }}>
+              {branches.length > 1 && (
+                <label><span>{a.branchLabel}</span>
+                  <select value={openForm.branchId} onChange={(e) => setOpenForm({ ...openForm, branchId: e.target.value, code: counterList.find((c) => c.branchId === e.target.value && !c.open)?.code ?? '' })}>
+                    {branches.map((b) => <option key={b.id} value={b.id}>{b.name}</option>)}
+                  </select></label>
+              )}
+              <label><span>{a.counterLabel}</span>
+                {counterList.some((c) => c.branchId === openForm.branchId)
+                  ? <select required value={openForm.code} onChange={(e) => setOpenForm({ ...openForm, code: e.target.value })}>
+                      <option value="" disabled>{a.pickCounter}</option>
+                      {counterList.filter((c) => c.branchId === openForm.branchId).map((c) => <option key={c.code} value={c.code}>{c.code} · {c.name}{c.open ? ` (${a.alreadyOpenWord})` : ''}</option>)}
+                    </select>
+                  : <input required value={openForm.code} onChange={(e) => setOpenForm({ ...openForm, code: e.target.value.toUpperCase() })} placeholder="C1" maxLength={3} />}
+              </label>
+              <label><span>{a.openingCash}</span><input required inputMode="numeric" pattern="[0-9]*" value={openForm.cash} onChange={(e) => setOpenForm({ ...openForm, cash: e.target.value.replace(/[^0-9]/g, '') })} placeholder="5000" /></label>
+              <p className="pa-sheet-p">{a.openHelp}</p>
+              <button className="btn btn-primary btn-block" disabled={!online}>{a.openButton}</button>
+            </form>
+          )}
+        </Sheet>
+      )}
+      {closeForm && (
+        <Sheet title={`${a.closeShift} · ${closeForm.shift.branch} ${closeForm.shift.counter ?? ''}`} onClose={() => setCloseForm(null)}>
+          {cmd ? <>{cmdState}<button className="btn btn-outline btn-block" onClick={() => { setCloseForm(null); setCmd(null) }}>{a.close}</button></> : (
+            <form className="pa-form" onSubmit={(e) => { e.preventDefault(); send('close_shift', closeForm.shift.branchId, { shift: closeForm.shift.id, countedCash: Number(closeForm.cash || 0) }) }}>
+              <dl className="pa-receipt">
+                <div><dt>{a.openingCash}</dt><dd>{rs(closeForm.shift.openingCash)}</dd></div>
+                <div><dt>{a.cashTakenWord}</dt><dd>{rs(closeForm.shift.cashTaken)}</dd></div>
+                <div className="total"><dt>{a.shouldBe}</dt><dd>{rs(Number(closeForm.shift.openingCash) + Number(closeForm.shift.cashTaken))}</dd></div>
+              </dl>
+              <label><span>{a.countedCash}</span><input required inputMode="numeric" pattern="[0-9]*" value={closeForm.cash} onChange={(e) => setCloseForm({ ...closeForm, cash: e.target.value.replace(/[^0-9]/g, '') })} placeholder="0" /></label>
+              <p className="pa-sheet-p">{a.closeHelp}</p>
+              <button className="btn btn-primary btn-block" disabled={!online}>{a.closeButton}</button>
+            </form>
+          )}
+        </Sheet>
+      )}
+      {buy && (
+        <Sheet title={`${buy.supplier} · ${buy.billNo}`} onClose={() => setBuy(null)}>
+          <dl className="pa-receipt">
+            {buy.lines.map((l, i) => <div key={i}><dt>{l.name} · {qty(l.qty)} × {rs(l.unitCost)}</dt><dd>{rs(l.total)}</dd></div>)}
+            {Number(buy.discount) > 0 && <div className="line"><dt>{a.discount}</dt><dd>−{rs(buy.discount)}</dd></div>}
+            {Number(buy.tax) > 0 && <div><dt>{a.tax}</dt><dd>{rs(buy.tax)}</dd></div>}
+            <div className="total"><dt>{a.total}</dt><dd>{rs(buy.total)}</dd></div>
+            <div><dt>{a.paidWord}</dt><dd>{rs(buy.paid)}{buy.method ? ` · ${a.methods[buy.method] ?? buy.method}` : ''}</dd></div>
+          </dl>
+          <button className="btn btn-outline btn-block" onClick={() => setBuy(null)}>{a.close}</button>
         </Sheet>
       )}
       {bill && (

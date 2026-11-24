@@ -1163,8 +1163,15 @@ returns jsonb language sql stable security definer set search_path = zap_cloud, 
     select jsonb_build_object(
         'counters', (select count(*) from zap_cloud.records r join mine m on m.id = r.branch_id
                      where r.kind = 'counter' and coalesce((r.payload->>'active')::boolean, true)),
+        -- each counter, for the phone's "Open shift" form (open = it already has a shift)
+        'counterList', coalesce((select jsonb_agg(jsonb_build_object('branchId', m.id, 'branch', m.name, 'code', r.payload->>'code', 'name', r.payload->>'name',
+                                                                     'open', exists (select 1 from sh where sh.branch_id = r.branch_id and sh.p->>'status' = 'open'
+                                                                                     and sh.p->>'counter_id' = r.entity_id))
+                                                  order by m.name, r.payload->>'code')
+                                 from zap_cloud.records r join mine m on m.id = r.branch_id
+                                 where r.kind = 'counter' and coalesce((r.payload->>'active')::boolean, true)), '[]'::jsonb),
         'shifts', coalesce((select jsonb_agg(jsonb_build_object(
-                    'id', s.p->>'id', 'branch', s.branch_name, 'counter', c.payload->>'code', 'counterName', c.payload->>'name',
+                    'id', s.p->>'id', 'branchId', s.branch_id, 'branch', s.branch_name, 'counter', c.payload->>'code', 'counterName', c.payload->>'name',
                     'status', s.p->>'status', 'openedAt', s.p->>'opened_at', 'openingCash', (s.p->>'opening_cash')::numeric,
                     'cashTaken', coalesce((select sum((pm.payload->>'amount')::numeric) from zap_cloud.records pm
                                            where pm.branch_id = s.branch_id and pm.kind = 'payment'
