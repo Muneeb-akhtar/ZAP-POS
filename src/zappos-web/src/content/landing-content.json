@@ -994,7 +994,7 @@
         "faq": [
           {
             "q": "Does ZAP POS work with FBR's POS integration?",
-            "a": "Yes. ZAP POS sends bills in FBR's fiscal format, the same one PRA's fiscal component uses. You add your own POS ID and token, and each receipt prints FBR's invoice number with a QR code."
+            "a": "Yes. The FBR integration is built into ZAP POS. You add your own POS ID and token, ZAP POS sends each bill in FBR's fiscal format, and each receipt prints FBR's invoice number with a QR code. We help you set it up."
           },
           {
             "q": "What happens to FBR reporting when the internet is down?",
@@ -1103,7 +1103,8 @@
           {
             "h": "Where ZAP POS fits",
             "p": [
-              "ZAP POS prints FBR's invoice number and QR code on the receipt, sends returns as credit notes against the original bill, applies a tax rate for each way of paying, and keeps billing when the internet drops, sending the bills once the connection is back. You add your own POS ID and token. Ask us how the connection is set up for your shop and which licensed integrator is involved before you decide."
+              "ZAP POS does the FBR integration for you. It is built into the software: you enter your own POS ID and token, and every receipt prints FBR's invoice number with a QR code. Returns are sent as credit notes against the original bill, each way of paying gets its own tax rate, and when the internet drops billing carries on and the bills are sent once the connection is back.",
+              "We set it up with you, so you do not need a separate integration tool. Ask us for a demo and we will show it on your own shop's settings."
             ]
           },
           {

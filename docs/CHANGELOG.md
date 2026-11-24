@@ -3,6 +3,9 @@
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
 
+## 2026-11-24: FBR integration wording (owner decision)
+- Owner confirmed ZAP POS does the FBR integration itself. `/fbr-pos-integration-guide` ("Where ZAP POS fits") and the first FAQ of `/fbr-invoicing` now say the integration is built in and we set it up with the shop. No claim of an FBR integrator licence is made: add it only if/when ZAP POS holds one.
+
 ## 2026-11-24: FBR POS integration guide
 - New guide `/fbr-pos-integration-guide` (footer "Guides", sitemap, `llms.txt`, FAQ data): who must integrate (Tier-1 retailers and persons FBR notifies), what the electronic invoice carries (FBR invoice number, QR code), the licensed-integrator rule (PRAL can act as one), what the rules allow for non-integration (penalty, sealing until integrated), Punjab's separate PRA e-IMS for restaurants and hotels, a buyer's checklist, and a sources line. Written from FBR's POS pages and booklet, FBR's FAQs, SRO 69(I)/2025 and news reports (Dawn, Business Recorder, Express Tribune, ARY), checked 24 Nov 2026. It gives no penalty amounts from FBR (they are in the law and can change) and says it is not legal or tax advice.
 - It says nothing about whether ZAP POS is itself a licensed integrator. **Open question for the owner:** FBR's rules say integration must go through a licensed integrator, while `/fbr-invoicing` says ZAP POS "works with FBR's POS integration" using the shop's own POS ID and token. Decide how the integration is set up and worded, and change `/fbr-invoicing` if needed.
