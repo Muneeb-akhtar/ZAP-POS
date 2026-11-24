@@ -841,6 +841,10 @@
           {
             "label": "FBR POS guide",
             "href": "/fbr-pos-integration-guide"
+          },
+          {
+            "label": "Cloud vs offline POS",
+            "href": "/cloud-pos-vs-offline-pos"
           }
         ]
       },
@@ -2443,6 +2447,103 @@
         "ctaText": "Book a free demo and we'll help you bring your product list across.",
         "published": "2026-11-23",
         "shortAnswer": "A register is cheap but gets slow and error-prone as a shop grows. Excel is good for records but not for billing customers. A POS bills, updates stock and counts the cash in one step. Switch when stock-outs, cash that doesn't match or a second counter start costing you money."
+      },
+      {
+        "slug": "cloud-pos-vs-offline-pos",
+        "menu": "Cloud vs offline POS",
+        "icon": "receipt",
+        "seoTitle": "Cloud POS vs Offline-First POS for Pakistani Shops: Which Fits You?",
+        "seoDescription": "An honest comparison of cloud-only POS and offline-first desktop POS for shops in Pakistan: internet drops, speed, branches, FBR, data ownership and cost. How to choose.",
+        "kicker": "Guide",
+        "title": "Cloud POS or offline-first POS,",
+        "titleHighlight": "which fits your shop?",
+        "description": "Cloud-only and offline-first POS software both work, but they fail in different ways. Here is how they compare on internet drops, speed, branches, FBR and your data, so you can choose for your own shop.",
+        "faqTitle": "Quick answers",
+        "faq": [
+          {
+            "q": "Does a cloud-only POS stop when the internet drops?",
+            "a": "It depends on the product. Some cloud POS apps keep a limited offline mode and some stop. Ask the vendor to show you a bill being made with the router switched off."
+          },
+          {
+            "q": "Is an offline-first POS cut off from the cloud?",
+            "a": "No. An offline-first POS bills on your own computer and syncs to the cloud when the internet is available, so you can still see branches and reports."
+          },
+          {
+            "q": "Which is better for several branches?",
+            "a": "Either can work. What matters is whether each branch keeps billing when its own internet drops, and whether stock and sales from every branch reach the owner afterwards."
+          },
+          {
+            "q": "Can I switch later?",
+            "a": "Ask any vendor how you export your items, customers and sales history before you buy. You should be able to leave with your own data."
+          }
+        ],
+        "ctaTitle": "Want to see offline-first billing?",
+        "ctaText": "Book a free demo and we'll switch the router off and keep billing.",
+        "published": "2026-11-24",
+        "shortAnswer": "A cloud-only POS keeps your data online and is easy to reach from anywhere, but billing depends on the internet. An offline-first POS bills on your own computer and syncs when the connection returns. For shops with unreliable internet, test what each one does with the router off.",
+        "article": [
+          {
+            "h": "Two ways to build a POS",
+            "p": [
+              "A cloud-only POS runs mostly on the vendor's servers. Your counter opens it in a browser or an app and each sale goes online. An offline-first POS runs its billing on a computer in your shop and keeps a full local copy of the data. It syncs to the cloud when the internet allows, so owners can still see reports away from the shop.",
+              "Neither is always better. The right choice depends on how reliable your internet is, how many branches you have and how you want to hold your data."
+            ]
+          },
+          {
+            "h": "When the internet drops",
+            "p": [
+              "This is the biggest difference in a Pakistani shop. Load shedding, a router left off or a weak connection will interrupt the internet at some point. With an offline-first design, billing carries on from the shop computer and the bills are sent later. With a cloud-only design, what happens depends on the product: some have a short offline mode, others wait for the connection.",
+              "Note that a power cut also switches off the computer unless it is on a UPS, so no software can promise billing in a blackout. The real question is what happens when only the internet goes down."
+            ]
+          },
+          {
+            "h": "Speed at the counter",
+            "p": [
+              "A local system answers from the shop computer, so scanning and billing do not wait on a network round trip. A cloud system can feel just as quick on a good connection and slow on a poor one. Test it at your busiest hour rather than trusting a demo."
+            ]
+          },
+          {
+            "h": "Branches and owners",
+            "p": [
+              "Cloud-only products make it easy to see all branches in one place. Offline-first products can do the same once each branch syncs, with the benefit that a branch with a dead connection still sells. Ask both kinds: if one branch is offline for a day, what does the owner see, and what happens to stock when it reconnects?"
+            ]
+          },
+          {
+            "h": "FBR and PRA",
+            "p": [
+              "Whatever you choose, check how the product reports to FBR or PRA, whether it prints the invoice number and QR code, and what it does when the authority's system or your internet is unreachable. Our FBR guide explains what the rules ask for."
+            ]
+          },
+          {
+            "h": "Your data and leaving",
+            "p": [
+              "With a cloud-only product your records sit on the vendor's servers. With offline-first you hold a copy in your own shop as well. In both cases ask how to export your items, customers and sales, and what happens to your data if you stop paying."
+            ]
+          },
+          {
+            "h": "Cost",
+            "p": [
+              "Compare the full price in rupees: monthly or yearly fees, setup, counters, branches, hardware and support. A cheap monthly price that excludes extra counters or support can cost more over a year."
+            ]
+          },
+          {
+            "h": "How to decide",
+            "p": [
+              "1. Switch your router off and ask to see a bill made.",
+              "2. Ask what the owner sees from another branch after a day offline.",
+              "3. Ask how you export your data.",
+              "4. Ask for the all-in price for your counters and branches.",
+              "5. Ask who answers when something goes wrong in the evening.",
+              "If your internet is steady and you have one counter, either type will do. If your internet is unreliable or you have several counters or branches, offline-first deserves a serious test."
+            ]
+          },
+          {
+            "h": "Where ZAP POS fits",
+            "p": [
+              "ZAP POS is offline-first: counters keep billing when the internet or the main PC's network is down, and sync later, with branch reports for owners in the cloud. We hold a licence for FBR integration, and you keep your data. A free demo shows all of this with the router off."
+            ]
+          }
+        ]
       },
       {
         "slug": "billing-during-load-shedding",

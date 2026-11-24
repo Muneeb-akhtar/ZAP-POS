@@ -3,6 +3,9 @@
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
 
+## 2026-11-24: Cloud vs offline-first POS guide
+- New guide `/cloud-pos-vs-offline-pos` (footer "Guides", sitemap, `llms.txt`): compares the two kinds of POS on internet drops, speed, branches, FBR/PRA, data and cost, with a buyer checklist. It names no competitor and makes no claims about any other product's features; it says to test each vendor. Keeps rule 5b (a power cut also stops the PC). File: `landing-content.json`.
+
 ## 2026-11-24: FBR integrator licence stated (owner confirmed)
 - Owner confirmed ZAP POS holds an FBR integrator licence. `/fbr-pos-integration-guide` (fits section and the "Can any POS" FAQ) and the first FAQ of `/fbr-invoicing` now say so. The licence number is not shown; add it if the owner wants it. Keep this true: remove the claim if the licence lapses.
 
