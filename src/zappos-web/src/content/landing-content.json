@@ -994,7 +994,7 @@
         "faq": [
           {
             "q": "Does ZAP POS work with FBR's POS integration?",
-            "a": "Yes. The FBR integration is built into ZAP POS. You add your own POS ID and token, ZAP POS sends each bill in FBR's fiscal format, and each receipt prints FBR's invoice number with a QR code. We help you set it up."
+            "a": "Yes. ZAP POS is an FBR-licensed integrator and the integration is built in. You add your own POS ID and token, ZAP POS sends each bill in FBR's fiscal format, and each receipt prints FBR's invoice number with a QR code. We help you set it up."
           },
           {
             "q": "What happens to FBR reporting when the internet is down?",
@@ -1038,7 +1038,7 @@
           },
           {
             "q": "Can any POS software connect to FBR?",
-            "a": "FBR's rules say integration must be carried out through a licensed integrator. FBR's own PRAL can act as one and may provide the integration free of cost. Ask any POS vendor exactly how its integration works and which licensed integrator is involved."
+            "a": "FBR's rules say integration must be carried out through a licensed integrator. FBR's own PRAL can act as one and may provide the integration free of cost. Ask any POS vendor exactly how its integration works and which licensed integrator is involved. ZAP POS holds an FBR integrator licence."
           },
           {
             "q": "What must the receipt show?",
@@ -1103,7 +1103,7 @@
           {
             "h": "Where ZAP POS fits",
             "p": [
-              "ZAP POS does the FBR integration for you. It is built into the software: you enter your own POS ID and token, and every receipt prints FBR's invoice number with a QR code. Returns are sent as credit notes against the original bill, each way of paying gets its own tax rate, and when the internet drops billing carries on and the bills are sent once the connection is back.",
+              "ZAP POS is an FBR-licensed integrator, so the integration is built into the software and handled by us. You enter your own POS ID and token, and every receipt prints FBR's invoice number with a QR code. Returns are sent as credit notes against the original bill, each way of paying gets its own tax rate, and when the internet drops billing carries on and the bills are sent once the connection is back.",
               "We set it up with you, so you do not need a separate integration tool. Ask us for a demo and we will show it on your own shop's settings."
             ]
           },

@@ -3,6 +3,9 @@
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
 
+## 2026-11-24: FBR integrator licence stated (owner confirmed)
+- Owner confirmed ZAP POS holds an FBR integrator licence. `/fbr-pos-integration-guide` (fits section and the "Can any POS" FAQ) and the first FAQ of `/fbr-invoicing` now say so. The licence number is not shown; add it if the owner wants it. Keep this true: remove the claim if the licence lapses.
+
 ## 2026-11-24: FBR integration wording (owner decision)
 - Owner confirmed ZAP POS does the FBR integration itself. `/fbr-pos-integration-guide` ("Where ZAP POS fits") and the first FAQ of `/fbr-invoicing` now say the integration is built in and we set it up with the shop. No claim of an FBR integrator licence is made: add it only if/when ZAP POS holds one.
 
