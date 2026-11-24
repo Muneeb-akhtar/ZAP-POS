@@ -3,6 +3,7 @@ import Icon from '../components/Icons.jsx'
 import { Stat } from './Charts.jsx'
 import { supabase, telLink, timeAgo, waLink } from './biz.js'
 import { PageBar, Sheet, TableFoot, useNotify } from './ui.jsx'
+import HelpThreads from './HelpThreads.jsx'
 
 // Help desk: requests shops send from ZAP POS (Support) or the website, through send_help_request(). You answer them
 // by phone or WhatsApp, keep a note of what you did, and mark them waiting (on the shop) or solved.
@@ -15,6 +16,8 @@ export default function HelpDesk() {
   const [show, setShow] = useState('open')
   const [q, setQ] = useState('')
   const [open, setOpen] = useState(null)
+  const [tab, setTab] = useState('app')   // 'app' = branch messages from ZAP POS Support, 'web' = requests through send_help_request()
+  const [appWaiting, setAppWaiting] = useState(null)
 
   const load = () => supabase.from('help_requests').select('*').order('created_at', { ascending: false }).then(({ data, error }) => {
     if (error) notify(error.message, 'error'); else setList(data ?? [])
@@ -28,8 +31,14 @@ export default function HelpDesk() {
 
   return (
     <>
-      <PageBar icon="call" title="Help desk" sub="Requests from shops, from ZAP POS and the website" />
+      <PageBar icon="call" title="Help desk" sub="Messages from shops, from ZAP POS and the website" />
       <div className="adm-panel wide">
+        <div className="adm-chips adm-tabs">
+          <button className={tab === 'app' ? 'on' : ''} onClick={() => setTab('app')}>From ZAP POS{appWaiting ? <em>{appWaiting}</em> : null}</button>
+          <button className={tab === 'web' ? 'on' : ''} onClick={() => setTab('web')}>From the website <em>{count('open')}</em></button>
+        </div>
+        <div hidden={tab !== 'app'}><HelpThreads onCount={setAppWaiting} /></div>
+        <div hidden={tab !== 'web'}>
         <div className="adm-stats">
           <Stat icon="mail" label="Open requests" value={list ? count('open') : '…'} sub="need an answer" onClick={() => setShow('open')} />
           <Stat icon="close" label="Urgent" value={list ? all.filter((h) => h.priority === 'urgent' && h.status !== 'solved').length : '…'} sub="shop can't bill" />
@@ -66,6 +75,7 @@ export default function HelpDesk() {
             <TableFoot count={shown.length} noun="requests" />
           </div>
         )}
+        </div>
       </div>
       {open && <HelpSheet req={open} onClose={() => setOpen(null)} onSaved={() => { setOpen(null); load() }} />}
     </>

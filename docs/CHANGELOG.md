@@ -3,6 +3,12 @@
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
 
+## 2026-11-24: Help desk reads the shops' Support threads from ZAP POS
+- Why: ZAP POS's Support screen already sends its threads to ZAP cloud (`zap_support`), but nothing in the admin read them, so a shop's message and photo went unseen and replies could not be sent. Now they can.
+- Cloud (desktop repo `cloud/0007_support_admin.sql`, applied to Supabase): admin-only `admin_support_threads()`, `admin_support_thread(id)` (messages with photos), `admin_support_reply(id, body, status, msg_id)` (a reply is a `from_zap` message, so `zap_support` returns it to the shop's main PC at its next sync; same `msg_id` twice is kept once; status only open/solved). Not granted to anon; non-admins get an error.
+- Admin → Help desk now has two tabs: "From ZAP POS" (new `admin/HelpThreads.jsx`: filter Needs a reply / Open / Solved, search, thread sheet with photos, reply, mark solved/open again, refresh every 60 s) and "From the website" (the old `help_requests` list, unchanged). CSS `.adm-thread/.adm-msg` at the end of `admin/admin.css`.
+- Not checked: the new tab with a real thread and an admin login (there were no threads yet), and the reply showing in the app's Support screen.
+
 ## 2026-11-24: Branches page no longer says the owner view is coming
 - Why: the owner console at /account has been live since 1.9.148; the page still marked it "Soon". `multi-branch-pos` in `landing-content.json`: stat, feature (no `soon`), solved line and FAQ now say it is live. **Republish Extra pages in the admin** for the live site.
 
