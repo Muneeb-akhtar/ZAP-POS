@@ -3,6 +3,10 @@
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
 
+## 2026-11-24: X icon removed from the footer
+- Owner request: no X (Twitter) icon. Removed it from the footer list in `Sections.jsx`, the now-unused `x` icon in `Icons.jsx`, and `links.social.x` in the built-in JSON and the published Supabase `site_content`. Footer social icons are now LinkedIn, Facebook and Instagram.
+- Files: `Sections.jsx`, `Icons.jsx`, `landing-content.json`, docs; Supabase `site_content` (`links.social`).
+
 ## 2026-11-24: Instagram link
 - Instagram account `zappos._.pk` added: footer social link (`links.social.instagram`, in the built-in JSON **and** the published Supabase `site_content`, since published text overrides the built-in) and the home page's `sameAs` in `index.html`. Facebook and X are still empty (`#`).
 - Files: `landing-content.json`, `index.html`, docs; Supabase `site_content` (`links.social.instagram`).

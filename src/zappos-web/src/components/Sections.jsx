@@ -174,7 +174,7 @@ export function FinalCta({ data, links, brand }) {
 
 export function Footer({ brand, footer, links }) {
   const year = new Date().getFullYear()
-  const socials = ['linkedin', 'facebook', 'instagram', 'x']
+  const socials = ['linkedin', 'facebook', 'instagram']
   return (
     <footer className="footer" id="contact">
       <div className="container">
