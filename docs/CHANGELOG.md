@@ -4,7 +4,7 @@ Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, 
 
 
 ## 2026-11-25: WhatsApp logo on the floating button
-- Owner request: the round button bottom-right showed a plain chat bubble (the outline `whatsapp` icon drawn filled loses its phone). New filled icon `whatsappLogo` (bubble with the phone, even-odd fill) in `Icons.jsx`, used by `WhatsAppFloat.jsx` and the final section's WhatsApp badge. The outline `whatsapp` icon stays for buttons that draw it as a line.
+- Owner request: the round button bottom-right showed a plain chat bubble (the outline `whatsapp` icon drawn filled loses its phone). New filled icon `whatsappLogo` in `Icons.jsx`, the standard WhatsApp glyph (Simple Icons path; a first hand-drawn version had the wrong phone shape and was replaced the same night), used by `WhatsAppFloat.jsx` and the final section's WhatsApp badge. The outline `whatsapp` icon stays for buttons that draw it as a line.
 - Files: `Icons.jsx`, `WhatsAppFloat.jsx`, `Sections.jsx`, docs.
 
 ## 2026-11-25: The site now says the owner app is available on Android and iPhone
