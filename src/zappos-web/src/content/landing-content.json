@@ -821,6 +821,22 @@
           {
             "label": "Sawal jawab",
             "href": "/pos-software-sawal-jawab"
+          },
+          {
+            "label": "What is a POS?",
+            "href": "/what-is-pos-software"
+          },
+          {
+            "label": "Barcode set-up",
+            "href": "/barcode-system-for-your-shop"
+          },
+          {
+            "label": "Counting stock",
+            "href": "/how-to-count-stock-in-a-shop"
+          },
+          {
+            "label": "POS kya hai?",
+            "href": "/pos-software-kya-hai"
           }
         ]
       },
@@ -2390,6 +2406,269 @@
         "ctaText": "Book a free demo and we'll show you billing with the internet unplugged.",
         "published": "2026-11-23",
         "shortAnswer": "Load shedding causes two problems that need two fixes. Put your PCs, receipt printer and network switch on a UPS so they stay on, and use a POS that bills without internet so the counter keeps working while the router is off."
+      },
+      {
+        "slug": "what-is-pos-software",
+        "menu": "What is a POS?",
+        "icon": "monitor",
+        "seoTitle": "What Is POS Software? A Plain Guide for Shop Owners in Pakistan",
+        "seoDescription": "What POS software is, what it does for a shop, what hardware you need, and how to start. A plain-language guide for shop and restaurant owners in Pakistan.",
+        "kicker": "Guide",
+        "title": "What is POS software?",
+        "titleHighlight": "A plain guide for shop owners.",
+        "description": "POS means point of sale: the place where a customer pays. POS software is the program on the counter PC that makes the bill, takes the money and updates your stock. Here is what it does and what you need to start.",
+        "faqTitle": "Quick answers",
+        "faq": [
+          {
+            "q": "Do I need a barcode scanner?",
+            "a": "No, but it makes billing faster and cuts typing mistakes. Without one, you can search by name or tap a product tile."
+          },
+          {
+            "q": "Can I use my old Excel product list?",
+            "a": "Usually yes. Ask whether the POS imports from Excel. ZAP POS can import a product list so you do not type it again."
+          },
+          {
+            "q": "Is POS software only for big shops?",
+            "a": "No. A single kiryana shop or cafe can use one. It matters more as you add products, counters or branches."
+          }
+        ],
+        "ctaTitle": "See a POS on your own products",
+        "ctaText": "Book a free demo and we'll help you set up your first products.",
+        "article": [
+          {
+            "h": "What it does",
+            "p": [
+              "A POS replaces the register and the notebook. The cashier scans or taps a product, the bill is added up, the customer pays, and the stock goes down by exactly what was sold. At the end of the day the sales, the cash and the stock all come from the same record, so they agree.",
+              "Better systems also record who sold what, who gave a discount, which bills were cancelled and which items were returned, so the owner can check without standing at the counter."
+            ]
+          },
+          {
+            "h": "What you need to start",
+            "p": [
+              "A Windows PC or laptop at the counter. A receipt printer and a barcode scanner make billing much faster but are not required: products can also be found by name or tapped on screen. A cash drawer is useful if you take a lot of cash. Put the PC on a UPS so a short power cut does not end the day.",
+              "Then you need your product list: names, prices and, if you have them, barcodes. If it is already in Excel, a good POS can import it so you do not type it again."
+            ]
+          },
+          {
+            "h": "What it does not do",
+            "p": [
+              "A POS does not count your stock for you if you never add what you buy. It only knows what you tell it: purchases in, sales out, returns back. Keep the purchase entries up to date and the stock numbers will be trustworthy.",
+              "It also does not remove the need for a good cashier. It makes mistakes easier to see and harder to hide."
+            ]
+          },
+          {
+            "h": "Does it need the internet?",
+            "p": [
+              "It depends on the software. Many cloud systems stop when the internet goes. In Pakistan, where the connection drops often, ask whether billing carries on without it and syncs later. ZAP POS runs on your own PC and keeps billing when the internet drops. A power cut still turns the PC off, so a UPS matters."
+            ]
+          },
+          {
+            "h": "How to choose and start",
+            "p": [
+              "Write down how your shop really sells: how many counters, whether you use barcodes, whether you need FBR invoicing, and how many branches. Then try a demo with your own products and a busy hour in mind. Our guide to choosing POS software in Pakistan lists the ten questions to ask.",
+              "Start with one counter and a short product list, bill on it for a week alongside your old method, then switch fully."
+            ]
+          }
+        ],
+        "published": "2026-11-24",
+        "shortAnswer": "POS software is the program at your counter that bills customers, records payments and updates stock in one step. You need a Windows PC, ideally a barcode scanner and a receipt printer, and software that keeps working when the internet drops."
+      },
+      {
+        "slug": "barcode-system-for-your-shop",
+        "menu": "Barcode set-up guide",
+        "icon": "scan",
+        "seoTitle": "How to Set Up a Barcode System in Your Shop (Step by Step)",
+        "seoDescription": "A practical guide to barcodes for a Pakistani shop: which products already have them, how to make your own, what scanner and label printer to buy, and how to avoid mistakes.",
+        "kicker": "Guide",
+        "title": "Set up barcodes in your shop.",
+        "titleHighlight": "Step by step.",
+        "description": "Barcodes make billing faster and stock more accurate. This guide shows how to put them on every product, including the ones that arrive without one.",
+        "faqTitle": "Barcode questions",
+        "faq": [
+          {
+            "q": "Can two products share one barcode?",
+            "a": "No. Each item, and each size or colour of it, should have its own barcode, or the stock cannot be right."
+          },
+          {
+            "q": "Do I need to label every product before I start?",
+            "a": "No. Start with your fastest-selling items and keep the rest searchable by name. Add barcodes as you go."
+          },
+          {
+            "q": "Which scanner should I buy?",
+            "a": "A standard USB barcode scanner works with most POS software. Check your POS's hardware list first; ZAP POS lists supported printers and scanners on its printers and scanners page."
+          }
+        ],
+        "ctaTitle": "Try barcode billing with ZAP POS",
+        "ctaText": "Book a free demo and we'll show you how to make and print your own labels.",
+        "article": [
+          {
+            "h": "Step 1: use the barcodes you already have",
+            "p": [
+              "Most packaged goods already carry a barcode from the maker. Scan it once into your POS and enter the name and price. From then on, scanning the pack finds the product. This is the biggest saving: do these first."
+            ]
+          },
+          {
+            "h": "Step 2: make your own for everything else",
+            "p": [
+              "Loose items, items you repack, clothes, shoes and many accessories have no barcode. Give each a short code of your own and print it as a label. Keep one rule: one barcode for one item. If a shirt comes in three sizes and two colours, each size and colour gets its own barcode, so the stock for each is correct.",
+              "ZAP POS can make a barcode for an item, including each size and colour, and print its price tag on a label printer."
+            ]
+          },
+          {
+            "h": "Step 3: get the right scanner and printer",
+            "p": [
+              "A USB barcode scanner works like a keyboard and is the simplest choice. For labels you need a label printer; for bills, a thermal receipt printer. Check that your POS supports the models you plan to buy before you pay for them."
+            ]
+          },
+          {
+            "h": "Step 4: label and test",
+            "p": [
+              "Stick labels where the scanner can read them: flat, not over folds or curves. Scan a few products at the counter and check the name and price come up right. Fix wrong prices now, not in front of a customer."
+            ]
+          },
+          {
+            "h": "Step 5: keep it clean",
+            "p": [
+              "When a price changes, change it in the POS and reprint the tag. Remove old labels before sticking new ones. Never reuse a barcode for a different product. Print a few spare labels for items that sell fast."
+            ]
+          }
+        ],
+        "published": "2026-11-24",
+        "shortAnswer": "Use the manufacturer's barcode where a product has one. For loose or unlabelled products, make your own barcode, print it on a label, and stick it on. Scan every barcode once into your POS with its name and price, then bill by scanning."
+      },
+      {
+        "slug": "how-to-count-stock-in-a-shop",
+        "menu": "Stock counting guide",
+        "icon": "box",
+        "seoTitle": "How to Count and Control Stock in a Shop: A Practical Guide",
+        "seoDescription": "Why shop stock never matches, and how to fix it: record purchases and returns, count a section at a time, watch low stock and expiry, and find where the missing units go.",
+        "kicker": "Guide",
+        "title": "Stock that matches the shelf.",
+        "titleHighlight": "How to count and control it.",
+        "description": "Most shops lose money on stock they cannot see: units that were sold without a bill, bought without an entry, or went past their date. These habits fix most of it.",
+        "faqTitle": "Stock control questions",
+        "faq": [
+          {
+            "q": "How often should I count stock?",
+            "a": "A small section every day or week is better than the whole shop once a year. Fast sellers and expensive items deserve more frequent counts."
+          },
+          {
+            "q": "Why does my stock differ from the system?",
+            "a": "Usually an unrecorded purchase or return, a product with two barcodes, a wrong size or colour, or items damaged or expired and not written off."
+          },
+          {
+            "q": "Can ZAP POS stop me selling an out-of-stock product?",
+            "a": "Yes. A product that tracks stock cannot be sold once it reaches zero, and low-stock and expiry warnings help you reorder or return it in time."
+          }
+        ],
+        "ctaTitle": "Get your stock under control",
+        "ctaText": "Book a free demo and we'll show you stock, low-stock warnings and expiry alerts.",
+        "article": [
+          {
+            "h": "Why stock never matches",
+            "p": [
+              "Stock goes wrong in three ways: something is sold without a bill, something is bought or returned without an entry, or something is damaged, expired or taken and nobody writes it down. A POS fixes the first by making every sale a bill. The other two need habits."
+            ]
+          },
+          {
+            "h": "Record what comes in",
+            "p": [
+              "Enter every purchase as it arrives, by scanning what is on the delivery. Enter customer returns the same day. If stock is only added at month end, every count in between is wrong."
+            ]
+          },
+          {
+            "h": "Count a little at a time",
+            "p": [
+              "Counting the whole shop once a year is slow and everyone is tired. Instead count one shelf or section a day and compare it with what the system says. A small difference is easy to trace; a year of differences is not."
+            ]
+          },
+          {
+            "h": "Look at the differences",
+            "p": [
+              "When the count and the system disagree, check the common causes first: a product with two barcodes, a size or colour sold under the wrong item, a return not entered, or a pack sold as single pieces. Then adjust the stock and write down why."
+            ]
+          },
+          {
+            "h": "Watch low stock and expiry",
+            "p": [
+              "Know what is about to run out before a customer asks for it. For medicines, cosmetics and food, also watch dates: ZAP POS refuses to sell an expired product and lists items expiring within 30 days so you can return them to the supplier in time."
+            ]
+          },
+          {
+            "h": "Stop the leaks",
+            "p": [
+              "Limit who can cancel a bill, give a discount or return an item, and require a manager for the risky ones. When these are recorded with a name, mistakes and theft both become visible."
+            ]
+          }
+        ],
+        "published": "2026-11-24",
+        "shortAnswer": "Record every purchase and return, count one section of the shop at a time instead of everything at once, compare the count with the system, and investigate differences while they are small. Watch low stock and expiry dates."
+      },
+      {
+        "slug": "pos-software-kya-hai",
+        "menu": "POS software kya hai?",
+        "icon": "monitor",
+        "seoTitle": "POS Software Kya Hai? Dukan Ke Liye Asaan Guide | ZAP POS",
+        "seoDescription": "POS software kya hota hai, dukan ko isse kya faida hota hai, kya kya chahiye aur kaise shuru karein. Pakistani dukandaron ke liye asaan Roman Urdu guide.",
+        "kicker": "Guide",
+        "title": "POS software kya hai?",
+        "titleHighlight": "Dukandaron ke liye asaan guide.",
+        "description": "POS ka matlab point of sale, yani woh jagah jahan customer paisay deta hai. POS software counter ke computer par chalne wala program hai jo bill banata hai, paisay likhta hai aur stock khud kam karta hai.",
+        "faqTitle": "Mukhtasar jawab",
+        "faq": [
+          {
+            "q": "Kya barcode scanner zaroori hai?",
+            "a": "Nahi, lekin scanner se billing tez hoti hai aur likhne ki ghaltiyan kam hoti hain. Scanner na ho to naam se search kar ke ya screen par dabaa kar bhi bech sakte hain."
+          },
+          {
+            "q": "Kya purani Excel list use ho sakti hai?",
+            "a": "Aam taur par haan. ZAP POS product list Excel se import kar sakta hai."
+          },
+          {
+            "q": "Kya POS sirf bari dukanon ke liye hai?",
+            "a": "Nahi. Aik kiryana dukan ya cafe bhi use kar sakta hai. Jaise jaise products, counter ya branches barhti hain, POS ki zaroorat barhti hai."
+          }
+        ],
+        "ctaTitle": "Apne products par POS dekhein",
+        "ctaText": "Free demo book karein, hum aapke pehle products add karne mein madad karenge.",
+        "article": [
+          {
+            "h": "POS software kya karta hai",
+            "p": [
+              "Register aur copy ki jagah POS lagta hai. Cashier product scan karta hai ya screen par dabata hai, bill khud jama hota hai, customer paisay deta hai aur jitna maal bika utna stock se kam ho jata hai. Din ke end par sale, cash aur stock sab ek hi record se aate hain, is liye aapas mein milte hain.",
+              "Behtar POS yeh bhi likhta hai ke kis ne kya becha, kis ne discount diya, kaun sa bill cancel hua aur kaun sa maal wapis aaya. Is se malik counter par khade baghair bhi check kar sakta hai."
+            ]
+          },
+          {
+            "h": "Shuru karne ke liye kya chahiye",
+            "p": [
+              "Counter par ek Windows computer ya laptop. Receipt printer aur barcode scanner se billing bohat tez ho jati hai, lekin zaroori nahi: product naam se dhoondh kar ya screen par dabaa kar bhi bech sakte hain. Agar cash zyada aata hai to cash drawer kaam aata hai. Computer ko UPS par rakhein taake thori der ki bijli band hone se kaam na ruke.",
+              "Phir aapko apne products ki list chahiye: naam, qeemat aur agar hon to barcode. Agar list Excel mein hai to acha POS usay import kar leta hai, dobara likhna nahi parta."
+            ]
+          },
+          {
+            "h": "Kya internet zaroori hai",
+            "p": [
+              "Yeh software par depend karta hai. Bohat se cloud system internet jane par ruk jate hain. Pakistan mein internet aksar jata rehta hai, is liye poochein ke internet ke baghair bill banta hai ya nahi aur baad mein sync hota hai ya nahi. ZAP POS aapke apne computer par chalta hai aur internet band hone par bhi bill banata rehta hai. Bijli poori band ho to computer bhi band ho jata hai, is liye UPS zaroori hai."
+            ]
+          },
+          {
+            "h": "POS kya nahi karta",
+            "p": [
+              "Agar aap khareedari ki entry na karein to POS stock khud nahi ginta. Usay wohi pata hota hai jo aap batate hain: maal aaya, maal bika, maal wapis aaya. Purchase entry theek rakhein to stock ke numbers par bharosa kar sakte hain."
+            ]
+          },
+          {
+            "h": "Kaise shuru karein",
+            "p": [
+              "Pehle likhein ke aapki dukan kaise chalti hai: kitne counter hain, barcode use hota hai ya nahi, FBR invoicing chahiye ya nahi, aur kitni branches hain. Phir apne products aur busy waqt ke hisaab se demo dekhein.",
+              "Ek counter aur chhoti product list se shuru karein, ek hafta purane tareeqe ke saath chalayein, phir poori tarah POS par aa jayein."
+            ]
+          }
+        ],
+        "published": "2026-11-24",
+        "shortAnswer": "POS software counter par bill banata hai, paisay darj karta hai aur stock apne aap update karta hai. Shuru karne ke liye Windows computer chahiye; barcode scanner aur receipt printer se kaam tez hota hai. Acha POS internet band hone par bhi bill banata rehta hai.",
+        "lang": "ur-Latn"
       },
       {
         "slug": "how-it-works",

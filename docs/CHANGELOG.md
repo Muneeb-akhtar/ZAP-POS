@@ -3,6 +3,12 @@
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
 
+## 2026-11-24: Four more guide pages
+- New guides (the `article` page type, with FAQ data, sitemap and `llms.txt` entries, linked from the footer group "Guides"): `/what-is-pos-software`, `/barcode-system-for-your-shop`, `/how-to-count-stock-in-a-shop` and, in Roman Urdu (`lang: ur-Latn`), `/pos-software-kya-hai`. The site now has 31 extra pages.
+- Why these: the "how to choose a POS", "POS vs register and Excel", FBR and load-shedding pages already existed, so these cover the beginner and how-to searches that were missing. ZAP POS is only mentioned where it really does the thing (barcode labels, expiry and low-stock warnings, stock recount/breakage entries, Excel import, offline billing).
+- Not written: a guide on FBR rules, because the legal details need a careful check first; the existing `/fbr-invoicing` page stays the reference.
+- Files: `landing-content.json` (pages and footer links). The published copy has no `pages` key, so these go live with the deploy.
+
 ## 2026-11-24: Three more industry pages
 - New pages `/cosmetics-store-pos`, `/mobile-accessories-shop-pos` and `/hardware-store-pos` (same template as the other shop-type pages, each with its own title, description, problems, features and FAQ, so each also feeds FAQPage data, the sitemap and `llms.txt`). Linked from the footer group "For your shop". There are now ten shop-type pages in all (pharmacy, restaurant, supermarket, kiryana, bakery, clothing, shoe, cosmetics, mobile accessories, hardware).
 - Copy only uses what the desktop app does today: expiry dates, sizes and colours, packs, barcode labels, supplier ledger, returns with credit notes, floor price, quick sale, FBR, offline billing. The accessories page says plainly that IMEI/serial tracking is not part of ZAP POS yet.
