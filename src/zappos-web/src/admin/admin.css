@@ -900,6 +900,8 @@ td .adm-kind + .adm-bill { margin-left: 6px; }
 
 /* Owner console: "put ZAP POS on your phone" card (Android install button / iPhone Add to Home Screen hint). */
 .own-install { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin: 0 0 16px; padding: 12px 14px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; }
+.acc-install { width: 100%; max-width: 420px; }
+.acc-install .own-install { margin: 0; }
 .own-install-icon { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 10px; background: var(--tint); color: var(--brand-600); flex-shrink: 0; }
 .own-install-text { display: grid; gap: 2px; flex: 1 1 200px; min-width: 0; font-size: 13.5px; color: var(--muted); }
 .own-install-text b { color: var(--ink); font-size: 14px; }

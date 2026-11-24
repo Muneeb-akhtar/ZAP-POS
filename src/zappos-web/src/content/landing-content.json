@@ -34,8 +34,8 @@
     "portal": "/account/",
     "windowsInstaller": "#",
     "githubRepo": "Muneeb-akhtar/ZAP-POS",
-    "googlePlay": "#",
-    "appStore": "#",
+    "googlePlay": "/account/?install=android",
+    "appStore": "/account/?install=iphone",
     "whatsapp": "#",
     "social": {
       "linkedin": "https://www.linkedin.com/company/zap-pos/",
@@ -538,7 +538,10 @@
     "titleHighlight": "the internet isn't.",
     "description": "Install ZAP POS on your counter PC today. It bills online or offline. Free trial, free setup help.",
     "primary": "Download for Windows",
-    "secondary": "Book a free demo"
+    "secondary": "Book a free demo",
+    "appSmall": "Owner app for",
+    "android": "Android",
+    "iphone": "iPhone"
   },
   "leadForm": {
     "title": "Book a free demo",
@@ -654,6 +657,7 @@
       "installSteps": ["Tap the Share button at the bottom of Safari", "Scroll down and tap Add to Home Screen", "Tap Add. ZAP POS is now on your home screen"],
       "installShare": "The Share button is down here",
       "installGotIt": "Got it",
+      "installStepsAndroid": ["Tap the ⋮ menu at the top right of Chrome", "Tap Install app (or Add to Home screen)", "Tap Install. ZAP POS is now on your home screen"],
       "installDismiss": "Not now",
       "phTabToday": "Today",
       "phTabBranches": "Branches",

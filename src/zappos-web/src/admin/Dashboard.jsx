@@ -11,8 +11,8 @@ const isPlaceholderLink = (v) => !v || v === '#'
 // Website checklist: things still showing placeholder content.
 function checklist(c, published) {
   const links = [
-    ['Windows download', c.links?.windowsInstaller], ['WhatsApp', c.links?.whatsapp], ['Google Play', c.links?.googlePlay],
-    ['App Store', c.links?.appStore], ['Customer portal', c.links?.portal],
+    ['Windows download', c.links?.windowsInstaller], ['WhatsApp', c.links?.whatsapp], ['Android app', c.links?.googlePlay],
+    ['iPhone app', c.links?.appStore], ['Customer portal', c.links?.portal],
   ].filter(([, v]) => isPlaceholderLink(v)).map(([n]) => n)
   const socials = Object.values(c.links?.social ?? {}).filter(isPlaceholderLink).length
   return [

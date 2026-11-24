@@ -1,18 +1,19 @@
 import { useEffect, useState } from 'react'
 import Icon from '../components/Icons.jsx'
 
-// "Put ZAP POS on your phone" card in the owner console. Android/Chrome gives us an install prompt (button);
-// iPhone Safari has none, so "Show me how" opens a sheet with the three Add to Home Screen steps.
-// Hidden once installed (opened from the home screen) or dismissed (remembered on this phone).
+// "Put ZAP POS on your phone" card: in the owner console, and on the log-in page only when someone came from the
+// home page's Android / iPhone buttons (/account/?install=android|iphone, `want`). Android/Chrome gives us an install
+// prompt (button); otherwise "Show me how" opens a sheet with that phone's three steps (Chrome menu or Safari Share).
+// Hidden once installed (opened from the home screen) or dismissed (remembered on this phone; a button tap shows it again).
 const KEY = 'zap-install-dismissed'
 const standalone = () => window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true
 const isIos = () => /iphone|ipad|ipod/i.test(navigator.userAgent) && !/crios|fxios|edgios/i.test(navigator.userAgent)
 const dismissed = () => { try { return localStorage.getItem(KEY) === '1' } catch { return false } }
 
-export default function InstallHint({ o }) {
+export default function InstallHint({ o, want }) {
   const [prompt, setPrompt] = useState(null)
   const [sheet, setSheet] = useState(false)
-  const [hidden, setHidden] = useState(() => dismissed() || standalone())
+  const [hidden, setHidden] = useState(() => standalone() || (!want && dismissed()))
   useEffect(() => {
     const on = (e) => { e.preventDefault(); setPrompt(e) }
     const done = () => setHidden(true)
@@ -26,8 +27,8 @@ export default function InstallHint({ o }) {
     window.addEventListener('keydown', esc)
     return () => window.removeEventListener('keydown', esc)
   }, [sheet])
-  const ios = isIos()
-  if (hidden || (!prompt && !ios)) return null
+  const ios = want ? want === 'iphone' : isIos()
+  if (hidden || (!prompt && !ios && !want)) return null
   const dismiss = () => { try { localStorage.setItem(KEY, '1') } catch { /* private mode: just hide for now */ } setHidden(true) }
   const install = async () => { prompt.prompt(); await prompt.userChoice; setPrompt(null); setHidden(true) }
   return (
@@ -46,12 +47,12 @@ export default function InstallHint({ o }) {
             <span className="own-sheet-grab" />
             <h2>{o.installTitle}</h2>
             <ol>
-              {o.installSteps.map((s, i) => (
-                <li key={s}><span>{i + 1}</span>{s}<Icon name={['share', 'plus', 'check'][i]} size={18} /></li>
+              {(ios ? o.installSteps : o.installStepsAndroid).map((s, i) => (
+                <li key={s}><span>{i + 1}</span>{s}<Icon name={[ios ? 'share' : 'dots', 'plus', 'check'][i]} size={18} /></li>
               ))}
             </ol>
             <button className="btn btn-primary btn-block" onClick={() => setSheet(false)} autoFocus>{o.installGotIt}</button>
-            <p className="own-sheet-hint"><Icon name="chevD" size={14} /> {o.installShare}</p>
+            {ios && <p className="own-sheet-hint"><Icon name="chevD" size={14} /> {o.installShare}</p>}
           </div>
         </div>
       )}

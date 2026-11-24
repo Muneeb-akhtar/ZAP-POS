@@ -7,6 +7,7 @@ import DownloadLink from '../components/DownloadLink.jsx'
 import { BILLING, METHODS, dateFmt, phoneKey, rs, supabase } from '../admin/biz.js'
 import { invoiceNo, invoiceState } from '../invoice/InvoiceDoc.jsx'
 import OwnerConsole from './OwnerConsole.jsx'
+import InstallHint from './InstallHint.jsx'
 import { OWNER_CACHE } from './ownerData.js'
 
 // Customer account at /account/: sign up, log in, reset password, and for a linked owner the owner console
@@ -17,7 +18,10 @@ import { OWNER_CACHE } from './ownerData.js'
 
 const fill = (text, vals) => text.replace(/\{(\w+)\}/g, (_, k) => vals[k] ?? '')
 
-function Shell({ brand, children }) {
+// Came from the home page's "Owner app for Android / iPhone" buttons: show that phone's install steps under the box.
+const wantInstall = new URLSearchParams(location.search).get('install')
+
+function Shell({ brand, o, children }) {
   return (
     <div className="adm-center">
       <div className="adm-center-top acc-top">
@@ -25,6 +29,7 @@ function Shell({ brand, children }) {
         <ThemeToggle />
       </div>
       {children}
+      {wantInstall && <div className="acc-install"><InstallHint o={o} want={wantInstall === 'iphone' ? 'iphone' : 'android'} /></div>}
     </div>
   )
 }
@@ -170,11 +175,11 @@ function MyAccount({ t, ti, links, session, brand }) {
   }, [session.user.id])
   const signOut = <button className="btn btn-quiet btn-sm" onClick={() => supabase.auth.signOut()}><Icon name="logout" size={14} /> {t.signOut}</button>
 
-  if (error) return <Shell brand={brand}><div className="adm-box"><p className="adm-error">{t.error}</p>{signOut}</div></Shell>
-  if (acc === undefined) return <Shell brand={brand}><div className="adm-box"><p className="adm-muted">…</p></div></Shell>
+  if (error) return <Shell brand={brand} o={t.owner}><div className="adm-box"><p className="adm-error">{t.error}</p>{signOut}</div></Shell>
+  if (acc === undefined) return <Shell brand={brand} o={t.owner}><div className="adm-box"><p className="adm-muted">…</p></div></Shell>
   if (acc === null) {
     return (
-      <Shell brand={brand}><div className="adm-box">
+      <Shell brand={brand} o={t.owner}><div className="adm-box">
         <h1>{state === 'pending' ? t.pendingTitle : session.user.email}</h1>
         <p>{isAdmin ? t.adminText : state === 'pending' ? t.pendingText : t.notLinkedText}</p>
         {isAdmin
@@ -284,5 +289,5 @@ export default function AccountApp() {
   else if (recovering) body = <NewPassword t={t} onDone={() => setRecovering(false)} />
   else if (!session) body = <Auth t={t} mode={mode} setMode={setMode} />
   else return <MyAccount key={session.user.id} t={t} ti={content.invoice} links={links} session={session} brand={content.brand} />
-  return <Shell brand={content.brand}>{body}</Shell>
+  return <Shell brand={content.brand} o={t.owner}>{body}</Shell>
 }

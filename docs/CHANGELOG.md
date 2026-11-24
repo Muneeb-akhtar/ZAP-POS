@@ -3,6 +3,10 @@
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
 
+## 2026-11-25: Android and iPhone buttons install the phone app
+- Owner request: the final section's store buttons went nowhere (`#`) and said "Google Play" / "App Store", where there are no apps yet. They now read "Owner app for Android" / "Owner app for iPhone" (text in `finalCta.appSmall/android/iphone`, new `android` icon; the unused `gplay` icon removed) and open `/account/?install=android|iphone` (`links.googlePlay` / `links.appStore`, built-in JSON **and** published Supabase `site_content`). There the log-in page shows the install card for that phone: Chrome's Install button when Android offers it, otherwise "Show me how" with that phone's three steps (`installStepsAndroid` for Chrome's ⋮ menu, new `dots` icon; `installSteps` for Safari Share). The plain log-in page still shows no card (owner decision above). Admin labels and the dashboard checklist now say Android app / iPhone app.
+- Files: `Sections.jsx`, `Icons.jsx`, `AccountApp.jsx`, `InstallHint.jsx`, `admin/admin.css` (`.acc-install`), `admin/sections.js`, `admin/Dashboard.jsx`, `landing-content.json`, docs; Supabase `site_content` (`links`).
+
 ## 2026-11-25: No install card on the log-in page (owner decision)
 - Tried showing "Put ZAP POS on your phone" under the log-in box; the owner doesn't want it there, so it was taken back out. The card stays only inside a linked owner's console (Today tab). Anyone else installs from Chrome's ⋮ menu → Install app (Android) or Safari Share → Add to Home Screen (iPhone).
 
