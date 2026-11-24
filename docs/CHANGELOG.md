@@ -3,6 +3,10 @@
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
 
+## 2026-11-24: Stock transfer linked from the footer; correction about republishing
+- Footer group "ZAP POS" links to `/branch-stock-transfer`, so every page reaches it by an internal link.
+- Correction to the entries above: the published copy in Supabase (`site_content`) holds no `pages` and no `account.owner`, so the new/changed pages, the owner-console texts and the footer come from the built-in JSON and go live with the Vercel deploy. **No republish in the admin is needed** (checked 24 Nov 2026).
+
 ## 2026-11-24: SEO/AEO answers for stock transfer and the owner console
 - Why: the facts page and the Roman-Urdu Q&A page (what search and AI answers quote) did not mention branch stock transfer or the owner console. Added two questions to each (`zap-pos-facts`, `pos-software-sawal-jawab` in `landing-content.json`); they also feed FAQPage data and `llms.txt`. **Republish Extra pages in the admin.**
 

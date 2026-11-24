@@ -724,6 +724,10 @@
             "href": "/multi-branch-pos"
           },
           {
+            "label": "Stock transfer",
+            "href": "/branch-stock-transfer"
+          },
+          {
             "label": "Printers & scanners",
             "href": "/pos-hardware"
           },
