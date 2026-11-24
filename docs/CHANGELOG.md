@@ -3,9 +3,8 @@
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
 
-## 2026-11-25: Install card on the log-in page too
-- The owner could not see the install option: it only appeared inside a linked owner's console, so an admin login, a not-yet-linked account or a logged-out visitor never saw it. `Shell` in `AccountApp.jsx` (log-in, sign-up and the small account boxes) now shows `InstallHint` under the box. CSS `.acc-install` in `admin/admin.css`.
-- Files: `AccountApp.jsx`, `admin.css`, docs.
+## 2026-11-25: No install card on the log-in page (owner decision)
+- Tried showing "Put ZAP POS on your phone" under the log-in box; the owner doesn't want it there, so it was taken back out. The card stays only inside a linked owner's console (Today tab). Anyone else installs from Chrome's ⋮ menu → Install app (Android) or Safari Share → Add to Home Screen (iPhone).
 
 ## 2026-11-25: Owner console as a phone app (PhoneConsole)
 - Owner request ("make it a masterpiece, human, not AI-looking"). On a phone (≤700px, also when installed) `/account/` now shows `src/account/PhoneConsole.jsx` instead of the shrunken desktop console: built like a shop register, not a dashboard. Today = sales in the receipt font (`--font-mono`) that settles slowly to its value, the comparison in plain words ("2% less than last Wednesday (Rs …)"), a hairline ledger (bills, cash, refunds, discounts, cancelled), last 7 days as plain bars with today's in yellow, and a ranked branch list. Tabs at the bottom: Today, Branches (tap a branch for its day, top sellers numbered like a bill, running low), Stock (out, low, transfers on the way across all branches), Plan (the plan/invoices content plus help, theme and log out). Pull down to refresh (an installed iPhone app has no reload), and figures reload when the app is reopened.
