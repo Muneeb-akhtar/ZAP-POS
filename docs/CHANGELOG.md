@@ -3,6 +3,10 @@
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
 
+## 2026-11-24: Instagram link
+- Instagram account `zappos._.pk` added: footer social link (`links.social.instagram`, in the built-in JSON **and** the published Supabase `site_content`, since published text overrides the built-in) and the home page's `sameAs` in `index.html`. Facebook and X are still empty (`#`).
+- Files: `landing-content.json`, `index.html`, docs; Supabase `site_content` (`links.social.instagram`).
+
 ## 2026-11-24: Owner app and dashboard wording (owner decision)
 - Owner's decision: the dashboard of all branches is live through sign-in at `zappos.pk/account` on any phone or browser; a dedicated owner app is "coming soon" for Android (an iPhone app is planned for later, per the owner).
 - Removed the old promises of an iPhone and Android app: the "Night" step of `day` ("Check sales from bed") and the plan feature row "Live sales app (iOS + Android)" (`pricing`), in the built-in JSON **and** in the published Supabase `site_content` (`day`, `pricing`; published text overrides the built-in). `zap-pos-facts` "What it doesn't do yet" no longer lists the owner app or the all-branch dashboard, and the cloud-vs-offline guide's "Where ZAP POS fits" says the same.
