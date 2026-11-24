@@ -60,7 +60,7 @@ Shop signed in ──rpc('my_account')──► own shop, current plan, paid_unt
 - **Admin data:** `admin/biz.js` loads all `leads` and `payments` once (`useBizStore`, shared via `BizContext`) and updates the local copy after each write; `useStats(days)` calls `rpc('admin_stats')`.
 
 ## 3. Components → sections
-Rendered by `App.jsx` in this order (plus `LeadForm.jsx`, the demo request modal, rendered on top when open; CSS block "Demo request form (modal)", classes `lead-*`); and `WhatsAppFloat.jsx`, the round WhatsApp button fixed to the bottom-right (`wa-float`, z-index 40, under the navbar 50 and the modal 100; label shows on mouse hover; hidden while `links.whatsapp` is empty or `#`, or `whatsappButton.label` is empty; opens `links.whatsapp` in a new tab, tracked as `whatsapp`):
+Rendered by `App.jsx` in this order (plus `LeadForm.jsx`, the demo request modal, rendered on top when open; CSS block "Demo request form (modal)", classes `lead-*`); and `WhatsAppFloat.jsx`, the round WhatsApp button fixed to the bottom-right (`wa-float`, icon `whatsappLogo`, z-index 40, under the navbar 50 and the modal 100; label shows on mouse hover; hidden while `links.whatsapp` is empty or `#`, or `whatsappButton.label` is empty; opens `links.whatsapp` in a new tab, tracked as `whatsapp`):
 
 | # | Component | File | JSON key(s) | Anchor | CSS block |
 |---|---|---|---|---|---|

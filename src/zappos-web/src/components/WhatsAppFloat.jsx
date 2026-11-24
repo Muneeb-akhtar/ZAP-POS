@@ -6,7 +6,7 @@ export default function WhatsAppFloat({ data, links }) {
   if (!data.label || !links.whatsapp || links.whatsapp === '#') return null
   return (
     <a className="wa-float" href={links.whatsapp} target="_blank" rel="noopener noreferrer" data-track="whatsapp" aria-label={data.label}>
-      <Icon name="whatsapp" size={30} fill />
+      <Icon name="whatsappLogo" size={32} fill />
       <span className="wa-float-label">{data.label}</span>
     </a>
   )

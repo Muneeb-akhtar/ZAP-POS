@@ -3,6 +3,10 @@
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
 
+## 2026-11-25: WhatsApp logo on the floating button
+- Owner request: the round button bottom-right showed a plain chat bubble (the outline `whatsapp` icon drawn filled loses its phone). New filled icon `whatsappLogo` (bubble with the phone, even-odd fill) in `Icons.jsx`, used by `WhatsAppFloat.jsx` and the final section's WhatsApp badge. The outline `whatsapp` icon stays for buttons that draw it as a line.
+- Files: `Icons.jsx`, `WhatsAppFloat.jsx`, `Sections.jsx`, docs.
+
 ## 2026-11-25: The site now says the owner app is available on Android and iPhone
 - Owner request: the app exists now (installable from `/account/` on both, with products, customers, ledger, purchases and shifts since ZAP POS 1.9.150), so the "coming soon" lines are gone. Night stop of the day timeline (`day`), the plan row (`pricing`: "Owner app for Android and iPhone"), the cloud-vs-offline guide and the facts page (new "Owner app: Android and iPhone" fact; it says plainly the app installs from the website and isn't in the Play Store or App Store yet). New FAQ "Is there an app for my phone?" with the install steps.
 - Changed in the built-in JSON **and** the published Supabase `site_content` (`day`, `pricing`, `faq` are published; the FAQ array was extended there too).

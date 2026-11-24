@@ -165,7 +165,7 @@ export function FinalCta({ data, links, brand }) {
         <div className="final-stores">
           <a href={links.googlePlay} data-track="android" className="store"><Icon name="android" size={34} fill /><span><small>{data.appSmall}</small>{data.android}</span></a>
           <a href={links.appStore} data-track="ios" className="store"><Icon name="apple" size={34} fill /><span><small>{data.appSmall}</small>{data.iphone}</span></a>
-          <a href={links.whatsapp} data-track="whatsapp" className="store wa"><Icon name="whatsapp" size={30} /><span><small>WhatsApp us</small>{brand.phone}</span></a>
+          <a href={links.whatsapp} data-track="whatsapp" className="store wa"><Icon name="whatsappLogo" size={30} fill /><span><small>WhatsApp us</small>{brand.phone}</span></a>
         </div>
       </div>
     </section>
