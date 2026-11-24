@@ -3,6 +3,11 @@
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
 
+## 2026-11-25: The site now says the owner app is available on Android and iPhone
+- Owner request: the app exists now (installable from `/account/` on both, with products, customers, ledger, purchases and shifts since ZAP POS 1.9.150), so the "coming soon" lines are gone. Night stop of the day timeline (`day`), the plan row (`pricing`: "Owner app for Android and iPhone"), the cloud-vs-offline guide and the facts page (new "Owner app: Android and iPhone" fact; it says plainly the app installs from the website and isn't in the Play Store or App Store yet). New FAQ "Is there an app for my phone?" with the install steps.
+- Changed in the built-in JSON **and** the published Supabase `site_content` (`day`, `pricing`, `faq` are published; the FAQ array was extended there too).
+- Files: `landing-content.json`, docs; Supabase `site_content`.
+
 ## 2026-11-25: Phone app step 2: products, customers, suppliers, ledger, purchases, categories, shifts from the phone
 - Owner wants everything Mint POS's app has. Needs ZAP POS **1.9.150** on each main PC (desktop repo: `db/migrations/0039_owner_app.sql`, `CloudSync.CommandsOnceAsync`); cloud side `cloud/0008_owner_app.sql` in the desktop repo, applied to Supabase (migration `cloud_0008_owner_app`).
 - **Products tab** (was Stock): Total / Low / Out cards (tap to filter), search by name or barcode, All / Standard / Weighted / Variant pills, each product with category, type, price and stock (`my_products`). With main PCs older than 1.9.150 it falls back to the low-stock list and says to update.

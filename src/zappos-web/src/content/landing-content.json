@@ -123,7 +123,7 @@
         "time": "11:00 PM",
         "period": "Night",
         "title": "Check sales from bed.",
-        "text": "Sign in to your ZAP POS account on any phone or browser and see every branch's sales today. An Android app is coming soon, and an iPhone app later.",
+        "text": "The ZAP POS owner app is on Android and iPhone: every branch's sales, stock, customers and cash drawers, live. You can even open or close a shift from bed.",
         "visual": "phone"
       }
     ]
@@ -260,7 +260,7 @@
           ],
           [
             "✓",
-            "Live branch sales on any phone or browser"
+            "Owner app for Android and iPhone"
           ],
           [
             "✓",
@@ -527,6 +527,10 @@
       {
         "q": "Is there a free trial?",
         "a": "Yes. Every plan comes with a free trial and no card is required."
+      },
+      {
+        "q": "Is there an app for my phone?",
+        "a": "Yes. The ZAP POS owner app works on Android and iPhone. Open zappos.pk/account on your phone, log in, then tap Install app (Android) or Share › Add to Home Screen (iPhone). It shows every branch's sales, bills, stock, customers, suppliers, purchases and cash drawers, and lets you open or close a shift. It isn't in the Play Store or App Store yet; it installs straight from the website."
       }
     ]
   },
@@ -3650,7 +3654,7 @@
           {
             "h": "Where ZAP POS fits",
             "p": [
-              "ZAP POS was built around these questions: billing keeps going without internet, FBR and PRA invoicing is built in, many counters share live stock, and it works with standard printers and scanners. Today it runs on Windows PCs. Clothing and shoe shops can stock by size and colour. Owners see every branch by signing in at zappos.pk/account, and an Android app is coming soon, with iPhone to follow."
+              "ZAP POS was built around these questions: billing keeps going without internet, FBR and PRA invoicing is built in, many counters share live stock, and it works with standard printers and scanners. Today it runs on Windows PCs. Clothing and shoe shops can stock by size and colour. Owners see every branch, its stock, customers and cash drawers in the ZAP POS owner app on Android and iPhone."
             ]
           }
         ],
@@ -5556,6 +5560,11 @@
             "icon": "receipt",
             "label": "Tax",
             "value": "FBR and PRA invoicing built in"
+          },
+          {
+            "icon": "phone",
+            "label": "Owner app",
+            "value": "Android and iPhone"
           }
         ],
         "specsTitle": "Quick facts",
@@ -5587,7 +5596,7 @@
           {
             "h": "What it doesn't do yet",
             "p": [
-              "Versions for Mac or Android counters and an Urdu interface (the app is in English) are planned. A dedicated owner app is coming soon for Android, with an iPhone app planned after that. Until then the owner signs in at zappos.pk/account on any phone or computer and sees every branch."
+              "Versions for Mac or Android counters and an Urdu interface (the app is in English) are planned. The owner app is already on Android and iPhone (installed from zappos.pk/account, not yet listed in the Play Store or App Store), and the owner can also sign in there on any computer."
             ]
           },
           {
