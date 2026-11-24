@@ -3,6 +3,13 @@
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
 
+## 2026-11-24: SEO clean-up (titles, links, offers, lastmod)
+- Every indexed page now has a title of 60 characters or fewer and a description of 155 or fewer (the audit found about 25 titles and 30 descriptions over the limit; they would be cut off in results).
+- Internal links: 28 pages got a curated `related` list (replacing the generic strip, which only repeated the footer), and 36 contextual links `[words](/slug)` were added in article text. New helper `withLinks` in `InfoPage.jsx`; link style `.ip-article p a`.
+- Structured data: the home page `SoftwareApplication` now has two `offers` (Dukaan PKR 3,499, Brand PKR 8,999 per branch), matching the published plans (checked in Supabase). The home description was shortened to 155.
+- Sitemap: `<lastmod>` is written for pages that have a real `published` date; none are invented.
+- Still open (needs the owner): Search Console and Bing, backlinks and directories, the verified Google profile, real reviews, a PageSpeed check, a YouTube demo, and the contradiction between `zap-pos-facts` ("planned": variants, owner app, all-branch dashboard) and the plans and clothing pages.
+
 ## 2026-11-24: City pages made distinct, weak ones noindexed
 - Following an SEO review (near-identical city pages risk Google's doorway and scaled-content policies), each city page now has its own description, headline, four-question FAQ and a "What to check before you choose in <city>" section; the repeated load-shedding and set-up sections were removed.
 - New page field `noindex` (prerender writes `noindex, follow` in place of the site-wide robots tag; page dropped from `sitemap.xml` and `llms.txt`). Set on Multan, Sialkot, Gujranwala and Quetta, whose local detail is thinnest. Remove `noindex` once a page has real local content. Sitemap is now 42 addresses.

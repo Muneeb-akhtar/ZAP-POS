@@ -66,6 +66,12 @@ function DownloadCard({ page, links, release }) {
   )
 }
 
+// Article text may hold links written as [words](/page); anything else stays plain text.
+const withLinks = (text) => text.split(/(\[[^\]]+\]\(\/[a-z0-9-]+\))/).map((part, i) => {
+  const m = part.match(/^\[([^\]]+)\]\((\/[a-z0-9-]+)\)$/)
+  return m ? <a key={i} href={m[2]}>{m[1]}</a> : part
+})
+
 const Head = ({ title, text }) => (
   <div className="ip-head"><h2>{title}</h2>{text && <p>{text}</p>}</div>
 )
@@ -73,7 +79,8 @@ const Head = ({ title, text }) => (
 export default function InfoPage({ page, pages, pricing, finalCta, brand, links, release }) {
   // Up to 6 other pages, starting after this one, so links are spread across the whole site.
   const at = pages.items.findIndex((p) => p.slug === page.slug)
-  const related = [...pages.items.slice(at + 1), ...pages.items.slice(0, at)].slice(0, 6)
+  const pick = page.related?.map((slug) => pages.items.find((p) => p.slug === slug)).filter(Boolean)
+  const related = pick?.length ? pick : [...pages.items.slice(at + 1), ...pages.items.slice(0, at)].slice(0, 6)
   return (
     <>
       <PageHero page={page} links={links} />
@@ -125,7 +132,7 @@ export default function InfoPage({ page, pages, pricing, finalCta, brand, links,
             {page.article.map((sec) => (
               <div key={sec.h}>
                 <h2>{sec.h}</h2>
-                {sec.p.map((t) => <p key={t}>{t}</p>)}
+                {sec.p.map((t) => <p key={t}>{withLinks(t)}</p>)}
               </div>
             ))}
           </article>

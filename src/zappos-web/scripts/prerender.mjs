@@ -85,8 +85,10 @@ for (const p of merged.pages.items) {
 
 // Sitemap: home + every inner page.
 const indexed = merged.pages.items.filter((p) => !p.noindex)
+// lastmod only where the page carries a real publish date; a made-up date would teach Google to ignore the field.
+const lastmod = new Map(indexed.filter((p) => p.published).map((p) => [`${site}/${p.slug}`, p.published]))
 const urls = [`${site}/`, ...indexed.map((p) => `${site}/${p.slug}`)]
-await writeFile(resolve(root, 'dist/sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `  <url><loc>${u}</loc></url>`).join('\n')}\n</urlset>\n`)
+await writeFile(resolve(root, 'dist/sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `  <url><loc>${u}</loc>${lastmod.get(u) ? `<lastmod>${lastmod.get(u)}</lastmod>` : ''}</url>`).join('\n')}\n</urlset>\n`)
 
 // llms.txt: a plain guide to the site for AI tools (the llms.txt convention), built from the same page list.
 const facts = merged.pages.items.find((p) => p.slug === 'zap-pos-facts')

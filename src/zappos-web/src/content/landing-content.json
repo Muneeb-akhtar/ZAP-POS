@@ -1089,14 +1089,22 @@
           "title": "Urdu mein · اردو میں",
           "roman": "ZAP POS har bill FBR ko bhejta hai aur receipt par FBR ka invoice number aur QR code chhapta hai. Internet band ho to billing jari rehti hai aur bills baad mein chale jate hain.",
           "ur": "زیپ پوس ہر بل ایف بی آر کو بھیجتا ہے اور رسید پر ایف بی آر کا انوائس نمبر اور کیو آر کوڈ چھاپتا ہے۔ انٹرنیٹ بند ہو تو بلنگ جاری رہتی ہے اور بل بعد میں چلے جاتے ہیں۔"
-        }
+        },
+        "related": [
+          "fbr-pos-integration-guide",
+          "restaurant-pos",
+          "offline-billing",
+          "plans",
+          "best-pos-software-pakistan",
+          "pos-software-lahore"
+        ]
       },
       {
         "slug": "fbr-pos-integration-guide",
         "menu": "FBR POS guide",
         "icon": "receipt",
-        "seoTitle": "FBR POS Integration in Pakistan: Who Must Integrate and What Changes (2026 Guide)",
-        "seoDescription": "Who has to integrate their POS with FBR, what the electronic invoice must carry, why a licensed integrator is needed, what happens if you do not integrate, and how Punjab's PRA system differs.",
+        "seoTitle": "FBR POS Integration in Pakistan: 2026 Guide for Shops",
+        "seoDescription": "Who must integrate their POS with FBR, what the invoice must carry, why a licensed integrator matters, and the penalties for not integrating.",
         "kicker": "Guide",
         "title": "FBR POS integration,",
         "titleHighlight": "explained for shop owners.",
@@ -1189,7 +1197,15 @@
           "title": "Urdu mein · اردو میں",
           "roman": "Sab dukaanon par FBR integration lazmi nahi, lekin Tier-1 retailers ko licensed integrator ke zariye integrate karna hota hai, warna jurmana aur dukaan seal ho sakti hai. ZAP POS ke paas FBR integrator ka licence hai.",
           "ur": "تمام دکانوں پر ایف بی آر انٹیگریشن لازمی نہیں، لیکن ٹیئر ون ریٹیلرز کو لائسنس یافتہ انٹیگریٹر کے ذریعے انٹیگریٹ کرنا ہوتا ہے، ورنہ جرمانہ اور دکان سیل ہو سکتی ہے۔ زیپ پوس کے پاس ایف بی آر انٹیگریٹر کا لائسنس ہے۔"
-        }
+        },
+        "related": [
+          "fbr-invoicing",
+          "restaurant-pos",
+          "offline-billing",
+          "best-pos-software-pakistan",
+          "cloud-pos-vs-offline-pos",
+          "plans"
+        ]
       },
       {
         "slug": "plans",
@@ -1286,14 +1302,22 @@
           "title": "Urdu mein · اردو میں",
           "roman": "Har plan mein offline billing, barcode, thermal printer, inventory aur daily reports shamil hain. Qeemat rupayon mein saaf likhi hai.",
           "ur": "ہر پلان میں آف لائن بلنگ، بارکوڈ، تھرمل پرنٹر، انوینٹری اور روزانہ رپورٹس شامل ہیں۔ قیمت روپوں میں صاف لکھی ہے۔"
-        }
+        },
+        "related": [
+          "download",
+          "offline-billing",
+          "fbr-invoicing",
+          "multi-branch-pos",
+          "best-pos-software-pakistan",
+          "zap-pos-vs-oscar-pos"
+        ]
       },
       {
         "slug": "download",
         "menu": "Get ZAP POS",
         "icon": "windows",
-        "seoTitle": "Download ZAP POS for Windows 10 and 11 | POS Software",
-        "seoDescription": "Download the ZAP POS installer for Windows. One program for the main PC and every counter, with offline billing, printer and barcode support and automatic updates.",
+        "seoTitle": "Download ZAP POS for Windows 10 and 11",
+        "seoDescription": "Download the ZAP POS installer for Windows. One program for the main PC and every counter, with offline billing and automatic updates.",
         "kicker": "Download",
         "title": "Get ZAP POS",
         "titleHighlight": "on your counter.",
@@ -1516,14 +1540,22 @@
           "title": "Urdu mein · اردو میں",
           "roman": "ZAP POS bill se pehle dawai ki expiry check karta hai aur strip ya box, dono tarah ek hi stock se bechne deta hai.",
           "ur": "زیپ پوس بل سے پہلے دوا کی ایکسپائری چیک کرتا ہے اور اسٹرپ یا ڈبے، دونوں طرح ایک ہی اسٹاک سے بیچنے دیتا ہے۔"
-        }
+        },
+        "related": [
+          "offline-billing",
+          "fbr-invoicing",
+          "kiryana-store-pos",
+          "multi-branch-pos",
+          "pos-hardware",
+          "pos-software-lahore"
+        ]
       },
       {
         "slug": "restaurant-pos",
         "menu": "Restaurants & cafes",
         "icon": "receipt",
-        "seoTitle": "Restaurant POS Software in Pakistan | Tables, Kitchen | ZAP POS",
-        "seoDescription": "Restaurant and cafe POS for Pakistan: tables, takeaway and delivery, tickets to kitchen printers, tax by cash or card, FBR/PRA invoicing, and billing without internet.",
+        "seoTitle": "Restaurant POS Software in Pakistan | ZAP POS",
+        "seoDescription": "Restaurant and cafe POS for Pakistan: tables, takeaway, delivery, kitchen printers, tax by payment method, FBR/PRA invoicing, offline billing.",
         "kicker": "For restaurants & cafes",
         "title": "Orders to the kitchen.",
         "titleHighlight": "Bills at the counter.",
@@ -1613,14 +1645,22 @@
           "title": "Urdu mein · اردو میں",
           "roman": "Table, takeaway aur delivery orders lein, har item sahi kitchen printer par bhejein, aur sahi tax lagayein.",
           "ur": "ٹیبل، ٹیک اوے اور ڈیلیوری آرڈرز لیں، ہر آئٹم صحیح کچن پرنٹر پر بھیجیں، اور صحیح ٹیکس لگائیں۔"
-        }
+        },
+        "related": [
+          "fbr-pos-integration-guide",
+          "offline-billing",
+          "pos-hardware",
+          "bakery-pos",
+          "pos-software-lahore",
+          "plans"
+        ]
       },
       {
         "slug": "supermarket-pos",
         "menu": "Supermarkets",
         "icon": "cart",
-        "seoTitle": "Supermarket POS Software in Pakistan | Multi-Counter | ZAP POS",
-        "seoDescription": "Supermarket POS for Pakistan: many counters sharing live stock, fast barcode billing, cartons and dozens, bulk prices, weighed items and scale labels, billing without internet.",
+        "seoTitle": "Supermarket POS Software in Pakistan | ZAP POS",
+        "seoDescription": "Supermarket POS for Pakistan: many counters on live stock, fast barcode billing, cartons, bulk prices, weighed items, billing without internet.",
         "kicker": "For supermarkets & marts",
         "title": "Five counters.",
         "titleHighlight": "One stock count.",
@@ -1710,14 +1750,22 @@
           "title": "Urdu mein · اردو میں",
           "roman": "Har counter tez scan karta hai aur sab ko ek hi stock nazar aata hai. Piece, darjan ya carton mein bechein aur bulk qeemat dein.",
           "ur": "ہر کاؤنٹر تیز اسکین کرتا ہے اور سب کو ایک ہی اسٹاک نظر آتا ہے۔ پیس، درجن یا کارٹن میں بیچیں اور تھوک قیمت دیں۔"
-        }
+        },
+        "related": [
+          "multi-counter-pos",
+          "kiryana-store-pos",
+          "barcode-system-for-your-shop",
+          "how-to-count-stock-in-a-shop",
+          "pos-hardware",
+          "plans"
+        ]
       },
       {
         "slug": "kiryana-store-pos",
         "menu": "Kiryana stores",
         "icon": "tag",
-        "seoTitle": "Kiryana Store POS Software in Pakistan | Billing & Stock | ZAP POS",
-        "seoDescription": "Simple POS for kiryana and general stores in Pakistan: fast billing with or without barcodes, quick sale for loose items, stock and supplier dues, works without internet.",
+        "seoTitle": "Kiryana Store POS Software in Pakistan | ZAP POS",
+        "seoDescription": "Simple POS for kiryana and general stores: fast billing with or without barcodes, quick sale for loose items, supplier dues, works offline.",
         "kicker": "For kiryana & general stores",
         "title": "Your register,",
         "titleHighlight": "on one screen.",
@@ -1806,14 +1854,22 @@
           "title": "Urdu mein · اردو میں",
           "roman": "Scan, search ya tap karke chand second mein bill banayein. Khula saman quick sale se bechein aur dekhein ke kya khatam ho raha hai.",
           "ur": "اسکین، سرچ یا ٹیپ کر کے چند سیکنڈ میں بل بنائیں۔ کھلا سامان کوئیک سیل سے بیچیں اور دیکھیں کہ کیا ختم ہو رہا ہے۔"
-        }
+        },
+        "related": [
+          "supermarket-pos",
+          "pharmacy-pos",
+          "barcode-system-for-your-shop",
+          "offline-billing",
+          "pos-vs-register-excel",
+          "plans"
+        ]
       },
       {
         "slug": "bakery-pos",
         "menu": "Bakeries",
         "icon": "zap",
-        "seoTitle": "Bakery POS Software in Pakistan | Weight & Expiry | ZAP POS",
-        "seoDescription": "Bakery and sweets POS for Pakistan: sell by kg or piece, expiry dates on fresh items, dozen and box packs, labels for weighed items, billing without internet.",
+        "seoTitle": "Bakery POS Software in Pakistan | ZAP POS",
+        "seoDescription": "Bakery and sweets POS for Pakistan: sell by kg or piece, expiry dates on fresh items, dozen and box packs, labels, billing without internet.",
         "kicker": "For bakeries & sweet shops",
         "title": "By the kg,",
         "titleHighlight": "by the dozen.",
@@ -1898,14 +1954,22 @@
           "title": "Urdu mein · اردو میں",
           "roman": "Mithai wazan se, rusk packet se aur cake piece se bechein. Taaza cheezon par expiry date lagayein.",
           "ur": "مٹھائی وزن سے، رسک پیکٹ سے اور کیک پیس سے بیچیں۔ تازہ چیزوں پر ایکسپائری ڈیٹ لگائیں۔"
-        }
+        },
+        "related": [
+          "restaurant-pos",
+          "kiryana-store-pos",
+          "pos-hardware",
+          "offline-billing",
+          "fbr-invoicing",
+          "plans"
+        ]
       },
       {
         "slug": "clothing-store-pos",
         "menu": "Clothing stores",
         "icon": "jeans",
-        "seoTitle": "Clothing Store POS Software in Pakistan | Sizes & Colours | ZAP POS",
-        "seoDescription": "POS for boutiques and garment shops in Pakistan: stock by size and colour, a barcode tag for each size, sale-price tags, returns with credit notes, branches, FBR.",
+        "seoTitle": "Clothing Store POS Software in Pakistan | ZAP POS",
+        "seoDescription": "POS for boutiques and garment shops in Pakistan: stock by size and colour, barcode tags, returns with credit notes, branches and FBR.",
         "kicker": "For boutiques & garment shops",
         "title": "Know every size,",
         "titleHighlight": "in every colour.",
@@ -2019,14 +2083,22 @@
           "title": "Urdu mein · اردو میں",
           "roman": "ZAP POS har size aur rang ka alag stock rakhta hai aur har ek ka barcode tag chhapta hai, taake cashier ko sahi cheez nazar aaye.",
           "ur": "زیپ پوس ہر سائز اور رنگ کا الگ اسٹاک رکھتا ہے اور ہر ایک کا بارکوڈ ٹیگ چھاپتا ہے، تاکہ کیشیئر کو صحیح چیز نظر آئے۔"
-        }
+        },
+        "related": [
+          "shoe-store-pos",
+          "cosmetics-store-pos",
+          "barcode-system-for-your-shop",
+          "multi-branch-pos",
+          "branch-stock-transfer",
+          "pos-software-lahore"
+        ]
       },
       {
         "slug": "shoe-store-pos",
         "menu": "Shoe stores",
         "icon": "tag",
-        "seoTitle": "Shoe Store POS Software in Pakistan | Stock by Size | ZAP POS",
-        "seoDescription": "POS for shoe shops in Pakistan: stock for every size and colour, sizes in number order, barcode tags per pair, returns with credit notes, branches and FBR invoicing.",
+        "seoTitle": "Shoe Store POS Software in Pakistan | ZAP POS",
+        "seoDescription": "POS for shoe shops in Pakistan: stock for every size and colour, barcode tags per pair, returns with credit notes, branches and FBR.",
         "kicker": "For shoe & footwear shops",
         "title": "Find size 9 in black",
         "titleHighlight": "before you check the store room.",
@@ -2116,14 +2188,22 @@
           "title": "Urdu mein · اردو میں",
           "roman": "Cashier ko batata hai ke har size aur rang ke kitne jore bache hain, taake store room tak jana na pare.",
           "ur": "کیشیئر کو بتاتا ہے کہ ہر سائز اور رنگ کے کتنے جوڑے بچے ہیں، تاکہ اسٹور روم تک جانا نہ پڑے۔"
-        }
+        },
+        "related": [
+          "clothing-store-pos",
+          "barcode-system-for-your-shop",
+          "multi-branch-pos",
+          "branch-stock-transfer",
+          "fbr-invoicing",
+          "plans"
+        ]
       },
       {
         "slug": "cosmetics-store-pos",
         "menu": "Cosmetics shops",
         "icon": "tag",
-        "seoTitle": "Cosmetics Shop POS Software in Pakistan | Expiry & Shades | ZAP POS",
-        "seoDescription": "POS for cosmetics, beauty and perfume shops in Pakistan: expiry dates that stop the sale, sizes and shades with their own barcode and stock, price tags, returns, FBR invoicing and offline billing.",
+        "seoTitle": "Cosmetics Shop POS Software in Pakistan | ZAP POS",
+        "seoDescription": "POS for cosmetics and perfume shops in Pakistan: expiry dates that stop the sale, shades and sizes with own stock, price tags, FBR.",
         "kicker": "For cosmetics & beauty shops",
         "title": "Every shade and size,",
         "titleHighlight": "counted and priced right.",
@@ -2213,14 +2293,22 @@
           "title": "Urdu mein · اردو میں",
           "roman": "Product par expiry date lagayein, aur date guzarne ke baad ZAP POS use bechne se mana kar deta hai.",
           "ur": "پروڈکٹ پر ایکسپائری ڈیٹ لگائیں، اور تاریخ گزرنے کے بعد زیپ پوس اسے بیچنے سے منع کر دیتا ہے۔"
-        }
+        },
+        "related": [
+          "clothing-store-pos",
+          "pharmacy-pos",
+          "barcode-system-for-your-shop",
+          "how-to-count-stock-in-a-shop",
+          "fbr-invoicing",
+          "plans"
+        ]
       },
       {
         "slug": "mobile-accessories-shop-pos",
         "menu": "Mobile accessories",
         "icon": "phone",
-        "seoTitle": "Mobile Accessories Shop POS Software in Pakistan | Billing & Stock | ZAP POS",
-        "seoDescription": "POS for mobile accessories and electronics shops in Pakistan: fast barcode billing, colours and sizes with their own stock, price tags, returns with credit notes, supplier dues and offline billing.",
+        "seoTitle": "Mobile Accessories Shop POS in Pakistan | ZAP POS",
+        "seoDescription": "POS for mobile accessories shops in Pakistan: fast barcode billing, colours and models with own stock, price tags, returns, offline billing.",
         "kicker": "For mobile accessories shops",
         "title": "Hundreds of small items,",
         "titleHighlight": "one clear stock list.",
@@ -2310,14 +2398,22 @@
           "title": "Urdu mein · اردو میں",
           "roman": "Cover, charger, cable aur earphones har rang aur model mein aate hain. ZAP POS har ek ko alag barcode aur qeemat deta hai.",
           "ur": "کور، چارجر، کیبل اور ایئر فونز ہر رنگ اور ماڈل میں آتے ہیں۔ زیپ پوس ہر ایک کو الگ بارکوڈ اور قیمت دیتا ہے۔"
-        }
+        },
+        "related": [
+          "hardware-store-pos",
+          "barcode-system-for-your-shop",
+          "pos-hardware",
+          "offline-billing",
+          "pos-software-lahore",
+          "plans"
+        ]
       },
       {
         "slug": "hardware-store-pos",
         "menu": "Hardware stores",
         "icon": "box",
-        "seoTitle": "Hardware Store POS Software in Pakistan | Billing, Stock & Dues | ZAP POS",
-        "seoDescription": "POS for hardware, paint and building material shops in Pakistan: items sold singly or by the box with their own barcode and price, supplier dues, quick sale, FBR invoicing and offline billing.",
+        "seoTitle": "Hardware Store POS Software in Pakistan | ZAP POS",
+        "seoDescription": "POS for hardware, paint and building material shops: sell singly or by the box, supplier dues, quick sale, FBR invoicing, offline billing.",
         "kicker": "For hardware & building material shops",
         "title": "A thousand items,",
         "titleHighlight": "none lost track of.",
@@ -2407,14 +2503,22 @@
           "title": "Urdu mein · اردو میں",
           "roman": "Nut, pipe, paint aur tools ek ek ya box mein bechein, har ek ka apna barcode aur qeemat ho.",
           "ur": "نٹ، پائپ، پینٹ اور اوزار ایک ایک یا ڈبے میں بیچیں، ہر ایک کا اپنا بارکوڈ اور قیمت ہو۔"
-        }
+        },
+        "related": [
+          "mobile-accessories-shop-pos",
+          "kiryana-store-pos",
+          "how-to-count-stock-in-a-shop",
+          "barcode-system-for-your-shop",
+          "offline-billing",
+          "plans"
+        ]
       },
       {
         "slug": "pos-software-lahore",
         "menu": "POS in Lahore",
         "icon": "receipt",
-        "seoTitle": "POS Software in Lahore | Offline Billing, FBR Ready | ZAP POS",
-        "seoDescription": "POS software for shops, pharmacies and restaurants in Lahore: bills without internet, FBR invoice number and QR code, several counters and branches, prices in rupees. Book a free demo.",
+        "seoTitle": "POS Software in Lahore | Offline, FBR Ready | ZAP POS",
+        "seoDescription": "POS for shops, pharmacies and restaurants in Lahore: bills without internet, FBR invoice number and QR code, counters and branches. Free demo.",
         "kicker": "POS in Lahore",
         "title": "POS software for Lahore shops,",
         "titleHighlight": "made in Lahore, for Lahore markets.",
@@ -2452,7 +2556,7 @@
           {
             "h": "Tax and FBR in Lahore",
             "p": [
-              "Punjab collects sales tax on services through the Punjab Revenue Authority. Hotels, restaurants, coffee shops and marriage halls there are expected to issue computerised receipts through PRA's Electronic Invoice Monitoring System, e-IMS, with a unique invoice number and a PRA QR code. Shops that sell goods report to FBR, and Tier-1 retailers must integrate with FBR's system. Lahore is where PRA is based, so Lahore restaurants are often the first checked.",
+              "Punjab collects sales tax on services through the Punjab Revenue Authority. Hotels, restaurants, coffee shops and marriage halls there are expected to issue computerised receipts through PRA's Electronic Invoice Monitoring System, e-IMS, with a unique invoice number and a PRA QR code. Shops that sell goods report to FBR, and [Tier-1 retailer](/fbr-pos-integration-guide)s must integrate with FBR's system. Lahore is where PRA is based, so Lahore restaurants are often the first checked.",
               "ZAP POS prints FBR's invoice number and QR code on the receipt, since it holds an FBR integrator licence, and applies the tax rate you set for each way of paying. This is a summary, not tax advice, so confirm your own obligations with a tax consultant."
             ]
           },
@@ -2465,7 +2569,7 @@
           {
             "h": "Made in Lahore",
             "p": [
-              "ZAP POS is made in Lahore, by people who know how a Lahore shop runs: the market rush on a weekend, the router that goes off with load shedding, and the visit from a tax officer. That is why offline billing, FBR and PRA receipts and several counters and branches are in the product from the start, not added later."
+              "ZAP POS is made in Lahore, by people who know how a Lahore shop runs: the market rush on a weekend, the router that goes off with load shedding, and the visit from a tax officer. That is why [offline billing](/offline-billing), FBR and PRA receipts and several counters and branches are in the product from the start, not added later."
             ]
           },
           {
@@ -2478,7 +2582,7 @@
             "h": "What to check before you choose in Lahore",
             "p": [
               "Lahore shops often add a second outlet in a mall or a new market. Ask how stock and sales from every outlet reach you, and what a new branch costs. ZAP POS prices the Brand plan per branch, from Rs 8,999 a month.",
-              "If you run a restaurant or cafe, PRA's e-IMS is the rule to check first. Ask the vendor how receipts carry the unique invoice number and PRA QR code, and test a bill yourself.",
+              "If you run a restaurant or cafe, PRA's [e-IMS](/fbr-pos-integration-guide) is the rule to check first. Ask the vendor how receipts carry the unique invoice number and PRA QR code, and test a bill yourself.",
               "On a weekend rush in Liberty or Anarkali, the router can fail at the worst time. Switch it off during the demo and make a bill. A PC on a UPS keeps billing; one without a UPS switches off with the power.",
               "We set up every shop with the owner over WhatsApp. For Lahore shops, book a free demo and we will show it on your own products."
             ]
@@ -2488,14 +2592,22 @@
           "title": "Urdu mein · اردو میں",
           "roman": "ZAP POS Lahore mein bana hai. Gulberg, DHA, Hall Road, Anarkali aur Model Town jaisi jagahon ki dukaanon ke liye offline billing, FBR aur PRA receipts aur kai branches ek jagah.",
           "ur": "زیپ پوس لاہور میں بنا ہے۔ گلبرگ، ڈی ایچ اے، ہال روڈ، انارکلی اور ماڈل ٹاؤن جیسی جگہوں کی دکانوں کے لیے آف لائن بلنگ، ایف بی آر اور پی آر اے رسیدیں اور کئی برانچیں ایک جگہ۔"
-        }
+        },
+        "related": [
+          "clothing-store-pos",
+          "restaurant-pos",
+          "mobile-accessories-shop-pos",
+          "pharmacy-pos",
+          "offline-billing",
+          "fbr-pos-integration-guide"
+        ]
       },
       {
         "slug": "pos-software-karachi",
         "menu": "POS in Karachi",
         "icon": "receipt",
-        "seoTitle": "POS Software in Karachi | Offline Billing, FBR Ready | ZAP POS",
-        "seoDescription": "POS software for shops, pharmacies and restaurants in Karachi: bills without internet, FBR invoice number and QR code, several counters and branches, prices in rupees. Book a free demo.",
+        "seoTitle": "POS Software in Karachi | Offline, FBR Ready | ZAP POS",
+        "seoDescription": "POS for shops, pharmacies and restaurants in Karachi: bills without internet, FBR invoice number and QR code, counters and branches. Free demo.",
         "kicker": "POS in Karachi",
         "title": "POS software for Karachi shops,",
         "titleHighlight": "fast counters for Karachi's busiest bazaars.",
@@ -2527,14 +2639,14 @@
           {
             "h": "Shops that use POS software in Karachi",
             "p": [
-              "In Karachi, ZAP POS is used for the kind of shops you find across the city: Saddar and Tariq Road retailers, Bolton Market wholesalers, Clifton and Defence cafes and restaurants, and pharmacies and kiryana stores in every neighbourhood. The common problem is the same everywhere: bills must be fast, the stock must be right, and the counter must not stop when the internet does."
+              "In Karachi, ZAP POS is used for the kind of shops you find across the city: Saddar and Tariq Road retailers, Bolton Market wholesalers, Clifton and Defence cafes and restaurants, and pharmacies and [kiryana](/kiryana-store-pos) stores in every neighbourhood. The common problem is the same everywhere: bills must be fast, the stock must be right, and the counter must not stop when the internet does."
             ]
           },
           {
             "h": "Tax and FBR in Karachi",
             "p": [
               "Sindh collects sales tax on services through the Sindh Revenue Board, SRB, so restaurants and other service businesses in Karachi report to SRB, while shops that sell goods report to FBR. Check which one applies to you, then ask us how ZAP POS handles it. Your NTN, STRN and tax office print on every ZAP POS receipt.",
-              "ZAP POS prints FBR's invoice number and QR code on the receipt, since it holds an FBR integrator licence, and applies the tax rate you set for each way of paying. This is a summary, not tax advice, so confirm your own obligations with a tax consultant."
+              "ZAP POS prints FBR's invoice number and QR code on the receipt, since it holds an [FBR integrator licence](/fbr-invoicing), and applies the tax rate you set for each way of paying. This is a summary, not tax advice, so confirm your own obligations with a tax consultant."
             ]
           },
           {
@@ -2548,7 +2660,7 @@
             "p": [
               "Ask which authority your business reports to. Restaurants and other services report to SRB, and shops that sell goods report to FBR. Then ask the vendor exactly what it supports for yours.",
               "Karachi has many wholesale buyers. Ask how the POS handles bulk prices, credit accounts and customer ledgers, not just retail billing.",
-              "At peak hours in Saddar or Bolton Market, a slow counter loses sales. Ask for a demo with your own barcode scanner and 50 items, and watch how fast it goes.",
+              "At peak hours in Saddar or Bolton Market, a slow counter loses sales. Ask for a demo with your own [barcode](/barcode-system-for-your-shop) scanner and 50 items, and watch how fast it goes.",
               "We set up every shop with the owner over WhatsApp, so you can start from anywhere in the city."
             ]
           }
@@ -2557,14 +2669,22 @@
           "title": "Urdu mein · اردو میں",
           "roman": "Karachi ki dukaanon ke liye: internet band ho to bhi billing, SRB aur FBR ke liye tax office receipt par, aur Saddar, Bolton Market aur Clifton jaise busy bazaaron ke liye tez counters.",
           "ur": "کراچی کی دکانوں کے لیے: انٹرنیٹ بند ہو تو بھی بلنگ، ایس آر بی اور ایف بی آر کے لیے ٹیکس آفس رسید پر، اور صدر، بولٹن مارکیٹ اور کلفٹن جیسے مصروف بازاروں کے لیے تیز کاؤنٹر۔"
-        }
+        },
+        "related": [
+          "supermarket-pos",
+          "restaurant-pos",
+          "pharmacy-pos",
+          "clothing-store-pos",
+          "offline-billing",
+          "fbr-pos-integration-guide"
+        ]
       },
       {
         "slug": "pos-software-islamabad",
         "menu": "POS in Islamabad",
         "icon": "receipt",
-        "seoTitle": "POS Software in Islamabad | Offline Billing, FBR Ready | ZAP POS",
-        "seoDescription": "POS software for shops, pharmacies and restaurants in Islamabad: bills without internet, FBR invoice number and QR code, several counters and branches, prices in rupees. Book a free demo.",
+        "seoTitle": "POS Software in Islamabad | Offline, FBR Ready | ZAP POS",
+        "seoDescription": "POS for shops, pharmacies and restaurants in Islamabad: bills without internet, FBR invoice number and QR code, counters and branches. Free demo.",
         "kicker": "POS in Islamabad",
         "title": "POS software for Islamabad shops,",
         "titleHighlight": "FBR-ready receipts for Islamabad's stores.",
@@ -2602,8 +2722,8 @@
           {
             "h": "Tax and FBR in Islamabad",
             "p": [
-              "Retail shops that sell goods report to FBR, and Tier-1 retailers must integrate their POS with FBR's system. For restaurants and other services, check with your tax consultant which authority applies to your premises, and ask us how ZAP POS handles it.",
-              "ZAP POS prints FBR's invoice number and QR code on the receipt, since it holds an FBR integrator licence, and applies the tax rate you set for each way of paying. This is a summary, not tax advice, so confirm your own obligations with a tax consultant."
+              "Retail shops that sell goods report to FBR, and [Tier-1 retailer](/fbr-pos-integration-guide)s must integrate their POS with FBR's system. For restaurants and other services, check with your tax consultant which authority applies to your premises, and ask us how ZAP POS handles it.",
+              "ZAP POS prints FBR's invoice number and QR code on the receipt, since it holds an [FBR integrator licence](/fbr-invoicing), and applies the tax rate you set for each way of paying. This is a summary, not tax advice, so confirm your own obligations with a tax consultant."
             ]
           },
           {
@@ -2626,14 +2746,22 @@
           "title": "Urdu mein · اردو میں",
           "roman": "Islamabad ke Blue Area, F-7 aur F-10 jaise markets ke liye: FBR invoice number aur QR code har receipt par, aur Tier-1 dukaanon ke liye integration.",
           "ur": "اسلام آباد کے بلیو ایریا، ایف سیون اور ایف ٹین جیسے مارکیٹوں کے لیے: ہر رسید پر ایف بی آر انوائس نمبر اور کیو آر کوڈ، اور ٹیئر ون دکانوں کے لیے انٹیگریشن۔"
-        }
+        },
+        "related": [
+          "supermarket-pos",
+          "restaurant-pos",
+          "pharmacy-pos",
+          "fbr-pos-integration-guide",
+          "offline-billing",
+          "pos-software-lahore"
+        ]
       },
       {
         "slug": "pos-software-rawalpindi",
         "menu": "POS in Rawalpindi",
         "icon": "receipt",
-        "seoTitle": "POS Software in Rawalpindi | Offline Billing, FBR Ready | ZAP POS",
-        "seoDescription": "POS software for shops, pharmacies and restaurants in Rawalpindi: bills without internet, FBR invoice number and QR code, several counters and branches, prices in rupees. Book a free demo.",
+        "seoTitle": "POS Software in Rawalpindi | Offline, FBR Ready | ZAP POS",
+        "seoDescription": "POS for shops, pharmacies and restaurants in Rawalpindi: bills without internet, FBR invoice number and QR code, counters and branches. Free demo.",
         "kicker": "POS in Rawalpindi",
         "title": "POS software for Rawalpindi shops,",
         "titleHighlight": "quick billing for Pindi's busy bazaars.",
@@ -2665,13 +2793,13 @@
           {
             "h": "Shops that use POS software in Rawalpindi",
             "p": [
-              "In Rawalpindi, ZAP POS is used for the kind of shops you find across the city: Raja Bazaar and Saddar traders, Bahria Town and Commercial Market shops, mobile and electronics sellers, and kiryana stores and pharmacies across the city. The common problem is the same everywhere: bills must be fast, the stock must be right, and the counter must not stop when the internet does."
+              "In Rawalpindi, ZAP POS is used for the kind of shops you find across the city: Raja Bazaar and Saddar traders, Bahria Town and Commercial Market shops, mobile and electronics sellers, and [kiryana](/kiryana-store-pos) stores and pharmacies across the city. The common problem is the same everywhere: bills must be fast, the stock must be right, and the counter must not stop when the internet does."
             ]
           },
           {
             "h": "Tax and FBR in Rawalpindi",
             "p": [
-              "Punjab collects sales tax on services through the Punjab Revenue Authority. Hotels, restaurants, coffee shops and marriage halls there are expected to issue computerised receipts through PRA's Electronic Invoice Monitoring System, e-IMS, with a unique invoice number and a PRA QR code. Shops that sell goods report to FBR, and Tier-1 retailers must integrate with FBR's system.",
+              "Punjab collects sales tax on services through the Punjab Revenue Authority. Hotels, restaurants, coffee shops and marriage halls there are expected to issue computerised receipts through PRA's Electronic Invoice Monitoring System, e-IMS, with a unique invoice number and a PRA QR code. Shops that sell goods report to FBR, and [Tier-1 retailer](/fbr-pos-integration-guide)s must integrate with FBR's system.",
               "ZAP POS prints FBR's invoice number and QR code on the receipt, since it holds an FBR integrator licence, and applies the tax rate you set for each way of paying. This is a summary, not tax advice, so confirm your own obligations with a tax consultant."
             ]
           },
@@ -2686,7 +2814,7 @@
             "p": [
               "Raja Bazaar shops sell by the piece, dozen and carton. Ask how the POS sells one item in several packs from the same stock.",
               "Mobile and electronics sellers in Saddar need a barcode for each model and colour. Check how fast the cashier can find the right one.",
-              "If you have a restaurant, PRA's e-IMS applies in Punjab. Ask how the receipt carries the invoice number and PRA QR code.",
+              "If you have a restaurant, PRA's [e-IMS](/fbr-pos-integration-guide) applies in Punjab. Ask how the receipt carries the invoice number and PRA QR code.",
               "We set up every shop with the owner over WhatsApp."
             ]
           }
@@ -2695,14 +2823,22 @@
           "title": "Urdu mein · اردو میں",
           "roman": "Rawalpindi ke Raja Bazaar, Saddar aur Commercial Market ki dukaanon ke liye tez barcode billing, alag alag pack ka stock, aur FBR aur PRA receipts.",
           "ur": "راولپنڈی کے راجہ بازار، صدر اور کمرشل مارکیٹ کی دکانوں کے لیے تیز بارکوڈ بلنگ، الگ الگ پیک کا اسٹاک، اور ایف بی آر اور پی آر اے رسیدیں۔"
-        }
+        },
+        "related": [
+          "kiryana-store-pos",
+          "mobile-accessories-shop-pos",
+          "supermarket-pos",
+          "pharmacy-pos",
+          "offline-billing",
+          "fbr-pos-integration-guide"
+        ]
       },
       {
         "slug": "pos-software-faisalabad",
         "menu": "POS in Faisalabad",
         "icon": "receipt",
-        "seoTitle": "POS Software in Faisalabad | Offline Billing, FBR Ready | ZAP POS",
-        "seoDescription": "POS software for shops, pharmacies and restaurants in Faisalabad: bills without internet, FBR invoice number and QR code, several counters and branches, prices in rupees. Book a free demo.",
+        "seoTitle": "POS Software in Faisalabad | Offline, FBR Ready | ZAP POS",
+        "seoDescription": "POS for shops, pharmacies and restaurants in Faisalabad: bills without internet, FBR invoice number and QR code, counters and branches. Free demo.",
         "kicker": "POS in Faisalabad",
         "title": "POS software for Faisalabad shops,",
         "titleHighlight": "built for Faisalabad's cloth and garment trade.",
@@ -2740,8 +2876,8 @@
           {
             "h": "Tax and FBR in Faisalabad",
             "p": [
-              "Punjab collects sales tax on services through the Punjab Revenue Authority. Hotels, restaurants, coffee shops and marriage halls there are expected to issue computerised receipts through PRA's Electronic Invoice Monitoring System, e-IMS, with a unique invoice number and a PRA QR code. Shops that sell goods report to FBR, and Tier-1 retailers must integrate with FBR's system.",
-              "ZAP POS prints FBR's invoice number and QR code on the receipt, since it holds an FBR integrator licence, and applies the tax rate you set for each way of paying. This is a summary, not tax advice, so confirm your own obligations with a tax consultant."
+              "Punjab collects sales tax on services through the Punjab Revenue Authority. Hotels, restaurants, coffee shops and marriage halls there are expected to issue computerised receipts through PRA's Electronic Invoice Monitoring System, e-IMS, with a unique invoice number and a PRA QR code. Shops that sell goods report to FBR, and [Tier-1 retailer](/fbr-pos-integration-guide)s must integrate with FBR's system.",
+              "ZAP POS prints FBR's invoice number and QR code on the receipt, since it holds an [FBR integrator licence](/fbr-invoicing), and applies the tax rate you set for each way of paying. This is a summary, not tax advice, so confirm your own obligations with a tax consultant."
             ]
           },
           {
@@ -2754,7 +2890,7 @@
             "h": "What to check before you choose in Faisalabad",
             "p": [
               "Ask how the POS sells cloth by the metre as well as suits by the piece, and how it keeps stock for each length and piece.",
-              "For garment shops, check how stock is kept by size and colour and how a barcode tag is printed for each.",
+              "For garment shops, check how stock is kept by size and colour and how a [barcode](/barcode-system-for-your-shop) tag is printed for each.",
               "Many Faisalabad shops sell to both shoppers and tailors or resellers. Ask about two price levels.",
               "We set up every shop with the owner over WhatsApp."
             ]
@@ -2764,7 +2900,15 @@
           "title": "Urdu mein · اردو میں",
           "roman": "Faisalabad ke kapray aur garments ki dukaanon ke liye size aur rang ka alag stock, gaz ya piece mein bikri, aur offline billing.",
           "ur": "فیصل آباد کے کپڑے اور گارمنٹس کی دکانوں کے لیے سائز اور رنگ کا الگ اسٹاک، گز یا پیس میں فروخت، اور آف لائن بلنگ۔"
-        }
+        },
+        "related": [
+          "clothing-store-pos",
+          "shoe-store-pos",
+          "bakery-pos",
+          "kiryana-store-pos",
+          "offline-billing",
+          "fbr-pos-integration-guide"
+        ]
       },
       {
         "slug": "pos-software-multan",
@@ -2803,14 +2947,14 @@
           {
             "h": "Shops that use POS software in Multan",
             "p": [
-              "In Multan, ZAP POS is used for the kind of shops you find across the city: Chowk and Hussain Agahi bazaar shops, general stores and kiryana shops, pharmacies, and sweet shops and restaurants. The common problem is the same everywhere: bills must be fast, the stock must be right, and the counter must not stop when the internet does."
+              "In Multan, ZAP POS is used for the kind of shops you find across the city: Chowk and Hussain Agahi bazaar shops, general stores and [kiryana](/kiryana-store-pos) shops, pharmacies, and sweet shops and restaurants. The common problem is the same everywhere: bills must be fast, the stock must be right, and the counter must not stop when the internet does."
             ]
           },
           {
             "h": "Tax and FBR in Multan",
             "p": [
-              "Punjab collects sales tax on services through the Punjab Revenue Authority. Hotels, restaurants, coffee shops and marriage halls there are expected to issue computerised receipts through PRA's Electronic Invoice Monitoring System, e-IMS, with a unique invoice number and a PRA QR code. Shops that sell goods report to FBR, and Tier-1 retailers must integrate with FBR's system.",
-              "ZAP POS prints FBR's invoice number and QR code on the receipt, since it holds an FBR integrator licence, and applies the tax rate you set for each way of paying. This is a summary, not tax advice, so confirm your own obligations with a tax consultant."
+              "Punjab collects sales tax on services through the Punjab Revenue Authority. Hotels, restaurants, coffee shops and marriage halls there are expected to issue computerised receipts through PRA's Electronic Invoice Monitoring System, e-IMS, with a unique invoice number and a PRA QR code. Shops that sell goods report to FBR, and [Tier-1 retailer](/fbr-pos-integration-guide)s must integrate with FBR's system.",
+              "ZAP POS prints FBR's invoice number and QR code on the receipt, since it holds an [FBR integrator licence](/fbr-invoicing), and applies the tax rate you set for each way of paying. This is a summary, not tax advice, so confirm your own obligations with a tax consultant."
             ]
           },
           {
@@ -2834,14 +2978,22 @@
           "roman": "Multan ki family dukaanon ke liye aasaan screens, owner ke saath WhatsApp par setup, aur purane saman aur qeematein naye system mein.",
           "ur": "ملتان کی خاندانی دکانوں کے لیے آسان اسکرینز، مالک کے ساتھ واٹس ایپ پر سیٹ اپ، اور پرانا سامان اور قیمتیں نئے نظام میں۔"
         },
-        "noindex": true
+        "noindex": true,
+        "related": [
+          "kiryana-store-pos",
+          "pharmacy-pos",
+          "bakery-pos",
+          "clothing-store-pos",
+          "offline-billing",
+          "fbr-pos-integration-guide"
+        ]
       },
       {
         "slug": "pos-software-peshawar",
         "menu": "POS in Peshawar",
         "icon": "receipt",
-        "seoTitle": "POS Software in Peshawar | Offline Billing, FBR Ready | ZAP POS",
-        "seoDescription": "POS software for shops, pharmacies and restaurants in Peshawar: bills without internet, FBR invoice number and QR code, several counters and branches, prices in rupees. Book a free demo.",
+        "seoTitle": "POS Software in Peshawar | Offline, FBR Ready | ZAP POS",
+        "seoDescription": "POS for shops, pharmacies and restaurants in Peshawar: bills without internet, FBR invoice number and QR code, counters and branches. Free demo.",
         "kicker": "POS in Peshawar",
         "title": "POS software for Peshawar shops,",
         "titleHighlight": "KPRA-aware billing for Peshawar shops.",
@@ -2880,7 +3032,7 @@
             "h": "Tax and FBR in Peshawar",
             "p": [
               "Khyber Pakhtunkhwa collects sales tax on services through the Khyber Pakhtunkhwa Revenue Authority, KPRA, while shops that sell goods report to FBR. Check which one applies to you. ZAP POS prints your NTN, STRN and your tax office, including KPRA, on every receipt.",
-              "ZAP POS prints FBR's invoice number and QR code on the receipt, since it holds an FBR integrator licence, and applies the tax rate you set for each way of paying. This is a summary, not tax advice, so confirm your own obligations with a tax consultant."
+              "ZAP POS prints FBR's invoice number and QR code on the receipt, since it holds an [FBR integrator licence](/fbr-invoicing), and applies the tax rate you set for each way of paying. This is a summary, not tax advice, so confirm your own obligations with a tax consultant."
             ]
           },
           {
@@ -2894,7 +3046,7 @@
             "p": [
               "Ask which authority your business reports to. Services fall under KPRA and shops that sell goods report to FBR.",
               "Many customers pay by cash, card or mobile wallet. Ask whether the POS applies a different tax rate for each, as ZAP POS does.",
-              "For electronics and dry fruit shops, check how you give each product its own barcode and price.",
+              "For electronics and dry fruit shops, check how you give each product its own [barcode](/barcode-system-for-your-shop) and price.",
               "We set up every shop with the owner over WhatsApp."
             ]
           }
@@ -2903,7 +3055,15 @@
           "title": "Urdu mein · اردو میں",
           "roman": "Peshawar ke Qissa Khwani, Namak Mandi aur University Town ki dukaanon ke liye KPRA aur FBR ka tax office receipt par, aur cash, card ya wallet ke hisab se tax.",
           "ur": "پشاور کے قصہ خوانی، نمک منڈی اور یونیورسٹی ٹاؤن کی دکانوں کے لیے کے پی آر اے اور ایف بی آر کا ٹیکس آفس رسید پر، اور کیش، کارڈ یا والٹ کے حساب سے ٹیکس۔"
-        }
+        },
+        "related": [
+          "mobile-accessories-shop-pos",
+          "restaurant-pos",
+          "pharmacy-pos",
+          "kiryana-store-pos",
+          "offline-billing",
+          "fbr-pos-integration-guide"
+        ]
       },
       {
         "slug": "pos-software-sialkot",
@@ -2948,8 +3108,8 @@
           {
             "h": "Tax and FBR in Sialkot",
             "p": [
-              "Punjab collects sales tax on services through the Punjab Revenue Authority. Hotels, restaurants, coffee shops and marriage halls there are expected to issue computerised receipts through PRA's Electronic Invoice Monitoring System, e-IMS, with a unique invoice number and a PRA QR code. Shops that sell goods report to FBR, and Tier-1 retailers must integrate with FBR's system.",
-              "ZAP POS prints FBR's invoice number and QR code on the receipt, since it holds an FBR integrator licence, and applies the tax rate you set for each way of paying. This is a summary, not tax advice, so confirm your own obligations with a tax consultant."
+              "Punjab collects sales tax on services through the Punjab Revenue Authority. Hotels, restaurants, coffee shops and marriage halls there are expected to issue computerised receipts through PRA's Electronic Invoice Monitoring System, e-IMS, with a unique invoice number and a PRA QR code. Shops that sell goods report to FBR, and [Tier-1 retailer](/fbr-pos-integration-guide)s must integrate with FBR's system.",
+              "ZAP POS prints FBR's invoice number and QR code on the receipt, since it holds an [FBR integrator licence](/fbr-invoicing), and applies the tax rate you set for each way of paying. This is a summary, not tax advice, so confirm your own obligations with a tax consultant."
             ]
           },
           {
@@ -2963,7 +3123,7 @@
             "p": [
               "Ask how the POS handles two price levels, retail and bulk, and how you give a buyer an account.",
               "Check that every sale shows what was sold, to whom, and on which bill.",
-              "For cafes and restaurants, Punjab's PRA rules apply. Ask how the receipt handles the e-IMS requirement.",
+              "For cafes and restaurants, Punjab's PRA rules apply. Ask how the receipt handles the [e-IMS](/fbr-pos-integration-guide) requirement.",
               "We set up every shop with the owner over WhatsApp."
             ]
           }
@@ -2973,7 +3133,15 @@
           "roman": "Sialkot ki dukaanon ke liye retail aur bulk alag qeematein, customer accounts, aur saaf record ke kya kis ko becha.",
           "ur": "سیالکوٹ کی دکانوں کے لیے ریٹیل اور تھوک الگ قیمتیں، کسٹمر اکاؤنٹس، اور صاف ریکارڈ کہ کیا کس کو بیچا۔"
         },
-        "noindex": true
+        "noindex": true,
+        "related": [
+          "hardware-store-pos",
+          "clothing-store-pos",
+          "restaurant-pos",
+          "kiryana-store-pos",
+          "offline-billing",
+          "fbr-pos-integration-guide"
+        ]
       },
       {
         "slug": "pos-software-gujranwala",
@@ -3018,14 +3186,14 @@
           {
             "h": "Tax and FBR in Gujranwala",
             "p": [
-              "Punjab collects sales tax on services through the Punjab Revenue Authority. Hotels, restaurants, coffee shops and marriage halls there are expected to issue computerised receipts through PRA's Electronic Invoice Monitoring System, e-IMS, with a unique invoice number and a PRA QR code. Shops that sell goods report to FBR, and Tier-1 retailers must integrate with FBR's system.",
-              "ZAP POS prints FBR's invoice number and QR code on the receipt, since it holds an FBR integrator licence, and applies the tax rate you set for each way of paying. This is a summary, not tax advice, so confirm your own obligations with a tax consultant."
+              "Punjab collects sales tax on services through the Punjab Revenue Authority. Hotels, restaurants, coffee shops and marriage halls there are expected to issue computerised receipts through PRA's Electronic Invoice Monitoring System, e-IMS, with a unique invoice number and a PRA QR code. Shops that sell goods report to FBR, and [Tier-1 retailer](/fbr-pos-integration-guide)s must integrate with FBR's system.",
+              "ZAP POS prints FBR's invoice number and QR code on the receipt, since it holds an [FBR integrator licence](/fbr-invoicing), and applies the tax rate you set for each way of paying. This is a summary, not tax advice, so confirm your own obligations with a tax consultant."
             ]
           },
           {
             "h": "How Gujranwala shops actually work",
             "p": [
-              "Gujranwala is known for its food and its restaurants, so many businesses here need table, takeaway and delivery billing, kitchen printing, and the right tax on each order, along with receipts that meet PRA's e-IMS requirement."
+              "Gujranwala is known for its food and its restaurants, so many businesses here need table, takeaway and delivery billing, kitchen printing, and the right tax on each order, along with receipts that meet PRA's [e-IMS](/fbr-pos-integration-guide) requirement."
             ]
           },
           {
@@ -3043,7 +3211,15 @@
           "roman": "Gujranwala ke restaurants aur khane ki dukaanon ke liye table, takeaway aur delivery billing, kitchen printer, aur PRA e-IMS ke mutabiq receipts.",
           "ur": "گوجرانوالہ کے ریستورانوں اور کھانے کی دکانوں کے لیے ٹیبل، ٹیک اوے اور ڈیلیوری بلنگ، کچن پرنٹر، اور پی آر اے ای آئی ایم ایس کے مطابق رسیدیں۔"
         },
-        "noindex": true
+        "noindex": true,
+        "related": [
+          "restaurant-pos",
+          "bakery-pos",
+          "kiryana-store-pos",
+          "hardware-store-pos",
+          "offline-billing",
+          "fbr-pos-integration-guide"
+        ]
       },
       {
         "slug": "pos-software-quetta",
@@ -3089,7 +3265,7 @@
             "h": "Tax and FBR in Quetta",
             "p": [
               "Balochistan has its own revenue authority for service taxes, and shops that sell goods report to FBR. Check which one applies to you, and ask us before you buy what ZAP POS supports for your authority.",
-              "ZAP POS prints FBR's invoice number and QR code on the receipt, since it holds an FBR integrator licence, and applies the tax rate you set for each way of paying. This is a summary, not tax advice, so confirm your own obligations with a tax consultant."
+              "ZAP POS prints FBR's invoice number and QR code on the receipt, since it holds an [FBR integrator licence](/fbr-invoicing), and applies the tax rate you set for each way of paying. This is a summary, not tax advice, so confirm your own obligations with a tax consultant."
             ]
           },
           {
@@ -3113,14 +3289,22 @@
           "roman": "Quetta mein internet kamzor ho ya band ho to bhi billing jari rakhne ke liye ZAP POS dukaan ke apne computer par chalta hai aur baad mein sync karta hai.",
           "ur": "کوئٹہ میں انٹرنیٹ کمزور ہو یا بند ہو تو بھی بلنگ جاری رکھنے کے لیے زیپ پوس دکان کے اپنے کمپیوٹر پر چلتا ہے اور بعد میں سنک کرتا ہے۔"
         },
-        "noindex": true
+        "noindex": true,
+        "related": [
+          "kiryana-store-pos",
+          "mobile-accessories-shop-pos",
+          "pharmacy-pos",
+          "restaurant-pos",
+          "offline-billing",
+          "fbr-pos-integration-guide"
+        ]
       },
       {
         "slug": "best-pos-software-pakistan",
         "menu": "Choosing a POS",
         "icon": "search",
-        "seoTitle": "How to Choose the Best POS Software in Pakistan (2026 Guide)",
-        "seoDescription": "A shop owner's checklist for choosing POS software in Pakistan: offline billing, FBR integration, counters and branches, printers, support, prices and backups.",
+        "seoTitle": "How to Choose the Best POS Software in Pakistan (2026)",
+        "seoDescription": "A shop owner's checklist for choosing POS software in Pakistan: offline billing, FBR, counters, branches, printers, support, prices, backups.",
         "kicker": "Buyer's guide",
         "title": "Choosing POS software",
         "titleHighlight": "in Pakistan, the right way.",
@@ -3129,13 +3313,13 @@
           {
             "h": "Start with how your shop really runs",
             "p": [
-              "Before comparing features, write down three things: how many counters you bill from, how many branches you have or plan to open, and what you sell (packed goods with barcodes, loose items by weight, medicines with expiry dates, food that goes to a kitchen). Every question below is easier once you know this."
+              "Before comparing features, write down three things: how many counters you bill from, how many branches you have or plan to open, and what you sell (packed goods with [barcode](/barcode-system-for-your-shop)s, loose items by weight, medicines with expiry dates, food that goes to a kitchen). Every question below is easier once you know this."
             ]
           },
           {
             "h": "1. Does billing stop when the internet drops?",
             "p": [
-              "In Pakistan the router often goes off during load shedding, even when the PC is on a UPS. Some POS systems keep everything online and stop billing without internet. Ask where the shop's data is kept. If it is on your own PC, billing can continue offline and sync later.",
+              "In Pakistan the router often goes off during [load shedding](/billing-during-load-shedding), even when the PC is on a UPS. Some POS systems keep everything online and stop billing without internet. Ask where the shop's data is kept. If it is on your own PC, billing can continue offline and sync later.",
               "In the demo, unplug the internet and make a bill. If the queue would stop in your shop, it will stop in the demo too."
             ]
           },
@@ -3227,14 +3411,22 @@
           "title": "Urdu mein · اردو میں",
           "roman": "POS kharidne se pehle dus sawal poochein: internet band ho to kya hota hai, FBR ke liye tayyar hai ya nahi, aur madad kaun deta hai.",
           "ur": "پوس خریدنے سے پہلے دس سوال پوچھیں: انٹرنیٹ بند ہو تو کیا ہوتا ہے، ایف بی آر کے لیے تیار ہے یا نہیں، اور مدد کون دیتا ہے۔"
-        }
+        },
+        "related": [
+          "cloud-pos-vs-offline-pos",
+          "zap-pos-vs-oscar-pos",
+          "zap-pos-vs-moneypex",
+          "fbr-pos-integration-guide",
+          "what-is-pos-software",
+          "plans"
+        ]
       },
       {
         "slug": "pos-vs-register-excel",
         "menu": "POS vs register & Excel",
         "icon": "chart",
-        "seoTitle": "POS Software vs Register and Excel: What Changes for Your Shop",
-        "seoDescription": "Still billing on a register or in Excel? See what a POS changes for a Pakistani shop: faster bills, cash that matches, stock you can trust, and when it is time to switch.",
+        "seoTitle": "POS vs Register and Excel: What Changes for Your Shop",
+        "seoDescription": "Still billing on a register or in Excel? See what a POS changes: faster bills, cash that matches, stock you can trust, and when to switch.",
         "kicker": "Guide",
         "title": "Register, Excel or POS?",
         "titleHighlight": "What changes for your shop.",
@@ -3267,7 +3459,7 @@
           {
             "h": "Moving over without stopping the shop",
             "p": [
-              "Start with your product list: most shops already have one in Excel, and it can be imported instead of typed in again. Print barcode labels for items without them, set up your printer and scanner, and run the POS alongside the register for a day or two. Then put the register away."
+              "Start with your product list: most shops already have one in Excel, and it can be imported instead of typed in again. Print [barcode](/barcode-system-for-your-shop) labels for items without them, set up your printer and scanner, and run the POS alongside the register for a day or two. Then put the register away."
             ]
           }
         ],
@@ -3294,14 +3486,22 @@
           "title": "Urdu mein · اردو میں",
           "roman": "Bahut si dukaanein register ya Excel par saalon chalti hain. Yeh guide batati hai ke kab POS par jana chahiye.",
           "ur": "بہت سی دکانیں رجسٹر یا ایکسل پر سالوں چلتی ہیں۔ یہ گائیڈ بتاتی ہے کہ کب پوس پر جانا چاہیے۔"
-        }
+        },
+        "related": [
+          "what-is-pos-software",
+          "best-pos-software-pakistan",
+          "kiryana-store-pos",
+          "how-to-count-stock-in-a-shop",
+          "plans",
+          "download"
+        ]
       },
       {
         "slug": "cloud-pos-vs-offline-pos",
         "menu": "Cloud vs offline POS",
         "icon": "receipt",
-        "seoTitle": "Cloud POS vs Offline-First POS for Pakistani Shops: Which Fits You?",
-        "seoDescription": "An honest comparison of cloud-only POS and offline-first desktop POS for shops in Pakistan: internet drops, speed, branches, FBR, data ownership and cost. How to choose.",
+        "seoTitle": "Cloud POS vs Offline-First POS in Pakistan",
+        "seoDescription": "Cloud-only vs offline-first POS for Pakistani shops: internet drops, speed, branches, FBR, data ownership and cost. How to choose.",
         "kicker": "Guide",
         "title": "Cloud POS or offline-first POS,",
         "titleHighlight": "which fits your shop?",
@@ -3382,7 +3582,7 @@
               "3. Ask how you export your data.",
               "4. Ask for the all-in price for your counters and branches.",
               "5. Ask who answers when something goes wrong in the evening.",
-              "If your internet is steady and you have one counter, either type will do. If your internet is unreliable or you have several counters or branches, offline-first deserves a serious test."
+              "If your internet is steady and you have one counter, either type will do. If your internet is unreliable or you have [several counters](/multi-counter-pos) or branches, offline-first deserves a serious test."
             ]
           },
           {
@@ -3396,14 +3596,22 @@
           "title": "Urdu mein · اردو میں",
           "roman": "Cloud POS aur offline-first POS dono chalte hain, lekin internet band hone par farq parta hai. Router band karke dono ko test karein.",
           "ur": "کلاؤڈ پوس اور آف لائن فرسٹ پوس دونوں چلتے ہیں، لیکن انٹرنیٹ بند ہونے پر فرق پڑتا ہے۔ راؤٹر بند کر کے دونوں کو ٹیسٹ کریں۔"
-        }
+        },
+        "related": [
+          "offline-billing",
+          "zap-pos-vs-oscar-pos",
+          "zap-pos-vs-moneypex",
+          "billing-during-load-shedding",
+          "best-pos-software-pakistan",
+          "how-it-works"
+        ]
       },
       {
         "slug": "zap-pos-vs-oscar-pos",
         "menu": "ZAP POS vs Oscar POS",
         "icon": "receipt",
-        "seoTitle": "ZAP POS vs Oscar POS: Honest Comparison for Pakistani Shops (2026)",
-        "seoDescription": "ZAP POS and Oscar POS compared on how they run, offline billing, FBR, branches, pricing, hardware and support, using each company's own public pages. Which fits your shop.",
+        "seoTitle": "ZAP POS vs Oscar POS: Honest Comparison (2026)",
+        "seoDescription": "ZAP POS and Oscar POS compared on offline billing, FBR, branches, price, hardware and support, from each company's own public pages.",
         "kicker": "Comparison",
         "title": "ZAP POS vs Oscar POS,",
         "titleHighlight": "which fits your shop?",
@@ -3494,14 +3702,22 @@
           "title": "Urdu mein · اردو میں",
           "roman": "Oscar POS cloud par chalta hai aur shuru mein free bataya jata hai. ZAP POS aap ke apne PC par chalta hai, is liye har counter dukaan ke network se bill banata hai. Dono ko router band karke test karein.",
           "ur": "آسکر پوس کلاؤڈ پر چلتا ہے اور شروع میں مفت بتایا جاتا ہے۔ زیپ پوس آپ کے اپنے پی سی پر چلتا ہے، اس لیے ہر کاؤنٹر دکان کے نیٹ ورک سے بل بناتا ہے۔ دونوں کو راؤٹر بند کر کے ٹیسٹ کریں۔"
-        }
+        },
+        "related": [
+          "zap-pos-vs-moneypex",
+          "cloud-pos-vs-offline-pos",
+          "offline-billing",
+          "fbr-invoicing",
+          "plans",
+          "best-pos-software-pakistan"
+        ]
       },
       {
         "slug": "zap-pos-vs-moneypex",
         "menu": "ZAP POS vs Moneypex",
         "icon": "receipt",
-        "seoTitle": "ZAP POS vs Moneypex POS: Honest Comparison for Pakistani Shops (2026)",
-        "seoDescription": "ZAP POS and Moneypex POS compared on offline mode, FBR, branches, pricing, pharmacy and restaurant features, using each company's own public pages. Which fits your shop.",
+        "seoTitle": "ZAP POS vs Moneypex POS: Honest Comparison (2026)",
+        "seoDescription": "ZAP POS and Moneypex compared on offline mode, FBR, branches, price, pharmacy and restaurant features, from their own public pages.",
         "kicker": "Comparison",
         "title": "ZAP POS vs Moneypex,",
         "titleHighlight": "which fits your shop?",
@@ -3592,14 +3808,22 @@
           "title": "Urdu mein · اردو میں",
           "roman": "Moneypex cloud aur desktop dono tarah ke options batata hai aur pharmacy ke liye pehle se medicines ki list deta hai. ZAP POS aap ke apne PC par chalta hai aur har counter wahin se bill banata hai. Dono ko router band karke test karein.",
           "ur": "منی پیکس کلاؤڈ اور ڈیسک ٹاپ دونوں طرح کے آپشنز بتاتا ہے اور فارمیسی کے لیے پہلے سے دواؤں کی فہرست دیتا ہے۔ زیپ پوس آپ کے اپنے پی سی پر چلتا ہے اور ہر کاؤنٹر وہیں سے بل بناتا ہے۔ دونوں کو راؤٹر بند کر کے ٹیسٹ کریں۔"
-        }
+        },
+        "related": [
+          "zap-pos-vs-oscar-pos",
+          "cloud-pos-vs-offline-pos",
+          "pharmacy-pos",
+          "offline-billing",
+          "plans",
+          "best-pos-software-pakistan"
+        ]
       },
       {
         "slug": "billing-during-load-shedding",
         "menu": "Billing in load shedding",
         "icon": "wifi",
-        "seoTitle": "Billing During Load Shedding: Keep Your POS Running | ZAP POS",
-        "seoDescription": "What really keeps billing going during load shedding in Pakistan: what needs a UPS, why the internet drops, and how an offline POS keeps your counter running.",
+        "seoTitle": "Billing During Load Shedding: Keep Your POS Running",
+        "seoDescription": "What keeps billing going during load shedding in Pakistan: what needs a UPS, why the internet drops, and how an offline POS helps.",
         "kicker": "Guide",
         "title": "Billing during load shedding:",
         "titleHighlight": "what really keeps working.",
@@ -3659,14 +3883,22 @@
           "title": "Urdu mein · اردو میں",
           "roman": "Load shedding mein do masle hote hain: bijli jati hai aur internet jata hai. UPS par PC chalta rahe to internet band hone par bhi billing jari rehti hai.",
           "ur": "لوڈ شیڈنگ میں دو مسئلے ہوتے ہیں: بجلی جاتی ہے اور انٹرنیٹ جاتا ہے۔ یو پی ایس پر پی سی چلتا رہے تو انٹرنیٹ بند ہونے پر بھی بلنگ جاری رہتی ہے۔"
-        }
+        },
+        "related": [
+          "offline-billing",
+          "cloud-pos-vs-offline-pos",
+          "how-it-works",
+          "pos-hardware",
+          "pos-software-lahore",
+          "plans"
+        ]
       },
       {
         "slug": "what-is-pos-software",
         "menu": "What is a POS?",
         "icon": "monitor",
-        "seoTitle": "What Is POS Software? A Plain Guide for Shop Owners in Pakistan",
-        "seoDescription": "What POS software is, what it does for a shop, what hardware you need, and how to start. A plain-language guide for shop and restaurant owners in Pakistan.",
+        "seoTitle": "What Is POS Software? A Guide for Pakistani Shop Owners",
+        "seoDescription": "What POS software is, what it does for a shop, what hardware you need, and how to start. A plain guide for shop and restaurant owners.",
         "kicker": "Guide",
         "title": "What is POS software?",
         "titleHighlight": "A plain guide for shop owners.",
@@ -3699,7 +3931,7 @@
           {
             "h": "What you need to start",
             "p": [
-              "A Windows PC or laptop at the counter. A receipt printer and a barcode scanner make billing much faster but are not required: products can also be found by name or tapped on screen. A cash drawer is useful if you take a lot of cash. Put the PC on a UPS so a short power cut does not end the day.",
+              "A Windows PC or laptop at the counter. A receipt printer and a [barcode](/barcode-system-for-your-shop) scanner make billing much faster but are not required: products can also be found by name or tapped on screen. A cash drawer is useful if you take a lot of cash. Put the PC on a UPS so a short power cut does not end the day.",
               "Then you need your product list: names, prices and, if you have them, barcodes. If it is already in Excel, a good POS can import it so you do not type it again."
             ]
           },
@@ -3730,14 +3962,22 @@
           "title": "Urdu mein · اردو میں",
           "roman": "POS ka matlab point of sale hai, yani jahan customer paisay deta hai. POS software counter par bill banata hai aur stock ka hisaab rakhta hai.",
           "ur": "پوس کا مطلب پوائنٹ آف سیل ہے، یعنی جہاں گاہک پیسے دیتا ہے۔ پوس سافٹ ویئر کاؤنٹر پر بل بناتا ہے اور اسٹاک کا حساب رکھتا ہے۔"
-        }
+        },
+        "related": [
+          "best-pos-software-pakistan",
+          "pos-vs-register-excel",
+          "pos-hardware",
+          "barcode-system-for-your-shop",
+          "kiryana-store-pos",
+          "plans"
+        ]
       },
       {
         "slug": "barcode-system-for-your-shop",
         "menu": "Barcode set-up guide",
         "icon": "scan",
-        "seoTitle": "How to Set Up a Barcode System in Your Shop (Step by Step)",
-        "seoDescription": "A practical guide to barcodes for a Pakistani shop: which products already have them, how to make your own, what scanner and label printer to buy, and how to avoid mistakes.",
+        "seoTitle": "How to Set Up a Barcode System in Your Shop",
+        "seoDescription": "A practical barcode guide for a Pakistani shop: which products have them, how to make your own, which scanner and printer to buy.",
         "kicker": "Guide",
         "title": "Set up barcodes in your shop.",
         "titleHighlight": "Step by step.",
@@ -3798,14 +4038,22 @@
           "title": "Urdu mein · اردو میں",
           "roman": "Barcode se billing tez aur stock sahi hota hai. Yeh guide batati hai ke har product par barcode kaise lagayein.",
           "ur": "بارکوڈ سے بلنگ تیز اور اسٹاک درست ہوتا ہے۔ یہ گائیڈ بتاتی ہے کہ ہر پروڈکٹ پر بارکوڈ کیسے لگائیں۔"
-        }
+        },
+        "related": [
+          "pos-hardware",
+          "how-to-count-stock-in-a-shop",
+          "supermarket-pos",
+          "clothing-store-pos",
+          "kiryana-store-pos",
+          "plans"
+        ]
       },
       {
         "slug": "how-to-count-stock-in-a-shop",
         "menu": "Stock counting guide",
         "icon": "box",
-        "seoTitle": "How to Count and Control Stock in a Shop: A Practical Guide",
-        "seoDescription": "Why shop stock never matches, and how to fix it: record purchases and returns, count a section at a time, watch low stock and expiry, and find where the missing units go.",
+        "seoTitle": "How to Count and Control Stock in a Shop",
+        "seoDescription": "Why shop stock never matches and how to fix it: record purchases and returns, count by section, watch low stock and expiry.",
         "kicker": "Guide",
         "title": "Stock that matches the shelf.",
         "titleHighlight": "How to count and control it.",
@@ -3849,7 +4097,7 @@
           {
             "h": "Look at the differences",
             "p": [
-              "When the count and the system disagree, check the common causes first: a product with two barcodes, a size or colour sold under the wrong item, a return not entered, or a pack sold as single pieces. Then adjust the stock and write down why."
+              "When the count and the system disagree, check the common causes first: a product with two [barcode](/barcode-system-for-your-shop)s, a size or colour sold under the wrong item, a return not entered, or a pack sold as single pieces. Then adjust the stock and write down why."
             ]
           },
           {
@@ -3871,7 +4119,15 @@
           "title": "Urdu mein · اردو میں",
           "roman": "Aksar dukaanein woh stock kho deti hain jo nazar nahi aata. Yeh guide dukaan mein stock gin'ne ka saada tareeqa batati hai.",
           "ur": "اکثر دکانیں وہ اسٹاک کھو دیتی ہیں جو نظر نہیں آتا۔ یہ گائیڈ دکان میں اسٹاک گننے کا سادہ طریقہ بتاتی ہے۔"
-        }
+        },
+        "related": [
+          "barcode-system-for-your-shop",
+          "supermarket-pos",
+          "pharmacy-pos",
+          "branch-stock-transfer",
+          "what-is-pos-software",
+          "plans"
+        ]
       },
       {
         "slug": "pos-software-kya-hai",
@@ -3911,7 +4167,7 @@
           {
             "h": "Shuru karne ke liye kya chahiye",
             "p": [
-              "Counter par ek Windows computer ya laptop. Receipt printer aur barcode scanner se billing bohat tez ho jati hai, lekin zaroori nahi: product naam se dhoondh kar ya screen par dabaa kar bhi bech sakte hain. Agar cash zyada aata hai to cash drawer kaam aata hai. Computer ko UPS par rakhein taake thori der ki bijli band hone se kaam na ruke.",
+              "Counter par ek Windows computer ya laptop. Receipt printer aur [barcode](/barcode-system-for-your-shop) scanner se billing bohat tez ho jati hai, lekin zaroori nahi: product naam se dhoondh kar ya screen par dabaa kar bhi bech sakte hain. Agar cash zyada aata hai to cash drawer kaam aata hai. Computer ko UPS par rakhein taake thori der ki bijli band hone se kaam na ruke.",
               "Phir aapko apne products ki list chahiye: naam, qeemat aur agar hon to barcode. Agar list Excel mein hai to acha POS usay import kar leta hai, dobara likhna nahi parta."
             ]
           },
@@ -3948,8 +4204,8 @@
         "slug": "how-it-works",
         "menu": "How it works",
         "icon": "layers",
-        "seoTitle": "How ZAP POS Works: Main PC, Counters and Cloud | POS Pakistan",
-        "seoDescription": "How ZAP POS runs a Pakistani shop: one main PC holds your data, counters pair to it over the shop network, and the cloud gets a copy when the internet is there.",
+        "seoTitle": "How ZAP POS Works: Main PC, Counters and Cloud",
+        "seoDescription": "How ZAP POS runs a Pakistani shop: one main PC holds your data, counters pair to it over the shop network, the cloud gets a copy.",
         "kicker": "How it works",
         "title": "Your shop runs on your PCs.",
         "titleHighlight": "The internet is a bonus.",
@@ -4039,14 +4295,22 @@
           "title": "Urdu mein · اردو میں",
           "roman": "ZAP POS dukaan ke main PC par data rakhta hai. Counter apne network par us se bill banate hain aur data cloud mein sync hota hai.",
           "ur": "زیپ پوس دکان کے مین پی سی پر ڈیٹا رکھتا ہے۔ کاؤنٹر اپنے نیٹ ورک پر اس سے بل بناتے ہیں اور ڈیٹا کلاؤڈ میں سنک ہوتا ہے۔"
-        }
+        },
+        "related": [
+          "offline-billing",
+          "multi-counter-pos",
+          "multi-branch-pos",
+          "pos-hardware",
+          "download",
+          "plans"
+        ]
       },
       {
         "slug": "offline-billing",
         "menu": "Offline billing",
         "icon": "wifi",
-        "seoTitle": "Offline POS Software in Pakistan | Billing Without Internet | ZAP POS",
-        "seoDescription": "Offline POS for Pakistani shops: bill, print and update stock without internet. Counters even keep billing for hours if the main PC goes off, then sync with no duplicates.",
+        "seoTitle": "Offline POS Software in Pakistan | ZAP POS",
+        "seoDescription": "Offline POS for Pakistani shops: bill, print and update stock without internet. Counters keep billing if the main PC goes off, then sync.",
         "kicker": "Offline billing",
         "title": "The internet drops.",
         "titleHighlight": "The queue doesn't.",
@@ -4135,14 +4399,22 @@
           "title": "Urdu mein · اردو میں",
           "roman": "ZAP POS ko bill banane ke liye internet nahi chahiye. Main PC band ho jaye to bhi har counter billing jari rakhta hai aur baad mein sync karta hai.",
           "ur": "زیپ پوس کو بل بنانے کے لیے انٹرنیٹ نہیں چاہیے۔ مین پی سی بند ہو جائے تو بھی ہر کاؤنٹر بلنگ جاری رکھتا ہے اور بعد میں سنک کرتا ہے۔"
-        }
+        },
+        "related": [
+          "billing-during-load-shedding",
+          "cloud-pos-vs-offline-pos",
+          "how-it-works",
+          "multi-counter-pos",
+          "fbr-invoicing",
+          "plans"
+        ]
       },
       {
         "slug": "multi-counter-pos",
         "menu": "Many counters",
         "icon": "monitor",
-        "seoTitle": "Multi-Counter POS Software in Pakistan | Shared Live Stock | ZAP POS",
-        "seoDescription": "Run several billing counters in one shop with ZAP POS: shared stock and prices within seconds, staff PIN logins, manager approvals, and counters that keep billing offline.",
+        "seoTitle": "Multi-Counter POS Software in Pakistan | ZAP POS",
+        "seoDescription": "Run several counters in one shop: shared stock and prices within seconds, staff PIN logins, manager approvals, counters that bill offline.",
         "kicker": "Many counters, one shop",
         "title": "Every counter.",
         "titleHighlight": "The same stock, live.",
@@ -4223,14 +4495,22 @@
           "title": "Urdu mein · اردو میں",
           "roman": "Apne plan ke mutabiq jitne chahein counter jorein. Sab ek hi product, qeemat aur stock share karte hain.",
           "ur": "اپنے پلان کے مطابق جتنے چاہیں کاؤنٹر جوڑیں۔ سب ایک ہی پروڈکٹ، قیمت اور اسٹاک شیئر کرتے ہیں۔"
-        }
+        },
+        "related": [
+          "supermarket-pos",
+          "multi-branch-pos",
+          "offline-billing",
+          "how-it-works",
+          "pos-hardware",
+          "plans"
+        ]
       },
       {
         "slug": "multi-branch-pos",
         "menu": "Branches",
         "icon": "server",
-        "seoTitle": "Multi-Branch POS Software in Pakistan | Chains & Brands | ZAP POS",
-        "seoDescription": "POS for Pakistani chains and brands with several branches: every branch bills on its own even when the internet or another branch is down, with its own numbers, tax and counters.",
+        "seoTitle": "Multi-Branch POS Software in Pakistan | ZAP POS",
+        "seoDescription": "POS for Pakistani chains with several branches: each branch bills on its own even when the internet is down, with its own numbers and tax.",
         "kicker": "For chains & brands",
         "title": "Every branch keeps billing.",
         "titleHighlight": "On its own feet.",
@@ -4323,14 +4603,22 @@
           "title": "Urdu mein · اردو میں",
           "roman": "Har branch apne main PC par chalti hai, is liye ek branch ka masla ya internet band hona baqi branches ko nahi rokta. Owner sab branches ek jagah dekhta hai.",
           "ur": "ہر برانچ اپنے مین پی سی پر چلتی ہے، اس لیے ایک برانچ کا مسئلہ یا انٹرنیٹ بند ہونا باقی برانچوں کو نہیں روکتا۔ مالک سب برانچیں ایک جگہ دیکھتا ہے۔"
-        }
+        },
+        "related": [
+          "branch-stock-transfer",
+          "multi-counter-pos",
+          "clothing-store-pos",
+          "pos-software-lahore",
+          "plans",
+          "how-it-works"
+        ]
       },
       {
         "slug": "branch-stock-transfer",
         "menu": "Stock transfer",
         "icon": "box",
-        "seoTitle": "Branch Stock Transfer in Pakistan | Move Stock Between Shops | ZAP POS",
-        "seoDescription": "Move stock from one branch to another with a numbered slip. Stock leaves the sender at once, the receiving branch counts what arrived, and short counts are recorded, never hidden.",
+        "seoTitle": "Branch Stock Transfer in Pakistan | ZAP POS",
+        "seoDescription": "Move stock between branches with a numbered slip. Stock leaves the sender at once, the receiver counts, short counts are recorded.",
         "kicker": "For shops with more than one branch",
         "title": "Move stock between branches.",
         "titleHighlight": "Every unit accounted for.",
@@ -4418,14 +4706,22 @@
           "title": "Urdu mein · اردو میں",
           "roman": "Manager dusri branch aur products chunta hai, aur ZAP POS stock fauran kam kar ke transfer slip chhapta hai.",
           "ur": "مینیجر دوسری برانچ اور پروڈکٹس چنتا ہے، اور زیپ پوس اسٹاک فوراً کم کر کے ٹرانسفر سلپ چھاپتا ہے۔"
-        }
+        },
+        "related": [
+          "multi-branch-pos",
+          "how-to-count-stock-in-a-shop",
+          "clothing-store-pos",
+          "shoe-store-pos",
+          "plans",
+          "how-it-works"
+        ]
       },
       {
         "slug": "pos-hardware",
         "menu": "Printers & scanners",
         "icon": "printer",
-        "seoTitle": "POS Hardware in Pakistan: Printers, Scanners, Drawers | ZAP POS",
-        "seoDescription": "Which hardware works with ZAP POS: 80 mm and 58 mm thermal receipt printers (USB or network), kitchen printers, USB barcode scanners, cash drawers and label printers.",
+        "seoTitle": "POS Hardware in Pakistan: Printers and Scanners",
+        "seoDescription": "Hardware that works with ZAP POS: 80 mm and 58 mm thermal printers, kitchen printers, USB barcode scanners, cash drawers, label printers.",
         "kicker": "Printers & scanners",
         "title": "Use the hardware",
         "titleHighlight": "you can buy anywhere.",
@@ -4529,14 +4825,22 @@
           "title": "Urdu mein · اردو میں",
           "roman": "ZAP POS standard thermal printer, USB barcode scanner, cash drawer aur label printer ke saath chalta hai.",
           "ur": "زیپ پوس اسٹینڈرڈ تھرمل پرنٹر، یو ایس بی بارکوڈ اسکینر، کیش ڈرانر اور لیبل پرنٹر کے ساتھ چلتا ہے۔"
-        }
+        },
+        "related": [
+          "barcode-system-for-your-shop",
+          "restaurant-pos",
+          "supermarket-pos",
+          "what-is-pos-software",
+          "offline-billing",
+          "download"
+        ]
       },
       {
         "slug": "about",
         "menu": "Our story",
         "icon": "zap",
-        "seoTitle": "About ZAP POS | Point of Sale Software Made in Pakistan",
-        "seoDescription": "ZAP POS is point of sale software built in Lahore for Pakistani shops, pharmacies and restaurants, designed around load shedding, FBR and the way shops really work.",
+        "seoTitle": "About ZAP POS | Point of Sale Software Made in Lahore",
+        "seoDescription": "ZAP POS is point of sale software built in Lahore for Pakistani shops, pharmacies and restaurants, designed around load shedding and FBR.",
         "kicker": "Our story",
         "title": "Built in Pakistan,",
         "titleHighlight": "for Pakistani counters.",
@@ -4557,7 +4861,7 @@
           {
             "h": "Who it's for",
             "p": [
-              "Shops of every kind: kiryana stores, supermarkets, pharmacies, bakeries, restaurants and cafes, and growing brands with several counters and branches."
+              "Shops of every kind: [kiryana](/kiryana-store-pos) stores, supermarkets, pharmacies, bakeries, restaurants and cafes, and growing brands with several counters and branches."
             ]
           },
           {
@@ -4699,8 +5003,8 @@
         "slug": "zap-pos-facts",
         "menu": "ZAP POS at a glance",
         "icon": "id",
-        "seoTitle": "ZAP POS at a Glance: Facts, Features and Limits | POS Pakistan",
-        "seoDescription": "Plain facts about ZAP POS: what it is, who it is for, what it does, how it works, and what it doesn't do yet. Point of sale software for shops in Pakistan.",
+        "seoTitle": "ZAP POS at a Glance: Facts, Features and Limits",
+        "seoDescription": "Plain facts about ZAP POS: what it is, who it is for, what it does, how it works, and what it doesn't do yet.",
         "kicker": "At a glance",
         "title": "ZAP POS,",
         "titleHighlight": "in plain facts.",
@@ -4739,13 +5043,13 @@
           {
             "h": "Who it is for",
             "p": [
-              "Kiryana and general stores, supermarkets, pharmacies and medical stores, bakeries and sweet shops, clothing and shoe shops (stock by size and colour), and restaurants and cafes, from a single counter to several counters and branches."
+              "Kiryana and general stores, supermarkets, pharmacies and medical stores, bakeries and sweet shops, clothing and shoe shops (stock by size and colour), and restaurants and cafes, from a single counter to [several counters](/multi-counter-pos) and branches."
             ]
           },
           {
             "h": "What it does",
             "p": [
-              "Billing by barcode, search or product tiles, with holds, discounts, returns and quick sales. Stock with packs (dozen, carton, strip, box), items sold by weight, expiry dates that block sales, low-stock levels, purchases and supplier ledgers. Restaurant tables, takeaway, delivery and kitchen printers by station. Sales tax by payment method and sending bills to FBR with the invoice number and QR code on the receipt. Staff PIN logins, manager approvals, cash per shift, daily reports, barcode labels, nightly backups and automatic updates."
+              "Billing by [barcode](/barcode-system-for-your-shop), search or product tiles, with holds, discounts, returns and quick sales. Stock with packs (dozen, carton, strip, box), items sold by weight, expiry dates that block sales, low-stock levels, purchases and supplier ledgers. Restaurant tables, takeaway, delivery and kitchen printers by station. Sales tax by payment method and sending bills to FBR with the invoice number and QR code on the receipt. Staff PIN logins, manager approvals, cash per shift, daily reports, barcode labels, nightly backups and automatic updates."
             ]
           },
           {
@@ -4810,7 +5114,7 @@
         "slug": "pos-software-sawal-jawab",
         "menu": "Sawal jawab (Roman Urdu)",
         "icon": "whatsapp",
-        "seoTitle": "POS Software Sawal Jawab | Internet Ke Baghair Billing | ZAP POS",
+        "seoTitle": "POS Software Sawal Jawab | Roman Urdu | ZAP POS",
         "seoDescription": "POS software ke baare mein aam sawal aur jawab Roman Urdu mein: internet ke baghair billing, load shedding, FBR, counters, printer aur expiry.",
         "kicker": "Sawal jawab",
         "title": "POS software ke sawal,",
