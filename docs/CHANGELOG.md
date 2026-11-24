@@ -3,6 +3,10 @@
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
 
+## 2026-11-25: App buttons restyled as store-style badges
+- Owner found the final section's Android / iPhone / WhatsApp buttons dull and sent the official Play Store / App Store badges as the look to follow. Restyled `.store` (`styles.css`) to that look: black, thin white border, small line over a big name in `--font-head`, large icons (green Android robot, white Apple, green WhatsApp). The official badges themselves are **not** used: Google and Apple allow them only for apps listed in their stores, and ZAP POS isn't yet (rule 5b: copy must stay true). Swap in the real badges once the store apps exist. Hover moved into the hover media block (rule 4); the old `.final .store` and dark-theme overrides removed (the section is always dark).
+- Files: `styles.css`, `Sections.jsx`, docs.
+
 ## 2026-11-25: Android and iPhone buttons install the phone app
 - Owner request: the final section's store buttons went nowhere (`#`) and said "Google Play" / "App Store", where there are no apps yet. They now read "Owner app for Android" / "Owner app for iPhone" (text in `finalCta.appSmall/android/iphone`, new `android` icon; the unused `gplay` icon removed) and open `/account/?install=android|iphone` (`links.googlePlay` / `links.appStore`, built-in JSON **and** published Supabase `site_content`). There the log-in page shows the install card for that phone: Chrome's Install button when Android offers it, otherwise "Show me how" with that phone's three steps (`installStepsAndroid` for Chrome's ⋮ menu, new `dots` icon; `installSteps` for Safari Share). The plain log-in page still shows no card (owner decision above). Admin labels and the dashboard checklist now say Android app / iPhone app.
 - Files: `Sections.jsx`, `Icons.jsx`, `AccountApp.jsx`, `InstallHint.jsx`, `admin/admin.css` (`.acc-install`), `admin/sections.js`, `admin/Dashboard.jsx`, `landing-content.json`, docs; Supabase `site_content` (`links`).

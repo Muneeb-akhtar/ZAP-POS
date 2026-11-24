@@ -115,10 +115,12 @@ h2 .hl { display: block; }
 .scribble.up .arrow { transform: rotate(80deg) scaleY(-1); }
 .stars { display: inline-flex; gap: 2px; color: #f5b301; }
 .live { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 0 3px #dcfce7; }
-.store { display: inline-flex; align-items: center; gap: 10px; background: var(--solid); color: #fff; padding: 8px 16px 8px 13px; border-radius: 12px; transition: transform .15s; }
-.store:hover { transform: translateY(-2px); }
-.store span { display: grid; line-height: 1.15; font-weight: 600; font-size: 15px; }
-.store small { font-size: 10px; font-weight: 400; opacity: .7; }
+/* App and WhatsApp buttons in the final section: store-badge look (black, thin white border, small line over a big name) */
+.store { display: inline-flex; align-items: center; gap: 11px; min-height: 58px; padding: 7px 20px 7px 14px; background: #000; color: #fff; border: 1px solid rgba(255,255,255,.55); border-radius: 11px; }
+.store svg { flex-shrink: 0; }
+.store span { display: grid; text-align: left; line-height: 1.05; font-family: var(--font-head); font-weight: 600; font-size: 23px; letter-spacing: -.015em; }
+.store small { font-family: var(--font); font-size: 11.5px; font-weight: 500; letter-spacing: .02em; opacity: .9; margin-bottom: 2px; }
+.store .icon-android { color: #3ddc84; }
 .flip { transform: rotate(180deg); }
 
 /* Paper with zig-zag (torn) edges, used for receipts */
@@ -598,8 +600,7 @@ h2 .hl { display: block; }
 .final p { font-size: 18px; max-width: 520px; }
 .final-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 36px; }
 .final-stores { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 28px; }
-.final .store { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.14); }
-.final .store.wa svg { color: #25d366; }
+.store.wa svg { color: #25d366; }
 
 /* ---------- Footer ---------- */
 .footer { position: relative; overflow: hidden; background: var(--night); color: #64748b; padding: 30px 0 0; border-top: 1px solid rgba(255,255,255,.06); }
@@ -1050,8 +1051,8 @@ html.modal-open { overflow: hidden; }
 
   /* Night CTA + footer */
   .final-bolt { transition: transform .3s, box-shadow .3s; }
-  .store { transition: transform .2s, background .2s, border-color .2s; }
-  .final .store:hover { background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.3); }
+  .store { transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease; }
+  .store:hover { transform: translateY(-2px); border-color: #fff; box-shadow: 0 10px 24px -12px rgba(0,0,0,.9); }
   .socials a { transition: transform .25s cubic-bezier(.3,1.6,.5,1), border-color .2s, color .2s; }
   .socials a:hover { transform: translateY(-4px) rotate(-6deg); color: var(--brand-400); }
   .footer-col a { transition: color .2s, transform .2s; display: inline-block; justify-self: start; }
@@ -1067,7 +1068,6 @@ html.modal-open { overflow: hidden; }
 :root[data-theme="dark"] body { background: var(--bg); }
 :root[data-theme="dark"] .btn-primary { box-shadow: 0 10px 26px -10px rgba(43,149,255,.7), inset 0 1px 0 rgba(255,255,255,.2); }
 :root[data-theme="dark"] .btn-primary:disabled { background: #233049; color: #6b7c96; }
-:root[data-theme="dark"] .store { border: 1px solid #1d2a44; }
 :root[data-theme="dark"] .live { box-shadow: 0 0 0 3px rgba(34,197,94,.22); }
 :root[data-theme="dark"] .paper { filter: drop-shadow(0 22px 34px rgba(0,0,0,.65)) brightness(.96); }
 :root[data-theme="dark"] .kicker { box-shadow: inset 0 1px 0 rgba(255,255,255,.04); }
