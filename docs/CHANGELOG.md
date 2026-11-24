@@ -3,11 +3,6 @@
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
 
-## 2026-11-24: Roman Urdu and Urdu-script guides
-- New pages: `/fbr-pos-integration-kya-hai` and `/cloud-pos-ya-offline-pos` (Roman Urdu, `lang: ur-Latn`) and `/fbr-pos-integration-urdu` (Urdu script, `lang: ur`, `dir: rtl`). They mirror the English FBR and cloud-vs-offline guides, are linked from the footer "Guides", and have FAQ and Article data.
-- Urdu script support: `InfoPage` wraps a page in `lang`/`dir` (class `.ip-rtl`), prerender writes `dir="rtl"` on `<html>`, and `styles.css` adds a system-font stack (Noto Nastaliq Urdu, Jameel Noori Nastaleeq, Segoe UI, Tahoma) with taller lines. No new dependency or webfont.
-- Files: `landing-content.json`, `InfoPage.jsx`, `styles.css`, `scripts/prerender.mjs`. Urdu text was written by Claude: have a native reader check it before relying on it.
-
 ## 2026-11-24: Cloud vs offline-first POS guide
 - New guide `/cloud-pos-vs-offline-pos` (footer "Guides", sitemap, `llms.txt`): compares the two kinds of POS on internet drops, speed, branches, FBR/PRA, data and cost, with a buyer checklist. It names no competitor and makes no claims about any other product's features; it says to test each vendor. Keeps rule 5b (a power cut also stops the PC). File: `landing-content.json`.
 

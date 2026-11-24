@@ -67,7 +67,7 @@ for (const p of merged.pages.items) {
     ],
   }
   let html = template
-  if (p.lang) html = html.replace('<html lang="en">', `<html lang="${attr(p.lang)}"${p.dir === 'rtl' ? ' dir="rtl"' : ''}>`)
+  if (p.lang) html = html.replace('<html lang="en">', `<html lang="${attr(p.lang)}">`)
   html = swap(html, /(<title>)[^<]*(<\/title>)/, p.seoTitle)
   html = swap(html, /(<meta name="description" content=")[^"]*(")/, p.seoDescription)
   html = swap(html, /(<link rel="canonical" href=")[^"]*(")/, address)

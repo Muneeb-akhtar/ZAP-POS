@@ -75,7 +75,7 @@ export default function InfoPage({ page, pages, pricing, finalCta, brand, links,
   const at = pages.items.findIndex((p) => p.slug === page.slug)
   const related = [...pages.items.slice(at + 1), ...pages.items.slice(0, at)].slice(0, 6)
   return (
-    <div lang={page.lang} dir={page.dir} className={page.dir === 'rtl' ? 'ip-rtl' : undefined}>
+    <>
       <PageHero page={page} links={links} />
       {page.shortAnswer && (
         <section className="ip-block ip-short-wrap">
@@ -200,6 +200,6 @@ export default function InfoPage({ page, pages, pricing, finalCta, brand, links,
       )}
 
       <FinalCta data={{ ...finalCta, title: page.ctaTitle, titleHighlight: '', description: page.ctaText }} links={links} brand={brand} />
-    </div>
+    </>
   )
 }
