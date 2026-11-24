@@ -3,6 +3,13 @@
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
 
+## 2026-11-24: Three more industry pages
+- New pages `/cosmetics-store-pos`, `/mobile-accessories-shop-pos` and `/hardware-store-pos` (same template as the other shop-type pages, each with its own title, description, problems, features and FAQ, so each also feeds FAQPage data, the sitemap and `llms.txt`). Linked from the footer group "For your shop". There are now ten shop-type pages in all (pharmacy, restaurant, supermarket, kiryana, bakery, clothing, shoe, cosmetics, mobile accessories, hardware).
+- Copy only uses what the desktop app does today: expiry dates, sizes and colours, packs, barcode labels, supplier ledger, returns with credit notes, floor price, quick sale, FBR, offline billing. The accessories page says plainly that IMEI/serial tracking is not part of ZAP POS yet.
+- Not added: city pages (Lahore, Karachi, ...). Without real local content they would be thin "doorway" pages that search engines penalise.
+- Speed check: home page JS about 80 KB compressed, video loads only on click, fonts bundled, cache headers set; nothing needed fixing.
+- Files: `landing-content.json` (the pages and the footer links). The published copy in Supabase has no `pages` key, so these go live with the deploy; no admin republish is needed.
+
 ## 2026-11-24: Contact point in the search data
 - The Organization data in `index.html` now has a `contactPoint` (phone +92 339 0035603, email zappos.contact@gmail.com, Pakistan, English/Urdu). Both are the real values already published in the admin (`brand`), so search engines can show them. No address is added (the site address is still just "Pakistan"), no prices and no ratings.
 - If the phone or email changes in the admin, change them in `index.html` too.

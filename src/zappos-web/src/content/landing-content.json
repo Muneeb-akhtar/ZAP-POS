@@ -784,6 +784,18 @@
           {
             "label": "Shoe stores",
             "href": "/shoe-store-pos"
+          },
+          {
+            "label": "Cosmetics shops",
+            "href": "/cosmetics-store-pos"
+          },
+          {
+            "label": "Mobile accessories",
+            "href": "/mobile-accessories-shop-pos"
+          },
+          {
+            "label": "Hardware stores",
+            "href": "/hardware-store-pos"
           }
         ]
       },
@@ -1869,6 +1881,282 @@
         ],
         "ctaTitle": "Run your shoe shop on ZAP POS",
         "ctaText": "Book a free demo and we'll set up your shoes with their sizes."
+      },
+      {
+        "slug": "cosmetics-store-pos",
+        "menu": "Cosmetics shops",
+        "icon": "tag",
+        "seoTitle": "Cosmetics Shop POS Software in Pakistan | Expiry & Shades | ZAP POS",
+        "seoDescription": "POS for cosmetics, beauty and perfume shops in Pakistan: expiry dates that stop the sale, sizes and shades with their own barcode and stock, price tags, returns, FBR invoicing and offline billing.",
+        "kicker": "For cosmetics & beauty shops",
+        "title": "Every shade and size,",
+        "titleHighlight": "counted and priced right.",
+        "description": "Add an expiry date to a product and ZAP POS refuses it once the date has passed. Keep each size or shade as its own item with its own barcode and stock, print price tags, and bill in seconds even when the internet is down.",
+        "stats": [
+          {
+            "value": "Expiry",
+            "label": "dates stop the sale"
+          },
+          {
+            "value": "Sizes & shades",
+            "label": "own barcode and stock"
+          },
+          {
+            "value": "Tags",
+            "label": "printed for every item"
+          },
+          {
+            "value": "Offline",
+            "label": "no internet needed"
+          }
+        ],
+        "problemsTitle": "What goes wrong in a cosmetics shop",
+        "problems": [
+          "An expired cream or lotion is sold because nobody checked the date.",
+          "The register says 30 lipsticks, but nobody knows which shades are left.",
+          "Price tags are written by hand and don't match the bill.",
+          "A return is written on paper and the refund never shows in the day's cash.",
+          "Discounts are given below cost when the owner isn't there."
+        ],
+        "solvedLine": "ZAP POS keeps the date, the shade and the stock on the item itself, so the counter can't get them wrong.",
+        "featuresTitle": "What ZAP POS does for a cosmetics shop",
+        "features": [
+          {
+            "icon": "check",
+            "title": "Expiry dates that stop the sale",
+            "text": "Add an expiry date to a product and ZAP POS refuses it once the date has passed, by barcode or by search. Notifications list products that expired or will expire within 30 days."
+          },
+          {
+            "icon": "layers",
+            "title": "Sizes and shades",
+            "text": "Type the sizes and colours once and ZAP POS makes every combination, each with its own barcode, stock and price. The cashier picks the size and colour at the counter, and any with nothing left are crossed out."
+          },
+          {
+            "icon": "tag",
+            "title": "Barcode and price tags",
+            "text": "Make a barcode for each item and print its price tag on your label printer, so the tag matches the bill."
+          },
+          {
+            "icon": "receipt",
+            "title": "Returns with credit notes",
+            "text": "Find the bill by its number, take back what was returned, and the stock goes back on the shelf. A manager approves it with a PIN."
+          },
+          {
+            "icon": "lock",
+            "title": "Lowest allowed price",
+            "text": "Set a floor price. A discount below it needs a manager's PIN, so staff can't sell under cost."
+          },
+          {
+            "icon": "server",
+            "title": "Works without internet",
+            "text": "The counter keeps billing when the internet drops and syncs afterwards. A power cut still turns the PC off, so keep it on a UPS."
+          }
+        ],
+        "faqTitle": "Cosmetics shop questions",
+        "faq": [
+          {
+            "q": "Does ZAP POS warn me about expiring products?",
+            "a": "Yes. Add an expiry date to a product. Expired products cannot be sold, and Notifications list the ones that expired or will expire within 30 days."
+          },
+          {
+            "q": "Can I keep each shade as a separate item?",
+            "a": "Yes. Enter the sizes and colours once and each combination gets its own barcode, stock and price. Shades can be entered as colours."
+          },
+          {
+            "q": "Can I print price tags?",
+            "a": "Yes, on a label printer. Each item can have its own barcode label."
+          },
+          {
+            "q": "Do I need internet to bill?",
+            "a": "No. Billing, stock and reports work without internet; the shop syncs to the cloud when it comes back."
+          }
+        ],
+        "ctaTitle": "Put your cosmetics shop on ZAP POS",
+        "ctaText": "Book a free demo and we'll help you add your products."
+      },
+      {
+        "slug": "mobile-accessories-shop-pos",
+        "menu": "Mobile accessories",
+        "icon": "phone",
+        "seoTitle": "Mobile Accessories Shop POS Software in Pakistan | Billing & Stock | ZAP POS",
+        "seoDescription": "POS for mobile accessories and electronics shops in Pakistan: fast barcode billing, colours and sizes with their own stock, price tags, returns with credit notes, supplier dues and offline billing.",
+        "kicker": "For mobile accessories shops",
+        "title": "Hundreds of small items,",
+        "titleHighlight": "one clear stock list.",
+        "description": "Cases, chargers, cables and earphones come in many colours and models. ZAP POS gives each its own barcode and stock, bills by scan in seconds, and keeps working when the internet drops.",
+        "stats": [
+          {
+            "value": "Barcode",
+            "label": "scan to bill"
+          },
+          {
+            "value": "Colours",
+            "label": "own stock for each"
+          },
+          {
+            "value": "Returns",
+            "label": "with credit notes"
+          },
+          {
+            "value": "Offline",
+            "label": "no internet needed"
+          }
+        ],
+        "problemsTitle": "What goes wrong in an accessories shop",
+        "problems": [
+          "The register says 50 cases, but nobody knows which colour or model is left.",
+          "Small items are sold without a bill, so the stock drifts.",
+          "A customer returns a cable and the refund is not recorded.",
+          "Supplier dues are kept in a notebook that only one person reads.",
+          "A discount is given below cost when the owner is away."
+        ],
+        "solvedLine": "ZAP POS counts every item and every colour, so the stock you see is the stock on the shelf.",
+        "featuresTitle": "What ZAP POS does for an accessories shop",
+        "features": [
+          {
+            "icon": "scan",
+            "title": "Scan to bill",
+            "text": "Scan the barcode, search by name or tap a tile. The total and change are worked out for you."
+          },
+          {
+            "icon": "layers",
+            "title": "Colours and sizes",
+            "text": "Keep each colour or size as its own item with its own barcode, stock and price. Sizes with nothing left are crossed out at the counter."
+          },
+          {
+            "icon": "tag",
+            "title": "Barcode tags",
+            "text": "Print a barcode and price tag for each item on your label printer."
+          },
+          {
+            "icon": "receipt",
+            "title": "Returns with credit notes",
+            "text": "Find the bill, take back what was returned, and the stock goes back on the shelf. A manager approves it with a PIN."
+          },
+          {
+            "icon": "card",
+            "title": "Supplier dues",
+            "text": "Record purchases, add stock by scanning what arrived, and keep each supplier's ledger."
+          },
+          {
+            "icon": "plus",
+            "title": "Quick sale",
+            "text": "Sell something not in your list by typing a name and price."
+          }
+        ],
+        "faqTitle": "Mobile accessories shop questions",
+        "faq": [
+          {
+            "q": "Does ZAP POS track IMEI or serial numbers?",
+            "a": "Not yet. ZAP POS tracks each item by barcode, colour and size, but it does not record an IMEI or serial number per phone. It suits accessories and general electronics."
+          },
+          {
+            "q": "Can I keep each colour of a case as its own item?",
+            "a": "Yes. Enter the colours once and each one gets its own barcode and stock."
+          },
+          {
+            "q": "Does it work without internet?",
+            "a": "Yes. Billing and stock work without internet and sync to the cloud when it comes back."
+          },
+          {
+            "q": "Can I use a barcode scanner and a receipt printer?",
+            "a": "Yes. ZAP POS works with USB barcode scanners and thermal receipt printers; the printers and scanners page lists what is supported."
+          }
+        ],
+        "ctaTitle": "Put your accessories shop on ZAP POS",
+        "ctaText": "Book a free demo and we'll help you add your products."
+      },
+      {
+        "slug": "hardware-store-pos",
+        "menu": "Hardware stores",
+        "icon": "box",
+        "seoTitle": "Hardware Store POS Software in Pakistan | Billing, Stock & Dues | ZAP POS",
+        "seoDescription": "POS for hardware, paint and building material shops in Pakistan: items sold singly or by the box with their own barcode and price, supplier dues, quick sale, FBR invoicing and offline billing.",
+        "kicker": "For hardware & building material shops",
+        "title": "A thousand items,",
+        "titleHighlight": "none lost track of.",
+        "description": "Nuts, pipes, paint and tools: sell items singly or by the box, each with its own barcode and price, record what you buy from suppliers, and bill in seconds even when the internet is down.",
+        "stats": [
+          {
+            "value": "Packs",
+            "label": "single and by the box"
+          },
+          {
+            "value": "Suppliers",
+            "label": "dues in one ledger"
+          },
+          {
+            "value": "Quick sale",
+            "label": "for odd items"
+          },
+          {
+            "value": "Offline",
+            "label": "no internet needed"
+          }
+        ],
+        "problemsTitle": "What goes wrong in a hardware store",
+        "problems": [
+          "Boxes and single pieces are counted separately and the stock never matches.",
+          "Prices are remembered, not recorded, so each helper quotes a different one.",
+          "Supplier bills and dues live in a notebook that only one person understands.",
+          "Odd items are sold without a bill and never show up in the stock.",
+          "The internet goes and the counter can't print a bill."
+        ],
+        "solvedLine": "ZAP POS keeps boxes, pieces, prices and dues in one place, so the numbers match what is in the shop.",
+        "featuresTitle": "What ZAP POS does for a hardware store",
+        "features": [
+          {
+            "icon": "box",
+            "title": "Pieces and boxes",
+            "text": "Give a product its packs, each with its own barcode and price. Selling a box takes the right number of pieces off the stock."
+          },
+          {
+            "icon": "scan",
+            "title": "Fast billing",
+            "text": "Scan, search by name or tap a tile. The total and change are worked out for you."
+          },
+          {
+            "icon": "card",
+            "title": "Suppliers and dues",
+            "text": "Record purchases, add stock by scanning what arrived, and keep each supplier's ledger."
+          },
+          {
+            "icon": "plus",
+            "title": "Quick sale",
+            "text": "Sell an item that isn't in your list by typing a name and price."
+          },
+          {
+            "icon": "lock",
+            "title": "Lowest allowed price",
+            "text": "Set a floor price. A discount below it needs a manager's PIN."
+          },
+          {
+            "icon": "receipt",
+            "title": "FBR invoicing",
+            "text": "Each bill can go to FBR with its invoice number and QR code on the receipt."
+          }
+        ],
+        "faqTitle": "Hardware store questions",
+        "faq": [
+          {
+            "q": "Can I sell the same product singly and by the box?",
+            "a": "Yes. Give the product packs, each with its own barcode and price. Selling a box takes the right number of pieces off the stock."
+          },
+          {
+            "q": "Do I have to add every item before I can sell?",
+            "a": "No. A quick sale lets you type a name and price for an item that isn't in your list yet."
+          },
+          {
+            "q": "Can I keep my supplier dues?",
+            "a": "Yes. Record purchases and keep each supplier's ledger so you can see what you owe."
+          },
+          {
+            "q": "Does it work without internet?",
+            "a": "Yes. Billing, stock and reports work without internet and sync when it comes back."
+          }
+        ],
+        "ctaTitle": "Put your hardware store on ZAP POS",
+        "ctaText": "Book a free demo and we'll help you add your products."
       },
       {
         "slug": "best-pos-software-pakistan",
