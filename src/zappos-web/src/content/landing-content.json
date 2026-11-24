@@ -124,7 +124,7 @@
         "time": "11:00 PM",
         "period": "Night",
         "title": "Check sales from bed.",
-        "text": "Every branch, every counter, live on the ZAP POS app for iPhone and Android, or any browser.",
+        "text": "Sign in to your ZAP POS account on any phone or browser and see every branch's sales today. An Android app is coming soon.",
         "visual": "phone"
       }
     ]
@@ -261,7 +261,7 @@
           ],
           [
             "✓",
-            "Live sales app (iOS + Android)"
+            "Live branch sales on any phone or browser"
           ],
           [
             "✓",
@@ -3429,7 +3429,7 @@
           {
             "h": "Where ZAP POS fits",
             "p": [
-              "ZAP POS was built around these questions: billing keeps going without internet, FBR and PRA invoicing is built in, many counters share live stock, and it works with standard printers and scanners. Today it runs on Windows PCs. Size and colour variants for clothing and an owner app for phones are still on the way, so ask us if you need them."
+              "ZAP POS was built around these questions: billing keeps going without internet, FBR and PRA invoicing is built in, many counters share live stock, and it works with standard printers and scanners. Today it runs on Windows PCs. Size and colour variants for clothing are still on the way, so ask us if you need them. Owners see every branch by signing in at zappos.pk/account, and an Android app is coming soon."
             ]
           }
         ],
@@ -5366,7 +5366,7 @@
           {
             "h": "What it doesn't do yet",
             "p": [
-              "Size and colour variants for clothing and shoes, an owner app for Android and iPhone, an online dashboard of all branches for owners, versions for Mac or Android counters, and an Urdu interface (the app is in English). These are planned."
+              "Size and colour variants for clothing and shoes, versions for Mac or Android counters, and an Urdu interface (the app is in English) are planned. A dedicated owner app is coming soon for Android. Until then the owner signs in at zappos.pk/account on any phone or computer and sees every branch."
             ]
           },
           {

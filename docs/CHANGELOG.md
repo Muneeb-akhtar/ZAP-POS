@@ -3,6 +3,12 @@
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
 
+## 2026-11-24: Owner app and dashboard wording (owner decision)
+- Owner's decision: the dashboard of all branches is live through sign-in at `zappos.pk/account` on any phone or browser; a dedicated owner app is "coming soon" for Android (no iPhone app is promised).
+- Removed the old promises of an iPhone and Android app: the "Night" step of `day` ("Check sales from bed") and the plan feature row "Live sales app (iOS + Android)" (`pricing`), in the built-in JSON **and** in the published Supabase `site_content` (`day`, `pricing`; published text overrides the built-in). `zap-pos-facts` "What it doesn't do yet" no longer lists the owner app or the all-branch dashboard, and the cloud-vs-offline guide's "Where ZAP POS fits" says the same.
+- **Still open:** size and colour variants. `zap-pos-facts` ("doesn't do yet") and the cloud-vs-offline guide say planned; the facts FAQ, clothing and shoe pages say they exist. Waiting for the owner's answer.
+- Files: `landing-content.json`, docs; Supabase `site_content` (`day`, `pricing`).
+
 ## 2026-11-24: 404 page and two more comparison pages (OneClickPOS, TransactFlow)
 - **404 page:** `scripts/prerender.mjs` now writes `dist/404.html` (Vercel serves it with a 404 status for any address that is not a page; before, visitors saw Vercel's bare "NOT_FOUND"). It is plain HTML with the site styles and no script bundle (so it never tries to draw the home page at a wrong address), `noindex, follow`, no canonical, no share tags, no structured data, a home button and nine links to the main pages. Styles: block `.nf*` at the end of `styles.css` (hover twin inside a hover media query).
 - **New pages** `/zap-pos-vs-oneclickpos` and `/zap-pos-vs-transactflow` (footer group "Compare", `related` lists of the Oscar and Moneypex pages updated, share images `public/og/*.jpg`). Competitor cells come only from each company's own pages and its own vendor listings (OneClickPOS: oneclickpos.pk blog and FBR pages plus its GoodFirms listing; TransactFlow: transactflow.pk pages plus its Product Hunt, GoodFirms and SourceForge listings). Where the sources disagree the cell says so (OneClickPOS calls itself cloud-based on its pages and offline without cloud dependency in its listing), and where nothing is stated it says "not stated". Its Urdu interface, 2018 start and 1000-business claims are quoted as its own claims, not verified. Sitemap now 44 addresses.
