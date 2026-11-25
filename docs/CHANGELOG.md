@@ -3,6 +3,11 @@
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
 
+## 2026-11-25: Google Maps listing linked from the site
+- The Google Business Profile is live ("ZAP POS- All-in-One POS & Billing Software", Gulberg III, Lahore). Its stable link `https://maps.google.com/?cid=7831547452859924468` is now `links.social.google` (built-in JSON and published `site_content`), shown as a map-pin icon in the footer ("ZAP POS on Google Maps"), and added to the Organization `sameAs` in `index.html`. The footer's social list is now `[key, icon, label]` triples and skips a link that isn't set.
+- Not done on purpose: showing the listing's reviews on the site. The first five came within hours from the owner's own accounts, a former workplace and a relative, and two describe features no connected shop has used yet; rule 2 (never invent customer reviews) applies. Add real customer reviews later. No `aggregateRating` markup (Google ignores self-served ratings for a business's own site).
+- Files: `Sections.jsx`, `index.html`, `landing-content.json`, docs; Supabase `site_content` (`links.social.google`).
+
 ## 2026-11-25: Hero badge bolt blinks blue
 - Owner request: the bolt in the hero's "Made for shops in Pakistan" badge now glows and blinks blue slowly (2.6 s), like a live light. `Kicker` gets a `live` prop (class `kicker-live`, filled bolt; used only in `Hero.jsx`), CSS `.kicker-live svg` + `@keyframes kickerLive` next to `.kicker` in `styles.css` (brand tokens, so light and dark both work; reduced motion stops it by the global rule). Named `kicker-live`, not `live`, because `.live` is the small green dot.
 - Files: `Bits.jsx`, `Hero.jsx`, `styles.css`, docs.

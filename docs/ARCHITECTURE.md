@@ -95,7 +95,7 @@ Shared building blocks:
 ## 4. Content schema (`landing-content.json`)
 Top-level keys: `_note, brand, nav, links, hero, ticker, day, video, counters, hardware, pricing, reviewsSection, reviews, faq, whatsappButton, finalCta, leadForm, footer`.
 - `brand`: `name, phone, email, address, about`
-- `links`: `demo` (`#demo` = open the demo form; any other URL is followed normally), `portal, windowsInstaller, googlePlay, appStore` (the final section's "Owner app for Android / iPhone" buttons; until store apps exist they go to `/account/?install=android|iphone`, the install steps; text `finalCta.appSmall/android/iphone`), `whatsapp, social{linkedin,facebook,instagram}`
+- `links`: `demo` (`#demo` = open the demo form; any other URL is followed normally), `portal, windowsInstaller, googlePlay, appStore` (the final section's "Owner app for Android / iPhone" buttons; until store apps exist they go to `/account/?install=android|iphone`, the install steps; text `finalCta.appSmall/android/iphone`), `whatsapp, social{linkedin,facebook,instagram,google (Maps listing)}`
 - `whatsappButton`: `label` (text of the floating WhatsApp button; shown on hover and read by screen readers)
 - `leadForm`: `title, description, nameLabel, phoneLabel, phonePlaceholder, phoneError, shopLabel, cityLabel, planLabel, notSure, branchesLabel, messageLabel, messagePlaceholder, submit, sending, privacy, successTitle, successText, errorText` (plan options come from `pricing.plans[].name`)
 - `hero`: `kicker, rows[] {lead, accent}, description, primaryCta, secondaryCta, switchLabel, switchNote, offlineNote, syncedNote, trust[]`
