@@ -9,15 +9,15 @@ function BrandName({ name }) {
   return <span>{first}{rest.length > 0 && <> <span className="brand-accent">{rest.join(' ')}</span></>}</span>
 }
 
-// Theme: index.html sets data-theme before first paint (saved choice, else dark: the site's default look).
+// Theme: index.html sets data-theme before first paint (saved choice, else light: the default; dark only when the visitor picks it).
 // The toggle saves the visitor's choice.
 const THEME_KEY = 'zap-theme'
 const saveTheme = (t) => { try { localStorage.setItem(THEME_KEY, t) } catch { /* private mode etc. */ } }
 
 function useTheme() {
-  // Starts as dark (the same on the server-made page and in the browser, so the page can hydrate), then reads the real value.
-  const [theme, setTheme] = useState('dark')
-  useEffect(() => { setTheme(document.documentElement.dataset.theme || 'dark') }, [])
+  // Starts as light (the same on the server-made page and in the browser, so the page can hydrate), then reads the real value.
+  const [theme, setTheme] = useState('light')
+  useEffect(() => { setTheme(document.documentElement.dataset.theme || 'light') }, [])
   return [theme, setTheme]
 }
 
