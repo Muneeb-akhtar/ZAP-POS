@@ -3,6 +3,10 @@
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
 
+## 2026-11-25: Search data: site name and Dukaan offer
+- Google showed "zappos.pk" with a plain globe in results (new domain; Google fetches the favicon and site name on its own schedule, often 1–3 weeks). The favicon setup was already correct (48x48 .ico, svg, 192 png on every page). Added `alternateName` to the WebSite data to help Google show "ZAP POS" as the site name, and removed "Free trial, no card required" from the Dukaan offer (there is no free trial since 1.9.139).
+- Files: `index.html`, docs.
+
 ## 2026-11-25: Plans open on yearly prices
 - Owner request: the pricing section's Monthly/Yearly switch now starts on Yearly (per-month equivalent, "billed yearly"); visitors can still switch to Monthly.
 - Files: `components/Pricing.jsx`, docs.
