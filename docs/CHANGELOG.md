@@ -3,6 +3,10 @@
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
 
+## 2026-11-25: Plans open on yearly prices
+- Owner request: the pricing section's Monthly/Yearly switch now starts on Yearly (per-month equivalent, "billed yearly"); visitors can still switch to Monthly.
+- Files: `components/Pricing.jsx`, docs.
+
 ## 2026-11-25: Quick ADD and Hira Akhtar reviews added
 - Owner decision: added the Quick ADD and Hira Akhtar Google Maps reviews, word for word, labelled "Google review", above the two existing ones (4 in total). Both are now paying Brand customers (2 branches each, invoices #1003 and #1004, leads added with source "In person") and saw the full demo. Claude had held them back because they describe live cafe use across branches that hadn't started yet; the owner confirmed payment and asked for them to go up. Built-in JSON and published `site_content.reviews`.
 - Files: `landing-content.json`, docs; Supabase `site_content`, `leads`, `bills`.

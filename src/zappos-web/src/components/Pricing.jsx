@@ -52,7 +52,7 @@ function ReceiptPlan({ p, annual, links }) {
 }
 
 export default function Pricing({ data, links }) {
-  const [annual, setAnnual] = useState(false)
+  const [annual, setAnnual] = useState(true) // yearly shown first (owner request, 25 Nov 2026)
   const [open, setOpen] = useState(false)
   const cell = (v) =>
     v === true ? <Icon name="check" size={16} className="yes" /> :
