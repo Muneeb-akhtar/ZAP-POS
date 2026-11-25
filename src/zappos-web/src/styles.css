@@ -625,7 +625,9 @@ h2 .hl { display: block; }
 .socials { display: flex; gap: 8px; }
 .socials a { width: 34px; height: 34px; border-radius: 10px; border: 1px solid rgba(255,255,255,.1); display: grid; place-items: center; color: #cbd5e1; }
 .socials a:hover { border-color: var(--brand-400); }
-.wordmark { font-family: var(--font-head); font-weight: 800; font-size: 20.5vw; line-height: .8; letter-spacing: -.01em; text-align: center; white-space: nowrap; color: transparent; background: linear-gradient(180deg, rgba(58,160,245,.28), rgba(11,132,240,.04) 75%); -webkit-background-clip: text; background-clip: text; margin-bottom: -4vw; user-select: none; }
+/* the footer's links sit above the giant wordmark: its letters reach up over the icons and would take their hover and clicks */
+.footer > .container { position: relative; z-index: 1; }
+.wordmark { position: relative; z-index: 0; font-family: var(--font-head); font-weight: 800; font-size: 20.5vw; line-height: .8; letter-spacing: -.01em; text-align: center; white-space: nowrap; color: transparent; background: linear-gradient(180deg, rgba(58,160,245,.28), rgba(11,132,240,.04) 75%); -webkit-background-clip: text; background-clip: text; margin-bottom: -4vw; user-select: none; }
 
 /* ---------- Demo request form (modal) ---------- */
 html.modal-open { overflow: hidden; }
@@ -1059,8 +1061,11 @@ html.modal-open { overflow: hidden; }
   .final-bolt { transition: transform .3s, box-shadow .3s; }
   .store { transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease; }
   .store:hover { transform: translateY(-2px); border-color: #fff; box-shadow: 0 10px 24px -12px rgba(0,0,0,.9); }
-  .socials a { transition: transform .25s cubic-bezier(.3,1.6,.5,1), border-color .2s, color .2s; }
-  .socials a:hover { transform: translateY(-4px) rotate(-6deg); color: var(--brand-400); }
+  /* only the icon moves; the button stays put, so the mouse never slips off it (no flicker, clicks always land) */
+  .socials a { transition: border-color .2s, color .2s, background .2s; }
+  .socials a svg { transition: transform .25s cubic-bezier(.3,1.6,.5,1); }
+  .socials a:hover { color: var(--brand-400); background: rgba(58,160,245,.08); }
+  .socials a:hover svg { transform: translateY(-2px) rotate(-6deg) scale(1.1); }
   .footer-col a { transition: color .2s, transform .2s; display: inline-block; justify-self: start; }
   .footer-col a:hover { transform: translateX(4px); }
   .wordmark { transition: filter .6s; }

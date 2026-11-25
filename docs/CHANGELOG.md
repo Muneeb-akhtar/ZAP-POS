@@ -3,6 +3,10 @@
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
 
+## 2026-11-25: Footer icons hover and click properly
+- Owner report: the footer's social icons didn't react on hover and the big "ZAP POS" wordmark lit up instead. The wordmark's huge letters (line-height .8) reach up over the icons, so the mouse was on the wordmark. `.footer > .container` now sits above it (`position: relative; z-index: 1`, wordmark `z-index: 0`); checked every icon at 1366px and 390px, top to bottom edge. Also the hover now moves only the icon (svg), not the button, so the mouse can't slip off a moving target.
+- Files: `styles.css`, docs.
+
 ## 2026-11-25: Google Maps listing linked from the site
 - The Google Business Profile is live ("ZAP POS- All-in-One POS & Billing Software", Gulberg III, Lahore). Its stable link `https://maps.google.com/?cid=7831547452859924468` is now `links.social.google` (built-in JSON and published `site_content`), shown as a map-pin icon in the footer ("ZAP POS on Google Maps"), and added to the Organization `sameAs` in `index.html`. The footer's social list is now `[key, icon, label]` triples and skips a link that isn't set.
 - Not done on purpose: showing the listing's reviews on the site. The first five came within hours from the owner's own accounts, a former workplace and a relative, and two describe features no connected shop has used yet; rule 2 (never invent customer reviews) applies. Add real customer reviews later. No `aggregateRating` markup (Google ignores self-served ratings for a business's own site).
