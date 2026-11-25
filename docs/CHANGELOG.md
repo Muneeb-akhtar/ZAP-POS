@@ -3,6 +3,10 @@
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
 
+## 2026-11-25: First reviews on the home page
+- Owner decision: the reviews section shows two of the Google Maps reviews in place of the three placeholders: Muneeb Khan ("Great software for billing and pharmacy ✅") and Sohaib Awan ("Good software"), each labelled "Google review" (no shop or city given, so none invented). The owner vouched for them; Claude had flagged that the first five Maps reviews came from accounts close to the owner. Built-in JSON and published `site_content.reviews`.
+- Files: `landing-content.json`, docs; Supabase `site_content`.
+
 ## 2026-11-25: Footer icons hover and click properly
 - Owner report: the footer's social icons didn't react on hover and the big "ZAP POS" wordmark lit up instead. The wordmark's huge letters (line-height .8) reach up over the icons, so the mouse was on the wordmark. `.footer > .container` now sits above it (`position: relative; z-index: 1`, wordmark `z-index: 0`); checked every icon at 1366px and 390px, top to bottom edge. Also the hover now moves only the icon (svg), not the button, so the mouse can't slip off a moving target.
 - Files: `styles.css`, docs.

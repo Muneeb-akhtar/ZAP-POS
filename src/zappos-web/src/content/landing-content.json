@@ -488,19 +488,14 @@
   },
   "reviews": [
     {
-      "text": "Placeholder: a real customer's words go here. Keep it short and honest.",
-      "name": "Customer Name",
-      "business": "Shop name, City"
+      "name": "Muneeb Khan",
+      "text": "Great software for billing and pharmacy ✅",
+      "business": "Google review"
     },
     {
-      "text": "Placeholder: a second real review, added from the admin panel.",
-      "name": "Customer Name",
-      "business": "Shop name, City"
-    },
-    {
-      "text": "Placeholder: a third real review. Real names build trust.",
-      "name": "Customer Name",
-      "business": "Shop name, City"
+      "name": "Sohaib Awan",
+      "text": "Good software",
+      "business": "Google review"
     }
   ],
   "faq": {
