@@ -1198,3 +1198,40 @@ $$;
 
 revoke all on function public.my_sales(date, date, uuid, int), public.my_shifts(int, uuid), public.my_support(int) from public, anon;
 grant execute on function public.my_sales(date, date, uuid, int), public.my_shifts(int, uuid), public.my_support(int) to authenticated;
+
+-- ============================================================
+-- 25) Licence activation at ZAP POS setup (26 Nov 2026, owner decision): the owner always logs in and types the key
+--     ZAP sent; setup goes on only when this check, made online as that login, says yes. A leaked key alone is useless:
+--     it must belong to the logged-in account's shop (or be the first claim of a shop with no account yet).
+--     Answers {ok, reason, …}: reason unknown | revoked | replaced | ended | other_account | other_shop.
+-- ============================================================
+create or replace function public.activate_licence(p_code text)
+returns jsonb language plpgsql security definer set search_path = public as $$
+declare v_uid uuid := auth.uid(); k record; v_mine uuid;
+begin
+  if v_uid is null then return jsonb_build_object('ok', false, 'reason', 'login'); end if;
+  if not public.rate_ok('activate_licence', 20, 2000) then
+    raise exception 'Too many requests. Please try again later.' using errcode = 'P0429';
+  end if;
+  select p.branch_code, p.counters, p.paid_until, p.status, p.lead_id, l.user_id, l.shop, l.name
+    into k
+    from public.plan_codes p join public.leads l on l.id = p.lead_id
+   where replace(upper(p.code), '-', '') = replace(upper(trim(coalesce(p_code, ''))), '-', '')
+   limit 1;
+  if not found then return jsonb_build_object('ok', false, 'reason', 'unknown'); end if;
+  if k.status = 'revoked' then return jsonb_build_object('ok', false, 'reason', 'revoked'); end if;
+  if k.status = 'replaced' then return jsonb_build_object('ok', false, 'reason', 'replaced'); end if;
+  if k.paid_until < (now() at time zone 'Asia/Karachi')::date then return jsonb_build_object('ok', false, 'reason', 'ended', 'paid_until', k.paid_until); end if;
+  if k.user_id is not null and k.user_id <> v_uid then return jsonb_build_object('ok', false, 'reason', 'other_account'); end if;
+  select id into v_mine from public.leads where user_id = v_uid limit 1;
+  if v_mine is not null and v_mine <> k.lead_id then return jsonb_build_object('ok', false, 'reason', 'other_shop'); end if;
+  if k.user_id is null then   -- first claim: this login becomes the shop's account (same as claim_shop)
+    update public.leads set pending_user_id = null, pending_email = null, pending_at = null where pending_user_id = v_uid and id <> k.lead_id;
+    update public.leads set user_id = v_uid, signed_up_at = coalesce(signed_up_at, now()), pending_user_id = null, pending_email = null, pending_at = null
+     where id = k.lead_id;
+  end if;
+  return jsonb_build_object('ok', true, 'branch_code', k.branch_code, 'counters', k.counters, 'paid_until', k.paid_until,
+                            'shop', k.shop, 'name', k.name);
+end $$;
+revoke all on function public.activate_licence(text) from public, anon;
+grant execute on function public.activate_licence(text) to authenticated;

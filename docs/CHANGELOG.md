@@ -2,6 +2,10 @@
 
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
+## 2026-11-26: ZAP POS setup checks the typed licence key online (`activate_licence`)
+- Owner decision: setup must always ask for the key and never fill it in; ZAP's cloud decides. New schema §25 `activate_licence(p_code)`: signed-in users only (anon refused), flood-limited (`rate_ok`, 20 per 2000 s). Answers `ok` with the key's shop code, PCs and paid-until, or a reason: `login`, `unknown`, `revoked`, `replaced`, `ended`, `other_account` (the shop belongs to another login), `other_shop` (this login already has a different shop). A shop with no login yet is linked to the caller (same as `claim_shop`). Applied as migration `activate_licence`; tested in a rolled-back transaction. Desktop 1.9.153 uses it; `licence_lookup()` stays for older versions.
+- Files: `supabase/schema.sql`, docs.
+
 ## 2026-11-26: Licence keys only for 2–6 character shop codes
 - Bug: a key made for shop code BALOCHAUTO (10 letters) stopped the client's ZAP POS setup at "Creating the shop database"; ZAP POS's database only accepts 2 to 6 letters or digits. Admin → New licence key now allows only 2 to 6 (`maxLength`, `pattern`, hint) and the `make-plan-code` edge function refuses anything else (deployed, version 5). The BALOCHAUTO key was revoked. Desktop 1.9.152 also refuses such keys with a plain message.
 - Files: `admin/PlanCodes.jsx`, `supabase/functions/make-plan-code/index.ts`, docs.
