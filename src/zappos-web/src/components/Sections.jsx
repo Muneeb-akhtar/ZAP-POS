@@ -176,7 +176,7 @@ export function FinalCta({ data, links, brand }) {
 
 export function Footer({ brand, footer, links }) {
   const year = new Date().getFullYear()
-  const socials = [['linkedin', 'linkedin', 'LinkedIn'], ['facebook', 'facebook', 'Facebook'], ['instagram', 'instagram', 'Instagram'], ['google', 'pin', 'ZAP POS on Google Maps']]   // key in links.social, icon, label
+  const socials = [['linkedin', 'linkedin', 'LinkedIn'], ['facebook', 'facebook', 'Facebook'], ['instagram', 'instagram', 'Instagram'], ['google', 'pin', 'ZAP POS on Google Maps'], ['crunchbase', 'crunchbase', 'ZAP POS on Crunchbase']]   // key in links.social, icon, label
   return (
     <footer className="footer" id="contact">
       <div className="container">

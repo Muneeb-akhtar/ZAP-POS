@@ -2,6 +2,10 @@
 
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
+## 2026-11-27: Crunchbase page added to the footer and search data
+- ZAP POS now has a Crunchbase company page (https://www.crunchbase.com/organization/zap-pos, made by the owner). It is a new `links.social.crunchbase` link (footer icon "ZAP POS on Crunchbase", new `crunchbase` icon) and a `sameAs` entry in the JSON-LD in `index.html`. Editable in admin → Links.
+- Files: `src/content/landing-content.json`, `components/Sections.jsx`, `components/Icons.jsx`, `index.html`, docs.
+
 ## 2026-11-26: licence codes shown as ZAP-XXXX-XXXX-XXXX
 - Owner request: the 12-character code looks like `ZAP-XXXX-XXXX-XXXX` (same 12 characters, grouped by 4 with a ZAP prefix). Only the display changed: the stored `short_code` is still 12 characters, so every code already made (e.g. Zohaibbaloch's) works unchanged. `activate_licence()` also accepts the `ZAP-` prefix and dashes (schema §25). Admin → Plans shows, copies and sends the grouped form (`fmtCode` in `admin/PlanCodes.jsx`). Desktop 1.9.155 accepts and shows it at setup.
 - Files: `supabase/schema.sql`, `admin/PlanCodes.jsx`, `admin/admin.css`, docs.
