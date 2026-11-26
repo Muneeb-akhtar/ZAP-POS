@@ -35,7 +35,9 @@ Deno.serve(async (req) => {
   const paidUntil = (body.paid_until ?? '').slice(0, 10)
   const startsOn = (body.starts_on ?? '').slice(0, 10) || null
   if (!body.lead_id) return reply(400, { error: 'Choose the customer.' })
-  if (!/^[A-Z0-9]{2,20}$/.test(branch)) return reply(400, { error: 'Shop code: 2 to 20 letters or digits, as shown in their ZAP POS (Settings → Plan).' })
+  // ZAP POS's shop database only accepts 2 to 6 letters or digits (branches.code, used in invoice numbers); a longer code
+  // made a key that stopped setup at "Creating the shop database" (26 Nov 2026).
+  if (!/^[A-Z0-9]{2,6}$/.test(branch)) return reply(400, { error: 'Shop code: 2 to 6 letters or digits (for example BALOCH), as shown in their ZAP POS (Settings → Plan).' })
   if (!Number.isInteger(counters) || counters < 1 || counters > 50) return reply(400, { error: 'Counters must be a whole number from 1 to 50.' })
   if (!/^\d{4}-\d{2}-\d{2}$/.test(paidUntil)) return reply(400, { error: 'Choose the paid-until date.' })
   if (startsOn && (!/^\d{4}-\d{2}-\d{2}$/.test(startsOn) || startsOn >= paidUntil)) return reply(400, { error: 'The key must end after it starts.' })

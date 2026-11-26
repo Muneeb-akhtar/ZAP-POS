@@ -168,8 +168,8 @@ export function PlanCodeSheet({ leadId, onClose }) {
                 {clients.map((l) => <option key={l.id} value={l.id}>{l.shop || l.name}{l.shop ? ` · ${l.name}` : ''}</option>)}
               </select>
             </Field>
-            <Field label="Shop code" hint="As shown in their ZAP POS: Settings → Plan → Shop code.">
-              <input type="text" required minLength={2} maxLength={20} value={f.branch_code} onChange={(e) => setF({ ...f, branch_code: e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '') })} placeholder="BALOCH" />
+            <Field label="Shop code" hint="2 to 6 letters or digits, as shown in their ZAP POS: Settings → Plan → Shop code.">
+              <input type="text" required minLength={2} maxLength={6} pattern="[A-Z0-9]{2,6}" value={f.branch_code} onChange={(e) => setF({ ...f, branch_code: e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '') })} placeholder="BALOCH" />
             </Field>
             <Field label="Counters allowed" hint="Every PC that bills, the main PC too.">
               <input type="number" required min={1} max={50} step={1} value={f.counters} onChange={(e) => setF({ ...f, counters: e.target.value })} />

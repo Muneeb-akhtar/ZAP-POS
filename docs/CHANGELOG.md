@@ -2,6 +2,10 @@
 
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
+## 2026-11-26: Licence keys only for 2–6 character shop codes
+- Bug: a key made for shop code BALOCHAUTO (10 letters) stopped the client's ZAP POS setup at "Creating the shop database"; ZAP POS's database only accepts 2 to 6 letters or digits. Admin → New licence key now allows only 2 to 6 (`maxLength`, `pattern`, hint) and the `make-plan-code` edge function refuses anything else (deployed, version 5). The BALOCHAUTO key was revoked. Desktop 1.9.152 also refuses such keys with a plain message.
+- Files: `admin/PlanCodes.jsx`, `supabase/functions/make-plan-code/index.ts`, docs.
+
 ## 2026-11-26: Owner app and WhatsApp number in the hero; demo buttons open WhatsApp
 - Owner request (like Mint POS's top): under the hero's Download / Book a demo buttons, a row of badges: Owner app for Android, Owner app for iPhone (same links as the final section) and "Free demo on WhatsApp" with the number (Brand → phone, written 0339 0035603). Two badges side by side and the WhatsApp one full width on phones. New `hero` fields `appSmall, android, iphone, whatsappSmall`; CSS `.hero-stores`.
 - Owner request: every "Book a free demo" button (hero, pricing, video, final section, extra pages) now opens WhatsApp to his number with a ready message (the plan name when clicked from a plan). The demo form was removed (`LeadForm.jsx`, its `lead-*` CSS, the `leadForm` content key and admin tab); new key `demoWhatsApp` with its admin tab "Demo on WhatsApp". Privacy page line about the form updated.
