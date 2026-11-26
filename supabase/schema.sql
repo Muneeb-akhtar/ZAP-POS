@@ -1207,17 +1207,18 @@ grant execute on function public.my_sales(date, date, uuid, int), public.my_shif
 -- ============================================================
 create or replace function public.activate_licence(p_code text)
 returns jsonb language plpgsql security definer set search_path = public as $$
-declare v_uid uuid := auth.uid(); k record; v_mine uuid;
+declare v_uid uuid := auth.uid(); k record; v_mine uuid; v_in text;
 begin
   if v_uid is null then return jsonb_build_object('ok', false, 'reason', 'login'); end if;
   if not public.rate_ok('activate_licence', 20, 2000) then
     raise exception 'Too many requests. Please try again later.' using errcode = 'P0429';
   end if;
+  v_in := regexp_replace(upper(coalesce(p_code, '')), '[\s-]', '', 'g');
+  if length(v_in) = 15 and left(v_in, 3) = 'ZAP' then v_in := substr(v_in, 4); end if;   -- shown as ZAP-XXXX-XXXX-XXXX
   select p.code, p.branch_code, p.counters, p.paid_until, p.status, p.lead_id, l.user_id, l.shop, l.name
     into k
     from public.plan_codes p join public.leads l on l.id = p.lead_id
-   where replace(upper(p.code), '-', '') = regexp_replace(upper(coalesce(p_code, '')), '[\s-]', '', 'g')
-      or p.short_code = regexp_replace(upper(coalesce(p_code, '')), '[\s-]', '', 'g')
+   where replace(upper(p.code), '-', '') = v_in or p.short_code = v_in
    limit 1;
   if not found then return jsonb_build_object('ok', false, 'reason', 'unknown'); end if;
   if k.status = 'revoked' then return jsonb_build_object('ok', false, 'reason', 'revoked'); end if;

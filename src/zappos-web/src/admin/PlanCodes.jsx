@@ -22,6 +22,9 @@ export function keyState(k) {
   return { id: 'active', text: 'Active' }
 }
 
+// the 12-character code is shown as ZAP-XXXX-XXXX-XXXX (setup accepts it with or without the dashes)
+const fmtCode = (c) => (c && /^[A-Z0-9]{12}$/.test(c) ? `ZAP-${c.slice(0, 4)}-${c.slice(4, 8)}-${c.slice(8)}` : c)
+
 export default function Plans({ onNewKey }) {
   const { leads } = useBiz()
   const notify = useNotify()
@@ -79,12 +82,12 @@ export default function Plans({ onNewKey }) {
                   const lead = byLead[k.lead_id]
                   return (
                     <tr key={k.id} className={s.id === 'replaced' ? 'adm-row-faded' : ''}>
-                      <td className="lead-cell"><b>{lead?.shop || lead?.name || 'Client'}</b><small>{k.branch_code}{lead?.name && lead?.shop ? ` · ${lead.name}` : ''}</small>{k.short_code && <small className="adm-short">{k.short_code}</small>}</td>
+                      <td className="lead-cell"><b>{lead?.shop || lead?.name || 'Client'}</b><small>{k.branch_code}{lead?.name && lead?.shop ? ` · ${lead.name}` : ''}</small>{k.short_code && <small className="adm-short">{fmtCode(k.short_code)}</small>}</td>
                       <td data-label="Counters" className="num">{k.counters}</td>
                       <td data-label="Valid">{k.starts_on ? `${dateFmt(k.starts_on)} → ` : ''}{dateFmt(k.paid_until)}<small>made {timeAgo(k.created_at)}</small></td>
                       <td data-label="Status"><span className={`adm-key ${s.id}`}>{s.text}</span></td>
                       <td className="adm-td-actions">
-                        {s.id !== 'replaced' && s.id !== 'revoked' && <button className="btn btn-quiet btn-sm" onClick={() => copy(k.short_code ?? k.code)}><Icon name="check" size={14} /> Copy code</button>}
+                        {s.id !== 'replaced' && s.id !== 'revoked' && <button className="btn btn-quiet btn-sm" onClick={() => copy(fmtCode(k.short_code) ?? k.code)}><Icon name="check" size={14} /> Copy code</button>}
                         {(s.id === 'expiring' || s.id === 'expired' || s.id === 'active') && <button className="btn btn-outline btn-sm" onClick={() => onNewKey(k.lead_id)}>Renew</button>}
                         {(s.id === 'active' || s.id === 'expiring') && <ConfirmButton onConfirm={() => revoke(k)} confirmText="Sure? Revoke">Revoke</ConfirmButton>}
                         {s.id === 'revoked' && <button className="btn btn-quiet btn-sm" onClick={() => restore(k)}>Restore</button>}
@@ -144,15 +147,15 @@ export function PlanCodeSheet({ leadId, onClose }) {
     notify('Licence key made. Their old key is replaced.')
   }
 
-  const copy = async () => { try { await navigator.clipboard.writeText(made.short_code ?? made.code); notify('Code copied') } catch { notify('Select the key and copy it by hand.', 'error') } }
-  const message = made && `Assalam o Alaikum ${chosen?.name ?? ''}, here is your ZAP POS licence code (${made.counters} counter${made.counters === 1 ? '' : 's'}, valid until ${dateFmt(made.paid_until)}).\n\nOpen ZAP POS setup on the main PC, log in with your ZAP email and password, and type this code:\n\n${made.short_code ?? made.code}`
+  const copy = async () => { try { await navigator.clipboard.writeText(fmtCode(made.short_code) ?? made.code); notify('Code copied') } catch { notify('Select the key and copy it by hand.', 'error') } }
+  const message = made && `Assalam o Alaikum ${chosen?.name ?? ''}, here is your ZAP POS licence code (${made.counters} counter${made.counters === 1 ? '' : 's'}, valid until ${dateFmt(made.paid_until)}).\n\nOpen ZAP POS setup on the main PC, log in with your ZAP email and password, and type this code:\n\n${fmtCode(made.short_code) ?? made.code}`
 
   return (
     <Sheet title={made ? 'Licence key ready' : 'New licence key'} onClose={onClose}>
       {made ? (
         <div className="adm-form">
           <p className="adm-hint">For shop <b>{made.branch_code}</b> · {made.counters} counter{made.counters === 1 ? '' : 's'} · valid until <b>{dateFmt(made.paid_until)}</b>. A shop that is already running gets the change by itself within 30 minutes when online; a new PC types this code at setup.</p>
-          <input className="adm-plancode adm-plancode-short" readOnly value={made.short_code ?? made.code} onFocus={(e) => e.target.select()} />
+          <input className="adm-plancode adm-plancode-short" readOnly value={fmtCode(made.short_code) ?? made.code} onFocus={(e) => e.target.select()} />
           <div className="adm-form-actions">
             <button type="button" className="btn btn-quiet btn-sm" onClick={onClose}>Done</button>
             {chosen?.phone && <a className="btn btn-outline btn-sm" href={waLink(chosen.phone, message)} target="_blank" rel="noreferrer"><Icon name="whatsapp" size={14} /> Send on WhatsApp</a>}
