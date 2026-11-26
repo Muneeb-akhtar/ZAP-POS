@@ -389,6 +389,8 @@ code { font-family: var(--font-mono); font-size: .88em; padding: 1px 6px; border
 .adm-form { display: grid; gap: 18px; }
 .adm-form-actions { display: flex; justify-content: flex-end; gap: 8px; }
 .adm-plancode { width: 100%; font-family: var(--font-mono); font-size: 14px; line-height: 1.6; letter-spacing: .02em; word-break: break-all; resize: none; margin: 10px 0 14px; }
+.adm-plancode-short { font-size: 22px; font-weight: 700; letter-spacing: .12em; text-align: center; padding: 12px 10px; }
+.adm-short { font-family: var(--font-mono); letter-spacing: .08em; color: var(--brand-600, var(--muted)); }
 .adm-drop { position: relative; display: grid; justify-items: center; gap: 4px; padding: 18px; margin-bottom: 14px; border: 1.5px dashed var(--line); border-radius: 14px; cursor: pointer; text-align: center; color: var(--muted); }
 .adm-drop span { color: var(--ink); font-weight: 600; }
 .adm-drop input { position: absolute; width: 1px; height: 1px; opacity: 0; }

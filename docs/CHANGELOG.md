@@ -2,6 +2,11 @@
 
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
+## 2026-11-26: 12-character licence codes
+- Owner request: a short code to type instead of the long `ZAP1-…` key. `plan_codes.short_code` (schema §26): 12 characters from `A–Z` (no I, O) and `2–9`, made by trigger `plan_codes_short` (`make_short_code()`), unique, back-filled for old keys. `activate_licence()` accepts the short code or the long key, and returns the signed key (`key`) only after its checks pass, so ZAP POS never holds a licence before ZAP's yes. Long keys still work in Settings → Plan and `licence_status()`.
+- Admin → Plans: the new-key sheet shows the 12-character code (big, selectable), Copy code and the WhatsApp message use it; the list shows it under each client. `make-plan-code` returns `short_code` (deployed, version 6). Desktop 1.9.153 asks for it at setup.
+- Files: `supabase/schema.sql`, `supabase/functions/make-plan-code/index.ts`, `admin/PlanCodes.jsx`, `admin/admin.css`, docs.
+
 ## 2026-11-26: ZAP POS setup checks the typed licence key online (`activate_licence`)
 - Owner decision: setup must always ask for the key and never fill it in; ZAP's cloud decides. New schema §25 `activate_licence(p_code)`: signed-in users only (anon refused), flood-limited (`rate_ok`, 20 per 2000 s). Answers `ok` with the key's shop code, PCs and paid-until, or a reason: `login`, `unknown`, `revoked`, `replaced`, `ended`, `other_account` (the shop belongs to another login), `other_shop` (this login already has a different shop). A shop with no login yet is linked to the caller (same as `claim_shop`). Applied as migration `activate_licence`; tested in a rolled-back transaction. Desktop 1.9.153 uses it; `licence_lookup()` stays for older versions.
 - Files: `supabase/schema.sql`, docs.

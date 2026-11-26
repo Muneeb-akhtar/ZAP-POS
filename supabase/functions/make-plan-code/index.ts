@@ -46,9 +46,10 @@ Deno.serve(async (req) => {
   try { code = await makeCode(await importKey(secret), branch, counters, paidUntil) }
   catch (e) { return reply(500, { error: `Couldn't sign the code: ${(e as Error).message}` }) }
 
-  const { error: saveError } = await db.from('plan_codes').insert({ lead_id: body.lead_id, branch_code: branch, counters, paid_until: paidUntil, starts_on: startsOn, code })
-  if (saveError) return reply(400, { error: `Couldn't record the code: ${saveError.message}` })
+  // the database adds the owner's short 12-character code (trigger plan_codes_short); setup asks for that one
+  const { data: saved, error: saveError } = await db.from('plan_codes').insert({ lead_id: body.lead_id, branch_code: branch, counters, paid_until: paidUntil, starts_on: startsOn, code }).select('short_code').single()
+  if (saveError || !saved) return reply(400, { error: `Couldn't record the code: ${saveError?.message ?? 'no answer'}` })
   await db.from('leads').update({ pos_branch_code: branch }).eq('id', body.lead_id)
 
-  return reply(200, { code, branch_code: branch, counters, paid_until: paidUntil })
+  return reply(200, { code, short_code: saved.short_code, branch_code: branch, counters, paid_until: paidUntil })
 })

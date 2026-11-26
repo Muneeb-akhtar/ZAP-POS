@@ -79,12 +79,12 @@ export default function Plans({ onNewKey }) {
                   const lead = byLead[k.lead_id]
                   return (
                     <tr key={k.id} className={s.id === 'replaced' ? 'adm-row-faded' : ''}>
-                      <td className="lead-cell"><b>{lead?.shop || lead?.name || 'Client'}</b><small>{k.branch_code}{lead?.name && lead?.shop ? ` · ${lead.name}` : ''}</small></td>
+                      <td className="lead-cell"><b>{lead?.shop || lead?.name || 'Client'}</b><small>{k.branch_code}{lead?.name && lead?.shop ? ` · ${lead.name}` : ''}</small>{k.short_code && <small className="adm-short">{k.short_code}</small>}</td>
                       <td data-label="Counters" className="num">{k.counters}</td>
                       <td data-label="Valid">{k.starts_on ? `${dateFmt(k.starts_on)} → ` : ''}{dateFmt(k.paid_until)}<small>made {timeAgo(k.created_at)}</small></td>
                       <td data-label="Status"><span className={`adm-key ${s.id}`}>{s.text}</span></td>
                       <td className="adm-td-actions">
-                        {s.id !== 'replaced' && s.id !== 'revoked' && <button className="btn btn-quiet btn-sm" onClick={() => copy(k.code)}><Icon name="check" size={14} /> Copy</button>}
+                        {s.id !== 'replaced' && s.id !== 'revoked' && <button className="btn btn-quiet btn-sm" onClick={() => copy(k.short_code ?? k.code)}><Icon name="check" size={14} /> Copy code</button>}
                         {(s.id === 'expiring' || s.id === 'expired' || s.id === 'active') && <button className="btn btn-outline btn-sm" onClick={() => onNewKey(k.lead_id)}>Renew</button>}
                         {(s.id === 'active' || s.id === 'expiring') && <ConfirmButton onConfirm={() => revoke(k)} confirmText="Sure? Revoke">Revoke</ConfirmButton>}
                         {s.id === 'revoked' && <button className="btn btn-quiet btn-sm" onClick={() => restore(k)}>Restore</button>}
@@ -144,19 +144,19 @@ export function PlanCodeSheet({ leadId, onClose }) {
     notify('Licence key made. Their old key is replaced.')
   }
 
-  const copy = async () => { try { await navigator.clipboard.writeText(made.code); notify('Key copied') } catch { notify('Select the key and copy it by hand.', 'error') } }
-  const message = made && `Assalam o Alaikum ${chosen?.name ?? ''}, here is your ZAP POS licence key (${made.counters} counter${made.counters === 1 ? '' : 's'}, valid until ${dateFmt(made.paid_until)}).\n\nIf your main PC is online it picks this up by itself. Otherwise open ZAP POS on the main PC → Settings → Plan, paste the whole key and press Apply plan:\n\n${made.code}`
+  const copy = async () => { try { await navigator.clipboard.writeText(made.short_code ?? made.code); notify('Code copied') } catch { notify('Select the key and copy it by hand.', 'error') } }
+  const message = made && `Assalam o Alaikum ${chosen?.name ?? ''}, here is your ZAP POS licence code (${made.counters} counter${made.counters === 1 ? '' : 's'}, valid until ${dateFmt(made.paid_until)}).\n\nOpen ZAP POS setup on the main PC, log in with your ZAP email and password, and type this code:\n\n${made.short_code ?? made.code}`
 
   return (
     <Sheet title={made ? 'Licence key ready' : 'New licence key'} onClose={onClose}>
       {made ? (
         <div className="adm-form">
-          <p className="adm-hint">For shop <b>{made.branch_code}</b> · {made.counters} counter{made.counters === 1 ? '' : 's'} · valid until <b>{dateFmt(made.paid_until)}</b>. Their main PC gets it by itself within 30 minutes when online.</p>
-          <textarea className="adm-plancode" readOnly rows={5} value={made.code} onFocus={(e) => e.target.select()} />
+          <p className="adm-hint">For shop <b>{made.branch_code}</b> · {made.counters} counter{made.counters === 1 ? '' : 's'} · valid until <b>{dateFmt(made.paid_until)}</b>. A shop that is already running gets the change by itself within 30 minutes when online; a new PC types this code at setup.</p>
+          <input className="adm-plancode adm-plancode-short" readOnly value={made.short_code ?? made.code} onFocus={(e) => e.target.select()} />
           <div className="adm-form-actions">
             <button type="button" className="btn btn-quiet btn-sm" onClick={onClose}>Done</button>
             {chosen?.phone && <a className="btn btn-outline btn-sm" href={waLink(chosen.phone, message)} target="_blank" rel="noreferrer"><Icon name="whatsapp" size={14} /> Send on WhatsApp</a>}
-            <button type="button" className="btn btn-primary btn-sm" onClick={copy}>Copy key</button>
+            <button type="button" className="btn btn-primary btn-sm" onClick={copy}>Copy code</button>
           </div>
         </div>
       ) : (

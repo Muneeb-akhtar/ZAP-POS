@@ -1213,10 +1213,11 @@ begin
   if not public.rate_ok('activate_licence', 20, 2000) then
     raise exception 'Too many requests. Please try again later.' using errcode = 'P0429';
   end if;
-  select p.branch_code, p.counters, p.paid_until, p.status, p.lead_id, l.user_id, l.shop, l.name
+  select p.code, p.branch_code, p.counters, p.paid_until, p.status, p.lead_id, l.user_id, l.shop, l.name
     into k
     from public.plan_codes p join public.leads l on l.id = p.lead_id
-   where replace(upper(p.code), '-', '') = replace(upper(trim(coalesce(p_code, ''))), '-', '')
+   where replace(upper(p.code), '-', '') = regexp_replace(upper(coalesce(p_code, '')), '[\s-]', '', 'g')
+      or p.short_code = regexp_replace(upper(coalesce(p_code, '')), '[\s-]', '', 'g')
    limit 1;
   if not found then return jsonb_build_object('ok', false, 'reason', 'unknown'); end if;
   if k.status = 'revoked' then return jsonb_build_object('ok', false, 'reason', 'revoked'); end if;
@@ -1231,7 +1232,40 @@ begin
      where id = k.lead_id;
   end if;
   return jsonb_build_object('ok', true, 'branch_code', k.branch_code, 'counters', k.counters, 'paid_until', k.paid_until,
-                            'shop', k.shop, 'name', k.name);
+                            'shop', k.shop, 'name', k.name, 'key', k.code);
 end $$;
 revoke all on function public.activate_licence(text) from public, anon;
 grant execute on function public.activate_licence(text) to authenticated;
+
+-- ============================================================
+-- 26) Short licence codes (26 Nov 2026, owner request): the owner types a 12-character code (letters and numbers, no I/O/0/1)
+--     instead of the long signed key. The code is only a reference: activate_licence() looks it up for the logged-in
+--     account and hands the signed key to ZAP POS only after saying yes, so ZAP POS never holds a key before ZAP's check.
+--     Old long keys keep working everywhere (licence_status, Settings → Plan).
+-- ============================================================
+alter table public.plan_codes add column if not exists short_code text;
+
+create or replace function public.make_short_code() returns text language plpgsql volatile set search_path = public as $$
+declare
+  alpha constant text := 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';   -- 32 characters, so every random byte maps evenly
+  u1 bytea := decode(replace(gen_random_uuid()::text, '-', ''), 'hex');
+  out text := ''; i int;
+begin
+  for i in 0..11 loop   -- bytes 6 and 8 of a v4 uuid are partly fixed, so they are skipped
+    out := out || substr(alpha, (get_byte(u1, case when i < 6 then i else i + 3 end) % 32) + 1, 1);
+  end loop;
+  return out;
+end $$;
+revoke all on function public.make_short_code() from public, anon, authenticated;
+
+create or replace function public.plan_codes_short() returns trigger language plpgsql security definer set search_path = public as $$
+begin
+  if new.short_code is null then new.short_code := public.make_short_code(); end if;
+  return new;
+end $$;
+revoke all on function public.plan_codes_short() from public, anon, authenticated;
+drop trigger if exists plan_codes_short on public.plan_codes;
+create trigger plan_codes_short before insert on public.plan_codes for each row execute function public.plan_codes_short();
+
+update public.plan_codes set short_code = public.make_short_code() where short_code is null;
+create unique index if not exists plan_codes_short_code on public.plan_codes (short_code);
