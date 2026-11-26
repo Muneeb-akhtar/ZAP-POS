@@ -158,6 +158,7 @@ h2 .hl { display: block; }
 .nav-actions { display: flex; align-items: center; gap: 6px; }
 .nav-login { white-space: nowrap; font-size: 14.5px; font-weight: 600; color: var(--ink); padding: 8px 12px; }
 .nav-login:hover { color: var(--brand-600); }
+.nav-actions .nav-login-phone { display: none; }
 .menu-btn { display: none; }
 
 /* ---------- Hero ---------- */
@@ -863,6 +864,8 @@ html.modal-open { overflow: hidden; }
   .section { padding: 84px 0; }
   .navbar { top: 10px; padding: 0 10px; }
   .nav-actions .btn { padding: 8px 12px; }
+  .nav-actions .nav-dl { display: none; }
+  .nav-actions .nav-login-phone { display: inline-flex; }
   .hero { padding: 112px 0 80px; }
   .lead { font-size: 16.5px; }
   .hero-actions .btn-primary { flex: 1 1 100%; }

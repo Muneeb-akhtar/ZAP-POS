@@ -72,7 +72,9 @@ export function Navbar({ brand, nav, links, home = true, homeLabel }) {
         <div className="nav-actions">
           <ThemeToggle />
           <a href={links.portal} data-track="portal" className="nav-login">Log in</a>
-          <a href="/download" data-track="download-page" className="btn btn-primary btn-sm"><Icon name="windows" size={13} fill /> Download</a>
+          <a href="/download" data-track="download-page" className="btn btn-primary btn-sm nav-dl"><Icon name="windows" size={13} fill /> Download</a>
+          {/* Phones can't run the Windows app, so phones get Log in here (owners check their branches from /account/) */}
+          <a href={links.portal} data-track="portal" className="btn btn-primary btn-sm nav-login-phone"><Icon name="user" size={13} /> Log in</a>
         </div>
         <button className="menu-btn" onClick={() => setOpen(!open)} aria-label="Toggle menu"><Icon name={open ? 'close' : 'menu'} size={20} /></button>
       </div>

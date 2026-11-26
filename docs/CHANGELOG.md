@@ -2,7 +2,9 @@
 
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
-
+## 2026-11-26: Log in instead of Download in the phone header
+- Owner request: on phones (≤720px) the top bar shows a blue **Log in** button (to `/account/`) in place of **Download**, since phones can't run the Windows app; tablets and computers keep Download. New classes `.nav-dl` / `.nav-login-phone` (rules next to `.nav-login` and in the 720px block of `styles.css`).
+- Files: `components/Sections.jsx`, `styles.css`, docs.
 ## 2026-11-25: Light mode by default
 - Owner request: every page (website, `/admin/`, `/account/`, `/invoice/`) now opens in light mode unless the visitor has picked dark with the theme button (saved in `zap-theme`); the device setting is still ignored. Replaces the dark-by-default rule of 20 Nov. Home page `theme-color` is now white.
 - Files: `index.html`, `admin/index.html`, `account/index.html`, `invoice/index.html`, `components/Sections.jsx`, docs.
