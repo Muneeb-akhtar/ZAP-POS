@@ -40,6 +40,9 @@ function Receipt({ phase, bills }) {
 const OFFLINE_MS = 5600
 const SYNCED_MS = 2600
 const FLY_GAP = 0.38 // seconds between paper planes
+// 03390035603 → 0339 0035603 (easier to read and dial)
+const spacedPhone = (p = '') => (/^\d{11}$/.test(p) ? `${p.slice(0, 4)} ${p.slice(4)}` : p)
+
 const slipAmounts = ['2,980', '890', '5,990', '3,450', '1,490', '2,250']
 
 export default function Hero({ hero, brand, links, release }) {
@@ -134,6 +137,13 @@ export default function Hero({ hero, brand, links, release }) {
           </div>
 
           {release && <p className="dl-note">{hero.downloadNote} · Version {release.version} · {sizeLabel(release.size)}</p>}
+
+          {/* Owner app + WhatsApp number up top, so visitors see at once that there is a phone app and who to call */}
+          <div className="hero-stores">
+            <a href={links.googlePlay} data-track="android" className="store"><Icon name="android" size={30} fill /><span><small>{hero.appSmall}</small>{hero.android}</span></a>
+            <a href={links.appStore} data-track="ios" className="store"><Icon name="apple" size={30} fill /><span><small>{hero.appSmall}</small>{hero.iphone}</span></a>
+            <a href={links.whatsapp} data-track="whatsapp" className="store wa"><Icon name="whatsappLogo" size={28} fill /><span><small>{hero.whatsappSmall}</small>{spacedPhone(brand.phone)}</span></a>
+          </div>
 
           {/* Internet switch: turn it off and the POS on the right keeps billing offline */}
           <div className="net-toggle-row">

@@ -2,6 +2,12 @@
 
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
+## 2026-11-26: Owner app and WhatsApp number in the hero; demo buttons open WhatsApp
+- Owner request (like Mint POS's top): under the hero's Download / Book a demo buttons, a row of badges: Owner app for Android, Owner app for iPhone (same links as the final section) and "Free demo on WhatsApp" with the number (Brand → phone, written 0339 0035603). Two badges side by side and the WhatsApp one full width on phones. New `hero` fields `appSmall, android, iphone, whatsappSmall`; CSS `.hero-stores`.
+- Owner request: every "Book a free demo" button (hero, pricing, video, final section, extra pages) now opens WhatsApp to his number with a ready message (the plan name when clicked from a plan). The demo form was removed (`LeadForm.jsx`, its `lead-*` CSS, the `leadForm` content key and admin tab); new key `demoWhatsApp` with its admin tab "Demo on WhatsApp". Privacy page line about the form updated.
+- Hero trust line changed from "Free trial · No card needed" to "Free demo · FBR integrated" (there is no free trial since 1.9.139). Published content updated (hero.trust, leadForm removed).
+- Files: `Hero.jsx`, `App.jsx`, `components/LeadForm.jsx` (deleted), `styles.css`, `landing-content.json`, `admin/sections.js`, `CLAUDE.md`, docs.
+
 ## 2026-11-26: Admin pop-up windows were see-through
 - Bug (owner screenshot, New licence key): the admin's pop-up sheets (new key, lead, payment) render outside `.adm`, so the glass colour variables were undefined there and the sheet had no background: dark text on the dimmed page. Now the glass variables are set on `:root` too (light and dark), so every admin pop-up, toast or page piece gets them wherever it is placed, and `.adm-sheet` falls back to `--surface`.
 - Files: `admin/admin.css`, docs.

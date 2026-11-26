@@ -30,7 +30,7 @@ ZAP POS/
       └─ src/
          ├─ main.jsx             font imports (Latin subsets) + styles.css + <App/>; hydrates the pre-rendered HTML when `#zap-content` is present, else draws the page (dev)
          ├─ entry-server.jsx     build-time only: `render(published)` → page HTML + merged content (used by scripts/prerender.mjs)
-         ├─ App.jsx              loads content (cache → Supabase); `path` '/' renders the home sections, '/<slug>' renders that `pages` item with InfoPage; demo form (#demo links), tracking listeners, cursor glow
+         ├─ App.jsx              loads content (cache → Supabase); `path` '/' renders the home sections, '/<slug>' renders that `pages` item with InfoPage; #demo links open WhatsApp (`demoWhatsApp`), tracking listeners, cursor glow
          ├─ lib/content.js       Supabase config, defaultContent, mergeContent, fetchPublishedContent, localStorage cache
          ├─ lib/track.js         anonymous visit/click/view events, leadSource()
          ├─ admin/               admin panel (see §9)
@@ -55,12 +55,12 @@ Shop signed in ──rpc('my_account')──► own shop, current plan, paid_unt
 ```
 - `mergeContent(defaults, saved)`: objects merge key by key, arrays and plain values from `saved` win. So new JSON fields appear automatically, but a published array replaces the default array entirely.
 - The landing page uses `GET {VITE_SUPABASE_URL}/rest/v1/site_content?id=eq.landing&select=data` with the anon key (no SDK). If Supabase is unset, down, or has no row yet, the bundled JSON is shown.
-- **Demo requests:** any click on `a[href="#demo"]` (or opening `/#demo`) opens `LeadForm`; pricing buttons pass `data-plan`. Submit → `POST /rest/v1/rpc/submit_lead` (anon, params `p_name, p_phone, p_email, p_shop, …`). Visitors can't read or write the `leads` table directly; the same email or mobile number again updates the existing lead (no duplicates).
+- **Demo requests (since 26 Nov 2026, owner request):** any click on `a[href="#demo"]` opens WhatsApp in a new tab to `brand.phone` (`wa.me/92…`) with `demoWhatsApp.message`, or `planMessage` with `{plan}` filled from the pricing button's `data-plan`. The old demo form (`LeadForm.jsx`, `lead-*` CSS, `leadForm` content) was removed; `submit_lead()` stays in the database but the website no longer calls it.
 - **Tracking (`lib/track.js`):** `trackVisit()` once per load, `trackClick(name)` for any click inside `[data-track="name"]`, `trackView('pricing')` via IntersectionObserver → `POST /rest/v1/events` with `keepalive`. Off in dev, for bots/headless, with Do Not Track, and when localStorage `zap-no-track` is set (the admin sets it on login).
 - **Admin data:** `admin/biz.js` loads all `leads` and `payments` once (`useBizStore`, shared via `BizContext`) and updates the local copy after each write; `useStats(days)` calls `rpc('admin_stats')`.
 
 ## 3. Components → sections
-Rendered by `App.jsx` in this order (plus `LeadForm.jsx`, the demo request modal, rendered on top when open; CSS block "Demo request form (modal)", classes `lead-*`); and `WhatsAppFloat.jsx`, the round WhatsApp button fixed to the bottom-right (`wa-float`, icon `whatsappLogo`, z-index 40, under the navbar 50 and the modal 100; label shows on mouse hover; hidden while `links.whatsapp` is empty or `#`, or `whatsappButton.label` is empty; opens `links.whatsapp` in a new tab, tracked as `whatsapp`):
+Rendered by `App.jsx` in this order (plus `WhatsAppFloat.jsx`, the round WhatsApp button fixed to the bottom-right (`wa-float`, icon `whatsappLogo`, z-index 40, under the navbar 50; label shows on mouse hover; hidden while `links.whatsapp` is empty or `#`, or `whatsappButton.label` is empty; opens `links.whatsapp` in a new tab, tracked as `whatsapp`):
 
 | # | Component | File | JSON key(s) | Anchor | CSS block |
 |---|---|---|---|---|---|
@@ -93,11 +93,12 @@ Shared building blocks:
 - **FinalCta**: `spin` set on click; cleared on `animationend` of `boltTap`. Background is `StarField` (7 hand-placed `STARS` that glow/dim + two `.shooting` stars that start when an IntersectionObserver adds `.final.in-view`).
 
 ## 4. Content schema (`landing-content.json`)
-Top-level keys: `_note, brand, nav, links, hero, ticker, day, video, counters, hardware, pricing, reviewsSection, reviews, faq, whatsappButton, finalCta, leadForm, footer`.
+Top-level keys: `_note, brand, nav, links, hero, ticker, day, video, counters, hardware, pricing, reviewsSection, reviews, faq, whatsappButton, finalCta, demoWhatsApp, footer`.
 - `brand`: `name, phone, email, address, about`
-- `links`: `demo` (`#demo` = open the demo form; any other URL is followed normally), `portal, windowsInstaller, googlePlay, appStore` (the final section's "Owner app for Android / iPhone" buttons; until store apps exist they go to `/account/?install=android|iphone`, the install steps; text `finalCta.appSmall/android/iphone`), `whatsapp, social{linkedin,facebook,instagram,google (Maps listing)}`
+- `links`: `demo` (`#demo` = open WhatsApp for a free demo; any other URL is followed normally), `portal, windowsInstaller, googlePlay, appStore` (the final section's "Owner app for Android / iPhone" buttons; until store apps exist they go to `/account/?install=android|iphone`, the install steps; text `finalCta.appSmall/android/iphone`), `whatsapp, social{linkedin,facebook,instagram,google (Maps listing)}`
 - `whatsappButton`: `label` (text of the floating WhatsApp button; shown on hover and read by screen readers)
-- `leadForm`: `title, description, nameLabel, phoneLabel, phonePlaceholder, phoneError, shopLabel, cityLabel, planLabel, notSure, branchesLabel, messageLabel, messagePlaceholder, submit, sending, privacy, successTitle, successText, errorText` (plan options come from `pricing.plans[].name`)
+- `demoWhatsApp`: `message, planMessage` (`{plan}` = the plan name) for the WhatsApp chat every demo button opens
+- `hero` also has `appSmall, android, iphone, whatsappSmall`: the row of Owner app (Android, iPhone) and WhatsApp number badges under the hero buttons (`.hero-stores`, reuses `.store`; number = `brand.phone`, shown as 0339 0035603)
 - `hero`: `kicker, rows[] {lead, accent}, description, primaryCta, secondaryCta, switchLabel, switchNote, offlineNote, syncedNote, trust[]`
 - `day.stops[]`: `time` (12-hour, "9:00 AM"; rendered as clock + `.ampm`), `period, title, text, visual` (`visual` ∈ `open|counters|offline|stock|phone`, rendered by `visuals` in Day.jsx; `period` maps to an icon via `periodIcon`)
 - `video`: `kicker, title, titleHighlight, description, src, poster, videoLabel, playLabel, playNote, points[], cta`. `src`/`poster` are addresses of files in `public/media/` (e.g. `/media/zap-pos-demo.mp4`); to change the video, replace the files there (or add new ones) and edit the addresses in the admin. Empty `src` hides the section. Keep the video H.264 + AAC with `faststart` and under about 8 MB.
@@ -114,7 +115,7 @@ Order of blocks (search the `/* ---------- Name ---------- */` headers):
 1. Tokens `:root` (colors, shadows, fonts), base, `h2 .hl` convention
 2. Buttons (`btn`, `btn-primary|outline|quiet|glass`, `btn-sm|lg|block`)
 3. Shared bits (kicker, scribble, stars, store button, `.paper` + `.zz`/`.zz-top` torn receipt edges, `.r-rule`)
-4. Navbar → Hero → Monitor frame + POS app UI → Ticker → Day → Counters → Hardware → Pricing → Reviews → FAQ → Final CTA → Footer → Demo request form (modal, `lead-*` classes; `html.modal-open` locks scroll; bottom sheet under 560px)
+4. Navbar → Hero → Monitor frame + POS app UI → Ticker → Day → Counters → Hardware → Pricing → Reviews → FAQ → Final CTA → Footer
 5. Reduced motion (kills all animation)
 6. Responsive: `max-width: 1080px` (stack hero/heads), `900px` (mobile nav, single-column timeline/receipts/notes, compare table becomes stacked rows), `720px` (phone sizing)
 7. **Hover animations** (`@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)`), always last

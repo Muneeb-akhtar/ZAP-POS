@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { defaultContent, mergeContent, fetchPublishedContent, readCachedContent, writeCachedContent } from './lib/content.js'
 import { Navbar, Ticker, Hardware, FinalCta, Footer } from './components/Sections.jsx'
 import Hero from './components/Hero.jsx'
@@ -8,11 +8,13 @@ import Counters from './components/Counters.jsx'
 import Pricing from './components/Pricing.jsx'
 import Reviews from './components/Reviews.jsx'
 import Faq from './components/Faq.jsx'
-import LeadForm from './components/LeadForm.jsx'
 import WhatsAppFloat from './components/WhatsAppFloat.jsx'
 import InfoPage from './components/InfoPage.jsx'
 import { trackClick, trackView, trackVisit } from './lib/track.js'
 import { installerLink, useLatestRelease } from './lib/release.js'
+
+// 03390035603 → 923390035603 for wa.me links
+const waNumber = (p = '') => { const d = p.replace(/\D/g, ''); return d.startsWith('0') ? `92${d.slice(1)}` : d }
 
 // Where content comes from:
 // - Supabase (edited in the admin panel at /admin), when VITE_SUPABASE_URL / VITE_SUPABASE_ANON_KEY are set.
@@ -42,12 +44,13 @@ export default function App({ initialContent, path = '/' }) {
       .catch(() => console.info('ZAP POS: content service not reachable, using built-in content.'))
   }, [])
 
-  // Demo form: any link to #demo opens it (pricing buttons pass their plan). Opening the page at /#demo opens it too.
-  const [lead, setLead] = useState(() => (typeof location !== 'undefined' && location.hash === '#demo' ? { plan: null } : null))
-  const closeLead = useCallback(() => {
-    setLead(null)
-    if (location.hash === '#demo') history.replaceState(null, '', location.pathname + location.search)
-  }, [])
+  // Free demo: every link to #demo opens WhatsApp to the shop's number (owner request, 26 Nov 2026); pricing buttons add their plan.
+  const demoRef = useRef(null)
+  demoRef.current = (plan) => {
+    const d = c.demoWhatsApp
+    const text = plan ? d.planMessage.replace('{plan}', plan) : d.message
+    return `https://wa.me/${waNumber(c.brand.phone)}?text=${encodeURIComponent(text)}`
+  }
 
   // Analytics: one visit per page load, clicks on [data-track] links, and whether pricing was seen.
   useEffect(() => {
@@ -56,7 +59,7 @@ export default function App({ initialContent, path = '/' }) {
       const tracked = e.target.closest?.('[data-track]')
       if (tracked) trackClick(tracked.dataset.track)
       const demo = e.target.closest?.('a[href="#demo"]')
-      if (demo) { e.preventDefault(); setLead({ plan: demo.dataset.plan ?? null }) }
+      if (demo) { e.preventDefault(); window.open(demoRef.current(demo.dataset.plan ?? null), '_blank', 'noopener') }
     }
     document.addEventListener('click', click)
     const pricing = document.getElementById('pricing')
@@ -86,7 +89,6 @@ export default function App({ initialContent, path = '/' }) {
       <main className="inner-page"><InfoPage page={page} pages={c.pages} pricing={c.pricing} finalCta={c.finalCta} brand={c.brand} links={links} release={release} /></main>
       <Footer brand={c.brand} footer={c.footer} links={links} />
       <WhatsAppFloat data={c.whatsappButton} links={links} />
-      {lead && <LeadForm plan={lead.plan} plans={c.pricing.plans} data={c.leadForm} links={links} brand={c.brand} onClose={closeLead} />}
     </>
   )
 
@@ -107,7 +109,6 @@ export default function App({ initialContent, path = '/' }) {
       </main>
       <Footer brand={c.brand} footer={c.footer} links={links} />
       <WhatsAppFloat data={c.whatsappButton} links={links} />
-      {lead && <LeadForm plan={lead.plan} plans={c.pricing.plans} data={c.leadForm} links={links} brand={c.brand} onClose={closeLead} />}
     </>
   )
 }

@@ -63,13 +63,17 @@
     "description": "ZAP POS is point of sale (POS) software in Pakistan for clothing stores, supermarkets, pharmacies and restaurants. Fast billing, barcode and printer support, inventory, multi-branch sync and live sales on your phone. And it keeps billing when the internet drops.",
     "primaryCta": "Download for Windows",
     "downloadNote": "Windows 10 or 11, 64-bit",
+    "appSmall": "Owner app for",
+    "android": "Android",
+    "iphone": "iPhone",
+    "whatsappSmall": "Free demo on WhatsApp",
     "secondaryCta": "Book a free demo",
     "switchLabel": "Internet",
     "switchNote": "switch it off, billing keeps going",
     "offlineNote": "saved offline, syncs later",
     "trust": [
-      "Free trial",
-      "No card needed",
+      "Free demo",
+      "FBR integrated",
       "Setup help on WhatsApp"
     ],
     "syncedNote": "back online, every bill synced"
@@ -553,28 +557,9 @@
     "android": "Android",
     "iphone": "iPhone"
   },
-  "leadForm": {
-    "title": "Book a free demo",
-    "description": "Tell us a little about your shop. We'll call you, usually within one working day, and show ZAP POS with your own products.",
-    "nameLabel": "Your name",
-    "phoneLabel": "Mobile number",
-    "phonePlaceholder": "03XX XXXXXXX",
-    "phoneError": "Please enter a valid mobile number.",
-    "emailLabel": "Email (optional)",
-    "emailPlaceholder": "you@yourshop.com",
-    "shopLabel": "Shop name",
-    "cityLabel": "City",
-    "planLabel": "Plan you're looking at",
-    "notSure": "Not sure yet",
-    "branchesLabel": "Branches",
-    "messageLabel": "Anything we should know?",
-    "messagePlaceholder": "Optional, e.g. 2 counters, garments, need barcode printer",
-    "submit": "Request my demo",
-    "sending": "Sending…",
-    "privacy": "We only use your number to contact you about ZAP POS.",
-    "successTitle": "Got it, thank you!",
-    "successText": "We'll call you soon to fix a time for your demo.",
-    "errorText": "Couldn't send right now. Please message us on WhatsApp instead."
+  "demoWhatsApp": {
+    "message": "Assalam o Alaikum, I'd like a free demo of ZAP POS.",
+    "planMessage": "Assalam o Alaikum, I'd like a free demo of ZAP POS ({plan} plan)."
   },
   "account": {
     "loginTab": "Log in",
@@ -5431,7 +5416,7 @@
             "h": "On this website",
             "p": [
               "We count visits anonymously: a random browser id kept in your browser, the kind of device, the website that sent you and any campaign tag in the link. We don't record your name, your IP address or the full pages you visit in these counts.",
-              "When you book a demo, we keep what you type in the form (name, mobile number, email, shop, city and message) so we can contact you. Visitors can't read other people's requests."
+              "When you book a demo, the chat happens on WhatsApp with our number; we keep only what you send us there so we can help you."
             ]
           },
           {
