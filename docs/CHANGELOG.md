@@ -5,6 +5,7 @@ Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, 
 ## 2026-11-26: 12-character licence codes
 - Owner request: a short code to type instead of the long `ZAP1-…` key. `plan_codes.short_code` (schema §26): 12 characters from `A–Z` (no I, O) and `2–9`, made by trigger `plan_codes_short` (`make_short_code()`), unique, back-filled for old keys. `activate_licence()` accepts the short code or the long key, and returns the signed key (`key`) only after its checks pass, so ZAP POS never holds a licence before ZAP's yes. Long keys still work in Settings → Plan and `licence_status()`.
 - Admin → Plans: the new-key sheet shows the 12-character code (big, selectable), Copy code and the WhatsApp message use it; the list shows it under each client. `make-plan-code` returns `short_code` (deployed, version 6). Desktop 1.9.153 asks for it at setup.
+- The new-key form no longer pre-fills an old shop code that is not 2 to 6 letters or digits (it had pre-filled BALOCHAUTO and the server refused it).
 - Files: `supabase/schema.sql`, `supabase/functions/make-plan-code/index.ts`, `admin/PlanCodes.jsx`, `admin/admin.css`, docs.
 
 ## 2026-11-26: ZAP POS setup checks the typed licence key online (`activate_licence`)

@@ -121,7 +121,7 @@ export function PlanCodeSheet({ leadId, onClose }) {
       const list = data ?? []
       setKeys(list)
       const last = list[0]
-      setF((x) => ({ ...x, branch_code: chosen?.pos_branch_code || last?.branch_code || '', counters: last?.counters ?? 1 }))
+      setF((x) => ({ ...x, branch_code: [chosen?.pos_branch_code, last?.branch_code].find((c) => /^[A-Z0-9]{2,6}$/.test(c ?? '')) ?? '', counters: last?.counters ?? 1 }))
     })
   }, [lead])
 
