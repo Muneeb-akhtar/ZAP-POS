@@ -1123,6 +1123,10 @@
             "href": "/how-to-count-stock-in-a-shop"
           },
           {
+            "label": "Closing the day",
+            "href": "/daily-cash-closing-shop"
+          },
+          {
             "label": "POS kya hai?",
             "href": "/pos-software-kya-hai"
           },
@@ -4615,6 +4619,108 @@
           "branch-stock-transfer",
           "what-is-pos-software",
           "plans"
+        ]
+      },
+      {
+        "slug": "daily-cash-closing-shop",
+        "menu": "Closing the day",
+        "icon": "receipt",
+        "seoTitle": "How to Close the Day at Your Shop: Cash Count and Sales Report",
+        "seoDescription": "A simple end-of-day routine for shop owners in Pakistan: count the drawer, match it to the sales report, check cancelled bills and discounts, and explain any shortage.",
+        "kicker": "Guide",
+        "title": "Closing the day at your shop:",
+        "titleHighlight": "count the cash, read the report.",
+        "description": "Closing takes ten minutes when you do the same steps every night. Here is a routine that finds a shortage the same day, while the staff still remember what happened, and what to ask your POS to show you.",
+        "faqTitle": "Quick answers",
+        "faq": [
+          {
+            "q": "How long should closing the day take?",
+            "a": "For one counter, about ten minutes: count the cash, compare it with the report, and look at cancelled bills and discounts. It takes longer only when something does not match, and that is the point of doing it every night."
+          },
+          {
+            "q": "What if the drawer is short or over by a small amount?",
+            "a": "Write the difference down with the date and the cashier's name, and do not hide it by adjusting the count. Small differences from change given in a rush happen. A pattern on one cashier or one shift is what to look into."
+          },
+          {
+            "q": "Should the cashier count the drawer alone?",
+            "a": "Better if the cashier counts first and the owner or a manager counts again, or the other way round. Two counts catch mistakes, and it protects an honest cashier from a doubt."
+          },
+          {
+            "q": "Does the day end at midnight in ZAP POS?",
+            "a": "Yes. The business day is the calendar day in Pakistan time, so a sale made after midnight counts for the next day. If your shop stays open late, close the shift when the last customer leaves."
+          },
+          {
+            "q": "Can I check the closing from home?",
+            "a": "The ZAP POS owner app on Android and iPhone shows each branch's sales and cash drawers and lets you open or close a shift. You still need someone at the counter to count the physical cash."
+          }
+        ],
+        "ctaTitle": "Want to see the shift report?",
+        "ctaText": "Book a free demo and we'll close a shift with you, step by step, on real ZAP POS screens.",
+        "published": "2026-11-28",
+        "shortAnswer": "At closing, count the cash in the drawer, compare it with what the sales report says it should be, then check cancelled bills, returns and discounts, write down any difference with the cashier's name, and take the cash to safe keeping. Do the same steps every night so a shortage shows up the same day.",
+        "article": [
+          {
+            "h": "Why close the day every night",
+            "p": [
+              "A shortage found tonight can still be explained. The cashier remembers the customer who paid late, the note that was changed, the bill that was cancelled. A shortage found at the end of the month is only an argument.",
+              "Closing every night also builds a habit that honest staff are comfortable with. When the routine is fixed and the same for everyone, nobody feels picked on."
+            ]
+          },
+          {
+            "h": "Step 1: Stop new bills and close the shift",
+            "p": [
+              "Finish the last customer, then close the cashier's shift on the counter. In ZAP POS each shift counts its own cash in and out and records who opened it, so the drawer is matched to one person and one stretch of time instead of the whole day mixed together.",
+              "If the counter is needed again, open a new shift before the next cash bill. Do not keep selling on an old shift to save a minute."
+            ]
+          },
+          {
+            "h": "Step 2: Count the drawer",
+            "p": [
+              "Take the cash out and count it in front of the cashier, note by note, starting with the largest. Put the opening float aside first, because it is not a sale.",
+              "Enter the counted total as the closing amount. In ZAP POS the cashier types in what is really in the drawer, and the system works out what it should hold, so the number entered is what is there and not what anyone hopes for."
+            ]
+          },
+          {
+            "h": "Step 3: Compare with the report",
+            "p": [
+              "The shift report shows the cash the drawer should hold: the opening float, plus cash sales, plus money put in, minus money taken out. Card and other digital payments are not in the drawer, so keep them separate when you compare.",
+              "ZAP POS records the difference between counted and expected cash on the shift. A small difference closes as it is; a difference above the limit set for the branch needs a manager's approval before the shift can close. If the numbers match, you are done with cash. If not, go to the next step before you accuse anyone."
+            ]
+          },
+          {
+            "h": "Step 4: Look at cancelled bills, returns and discounts",
+            "p": [
+              "Most differences come from three places: a bill cancelled after the cash was taken, a return paid out of the drawer, or a discount given without approval. A POS that records who cancelled, who returned and who gave a discount lets you check this without standing at the counter.",
+              "In ZAP POS a discount that takes a price below cost needs a manager's PIN, and cancelled orders are marked as cancelled with the name of who did it, not deleted. Look at those lines for the shift that is out."
+            ]
+          },
+          {
+            "h": "Step 5: Record the difference and secure the cash",
+            "p": [
+              "Write down the date, the cashier, the shift, the expected amount, the counted amount and the difference. Keep the notes in one place so a pattern can be seen after a few weeks.",
+              "Then take the cash out of the shop or lock it in the safe, and leave only the next day's float in the drawer. Do not leave a full drawer overnight."
+            ]
+          },
+          {
+            "h": "A short weekly check",
+            "p": [
+              "Once a week, read the shifts for all days side by side: which cashier is often short, which day has the most cancelled bills, and whether cash sales and your bank deposits agree. Ten minutes on this shows more than a month of guessing.",
+              "If you have more than one branch, do the same for each branch and compare them. The owner app shows every branch's cash drawers on your phone, so you can see which branch needs a visit."
+            ]
+          }
+        ],
+        "urdu": {
+          "title": "Urdu mein · اردو میں",
+          "roman": "Har raat shift band karein, drawer ka cash ginein, report se milayein aur cancel bills aur discount dekhein. Farq ho to usi din likh lein.",
+          "ur": "ہر رات شفٹ بند کریں، دراز کا کیش گنیں، رپورٹ سے ملائیں اور کینسل بل اور ڈسکاؤنٹ دیکھیں۔ فرق ہو تو اسی دن لکھ لیں۔"
+        },
+        "related": [
+          "how-to-count-stock-in-a-shop",
+          "best-pos-software-pakistan",
+          "multi-counter-pos",
+          "what-is-pos-software",
+          "pos-hardware",
+          "about"
         ]
       },
       {

@@ -2,6 +2,10 @@
 
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
+## 2026-11-28: New guide page "Closing the day at your shop" (/daily-cash-closing-shop)
+- New page in `pages.items` (after "Counting stock"), Guides footer link "Closing the day", share image `public/og/daily-cash-closing-shop.jpg`. Five-step end-of-day routine (close shift, blind cash count, compare with expected cash, check cancels/returns/discounts, record difference). ZAP POS statements match the database: `close_shift` takes the counted cash, `shift_expected_cash` = opening + cash sales + pay-ins - pay-outs, a variance above the branch limit needs a manager, business day = calendar day. Sitemap now has 45 addresses; the page is also in `llms.txt`. Lighthouse Accessibility 100.
+- The published Supabase copy has no `pages` key, so it goes live with the deploy. Files: `landing-content.json`, `public/og/`, docs.
+
 ## 2026-11-28: Accessibility score 89 → 100 (Lighthouse, light and dark)
 - Pricing Monthly/Yearly switch: buttons now have `role="tab"` and `aria-selected` (a tablist needs tabs).
 - Contrast (WCAG AA 4.5:1): `.btn-primary` is `--brand-600` (hover `--brand-700`), and in dark mode fixed `#0a74d6` / `#075fb3` because the dark theme lightens the brand tokens; `.stamp` uses `--brand-700` (dark: `#075fb3`); `.bubble em` is `#475569` (dark incoming bubbles `#94a3b8`); footer text `#94a3b8`; dark `.chat-day` `#94a3b8`; `.ip-byline` uses `--muted` instead of opacity; dark pricing toggle `#0a74d6`.
