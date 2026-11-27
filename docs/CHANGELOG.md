@@ -2,6 +2,10 @@
 
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
+## 2026-11-28: Facebook Page added to the footer and search data
+- The ZAP POS Facebook Page (https://www.facebook.com/profile.php?id=61597072678116, made by the owner on 28 Nov 2026) is now `links.social.facebook` (the footer icon shows, it was empty before) and a `sameAs` entry in the JSON-LD in `index.html`. Editable in admin → Links; shorten to the username link if the owner sets one.
+- Files: `src/content/landing-content.json`, `index.html`, docs.
+
 ## 2026-11-27: Crunchbase page added to the footer and search data
 - ZAP POS now has a Crunchbase company page (https://www.crunchbase.com/organization/zap-pos, made by the owner). It is a new `links.social.crunchbase` link (footer icon "ZAP POS on Crunchbase", new `crunchbase` icon) and a `sameAs` entry in the JSON-LD in `index.html`. Editable in admin → Links.
 - Files: `src/content/landing-content.json`, `components/Sections.jsx`, `components/Icons.jsx`, `index.html`, docs.
