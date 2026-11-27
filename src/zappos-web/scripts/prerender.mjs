@@ -42,11 +42,18 @@ if (!site) throw new Error('prerender: canonical link not found in index.html')
 // "<" and the two line-separator characters are escaped so JSON can never end its script tag early.
 const json = (v) => JSON.stringify(v).replace(/</g, '\\u003c').replace(/\u2028/g, '\\u2028').replace(/\u2029/g, '\\u2029')
 const attr = (s) => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;')
-const fill = (page, html) => page.replace('<div id="root"></div>',
-  `<div id="root">${html}</div>\n    <script id="zap-content" type="application/json">${json(merged)}</script>`)
+// The content snapshot inside each page only carries the full text of that page. The other pages are cut down to the three
+// fields the page really draws from them (the "related pages" links: slug, menu, icon). Without this every page shipped all
+// 48 pages' text to every visitor (about 225 KB of JSON in each HTML file). The home page needs none of the page texts.
+const slim = (slug) => ({
+  ...merged,
+  pages: { ...merged.pages, items: merged.pages.items.map((p) => (p.slug === slug ? p : { slug: p.slug, menu: p.menu, icon: p.icon })) },
+})
+const fill = (page, html, slug) => page.replace('<div id="root"></div>',
+  `<div id="root">${html}</div>\n    <script id="zap-content" type="application/json">${json(slim(slug))}</script>`)
 
 // Home page
-await writeFile(resolve(root, 'dist/index.html'), fill(template, render(merged, '/')))
+await writeFile(resolve(root, 'dist/index.html'), fill(template, render(merged, '/'), null))
 
 // Inner pages: same shell, own head tags.
 const swap = (html, re, value) => {
@@ -87,7 +94,7 @@ for (const p of merged.pages.items) {
   }
   html = html.replace('</head>', `  <script type="application/ld+json">${json(ld)}</script>\n  </head>`)
   await mkdir(resolve(root, `dist/${p.slug}`), { recursive: true })
-  await writeFile(resolve(root, `dist/${p.slug}/index.html`), fill(html, render(merged, `/${p.slug}`)))
+  await writeFile(resolve(root, `dist/${p.slug}/index.html`), fill(html, render(merged, `/${p.slug}`), p.slug))
 }
 
 // 404 page. Vercel serves dist/404.html (with a 404 status) for any address that is not a page. It is plain HTML with

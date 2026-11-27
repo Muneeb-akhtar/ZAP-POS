@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import Icon, { Logo } from '../components/Icons.jsx'
-import { defaultContent, fetchPublishedContent, mergeContent, SUPABASE_ANON_KEY, SUPABASE_URL, supabaseConfigured } from '../lib/content.js'
+import { defaultContent } from '../lib/defaults.js'
+import { fetchPublishedContent, mergeContent, SUPABASE_ANON_KEY, SUPABASE_URL, supabaseConfigured } from '../lib/content.js'
 import InvoiceDoc, { invoiceNo } from './InvoiceDoc.jsx'
 
 // /invoice/?t=<token>: the invoice a client opens from the link you send (no login). It asks Supabase for this one

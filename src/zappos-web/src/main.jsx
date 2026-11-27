@@ -16,12 +16,18 @@ import './styles.css'
 // from. When both are there, React reuses that HTML (hydrates); in `npm run dev` there is neither, so it draws the page.
 const root = document.getElementById('root')
 const snapshot = document.getElementById('zap-content')
-const initialContent = snapshot && root.hasChildNodes() ? JSON.parse(snapshot.textContent) : undefined
+const hydrate = Boolean(snapshot && root.hasChildNodes())
 const path = location.pathname.replace(/\/+$/, '') || '/'
-const app = (
-  <React.StrictMode>
-    <App initialContent={initialContent} path={path} />
-  </React.StrictMode>
-)
-if (initialContent) ReactDOM.hydrateRoot(root, app)
-else ReactDOM.createRoot(root).render(app)
+
+async function start() {
+  // Built page: the text comes from the snapshot. `npm run dev`: load the built-in text now (kept out of the public bundle).
+  const initialContent = hydrate ? JSON.parse(snapshot.textContent) : (await import('./content/landing-content.json')).default
+  const app = (
+    <React.StrictMode>
+      <App initialContent={initialContent} path={path} />
+    </React.StrictMode>
+  )
+  if (hydrate) ReactDOM.hydrateRoot(root, app)
+  else ReactDOM.createRoot(root).render(app)
+}
+start()

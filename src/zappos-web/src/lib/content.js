@@ -1,5 +1,3 @@
-import defaults from '../content/landing-content.json'
-
 // Supabase settings come from env vars (.env.local in dev, Vercel → Environment Variables in production).
 // The anon key is public by design; Row Level Security in supabase/schema.sql decides who can write.
 export const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL ?? ''
@@ -7,7 +5,8 @@ export const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY ?? ''
 export const supabaseConfigured = Boolean(SUPABASE_URL && SUPABASE_ANON_KEY)
 
 export const CONTENT_ID = 'landing'
-export const defaultContent = defaults
+// The built-in text lives in lib/defaults.js, so the public pages (which already carry their text in the built page)
+// do not download it. Only admin, account, invoice and the build step import that file.
 
 // Stored content is merged over the built-in defaults, so fields added to the site later
 // still have a value even if the saved copy is older. Objects merge key by key; arrays and

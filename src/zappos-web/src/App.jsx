@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { defaultContent, mergeContent, fetchPublishedContent, readCachedContent, writeCachedContent } from './lib/content.js'
+import { mergeContent, fetchPublishedContent, readCachedContent, writeCachedContent } from './lib/content.js'
 import { Navbar, Ticker, Hardware, FinalCta, Footer } from './components/Sections.jsx'
 import Hero from './components/Hero.jsx'
 import Day from './components/Day.jsx'
@@ -18,28 +18,27 @@ const waNumber = (p = '') => { const d = p.replace(/\D/g, ''); return d.startsWi
 
 // Where content comes from:
 // - Supabase (edited in the admin panel at /admin), when VITE_SUPABASE_URL / VITE_SUPABASE_ANON_KEY are set.
-// - Until it loads: the copy this browser saw last time, else the bundled landing-content.json.
-// - If Supabase is unreachable or not configured: the bundled JSON.
+// - Until it loads: the copy this browser saw last time, else the text the page was built with (the snapshot in the HTML;
+//   in `npm run dev` main.jsx loads landing-content.json).
+// - If Supabase is unreachable or not configured: that built-in text.
 
 // `initialContent` is the content the page was pre-rendered with (see scripts/prerender.mjs). The first browser render
 // must match that HTML exactly so React can reuse it; the saved copy and the live copy are applied right after.
 // `path` is the page's address ('/' = home, '/plans' = an inner page from the `pages` content key).
 export default function App({ initialContent, path = '/' }) {
-  const [c, setC] = useState(() => initialContent ?? mergeContent(defaultContent, readCachedContent()))
+  const [c, setC] = useState(initialContent)
 
   const release = useLatestRelease(c.links.githubRepo)
   const links = useMemo(() => ({ ...c.links, windowsInstaller: installerLink(c.links, release) }), [c.links, release])
 
   useEffect(() => {
-    if (initialContent) {
-      const cached = readCachedContent()
-      if (cached) setC(mergeContent(defaultContent, cached))
-    }
+    const cached = readCachedContent()
+    if (cached) setC(mergeContent(initialContent, cached))
     fetchPublishedContent()
       .then((data) => {
         if (!data) return
         writeCachedContent(data)
-        setC(mergeContent(defaultContent, data))
+        setC(mergeContent(initialContent, data))
       })
       .catch(() => console.info('ZAP POS: content service not reachable, using built-in content.'))
   }, [])
