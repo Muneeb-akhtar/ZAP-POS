@@ -21,7 +21,7 @@ export default function DemoVideo({ data, links }) {
           {playing ? (
             <video src={data.src} poster={data.poster} controls autoPlay playsInline aria-label={data.videoLabel} onEnded={() => setPlaying(false)} />
           ) : (
-            <button type="button" className="video-play" onClick={() => setPlaying(true)} data-track="demo-video-play" aria-label={data.playLabel}>
+            <button type="button" className="video-play" onClick={() => setPlaying(true)} data-track="demo-video-play" aria-label={`${data.playLabel}: ${data.playNote}`}>
               <img src={data.poster} alt={data.posterAlt ?? ''} width="1280" height="720" loading="lazy" decoding="async" />
               <span className="video-badge"><Icon name="play" size={34} fill /></span>
               <span className="video-note">{data.playNote}</span>

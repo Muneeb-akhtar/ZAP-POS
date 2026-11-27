@@ -192,7 +192,7 @@ export function Footer({ brand, footer, links }) {
           </div>
           {footer.groups.map((g) => (
             <div className="footer-col" key={g.title}>
-              <h4>{g.title}</h4>
+              <h3>{g.title}</h3>
               {g.links.map((l) => <a key={l.href} href={l.href}>{l.label}</a>)}
             </div>
           ))}

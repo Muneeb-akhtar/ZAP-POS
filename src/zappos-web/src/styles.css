@@ -90,8 +90,8 @@ h2 .hl { display: block; }
 
 /* ---------- Buttons ---------- */
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-weight: 600; font-size: 15px; padding: 11px 20px; border-radius: 12px; transition: transform .15s, box-shadow .15s, background .15s, border-color .15s, color .15s; white-space: nowrap; }
-.btn-primary { background: var(--brand-500); color: #fff; box-shadow: 0 8px 20px -8px rgba(11, 132, 240, .7), inset 0 1px 0 rgba(255,255,255,.25); }
-.btn-primary:hover:not(:disabled) { transform: translateY(-2px); background: var(--brand-600); }
+.btn-primary { background: var(--brand-600); color: #fff; box-shadow: 0 8px 20px -8px rgba(11, 132, 240, .7), inset 0 1px 0 rgba(255,255,255,.25); }
+.btn-primary:hover:not(:disabled) { transform: translateY(-2px); background: var(--brand-700); }
 .btn-primary:disabled { background: #cbd5e1; box-shadow: none; }
 .btn-outline { background: var(--surface); color: var(--ink); border: 1.5px solid var(--line); }
 .btn-outline:hover { border-color: var(--ink); }
@@ -498,7 +498,7 @@ h2 .hl { display: block; }
 .barcode { display: block; width: 100%; height: 38px; fill: #111827; }
 .rp-thanks { display: block; text-align: center; font-size: 10px; letter-spacing: .1em; color: #64748b; margin-top: 8px; }
 .rp-cta { margin-top: 26px; }
-.stamp { position: absolute; z-index: 2; top: 10px; right: -22px; transform: rotate(14deg); font-family: var(--font-head); font-size: 15px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--brand-600); border: 3px solid var(--brand-600); border-radius: 10px; padding: 6px 12px; background: rgba(239,248,255,.6); box-shadow: inset 0 0 0 2px rgba(255,255,255,.7); opacity: .92; animation: stampIn .5s .3s cubic-bezier(.3,1.6,.5,1) backwards; }
+.stamp { position: absolute; z-index: 2; top: 10px; right: -22px; transform: rotate(14deg); font-family: var(--font-head); font-size: 15px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--brand-700); border: 3px solid var(--brand-700); border-radius: 10px; padding: 6px 12px; background: rgba(239,248,255,.6); box-shadow: inset 0 0 0 2px rgba(255,255,255,.7); opacity: .92; animation: stampIn .5s .3s cubic-bezier(.3,1.6,.5,1) backwards; }
 @keyframes stampIn { from { transform: rotate(14deg) scale(2.2); opacity: 0; } }
 
 .compare-wrap { max-width: 1080px; margin: 64px auto 0; border-radius: 22px; background: var(--surface); border: 1px solid var(--line); overflow: hidden; }
@@ -571,7 +571,7 @@ h2 .hl { display: block; }
 .exchange { display: flex; flex-direction: column; gap: 8px; }
 .bubble { position: relative; max-width: 84%; padding: 9px 13px 20px; border-radius: 14px; font-size: 14.5px; line-height: 1.45; color: var(--ink); box-shadow: 0 1px 1px rgba(15,23,42,.08); animation: bubble .3s ease both; }
 @keyframes bubble { from { opacity: 0; transform: translateY(6px) scale(.98); } }
-.bubble em { position: absolute; right: 10px; bottom: 4px; font-style: normal; font-size: 10.5px; color: var(--muted); display: inline-flex; align-items: center; gap: 0; }
+.bubble em { position: absolute; right: 10px; bottom: 4px; font-style: normal; font-size: 10.5px; color: #475569; display: inline-flex; align-items: center; gap: 0; }
 .bubble em svg { color: var(--brand-500); margin-left: -6px; }
 .bubble em svg:first-child { margin-left: 4px; }
 .bubble.out { align-self: flex-end; background: var(--brand-100); border-bottom-right-radius: 4px; font-weight: 500; }
@@ -616,9 +616,9 @@ h2 .hl { display: block; }
 .store.wa svg { color: #25d366; }
 
 /* ---------- Footer ---------- */
-.footer { position: relative; overflow: hidden; background: var(--night); color: #64748b; padding: 30px 0 0; border-top: 1px solid rgba(255,255,255,.06); }
+.footer { position: relative; overflow: hidden; background: var(--night); color: #94a3b8; padding: 30px 0 0; border-top: 1px solid rgba(255,255,255,.06); }
 .footer .brand { color: #fff; }
-.footer h4 { color: #e2e8f0; font-family: var(--font); font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 16px; }
+.footer h3 { color: #e2e8f0; font-family: var(--font); font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 16px; }
 .footer-top { display: grid; grid-template-columns: 1.4fr repeat(5, 1fr); gap: 40px; padding: 40px 0; border-bottom: 1px solid rgba(255,255,255,.07); }
 .footer-brand p { margin: 16px 0 18px; max-width: 340px; font-size: 14px; }
 .footer-contact-list { display: grid; gap: 8px; font-size: 14px; color: #cbd5e1; }
@@ -682,7 +682,7 @@ h2 .hl { display: block; }
 }
 .ip-shot-wrap { padding-block: 0 8px; }
 .ip-shot { display: block; max-width: 760px; width: 100%; height: auto; margin-inline: auto; border-radius: 16px; border: 1px solid var(--line); }
-.ip-article .ip-byline { font-size: 14px; color: var(--text); opacity: .75; margin: 0; }
+.ip-article .ip-byline { font-size: 14px; color: var(--muted); margin: 0; }
 .ip-urdu-wrap { padding-block: 0 8px; }
 .ip-urdu { max-width: 760px; margin-inline: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px 22px; display: grid; gap: 10px; }
 .ip-urdu-label { font-weight: 700; color: var(--brand-600); font-family: var(--urdu-font); }
@@ -731,7 +731,7 @@ h2 .hl { display: block; }
 .ip-chat h3.bubble { font-size: 15px; font-weight: 600; line-height: 1.45; }
 .ip-chat-wa { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: #25d366; color: #fff; }
 .ip-related { text-align: center; padding: 10px 24px 0; }
-.ip-related h4 { font-family: var(--font); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+.ip-related h3 { font-family: var(--font); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
 .ip-related > div { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; }
 .ip-rel { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); color: var(--ink); font-weight: 600; font-size: 14px; }
 .ip-rel svg:first-child { color: var(--brand-500); }
@@ -1045,6 +1045,7 @@ h2 .hl { display: block; }
    (colors that are hard-coded for light mode get their dark twin here)
    ============================================================ */
 :root[data-theme="dark"] body { background: var(--bg); }
+:root[data-theme="dark"] .btn-primary { background: #0a74d6; } :root[data-theme="dark"] .btn-primary:hover:not(:disabled) { background: #075fb3; }
 :root[data-theme="dark"] .btn-primary { box-shadow: 0 10px 26px -10px rgba(43,149,255,.7), inset 0 1px 0 rgba(255,255,255,.2); }
 :root[data-theme="dark"] .btn-primary:disabled { background: #233049; color: #6b7c96; }
 :root[data-theme="dark"] .live { box-shadow: 0 0 0 3px rgba(34,197,94,.22); }
@@ -1105,9 +1106,9 @@ h2 .hl { display: block; }
 :root[data-theme="dark"] .sticker svg { color: #0a74d6; }
 
 /* Pricing */
-:root[data-theme="dark"] .toggle button.on { background: var(--brand-500); }
+:root[data-theme="dark"] .toggle button.on { background: #0a74d6; }
 :root[data-theme="dark"] .rplan.featured .paper { filter: drop-shadow(0 26px 46px rgba(43,149,255,.35)) brightness(.97); }
-:root[data-theme="dark"] .stamp { color: #0a74d6; border-color: #0a74d6; }
+:root[data-theme="dark"] .stamp { color: #075fb3; border-color: #075fb3; }
 :root[data-theme="dark"] .rp-line .q { color: #0a74d6; }
 :root[data-theme="dark"] .rplan.featured .rp-total .amt b { color: #0a74d6; }
 :root[data-theme="dark"] .cmp-cell .no { color: #33415c; }
@@ -1123,8 +1124,9 @@ h2 .hl { display: block; }
 /* FAQ: WhatsApp's own dark look */
 :root[data-theme="dark"] .chat { box-shadow: 0 0 0 1px rgba(255,255,255,.06), var(--shadow-lg); }
 :root[data-theme="dark"] .chat-body { background-color: #0b1220; background-image: radial-gradient(#162139 1px, transparent 1px); }
-:root[data-theme="dark"] .chat-day { background: #172235; }
+:root[data-theme="dark"] .chat-day { background: #172235; color: #94a3b8; }
 :root[data-theme="dark"] .bubble.in { background: #1a2538; }
+:root[data-theme="dark"] .bubble.in em { color: #94a3b8; }
 :root[data-theme="dark"] .bubble.out { background: #134079; color: #eaf3ff; }
 :root[data-theme="dark"] .bubble.out em { color: #9cc3ef; }
 :root[data-theme="dark"] .bubble.typing i { background: #5b6b84; }

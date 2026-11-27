@@ -67,8 +67,8 @@ export default function Pricing({ data, links }) {
           <p>{data.description}</p>
           <div className="toggle-row">
             <div className="toggle" role="tablist">
-              <button className={!annual ? 'on' : ''} onClick={() => setAnnual(false)}>Monthly</button>
-              <button className={annual ? 'on' : ''} onClick={() => setAnnual(true)}>Yearly</button>
+              <button role="tab" aria-selected={!annual} className={!annual ? 'on' : ''} onClick={() => setAnnual(false)}>Monthly</button>
+              <button role="tab" aria-selected={annual} className={annual ? 'on' : ''} onClick={() => setAnnual(true)}>Yearly</button>
             </div>
             {(data.saveLabel || bestSaving(data.plans) > 0) && <Scribble dir="left" className="toggle-note">{data.saveLabel ?? `save up to ${bestSaving(data.plans)}% yearly`}</Scribble>}
           </div>

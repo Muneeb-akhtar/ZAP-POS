@@ -2,6 +2,13 @@
 
 Newest first. Every change gets an entry (see CLAUDE.md rule 10). Format: date, what changed and why, files touched.
 
+## 2026-11-28: Accessibility score 89 → 100 (Lighthouse, light and dark)
+- Pricing Monthly/Yearly switch: buttons now have `role="tab"` and `aria-selected` (a tablist needs tabs).
+- Contrast (WCAG AA 4.5:1): `.btn-primary` is `--brand-600` (hover `--brand-700`), and in dark mode fixed `#0a74d6` / `#075fb3` because the dark theme lightens the brand tokens; `.stamp` uses `--brand-700` (dark: `#075fb3`); `.bubble em` is `#475569` (dark incoming bubbles `#94a3b8`); footer text `#94a3b8`; dark `.chat-day` `#94a3b8`; `.ip-byline` uses `--muted` instead of opacity; dark pricing toggle `#0a74d6`.
+- Heading order: footer column titles and the "related pages" title are `h3` (CSS selectors `.footer h3`, `.ip-related h3`).
+- Demo video play button: accessible name now contains the visible text ("Play demo video: 1 minute · sound on").
+- Checked with Lighthouse on /, /plans, /multi-branch-pos, /pos-software-lahore, /about in light and dark: all 100. Files: `styles.css`, `Pricing.jsx`, `Sections.jsx`, `InfoPage.jsx`, `DemoVideo.jsx`, docs.
+
 ## 2026-11-28: Facebook Page added to the footer and search data
 - The ZAP POS Facebook Page (https://www.facebook.com/profile.php?id=61597072678116, made by the owner on 28 Nov 2026) is now `links.social.facebook` (the footer icon shows, it was empty before) and a `sameAs` entry in the JSON-LD in `index.html`. Editable in admin → Links; shorten to the username link if the owner sets one.
 - Files: `src/content/landing-content.json`, `index.html`, docs.

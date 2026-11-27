@@ -240,7 +240,7 @@ export default function InfoPage({ page, pages, pricing, finalCta, brand, links,
 
       {related.length > 0 && (
         <div className="container ip-related">
-          <h4>{pages.relatedTitle}</h4>
+          <h3>{pages.relatedTitle}</h3>
           <div>{related.map((p) => <a key={p.slug} href={`/${p.slug}`} className="ip-rel"><Icon name={p.icon} size={16} />{p.menu}<Icon name="arrow" size={14} /></a>)}</div>
         </div>
       )}
