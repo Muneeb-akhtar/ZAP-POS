@@ -1201,8 +1201,8 @@
         "slug": "fbr-invoicing",
         "menu": "FBR invoicing",
         "icon": "receipt",
-        "seoTitle": "FBR Integrated POS Software in Pakistan | ZAP POS",
-        "seoDescription": "ZAP POS sends every bill to FBR, prints FBR's invoice number and QR code, sets sales tax by payment method and keeps billing when the internet drops.",
+        "seoTitle": "FBR POS Invoicing System in Pakistan | FBR Invoice | ZAP POS",
+        "seoDescription": "ZAP POS is an FBR-integrated POS invoicing system: every bill goes to FBR, the receipt prints FBR's invoice number and QR code, and billing continues when the internet drops.",
         "kicker": "FBR & PRA invoicing",
         "title": "Every bill reported.",
         "titleHighlight": "The queue keeps moving.",
@@ -1289,6 +1289,14 @@
         "faqTitle": "FBR questions",
         "faq": [
           {
+            "q": "What is an FBR POS invoice?",
+            "a": "It is the customer receipt from a POS that is connected to FBR. The bill is reported to FBR, and the receipt shows FBR's invoice number and a QR code. ZAP POS prints both on every bill."
+          },
+          {
+            "q": "How does the FBR POS invoicing system work in ZAP POS?",
+            "a": "You add your own POS ID and token once. After that, each sale is sent to FBR in its fiscal format, FBR's invoice number and QR code are printed on the receipt, and sales tax is applied at the rate you set for each way of paying."
+          },
+          {
             "q": "Does ZAP POS work with FBR's POS integration?",
             "a": "Yes. ZAP POS is an FBR-licensed integrator and the integration is built in. You add your own POS ID and token, ZAP POS sends each bill in FBR's fiscal format, and each receipt prints FBR's invoice number with a QR code. We help you set it up."
           },
@@ -1333,13 +1341,14 @@
           "alt": "ZAP POS billing screen where a bill is paid and printed, with the receipt carrying FBR's invoice number",
           "width": 840,
           "height": 442
-        }
+        },
+        "shortAnswer": "An FBR POS invoice is a sales receipt that carries an invoice number issued by FBR and a QR code. ZAP POS sends each bill to FBR in its fiscal format and prints that number and QR code on the receipt. If the internet drops, billing continues and the bills are sent later."
       },
       {
         "slug": "fbr-pos-integration-guide",
         "menu": "FBR POS guide",
         "icon": "receipt",
-        "seoTitle": "FBR POS Integration in Pakistan: 2026 Guide for Shops",
+        "seoTitle": "FBR POS Invoice and Integration in Pakistan: 2026 Guide",
         "seoDescription": "Who must integrate their POS with FBR, what the invoice must carry, why a licensed integrator matters, and the penalties for not integrating.",
         "kicker": "Guide",
         "title": "FBR POS integration,",
@@ -4727,7 +4736,7 @@
         "slug": "pos-software-kya-hai",
         "menu": "POS software kya hai?",
         "icon": "monitor",
-        "seoTitle": "POS Software Kya Hai? Dukan Ke Liye Asaan Guide | ZAP POS",
+        "seoTitle": "POS Kya Hota Hai? Dukan Ke Liye Asaan Guide | ZAP POS",
         "seoDescription": "POS software kya hota hai, dukan ko isse kya faida hota hai, kya kya chahiye aur kaise shuru karein. Pakistani dukandaron ke liye asaan Roman Urdu guide.",
         "kicker": "Guide",
         "title": "POS software kya hai?",
